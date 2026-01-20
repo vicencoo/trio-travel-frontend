@@ -1,0 +1,1 @@
+export { FlightOfferCard } from './FlightOfferCard';

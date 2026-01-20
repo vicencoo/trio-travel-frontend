@@ -1,0 +1,1 @@
+export { ManageProperty } from './ManageProperty';

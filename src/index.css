@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f8fafc;
+}
+
+.leaflet-container {
+  height: 250px;
+  width: 100%;
+}
+
+:root {
+  --dash-width: 210px;
+}
+
+#root {
+  transition: margin-left 300ms ease;
+}
+
+body.dash-open #root {
+  margin-left: var(--dash-width);
+}
+
+@media (max-width: 999px) {
+  body.dash-open #root {
+    margin-left: 0;
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in-left 0.3s ease-out forwards;
+}
