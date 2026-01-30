@@ -30,7 +30,7 @@ export const Sidebar = ({ items }: SidebarProps) => {
   return (
     <div className='fixed top-0 -left-14 h-screen z-50' ref={wrapperRef}>
       <button
-        className='absolute top-1 left-16 z-50 hover:scale-110 transition-all duration-300 will-change-transform'
+        className='absolute md:top-1 top-3 left-16 z-[9999]'
         onClick={() => toggle()}
       >
         <MenuIcon fontSize='large' sx={{ color: isOpen ? 'white' : 'black' }} />

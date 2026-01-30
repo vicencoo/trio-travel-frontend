@@ -4,7 +4,6 @@ import { DEFAULT_URL } from '../defaults';
 export const axios = AXIOS.create({
   baseURL: DEFAULT_URL,
 });
-
 // export const setUpInterceptors = (navigate) => {
 //   axios.interceptors.request.use(
 //     (config) => {

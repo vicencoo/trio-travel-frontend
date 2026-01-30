@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LightMode, DarkMode } from '@mui/icons-material';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import { Text } from '../../components/text';
 import { Icon } from '../../components/icon';
 import { useHeader } from './useHeader';
@@ -15,6 +17,7 @@ export const Header = () => {
   const {
     state,
     toggleDarkMode,
+    toggleMenuOpen,
     // currency,
     // language,
     // setCurrency,
@@ -24,11 +27,11 @@ export const Header = () => {
   } = useHeader();
   return (
     <div className='flex items-center w-full border-b shadow-lg pl-14 pr-4 py-3 md:py-2 justify-between sticky top-0 z-[9999] bg-white/95'>
-      <div className='flex items-center gap-4'>
+      <div className='flex items-center gap-4 '>
         <Sidebar items={SIDEBAR_ITEMS} />
         <Image
           img='/images/TrioTravel.png'
-          className='w-[100px] h-[20px] object-cover cursor-pointer hover:scale-110 transition-all duration-300 will-change-transform'
+          className='min-w-[100px] max-w-[100px] h-[20px] object-cover cursor-pointer hover:scale-110 transition-all duration-300 will-change-transform'
           onClick={() => navigate('/')}
         />
       </div>
@@ -38,7 +41,7 @@ export const Header = () => {
           <Text
             key={item.id}
             text={item.name}
-            className={`cursor-pointer capitalize text-gray-600 hover:text-gray-950 hover:scale-110 transition-all duration-300 will-change-transform ${
+            className={`cursor-pointer capitalize text-gray-600  select-none hover:text-gray-950 hover:scale-110 transition-all duration-300 will-change-transform ${
               location.pathname === item.path && 'text-gray-950 scale-110'
             }`}
             size='text-sm'
@@ -47,6 +50,40 @@ export const Header = () => {
           />
         ))}
       </div>
+
+      <span className='md:hidden flex w-full justify-end relative'>
+        {state.isMenuOpen ? (
+          <KeyboardArrowUpOutlinedIcon
+            fontSize='large'
+            onClick={toggleMenuOpen}
+          />
+        ) : (
+          <KeyboardArrowDownOutlinedIcon
+            fontSize='large'
+            onClick={toggleMenuOpen}
+          />
+        )}
+        <div
+          className={`absolute ${state.isMenuOpen ? 'flex' : 'hidden'} top-10 bg-white rounded-lg shadow-2xl border border-gray-200
+         px-5 py-2 flex flex-col gap-3`}
+        >
+          {HeaderItems.map((item) => (
+            <Text
+              key={item.id}
+              text={item.name}
+              className={`cursor-pointer capitalize text-gray-600 hover:text-gray-950 hover:scale-110 transition-all duration-300 will-change-transform  text-nowrap ${
+                location.pathname === item.path && 'text-gray-950 scale-110'
+              }`}
+              size='text-lg'
+              font='font-medium font-serif'
+              onClick={() => {
+                navigate(item.path);
+                toggleMenuOpen();
+              }}
+            />
+          ))}
+        </div>
+      </span>
 
       <div className='flex items-center gap-5'>
         {/* <Language

@@ -49,7 +49,7 @@ export const Destinations = () => {
               font='font-medium'
               className='text-gray-700'
             />
-            <div className='grid grid-cols-2 md:grid-cols-4 gap-5'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5'>
               {FAVORITE_DESTINATIONS.map((item) => (
                 <DestCard
                   key={item.id}
@@ -63,8 +63,8 @@ export const Destinations = () => {
           </div>
         </div>
         <div className='bg-purple-100 py-6 md:py-24'>
-          <div className='grid grid-cols-2 container items-center'>
-            <div className='flex flex-col gap-3'>
+          <div className='grid grid-cols-1 md:grid-cols-2 container items-center'>
+            <div className='flex flex-col gap-3 md:items-start items-center md:text-start text-center'>
               <Text
                 text={'Not Sure Where to Go?'}
                 size='text-4xl'
@@ -82,7 +82,10 @@ export const Destinations = () => {
               />
             </div>
             <span className='flex justify-center'>
-              <Image img='/images/confused.png' className='h-[280px]' />
+              <Image
+                img='/images/confused.png'
+                className='h-[150px] md:h-[280px]'
+              />
             </span>
           </div>
         </div>

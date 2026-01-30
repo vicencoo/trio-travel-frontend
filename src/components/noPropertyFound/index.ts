@@ -1,0 +1,1 @@
+export { NoPropertyFound } from './NoPropertyFound';

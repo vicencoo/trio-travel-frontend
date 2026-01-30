@@ -2,26 +2,31 @@ import { RepeatIcon } from 'lucide-react';
 import { Image } from '../image';
 import { Text } from '../text';
 import { Button } from '../button';
-import type { FlightCardProps } from './types';
+import type { PlaneTicket } from '../../types';
 
-export const FlightOfferCard = ({ item }: FlightCardProps) => {
+export const FlightOfferCard = ({ ticket }: { ticket: PlaneTicket }) => {
+  const firstImage = ticket?.ticketImages?.[0];
+  const image =
+    typeof firstImage === 'object' && 'image' in firstImage
+      ? firstImage.image
+      : '';
   return (
-    <div className='flex w-full h-[250px] border border-gray-300 relative rounded-3xl overflow-hidden cursor-pointer hover:shadow-md transition-all duration-300 will-change-transform group'>
+    <div className='flex w-full h-[250px] border border-gray-300 relative rounded-3xl overflow-hidden hover:shadow-md transition-all duration-300 will-change-transform group'>
       <Image
-        img={item.image}
+        src={image}
         className='object-cover w-1/2 group-hover:scale-105 transition-all duration-300 will-change-transform'
       />
       <div className='absolute right-0 w-3/5 h-full bg-white rounded-l-3xl px-7 py-5 flex flex-col justify-between'>
         <div className='flex flex-col gap-1'>
           <div className='flex items-center justify-between'>
             <Text
-              text={item.departureAirport}
+              text={ticket?.departureAirport}
               font='font-serif'
               className='text-gray-500 uppercase'
             />
             <div className='flex-1 border-t border-dashed border-gray-500 mx-3' />
             <Text
-              text={item.arrivalAirport}
+              text={ticket?.arrivalAirport}
               font='font-serif'
               className='text-gray-500 uppercase'
             />
@@ -29,14 +34,14 @@ export const FlightOfferCard = ({ item }: FlightCardProps) => {
 
           <div className='flex items-center justify-between gap-2'>
             <Text
-              text={item.from}
+              text={ticket?.from}
               size='sm:text-3xl text-xl'
               font='font-semibold'
               className='capitalize'
             />
             <RepeatIcon fontSize='medium' className='text-gray-500' />
             <Text
-              text={item.to}
+              text={ticket?.to}
               size='sm:text-3xl text-xl'
               font='font-semibold'
               className='capitalize'
@@ -48,7 +53,7 @@ export const FlightOfferCard = ({ item }: FlightCardProps) => {
           <Text text={'From'} font='font-medium' className='text-gray-500' />
           <span className='flex items-baseline gap-2'>
             <Text
-              text={`${item.price}€`}
+              text={`${ticket?.price}€`}
               size='text-3xl'
               font='font-semibold'
             />
@@ -62,7 +67,7 @@ export const FlightOfferCard = ({ item }: FlightCardProps) => {
         </div>
 
         <Button
-          name='book now'
+          name='kontakto agjensinë'
           hoverColor='black'
           bgHover='transparent'
           border='black'

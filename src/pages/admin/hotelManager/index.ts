@@ -1,0 +1,1 @@
+export { HotelManager } from './HotelManager';

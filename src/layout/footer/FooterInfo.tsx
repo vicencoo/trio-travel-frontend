@@ -35,10 +35,25 @@ const FOOTER_INFO = [
 ];
 
 const CONTACT = [
-  { id: 1, icon: <InstagramIcon fontSize='small' />, color: 'text-purple-700' },
-  { id: 2, icon: <FacebookIcon fontSize='small' />, color: 'text-blue-500' },
+  {
+    id: 1,
+    icon: <InstagramIcon fontSize='small' />,
+    url: 'https://instagram.com/trio_travel_immo_/',
+    color: 'text-purple-700',
+  },
+  {
+    id: 2,
+    icon: <FacebookIcon fontSize='small' />,
+    url: 'https://facebook.com/Agjensi Trio',
+    color: 'text-blue-500',
+  },
   { id: 3, icon: <TwitterIcon fontSize='small' />, color: 'text-blue-700' },
-  { id: 4, icon: <WhatsAppIcon fontSize='small' />, color: 'text-green-600' },
+  {
+    id: 4,
+    icon: <WhatsAppIcon fontSize='small' />,
+    url: 'https://wa.me/355696900916',
+    color: 'text-green-600',
+  },
 ];
 
 export const FooterInfo = () => {
@@ -70,6 +85,7 @@ export const FooterInfo = () => {
             <div
               className={`w-10 h-10 border border-gray-300 bg-gray-100 flex items-center justify-center rounded-full cursor-pointer hover:scale-110 transition-all duration-300 will-change-transform ${contact.color}`}
               key={contact.id}
+              onClick={() => window.open(contact.url)}
             >
               <Icon icon={contact.icon} />
             </div>

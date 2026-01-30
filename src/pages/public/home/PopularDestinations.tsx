@@ -3,7 +3,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useEffect, useState } from 'react';
 import { Image } from '../../../components/image';
 import { Text } from '../../../components/text';
-import { POPULAR_DESTINATIONS } from '../../..';
+import { FAVORITE_DESTINATIONS } from '../../..';
 import { useNavigate } from 'react-router-dom';
 
 const VISIBLE_COUNT = 8;
@@ -12,7 +12,7 @@ export const PopularDestinations = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState<number>(VISIBLE_COUNT);
   const navigate = useNavigate();
-  const total = POPULAR_DESTINATIONS.length;
+  const total = FAVORITE_DESTINATIONS.length;
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,7 +40,7 @@ export const PopularDestinations = () => {
   };
 
   const visibleItems = Array.from({ length: visibleCount }, (_, i) => {
-    return POPULAR_DESTINATIONS[(startIndex + i) % total];
+    return FAVORITE_DESTINATIONS[(startIndex + i) % total];
   });
   return (
     <div className='flex items-center gap-3'>
@@ -50,7 +50,7 @@ export const PopularDestinations = () => {
       >
         <ChevronLeftIcon fontSize='medium' />
       </div>
-      <div className='flex items-center justify-between w-full'>
+      <div className='flex items-center sm:justify-between justify-center sm:gap-0 gap-10 w-full'>
         {visibleItems.slice(0, visibleCount).map((item) => (
           <div className='flex flex-col items-center gap-1' key={item.id}>
             <Image
@@ -59,7 +59,7 @@ export const PopularDestinations = () => {
               onClick={() => navigate('/destinations')}
             />
             <Text
-              text={item.place}
+              text={item.city}
               className='capitalize'
               size='text-sm'
               font='font-medium'

@@ -1,8 +1,5 @@
-export type DestinationCardProps = {
-  img: string;
-  title: string;
-  place: string;
-  stay: string;
-  stars: string;
-  price: string;
+import type { TouristPackage } from '../../types';
+
+export type PackageCardProps = {
+  data: TouristPackage;
 };

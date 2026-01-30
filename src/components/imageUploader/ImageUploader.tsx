@@ -1,19 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import { X, Plus } from 'lucide-react';
+import { DEFAULT_URL } from '../../defaults';
 
-interface ImageUploaderProps {
-  value: (File | string)[]; // Files (new) or URLs (from backend)
-  onChange: (images: (File | string)[]) => void;
+type ImageObject = Record<string, unknown>;
+
+interface ImageUploaderProps<T = ImageObject> {
+  value: (File | string | T)[];
+  onChange: (images: (File | T)[]) => void;
   maxImages?: number;
+  imageKey?: string;
 }
 
-export const ImageUploader = ({
+export const ImageUploader = <T extends ImageObject>({
   value = [],
   onChange,
+  imageKey,
   maxImages = 10,
-}: ImageUploaderProps) => {
+}: ImageUploaderProps<T>) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [images, setImages] = useState(value);
+  const [images, setImages] = useState<(File | string | T)[]>(value);
 
   useEffect(() => {
     setImages(value);
@@ -33,9 +38,21 @@ export const ImageUploader = ({
     onChange(updated);
   };
 
-  const getPreview = (img: File | string) => {
-    if (typeof img === 'string') return img; // from backend
-    return URL.createObjectURL(img); // local file
+  const getPreview = (img: File | string | T) => {
+    if (img instanceof File) {
+      return URL.createObjectURL(img);
+    }
+
+    if (typeof img === 'string') {
+      return img;
+    }
+
+    if (imageKey && img[imageKey]) {
+      const url = String(img[imageKey]);
+      return url.startsWith('http') ? url : `${DEFAULT_URL}${url}`;
+    }
+
+    return '';
   };
 
   return (

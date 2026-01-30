@@ -3,9 +3,9 @@ import { Image } from '../../../components/image';
 import { Text } from '../../../components/text';
 
 const INFO = [
-  { id: 1, icon: <Users />, text: 'Personalized Travel Experiences' },
-  { id: 2, icon: <MapPin />, text: 'Expert Destination Knowledge' },
-  { id: 3, icon: <BadgeCheck />, text: 'Customer Service' },
+  { id: 1, icon: <Users />, text: 'Udhëtime me stil personal' },
+  { id: 2, icon: <MapPin />, text: 'Sekrete ekskluzive të destinacioneve' },
+  { id: 3, icon: <BadgeCheck />, text: 'Sherbim Cilesor Per Klientet' },
 ];
 
 export const Advertise = () => {
@@ -20,13 +20,13 @@ export const Advertise = () => {
       <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center flex flex-col gap-8 text-white'>
         <span className='flex justify-center text-black'>
           <Text
-            text={'Luxury Travel Redefined'}
+            text={'Udhëtime Luksoze, Për Ty'}
             font='font-semibold'
             className='px-10 py-2 bg-yellow-300 w-max rounded-3xl'
           />
         </span>
         <Text
-          text={'Your Passport to Global Glamour'}
+          text={'Hap Pasaportën për Aventurat e Botës'}
           size='md:text-5xl text-xl'
           font='font-medium'
         />
@@ -40,7 +40,7 @@ export const Advertise = () => {
         </div>
         <span className='flex w-full justify-center'>
           <Text
-            text={'Start your journey'}
+            text={'Nis Aventurën Tënde'}
             size='text-lg'
             font='font-medium'
             className='border-2 px-7 py-2 border-black bg-black/40 rounded-3xl hover:bg-black/90 cursor-pointer transition-all duration-300'

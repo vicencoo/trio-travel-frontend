@@ -1,21 +1,19 @@
 import SearchIcon from '@mui/icons-material/Search';
 import { Text } from '../../../components/text';
 import { Input } from '../../../components/input';
-import { RECOMMANDIONS } from '../../..';
-import { DestinationCard } from '../../../components/destinationCard';
-import { useState } from 'react';
+import { PackageCard } from '../../../components/destinationCard';
+import { usePackages } from './usePackages';
+import { NoDataFound } from '../../../components/noDataFound';
+import { Pagination } from '../../../components/pagination';
+import { useScrollOnChange } from '../../../hooks/useScrollOnChange';
 
 export const Packages = () => {
-  const [value, setValue] = useState<string>('');
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
+  const { data, handlePageChange, pageNumber } = usePackages();
 
-  const filteredPackages = RECOMMANDIONS.filter((item) =>
-    `${item.place} ${item.title}`.toLowerCase().includes(value.toLowerCase()),
-  );
+  const { scrollRef } = useScrollOnChange(pageNumber);
+
   return (
-    <div className='flex flex-col md:gap-16 gap-8'>
+    <div className='flex flex-col md:gap-16 gap-8' ref={scrollRef}>
       <div className='bg-gradient-to-r from-blue-400 to-blue-500 text-white'>
         <div className='container flex flex-col w-full gap-5 py-10'>
           <Text
@@ -32,23 +30,27 @@ export const Packages = () => {
             icon={<SearchIcon className='text-black' />}
             className='md:w-3/6 w-full'
             height='h-12'
-            onChange={handleChange}
+            // onChange={handleChange}
           />
         </div>
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-4 container'>
-        {filteredPackages.map((item) => (
-          <DestinationCard
-            key={item.id}
-            img={item.image}
-            place={item.place}
-            price={item.price}
-            stars={item.hotelStars}
-            stay={item.stay}
-            title={item.title}
+
+      {data?.packages && data.packages.length > 0 ? (
+        <div className='flex flex-col items-center gap-10'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4 container'>
+            {data.packages.map((item) => (
+              <PackageCard data={item} key={item._id} />
+            ))}
+          </div>
+          <Pagination
+            onChange={handlePageChange}
+            page={pageNumber}
+            pages={data.pagination.totalPages}
           />
-        ))}
-      </div>
+        </div>
+      ) : (
+        <NoDataFound text='No Packages found' />
+      )}
 
       <div className='bg-gradient-to-r from-blue-400 to-blue-500 text-white'>
         <div className='container flex flex-col w-full gap-5 py-10 items-center'>

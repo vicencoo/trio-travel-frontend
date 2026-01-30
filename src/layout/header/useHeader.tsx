@@ -5,6 +5,7 @@ export const useHeader = () => {
     darkMode: false,
     currencyOpen: false,
     languageOpen: false,
+    isMenuOpen: false,
   });
   const [currency, setCurrency] = useState<string>('eur');
   const [language, setLanguage] = useState<string>('en');
@@ -28,6 +29,12 @@ export const useHeader = () => {
       languageOpen: !prev.languageOpen,
       currencyOpen: false,
     }));
+
+  const toggleMenuOpen = () =>
+    setState((prev) => ({
+      ...prev,
+      isMenuOpen: !prev.isMenuOpen,
+    }));
   return {
     state,
     currency,
@@ -37,5 +44,6 @@ export const useHeader = () => {
     toggleDarkMode,
     toggleOpenCurrency,
     toggleOpenLanguage,
+    toggleMenuOpen,
   };
 };

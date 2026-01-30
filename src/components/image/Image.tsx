@@ -1,9 +1,10 @@
+import { DEFAULT_URL } from '../../defaults';
 import type { ImageProps } from './types';
 
-export const Image = ({ className, img, onClick }: ImageProps) => {
+export const Image = ({ className, img, onClick, src }: ImageProps) => {
   return (
     <>
-      {/* {src ? (
+      {src ? (
         <img
           src={`${DEFAULT_URL}${src}`}
           className={className}
@@ -11,8 +12,7 @@ export const Image = ({ className, img, onClick }: ImageProps) => {
         />
       ) : (
         <img src={img} className={className} onClick={onClick} />
-      )} */}
-      <img src={img} className={className} onClick={onClick} />
+      )}
     </>
   );
 };

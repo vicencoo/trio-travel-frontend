@@ -10,9 +10,9 @@ export type HotelCardProps = {
   title: string;
   location: string;
   facilities?: JSX.Element[];
-  price: string | number;
-  rating?: string | number;
-  reviews?: string | number;
+  price: number | null;
+  rating?: number | null;
+  reviews?: number | null;
 };
 
 export const HotelCard = ({
@@ -27,7 +27,7 @@ export const HotelCard = ({
   return (
     <div className='flex flex-col bg-white rounded-xl overflow-hidden border shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300 will-change-transform h-full cursor-pointer'>
       <div className='flex h-[220px] relative w-full'>
-        <Image img={image} className='h-full w-full object-cover' />
+        <Image src={image} className='h-full w-full object-cover' />
         {rating && reviews && (
           <span className='absolute bottom-2 left-2 bg-white flex px-3 py-1 rounded-3xl items-center gap-1'>
             <StarIcon fontSize='small' className='text-yellow-400' />
@@ -45,13 +45,18 @@ export const HotelCard = ({
       </div>
       <div className='flex flex-col px-4 py-5 h-full justify-between'>
         <div className='flex flex-col gap-3'>
-          <Text text={title} size='text-xl' font='font-medium' />
+          <Text
+            text={title}
+            size='text-xl'
+            font='font-medium'
+            className='capitalize'
+          />
           <span className='flex items-center gap-1'>
             <LocationOn fontSize='small' className='text-gray-500' />
             <Text
               text={location}
               font='font-medium'
-              className='text-gray-500'
+              className='text-gray-500 capitalize'
             />
           </span>
           <span className='flex items-center gap-3'>

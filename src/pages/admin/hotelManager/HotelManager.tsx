@@ -1,0 +1,91 @@
+import { AdminPageHeader } from '../../../components/adminPageHeader/AdminPageHeader';
+import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
+import { useHotelManager } from './useHotelManager';
+import { HotelForm } from './HotelForm';
+import { DataTable } from '../../../components/dataTable';
+import { HotelTableRow } from './HotelTableRow';
+import { HOTEL_COLUMNS } from '../../../columns';
+import { NoDataFound } from '../../../components/noDataFound';
+import { Pagination } from '../../../components/pagination';
+import { useScrollOnChange } from '../../../hooks/useScrollOnChange';
+
+export const HotelManager = () => {
+  const {
+    handleOpenForm,
+    isHotelFormOpen,
+    handleChangeData,
+    hotelData,
+    handleImagesChange,
+    handleSetFacilities,
+    saveHotel,
+    allHotels,
+    handleEditHotel,
+    handlePageChange,
+    pageNumber,
+    handleDeleteHotel,
+  } = useHotelManager();
+  const { scrollRef } = useScrollOnChange(isHotelFormOpen);
+
+  return (
+    <div
+      className='flex flex-col py-10 gap-10 min-h-screen container'
+      ref={scrollRef}
+    >
+      <AdminPageHeader
+        icon={<HotelOutlinedIcon className='text-white' />}
+        iconBgColor='bg-blue-600'
+        label='Menaxhimi i Hoteleve'
+        text='Shiko, modifiko dhe menaxho te gjithe hotelet'
+        buttonName={'shto hotel te ri'}
+        buttonBg='#3b82f6'
+        buttonBgHover='#2563eb'
+        buttonBorderHover='#1d4ed8'
+        onClick={handleOpenForm}
+        display={!isHotelFormOpen}
+      />
+      {isHotelFormOpen && (
+        <div className='flex w-full justify-center'>
+          <HotelForm
+            handleOpenForm={handleOpenForm}
+            handleChangeData={handleChangeData}
+            hotelData={hotelData}
+            handleImagesChange={handleImagesChange}
+            handleSetFacilities={handleSetFacilities}
+            saveHotel={saveHotel}
+          />
+        </div>
+      )}
+
+      {allHotels?.hotels && allHotels.hotels.length > 0 ? (
+        <div className='flex flex-col gap-10 items-center min-h-[61vh] justify-between'>
+          <DataTable
+            columns={HOTEL_COLUMNS}
+            headerBg='bg-blue-600'
+            headerText='text-white'
+            layout='hotel'
+          >
+            {allHotels.hotels.map((hotel) => (
+              <HotelTableRow
+                data={hotel}
+                handleEditHotel={handleEditHotel}
+                key={hotel._id}
+                handleDeleteHotel={() =>
+                  hotel._id && handleDeleteHotel(hotel._id)
+                }
+              />
+            ))}
+          </DataTable>
+          <Pagination
+            onChange={handlePageChange}
+            page={pageNumber}
+            pages={allHotels.pagination.allPages}
+          />
+        </div>
+      ) : (
+        <div className='py-20'>
+          <NoDataFound text='No Hotels Found' />
+        </div>
+      )}
+    </div>
+  );
+};
