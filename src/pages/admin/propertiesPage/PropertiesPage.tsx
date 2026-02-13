@@ -13,6 +13,8 @@ export const PropertiesPage = () => {
   const { properties, handleDelete, handlePageChange, pageNumber } =
     usePropertiesPage();
 
+  console.log(properties);
+
   return (
     <div className='flex flex-col gap-10 py-10 container min-h-screen'>
       <AdminPageHeader
@@ -39,7 +41,7 @@ export const PropertiesPage = () => {
               <PropertyTableRow
                 property={property}
                 handleDelete={handleDelete}
-                key={property._id}
+                key={property.id}
               />
             ))}
           </DataTable>

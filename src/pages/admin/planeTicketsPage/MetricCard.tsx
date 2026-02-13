@@ -1,5 +1,5 @@
-import { IconBox } from '../../pages/admin/planeTicketsPage/IconBox';
-import { Text } from '../text';
+import { IconBox } from '../../../components/iconBox';
+import { Text } from '../../../components/text';
 import type { MetricCardProps } from './types';
 
 export const MetricCard = ({ label, value, icon, iconBg }: MetricCardProps) => {

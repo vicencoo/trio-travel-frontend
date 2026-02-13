@@ -2,72 +2,71 @@ import { Search } from '@mui/icons-material';
 import { Button } from '../../../components/button';
 import { Input } from '../../../components/input';
 import { Text } from '../../../components/text';
-import { HotelCard } from './HotelCard';
 import { useHotel } from './useHotel';
+import { NoDataFound } from '../../../components/noDataFound';
+import { Pagination } from '../../../components/pagination';
+import { useScrollOnChange } from '../../../hooks/useScrollOnChange';
+import { HotelCard } from '../../../components/hotelCard';
 
 export const Hotel = () => {
-  const { hotels } = useHotel();
+  const { hotels, handlePageChange, pageNumber } = useHotel();
+  const { scrollRef } = useScrollOnChange(pageNumber);
   return (
     <div className='flex flex-col gap-14 mb-20'>
-      <div className='bg-gradient-to-r from-blue-500 to-indigo-600  py-9 md:py-20 text-white flex flex-col text-center gap-5 relative'>
-        <Text
-          text={'Our Partner Hotels'}
-          size='text-5xl'
-          font='font-semibold'
-        />
-        <Text
-          text={`Discover handpicked luxury hotels and resorts we've partnered with to bring you exceptional stays worldwide`}
-          size='text-lg'
-          font='fontmedium'
-        />
-        <div className='container absolute md:-bottom-6 -bottom-28'>
-          <div className='bg-white flex md:flex-row flex-col w-full gap-2 rounded-lg p-5 shadow-lg'>
+      <div
+        className='bg-gradient-to-r from-blue-500 to-indigo-600  md:pt-16 pt-9 pb-20  text-white flex flex-col text-center relative'
+        ref={scrollRef}
+      >
+        <div className='flex flex-col gap-2 px-2'>
+          <Text
+            text={'Partnerët Tanë'}
+            size='md:text-5xl text-4xl'
+            font='font-semibold'
+          />
+          <Text
+            text={`Zbulo hotele dhe resort-e luksoze të përzgjedhura me kujdes, me të cilat bashkëpunojmë për t’ju ofruar qëndrime të jashtëzakonshme në mbarë botën.`}
+            size='md:text-lg text-sm'
+            font='fontmedium'
+          />
+        </div>
+        <div className='container absolute md:-bottom-10 -bottom-16'>
+          <div className='bg-white flex md:flex-row flex-col w-full gap-3 rounded-lg p-5 shadow-lg'>
             <Input
-              placeholder='Search hotels and destinations...'
+              placeholder='Kërko emrin ose vendëndodhjen e hotelit...'
               className='flex-1 text-gray-500'
               icon={<Search className='text-gray-500' />}
             />
-            <div className='flex gap-2 md:w-max w-full justify-center'>
-              <Button
-                name='all hotels'
-                bgColor='#2563eb'
-                bgHover='#1d4ed8 '
-                border='#2563eb'
-                color='white'
-                borderHover='trasparent'
-              />
-              <Button
-                name='featured'
-                bgHover='transparent'
-                hoverColor='black'
-              />
-            </div>
+            <Button
+              name='kërko hotel'
+              endIcon={<Search />}
+              bgColor='#3b82f6 '
+              bgHover='#4f46e5 '
+              color='white'
+              border='transparent'
+              borderHover='transparent'
+              padding='9px 35px'
+            />
           </div>
         </div>
       </div>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:pt-0 pt-24 container'>
-        {hotels &&
-          hotels.map((hotel) => {
-            const firstImage = hotel?.hotelImages?.[0];
-            const image =
-              typeof firstImage === 'object' &&
-              'hotelImage' in firstImage &&
-              firstImage.hotelImage;
-
-            return (
-              <HotelCard
-                key={hotel._id}
-                image={image || ''}
-                location={hotel.location}
-                title={hotel.hotelName}
-                facilities={hotel.facilities}
-                price={hotel.price}
-                rating={hotel.rating}
-                reviews={hotel.reviews}
-              />
-            );
-          })}
-      </div>
+      {hotels && hotels.hotels.length > 0 ? (
+        <div className='flex flex-col gap-10 items-center'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:gap-4 gap-5 md:pt-0 pt-12 container'>
+            {hotels.hotels.map((hotel) => {
+              return <HotelCard data={hotel} key={hotel.id} />;
+            })}
+          </div>
+          <Pagination
+            onChange={handlePageChange}
+            page={pageNumber}
+            pages={hotels.pagination.allPages}
+          />
+        </div>
+      ) : (
+        <div className='py-28'>
+          <NoDataFound text='No Hotels Found' />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import type { SelectorProps } from './types';
+import { Text } from '../text';
 
 export const Selector = ({
   value,
@@ -9,9 +10,15 @@ export const Selector = ({
   label,
   border = 'black',
   multiple = false,
+  errorMessage,
 }: SelectorProps) => {
   return (
-    <FormControl fullWidth variant='outlined' sx={{ mb: 2 }}>
+    <FormControl
+      fullWidth
+      className='flex flex-col gap-1'
+      variant='outlined'
+      sx={{ mb: 2 }}
+    >
       <InputLabel
         sx={{
           fontSize: 14,
@@ -73,6 +80,12 @@ export const Selector = ({
             </MenuItem>
           ))} */}
       </Select>
+      <Text
+        text={errorMessage}
+        size='text-xs'
+        font='font-medium'
+        className='text-red-500'
+      />
     </FormControl>
   );
 };

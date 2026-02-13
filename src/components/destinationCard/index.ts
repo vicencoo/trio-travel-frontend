@@ -1,1 +1,1 @@
-export { PackageCard } from './PackageCard';
+export { DestinationCard } from './DestinationCard';

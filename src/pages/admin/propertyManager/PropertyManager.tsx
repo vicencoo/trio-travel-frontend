@@ -13,13 +13,7 @@ import { Input } from '../../../components/input';
 import { Selector } from '../../../components/selector';
 import { ImageUploader } from '../../../components/imageUploader';
 import { useNavigate } from 'react-router-dom';
-
-const options = [
-  { label: 'Apartament', value: 'apartament' },
-  { label: 'Vile', value: 'vile' },
-  { label: 'Duplex', value: 'duplex' },
-  { label: 'Toke', value: 'toke' },
-];
+import { PROPERTY_TYPE } from '../../..';
 
 export const PropertyManager = () => {
   const navigate = useNavigate();
@@ -30,6 +24,7 @@ export const PropertyManager = () => {
     handleImagesChange,
     handleSave,
     error,
+    setDeletedImages,
   } = useAddProperty();
 
   return (
@@ -41,11 +36,11 @@ export const PropertyManager = () => {
           </span>
           <div className='flex flex-col gap-3'>
             <Text
-              text={propertyData._id ? 'Edito Pronen' : 'Shto Prone Te Re'}
+              text={propertyData.id ? 'Edito Pronen' : 'Shto Prone Te Re'}
               size='text-4xl'
               font='font-bold'
             />
-            {!propertyData._id && (
+            {!propertyData.id && (
               <Text
                 text={'Shto nje prone per qera ose shitje'}
                 font='font-medium'
@@ -56,32 +51,26 @@ export const PropertyManager = () => {
         </div>
       </Card>
 
-      {error && (
-        <span className='flex w-full justify-center'>
-          <Text text={error} font='font-medium' className='text-red-500' />
-        </span>
-      )}
-
       <Card width='w-full md:w-3/5'>
-        <Text text={'Lloji I Listimit'} size='text-lg' font='font-medium' />
+        <Text text={'Lloji I Listimit *'} size='text-lg' font='font-medium' />
         <div className=' flex w-full gap-3'>
           <Button
             name='per qera'
             fullWidth
             onClick={() => {
-              handleChangePropertyData('listeningType', 'rent');
+              handleChangePropertyData('listing_type', 'rent');
             }}
-            bgColor={propertyData.listeningType === 'rent' ? 'black' : 'white'}
-            color={propertyData.listeningType === 'rent' ? 'white' : 'black'}
+            bgColor={propertyData.listing_type === 'rent' ? 'black' : 'white'}
+            color={propertyData.listing_type === 'rent' ? 'white' : 'black'}
           />
           <Button
             name='per shitje'
             fullWidth
             onClick={() => {
-              handleChangePropertyData('listeningType', 'sale');
+              handleChangePropertyData('listing_type', 'sale');
             }}
-            bgColor={propertyData.listeningType === 'sale' ? 'black' : 'white'}
-            color={propertyData.listeningType === 'sale' ? 'white' : 'black'}
+            bgColor={propertyData.listing_type === 'sale' ? 'black' : 'white'}
+            color={propertyData.listing_type === 'sale' ? 'white' : 'black'}
           />
         </div>
       </Card>
@@ -93,29 +82,36 @@ export const PropertyManager = () => {
         </div>
 
         <div className='flex flex-col gap-1'>
-          <Text text={'Tipi I Prones'} font='font-semibold' size='text-sm' />
+          <Text text={'Tipi I Prones *'} font='font-semibold' size='text-sm' />
           <Selector
-            options={options || ''}
-            value={propertyData.propertyType}
+            options={PROPERTY_TYPE || ''}
+            value={propertyData.property_type}
             onChange={handlePropertyChange}
+            errorMessage={error?.property_type}
           />
         </div>
-        <Input
-          label='Titulli I Postimit'
-          placeholder='Shkruani titullin qe do te shfaqet ne postim . . .'
-          value={propertyData.title || ''}
-          onChange={(e) => handleChangePropertyData('title', e.target.value)}
-        />
+        <div className='flex flex-col gap-1'>
+          <Input
+            label='Titulli I Postimit *'
+            placeholder='Shkruani titullin qe do te shfaqet ne postim . . .'
+            value={propertyData.title || ''}
+            onChange={(e) => handleChangePropertyData('title', e.target.value)}
+            errorMessage={error?.title}
+          />
+        </div>
 
-        <Input
-          label='Pershkrimi I Prones'
-          placeholder='Shkruani pershkrimin e prones . . .'
-          value={propertyData.description || ''}
-          onChange={(e) =>
-            handleChangePropertyData('description', e.target.value)
-          }
-          multiline
-        />
+        <div className='flex flex-col gap-1'>
+          <Input
+            label='Pershkrimi I Prones *'
+            placeholder='Shkruani pershkrimin e prones . . .'
+            value={propertyData.description || ''}
+            onChange={(e) =>
+              handleChangePropertyData('description', e.target.value)
+            }
+            multiline
+            errorMessage={error?.description}
+          />
+        </div>
       </Card>
 
       <Card className='w-full md:w-3/5'>
@@ -124,27 +120,36 @@ export const PropertyManager = () => {
           <Text text={'Locationi I Prones'} size='text-lg' font='font-medium' />
         </div>
 
-        <Input
-          label='Qyteti'
-          placeholder='Qyteti ku ndodhet prona . . .'
-          value={propertyData.city || ''}
-          onChange={(e) => handleChangePropertyData('city', e.target.value)}
-        />
-        <div className='flex md:flex-row flex-col gap-5'>
+        <div className='flex flex-col gap-1'>
           <Input
-            label='Zona'
-            placeholder='Zona orientuese psh: Skele'
-            className='flex-1'
-            value={propertyData.area || ''}
-            onChange={(e) => handleChangePropertyData('area', e.target.value)}
+            label='Qyteti *'
+            placeholder='Qyteti ku ndodhet prona . . .'
+            value={propertyData.city || ''}
+            onChange={(e) => handleChangePropertyData('city', e.target.value)}
+            errorMessage={error?.city}
           />
-          <Input
-            label='Rruga'
-            placeholder='psh: Rruga Kombinati I Peshkut'
-            className='flex-1'
-            value={propertyData.street || ''}
-            onChange={(e) => handleChangePropertyData('street', e.target.value)}
-          />
+        </div>
+        <div className='grid md:grid-cols-2 grid-cols-1 gap-5'>
+          <div className='flex flex-col gap-1'>
+            <Input
+              label='Zona *'
+              placeholder='Zona orientuese psh: Skele'
+              value={propertyData.area || ''}
+              onChange={(e) => handleChangePropertyData('area', e.target.value)}
+              errorMessage={error?.area}
+            />
+          </div>
+          <div className='flex flex-col gap-1'>
+            <Input
+              label='Rruga *'
+              placeholder='psh: Rruga Kombinati I Peshkut'
+              value={propertyData.street || ''}
+              onChange={(e) =>
+                handleChangePropertyData('street', e.target.value)
+              }
+              errorMessage={error?.street}
+            />
+          </div>
         </div>
       </Card>
 
@@ -155,24 +160,30 @@ export const PropertyManager = () => {
         </div>
 
         <div className='grid md:grid-cols-2 grid-cols-1 gap-5'>
-          <Input
-            label={
-              propertyData.listeningType === 'rent'
-                ? 'Cmimi I Qerase'
-                : 'Cmimi I Prones'
-            }
-            placeholder='0'
-            type='number'
-            value={propertyData.price || ''}
-            onChange={(e) => handleChangePropertyData('price', e.target.value)}
-            icon={<EuroSymbolOutlinedIcon fontSize='inherit' />}
-          />
+          <div className='flex flex-col gap-1'>
+            <Input
+              label={
+                propertyData.listing_type === 'rent'
+                  ? 'Cmimi I Qerase *'
+                  : 'Cmimi I Prones *'
+              }
+              placeholder='0'
+              type='number'
+              value={propertyData.price || ''}
+              onChange={(e) =>
+                handleChangePropertyData('price', e.target.value)
+              }
+              icon={<EuroSymbolOutlinedIcon fontSize='inherit' />}
+              errorMessage={error?.price}
+            />
+          </div>
           <div className='flex flex-col gap-1'>
             <Text font='font-semibold' size='text-sm'>
               Hapesira E Prones{' '}
               <span className='text-gray-500'>
                 (m<sup>2</sup>)
-              </span>
+              </span>{' '}
+              *
             </Text>
             <Input
               placeholder='0'
@@ -181,6 +192,7 @@ export const PropertyManager = () => {
               onChange={(e) =>
                 handleChangePropertyData('space', e.target.value)
               }
+              errorMessage={error?.space}
             />
           </div>
 
@@ -209,9 +221,9 @@ export const PropertyManager = () => {
             label='Numri I Katit'
             placeholder='0'
             type='number'
-            value={propertyData.floorNumber || ''}
+            value={propertyData.floor_number || ''}
             onChange={(e) =>
-              handleChangePropertyData('floorNumber', e.target.value)
+              handleChangePropertyData('floor_number', e.target.value)
             }
           />
 
@@ -219,9 +231,9 @@ export const PropertyManager = () => {
             label='Viti I Ndertimit'
             placeholder='2020'
             type='number'
-            value={propertyData.buildYear || ''}
+            value={propertyData.build_year || ''}
             onChange={(e) =>
-              handleChangePropertyData('buildYear', e.target.value)
+              handleChangePropertyData('build_year', e.target.value)
             }
           />
         </div>
@@ -233,14 +245,20 @@ export const PropertyManager = () => {
             fontSize='medium'
             className='text-blue-600'
           />
-          <Text text={'Imazhet E Prones'} size='text-lg' font='font-medium' />
+          <Text text={'Imazhet E Prones *'} size='text-lg' font='font-medium' />
         </div>
 
         <ImageUploader
-          value={propertyData.propertyImages || []}
+          value={propertyData.property_images || []}
           onChange={handleImagesChange}
           maxImages={20}
-          imageKey='propertyImage'
+          imageKey='property_image'
+          onDeleteOld={(img) => {
+            const filename = typeof img === 'string' ? img : img.property_image;
+            if (filename) {
+              setDeletedImages((prev) => [...prev, filename]);
+            }
+          }}
         />
       </Card>
 
@@ -254,7 +272,9 @@ export const PropertyManager = () => {
           endIcon={<CloseIcon />}
         />
         <Button
-          name={propertyData._id ? 'edito pronen' : 'shto pronen'}
+          name={
+            propertyData.id || propertyData.id ? 'edito pronen' : 'shto pronen'
+          }
           onClick={handleSave}
           fullWidth
           color='white'

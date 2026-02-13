@@ -45,7 +45,7 @@ export const ContactForm = ({
         />
         <Input
           label='Mesazhi *'
-          placeholder='Shkruani mesazhin që doni ti dërgoni agjensisë'
+          placeholder='Shkruani mesazhin që doni ti dërgoni agjencisë'
           multiline
           value={contact.message}
           onChange={(e) => handleChangeContact('message', e.target.value)}

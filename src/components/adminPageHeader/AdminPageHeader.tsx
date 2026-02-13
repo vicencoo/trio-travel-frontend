@@ -47,7 +47,7 @@ export const AdminPageHeader = ({
         </div>
       </div>
       {display && (
-        <div className='flex w-full md:justify-end justify-center'>
+        <div className='flex md:w-fit w-full md:justify-end justify-center'>
           <Button
             name={buttonName}
             endIcon={<AddIcon />}
@@ -57,6 +57,7 @@ export const AdminPageHeader = ({
             border='transparent'
             borderHover={buttonBorderHover}
             onClick={onClick}
+            fullWidth
           />
         </div>
       )}

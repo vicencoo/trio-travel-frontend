@@ -4,16 +4,7 @@ import { Input } from '../../../components/input';
 import { Text } from '../../../components/text';
 import { Button } from '../../../components/button';
 import { ImageUploader } from '../../../components/imageUploader';
-import type { PlaneTicket, TicketImage } from '../../../types';
-
-type TicketModalProps = {
-  openModal: boolean;
-  handleOpenModal: () => void;
-  hadleTicketChange: (key: string, value: string) => void;
-  handleImageChange: (images: (File | string | TicketImage)[]) => void;
-  handleSubmit: () => void;
-  planeTicket: PlaneTicket;
-};
+import type { TicketModalProps } from './types';
 
 export const TicketModal = ({
   openModal,
@@ -22,6 +13,7 @@ export const TicketModal = ({
   handleSubmit,
   handleImageChange,
   planeTicket,
+  errors,
 }: TicketModalProps) => {
   return (
     <Modal
@@ -33,7 +25,7 @@ export const TicketModal = ({
     >
       <div className='flex w-full bg-indigo-500 px-6 py-4 items-center justify-between text-white'>
         <Text
-          text={planeTicket._id ? 'Edito Bileten' : 'Shto Bilete Te Re'}
+          text={planeTicket.id ? 'Edito Bileten' : 'Shto Bilete Te Re'}
           size='text-lg'
           font='font-bold'
           className='select-none'
@@ -45,45 +37,60 @@ export const TicketModal = ({
       </div>
       <div className='flex flex-col gap-4 px-6 py-3'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-          <Input
-            label='Nga (from)'
-            placeholder='tirana'
-            value={planeTicket.from}
-            onChange={(e) => hadleTicketChange('from', e.target.value)}
-          />
-          <Input
-            label='Ne (to)'
-            placeholder='rome'
-            value={planeTicket.to}
-            onChange={(e) => hadleTicketChange('to', e.target.value)}
-          />
-          <Input
-            label='Aeroporti Nisjes (departure airport)'
-            placeholder='tia'
-            value={planeTicket.departureAirport}
-            onChange={(e) =>
-              hadleTicketChange('departureAirport', e.target.value)
-            }
-          />
-          <Input
-            label='Aeroporti Mberritjes (arrival airport)'
-            placeholder='fco'
-            value={planeTicket.arrivalAirport}
-            onChange={(e) =>
-              hadleTicketChange('arrivalAirport', e.target.value)
-            }
-          />
-          <Input
-            label='Cmimi Fillestar (initial price)'
-            placeholder='0'
-            type='number'
-            value={planeTicket.price || ''}
-            onChange={(e) => hadleTicketChange('price', e.target.value)}
-          />
+          <div className='flex flex-col gap-1'>
+            <Input
+              label='Nga (from) *'
+              placeholder='tirana'
+              value={planeTicket.from}
+              onChange={(e) => hadleTicketChange('from', e.target.value)}
+              errorMessage={errors?.from}
+            />
+          </div>
+          <div className='flex flex-col gap-1'>
+            <Input
+              label='Ne (to) *'
+              placeholder='rome'
+              value={planeTicket.to}
+              onChange={(e) => hadleTicketChange('to', e.target.value)}
+              errorMessage={errors?.to}
+            />
+          </div>
+          <div className='flex flex-col gap-1'>
+            <Input
+              label='Aeroporti Nisjes (departure airport) *'
+              placeholder='tia'
+              value={planeTicket.departure_airport}
+              onChange={(e) =>
+                hadleTicketChange('departure_airport', e.target.value)
+              }
+              errorMessage={errors?.departure_airport}
+            />
+          </div>
+          <div className='flex flex-col gap-1'>
+            <Input
+              label='Aeroporti Mberritjes (arrival airport) *'
+              placeholder='fco'
+              value={planeTicket.arrival_airport}
+              onChange={(e) =>
+                hadleTicketChange('arrival_airport', e.target.value)
+              }
+              errorMessage={errors?.arrival_airport}
+            />
+          </div>
+          <div className='flex flex-col gap-1'>
+            <Input
+              label='Cmimi Fillestar (initial price) *'
+              placeholder='0'
+              type='number'
+              value={planeTicket.price || ''}
+              onChange={(e) => hadleTicketChange('price', e.target.value)}
+              errorMessage={errors?.price}
+            />
+          </div>
         </div>
 
         <ImageUploader
-          value={planeTicket?.ticketImages || []}
+          value={planeTicket?.ticket_images || []}
           maxImages={1}
           onChange={handleImageChange}
           imageKey='image'

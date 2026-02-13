@@ -1,13 +1,17 @@
 import { useEffect, useState, type ChangeEvent } from 'react';
 import { HOTEL_DATA } from '../../../defaults';
-import type { HotelImages, HotelsResponse, HotelTypes } from '../../../types';
+import type { HotelImages, HotelTypes } from '../../../types';
 import { axios } from '../../../api';
+import type { HotelsResponse } from '../../../responseTypes';
+import type { HotelFieldError } from '../../../errorTypes';
 
 export const useHotelManager = () => {
   const [isHotelFormOpen, setIsHotelFormOpen] = useState<boolean>(false);
   const [hotelData, setHotelData] = useState<HotelTypes>(HOTEL_DATA);
   const [allHotels, setAllHotels] = useState<HotelsResponse | null>(null);
+  const [deletedImages, setDeletedImages] = useState<string[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [errors, setErrors] = useState<HotelFieldError>({});
 
   const handlePageChange = (_event: ChangeEvent<unknown>, page: number) => {
     setPageNumber(page);
@@ -37,7 +41,7 @@ export const useHotelManager = () => {
   const handleImagesChange = (images: (File | string | HotelImages)[]) => {
     setHotelData((prev) => ({
       ...prev,
-      hotelImages: images,
+      hotel_images: images,
     }));
   };
 
@@ -56,7 +60,14 @@ export const useHotelManager = () => {
   }, [pageNumber]);
 
   const handleEditHotel = (hotelItem: HotelTypes) => {
-    setHotelData(hotelItem);
+    const normalizedFacilities = hotelItem.facilities.map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (f: any) => f.facility,
+    );
+    setHotelData({
+      ...hotelItem,
+      facilities: normalizedFacilities,
+    });
     setIsHotelFormOpen(true);
   };
 
@@ -76,9 +87,10 @@ export const useHotelManager = () => {
 
   const saveHotel = async () => {
     try {
+      console.log('Data collected:', hotelData);
       const formData = new FormData();
-      if (hotelData.hotelName)
-        formData.append('hotelName', hotelData.hotelName);
+      if (hotelData.hotel_name)
+        formData.append('hotel_name', hotelData.hotel_name);
       if (hotelData.location) formData.append('location', hotelData.location);
       if (hotelData.description)
         formData.append('description', hotelData.description);
@@ -89,22 +101,37 @@ export const useHotelManager = () => {
       if (hotelData.price) formData.append('price', hotelData.price.toString());
       if (hotelData.facilities)
         formData.append('facilities', JSON.stringify(hotelData.facilities));
-      if (hotelData.hotelImages)
-        hotelData.hotelImages.map((img) => {
+      if (deletedImages.length) {
+        formData.append('deletedImages', JSON.stringify(deletedImages));
+      }
+      if (hotelData.hotel_images)
+        hotelData.hotel_images.map((img) => {
           if (img instanceof File) {
-            formData.append('hotelImages', img);
+            formData.append('hotel_images', img);
           }
         });
 
-      const url = hotelData._id ? '' : '/admin/add-hotel';
+      const url = hotelData.id
+        ? `/admin/edit-hotel?hotelId=${hotelData.id}`
+        : '/admin/add-hotel';
 
       const res = await axios.post(url, formData);
       if (res.data) {
         handleOpenForm();
         await getAllHotels();
       }
-    } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
       console.error(err);
+      if (err?.response?.data?.errors) {
+        const fieldErrors: Record<string, string> = {};
+        err.response.data.errors.forEach(
+          (e: { path: string | number; msg: string }) => {
+            fieldErrors[e.path] = e.msg;
+          },
+        );
+        setErrors(fieldErrors);
+      }
     }
   };
 
@@ -121,5 +148,7 @@ export const useHotelManager = () => {
     handlePageChange,
     pageNumber,
     handleDeleteHotel,
+    setDeletedImages,
+    errors,
   };
 };

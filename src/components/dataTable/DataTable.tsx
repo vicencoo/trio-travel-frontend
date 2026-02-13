@@ -11,7 +11,7 @@ type DataTableProps = {
   headerBg?: string;
   headerText?: string;
   columns: Columns[];
-  layout?: 'tickets' | 'property' | 'package' | 'hotel';
+  layout?: 'tickets' | 'property' | 'package' | 'hotel' | 'destination';
   children: ReactNode;
 };
 
@@ -27,6 +27,7 @@ export const DataTable = ({
     property: 'grid-cols-7',
     package: 'md:grid-cols-8 grid-cols-7',
     hotel: 'md:grid-cols-7 grid-cols-8',
+    destination: 'grid-cols-5',
   };
 
   const gridClass = gridClasses[layout];

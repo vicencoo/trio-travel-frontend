@@ -1,12 +1,10 @@
 import type { SelectChangeEvent } from '@mui/material';
 import { useEffect, useState, type ChangeEvent } from 'react';
 import { DEFAULT_PACKAGE } from '../../../defaults';
-import type {
-  PackageImages,
-  PackageResponse,
-  TouristPackage,
-} from '../../../types';
+import type { PackageImage, TouristPackage } from '../../../types';
 import { axios } from '../../../api';
+import type { PackageResponse } from '../../../responseTypes';
+import type { PackageFieldError } from '../../../errorTypes';
 
 export const usePackageManager = () => {
   const [touristPackage, setTouristPackage] = useState(DEFAULT_PACKAGE);
@@ -14,6 +12,8 @@ export const usePackageManager = () => {
   const [isPackageFormOpen, setIsPackageFormOpen] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [deletedImages, setDeletedImages] = useState<string[]>([]);
+  const [errors, setErrors] = useState<PackageFieldError>({});
 
   const handleChangePage = (_event: ChangeEvent<unknown>, page: number) => {
     setPageNumber(page);
@@ -56,27 +56,26 @@ export const usePackageManager = () => {
 
   const handlePackageDetailsChange = (
     event: SelectChangeEvent<string | string[]>,
-    type: 'accomodation' | 'mealIncluded',
+    type: 'accomodation' | 'meal_included',
   ) => {
     const value = event.target.value;
     const stringValue = Array.isArray(value) ? value[0] : value;
     if (type === 'accomodation') {
       handleChangePackageData('accomodation', stringValue);
-    } else if (type === 'mealIncluded') {
-      handleChangePackageData('mealIncluded', stringValue);
+    } else if (type === 'meal_included') {
+      handleChangePackageData('meal_included', stringValue);
     }
   };
 
-  const handleImagesChange = (images: (File | string | PackageImages)[]) => {
+  const handleImagesChange = (images: (File | string | PackageImage)[]) => {
     setTouristPackage((prev) => ({
       ...prev,
-      packageImages: images,
+      package_images: images,
     }));
   };
 
   const handleSave = async () => {
     try {
-      console.log('Data collected:', touristPackage);
       const formData = new FormData();
       if (touristPackage.title) formData.append('title', touristPackage.title);
       if (touristPackage.destination)
@@ -89,17 +88,20 @@ export const usePackageManager = () => {
         formData.append('description', touristPackage.description);
       if (touristPackage.accomodation)
         formData.append('accomodation', touristPackage.accomodation);
-      if (touristPackage.mealIncluded)
-        formData.append('mealIncluded', touristPackage.mealIncluded);
-      if (touristPackage.packageImages)
-        touristPackage.packageImages.map((img) => {
+      if (touristPackage.meal_included)
+        formData.append('meal_included', touristPackage.meal_included);
+      if (deletedImages.length) {
+        formData.append('deletedImages', JSON.stringify(deletedImages));
+      }
+      if (touristPackage.package_images)
+        touristPackage.package_images.map((img) => {
           if (img instanceof File) {
-            formData.append('packageImages', img);
+            formData.append('package_images', img);
           }
         });
 
       const url = editMode
-        ? `/admin/edit-package?packageId=${touristPackage._id}`
+        ? `/admin/edit-package?packageId=${touristPackage.id}`
         : '/admin/add-package';
 
       const res = await axios.post(url, formData);
@@ -109,8 +111,18 @@ export const usePackageManager = () => {
         setEditMode(false);
         await getPackages();
       }
-    } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
       console.error(err);
+      if (err?.response?.data?.errors) {
+        const fieldErrors: Record<string, string> = {};
+        err.response.data.errors.forEach(
+          (e: { path: string | number; msg: string }) => {
+            fieldErrors[e.path] = e.msg;
+          },
+        );
+        setErrors(fieldErrors);
+      }
     }
   };
 
@@ -142,5 +154,7 @@ export const usePackageManager = () => {
     handleDeletePackage,
     handleChangePage,
     pageNumber,
+    setDeletedImages,
+    errors,
   };
 };

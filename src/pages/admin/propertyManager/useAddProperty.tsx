@@ -4,11 +4,13 @@ import { DEFAULT_PROPERTY } from '../../../defaults';
 import { axios } from '../../../api';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { PropertyImage } from '../../../types';
+import type { PropertyFieldError } from '../../../errorTypes';
 
 export const useAddProperty = () => {
   const { id } = useParams();
   const [propertyData, setPropertyData] = useState(DEFAULT_PROPERTY);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<PropertyFieldError>({});
+  const [deletedImages, setDeletedImages] = useState<string[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,48 +43,23 @@ export const useAddProperty = () => {
   ) => {
     const value = event.target.value;
     const stringValue = Array.isArray(value) ? value[0] : value;
-    handleChangePropertyData('propertyType', stringValue);
+    handleChangePropertyData('property_type', stringValue);
   };
 
   const handleImagesChange = (images: (File | string | PropertyImage)[]) => {
     setPropertyData((prev) => ({
       ...prev,
-      propertyImages: images,
+      property_images: images,
     }));
   };
 
   const handleSave = async () => {
     try {
-      console.log(propertyData);
-
-      const missingField = Object.entries(propertyData)
-        .filter(
-          ([key]) =>
-            key !== 'propertyImages' &&
-            key !== '_id' &&
-            key !== 'bedrooms' &&
-            key !== 'toilets' &&
-            key !== 'floorNumber' &&
-            key !== 'buildYear',
-        )
-        .filter(([, value]) => {
-          if (typeof value === 'string') return value.trim() === '';
-          return value === null || value === undefined;
-        })
-        .map(([field]) => field);
-
-      console.log(missingField);
-
-      if (missingField.length > 0) {
-        return setError('Ju lutemi te plotesoni te gjitha fushat!');
-      }
-
       const formData = new FormData();
-
-      if (propertyData.listeningType)
-        formData.append('listeningType', propertyData.listeningType);
-      if (propertyData.propertyType)
-        formData.append('propertyType', propertyData.propertyType);
+      if (propertyData.listing_type)
+        formData.append('listing_type', propertyData.listing_type);
+      if (propertyData.property_type)
+        formData.append('property_type', propertyData.property_type);
       if (propertyData.title) formData.append('title', propertyData.title);
       if (propertyData.description)
         formData.append('description', propertyData.description);
@@ -97,15 +74,18 @@ export const useAddProperty = () => {
         formData.append('bedrooms', propertyData.bedrooms.toString());
       if (propertyData.toilets)
         formData.append('toilets', propertyData.toilets.toString());
-      if (propertyData.floorNumber)
-        formData.append('floorNumber', propertyData.floorNumber.toString());
-      if (propertyData.buildYear)
-        formData.append('buildYear', propertyData.buildYear.toString());
+      if (propertyData.floor_number)
+        formData.append('floor_number', propertyData.floor_number.toString());
+      if (propertyData.build_year)
+        formData.append('build_year', propertyData.build_year.toString());
+      if (deletedImages.length) {
+        formData.append('deletedImages', JSON.stringify(deletedImages));
+      }
 
-      if (propertyData.propertyImages)
-        propertyData.propertyImages.forEach((img) => {
+      if (propertyData.property_images)
+        propertyData.property_images.forEach((img) => {
           if (img instanceof File) {
-            formData.append('propertyImages', img);
+            formData.append('property_images', img);
           }
         });
 
@@ -115,10 +95,18 @@ export const useAddProperty = () => {
         navigate('/admin/manage-properties');
         setPropertyData(DEFAULT_PROPERTY);
       }
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.error(error);
-
-      // setError(error?.response?.data?.message || `Failed to add new property!`);
+      if (error?.response?.data?.errors) {
+        const fieldErrors: Record<string, string> = {};
+        error.response.data.errors.forEach(
+          (e: { path: string | number; msg: string }) => {
+            fieldErrors[e.path] = e.msg;
+          },
+        );
+        setError(fieldErrors);
+      }
     }
   };
 
@@ -129,5 +117,6 @@ export const useAddProperty = () => {
     handleImagesChange,
     handleSave,
     error,
+    setDeletedImages,
   };
 };

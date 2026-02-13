@@ -24,7 +24,7 @@ export const PropertyImages = ({
       <div className='relative md:w-5/6 w-full md:h-[75vh] h-[55vh] bg-slate-900 overflow-hidden group rounded-lg border border-gray-500'>
         <div className='absolute inset-0 transition-transform duration-700 ease-out'>
           {property &&
-            property?.propertyImages?.map((img, index) => (
+            property?.property_images?.map((img, index) => (
               <div
                 key={index}
                 className={`absolute inset-0 transition-all duration-1000 ${
@@ -34,7 +34,7 @@ export const PropertyImages = ({
                 }`}
               >
                 <Image
-                  src={img.propertyImage}
+                  src={img.property_image}
                   className='w-full h-full object-cover rounded-lg'
                 />
               </div>
@@ -57,15 +57,21 @@ export const PropertyImages = ({
         >
           <ChevronRightIcon fontSize='large' />
         </button>
+
+        {/* Image Number */}
+        <span className='absolute right-2 top-2 bg-black/40 backdrop-blur-sm border border-white/20 px-3 py-1.5 rounded-full flex items-center justify-center  text-white text-sm font-semibold shadow-md'>
+          {currentIndexImage + 1} / {property?.property_images?.length}
+        </span>
       </div>
+
       {/* Images */}
-      <div className='grid md:grid-cols-6 grid-cols-3 gap-3'>
+      <div className='flex md:grid md:grid-cols-7 gap-3 overflow-x-auto md:overflow-visible hide-scrollbar snap-x snap-mandatory'>
         {property &&
-          property?.propertyImages?.map((img, index) => (
+          property?.property_images?.map((img, index) => (
             <Image
               key={index}
-              src={img.propertyImage}
-              className={`object-cover w-32 h-20 transition-all duration-500 will-change-transform rounded-xl ${index === currentIndexImage ? 'border-2 border-blue-500 scale-110' : 'border-2 border-gray-500'}  cursor-pointer`}
+              src={img.property_image}
+              className={`object-cover w-32  h-20 flex-shrink-0 transition-all duration-300 will-change-transform rounded-xl ${index === currentIndexImage ? 'border-2 border-blue-500' : 'border-2 border-gray-500'}  cursor-pointer`}
               onClick={() => setCurrentIndex(index)}
             />
           ))}

@@ -22,6 +22,8 @@ export const PackageManager = () => {
     handleDeletePackage,
     handleChangePage,
     pageNumber,
+    setDeletedImages,
+    errors,
   } = usePackageManager();
 
   return (
@@ -47,6 +49,8 @@ export const PackageManager = () => {
           handlePackageDetailsChange={handlePackageDetailsChange}
           handleImagesChange={handleImagesChange}
           handleSave={handleSave}
+          setDeletedImages={setDeletedImages}
+          errors={errors}
         />
       )}
 
@@ -61,7 +65,7 @@ export const PackageManager = () => {
             {packages.packages.map((packageItem) => (
               <PackageTableRow
                 packageItem={packageItem}
-                key={packageItem._id}
+                key={packageItem.id}
                 handleDeletePackage={handleDeletePackage}
                 handleEditPackage={handleEditPackage}
               />

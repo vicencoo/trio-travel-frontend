@@ -23,6 +23,7 @@ export const Input = ({
   onFocus,
   onBlur,
   className = '',
+  errorMessage,
   ...props
 }: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -47,7 +48,7 @@ export const Input = ({
             rows={rows}
             value={value}
             onChange={onChange}
-            className={`w-full p-3 border border-gray-300 rounded-xl
+            className={`w-full p-3 border border-gray-300 text-gray-500 rounded-xl
             focus:ring-2 focus:ring-blue-500 focus:border-transparent
             transition-all duration-100 bg-white/60 focus:bg-white/70
             backdrop-blur-sm ${className}`}
@@ -65,7 +66,7 @@ export const Input = ({
             className={`w-full
               ${icon || img ? 'pl-10' : 'pl-2'}
               ${isPassword ? 'pr-12' : 'pr-2'}
-              ${height} py-2 border border-black rounded-xl
+              ${height} py-2 border text-gray-500 border-black rounded-xl
               focus:ring-2 focus:ring-blue-500 focus:border-transparent
               transition-all duration-200 bg-white/60 focus:bg-white/70
               backdrop-blur-sm
@@ -78,7 +79,7 @@ export const Input = ({
           <button
             type='button'
             onClick={() => setShowPassword(!showPassword)}
-            className='absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors'
+            className='absolute right-3 top-1/2 -translate-y-1/2 text-gray-400  hover:text-gray-600 transition-colors'
           >
             {showPassword ? (
               <VisibilityOff className='h-5 w-5' />
@@ -98,6 +99,14 @@ export const Input = ({
           </div>
         )}
       </div>
+      {errorMessage && (
+        <Text
+          text={errorMessage}
+          size='text-xs'
+          font='font-medium'
+          className='text-red-500'
+        />
+      )}
     </div>
   );
 };

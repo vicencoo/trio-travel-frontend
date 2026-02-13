@@ -1,14 +1,24 @@
 import type { SelectChangeEvent } from '@mui/material';
-import type { PackageImages, TouristPackage } from '../../../types';
+import type { PackageImage, TouristPackage } from '../../../types';
+import type { Dispatch, SetStateAction } from 'react';
+import type { PackageFieldError } from '../../../errorTypes';
 
 export type PackageFormProps = {
   onClose: () => void;
   handleChangePackageData: (key: string, value: string) => void;
   handlePackageDetailsChange: (
     event: SelectChangeEvent<string | string[]>,
-    type: 'accomodation' | 'mealIncluded',
+    type: 'accomodation' | 'meal_included',
   ) => void;
   touristPackage: TouristPackage;
-  handleImagesChange: (images: (File | string | PackageImages)[]) => void;
+  handleImagesChange: (images: (File | string | PackageImage)[]) => void;
   handleSave: () => void;
+  setDeletedImages: Dispatch<SetStateAction<string[]>>;
+  errors: PackageFieldError;
+};
+
+export type PackageItemProps = {
+  packageItem: TouristPackage;
+  handleEditPackage: (packageItem: TouristPackage) => void;
+  handleDeletePackage: (id: string) => void;
 };

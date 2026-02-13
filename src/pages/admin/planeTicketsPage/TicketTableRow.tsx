@@ -3,6 +3,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { Image } from '../../../components/image';
 import { Text } from '../../../components/text';
 import type { PlaneTicket } from '../../../types';
+import { formattedPrice } from '../../../utils/formattedPrice';
 
 type TicketItemProps = {
   ticket: PlaneTicket;
@@ -15,11 +16,12 @@ export const TicketTableRow = ({
   handleDelete,
   handleEdit,
 }: TicketItemProps) => {
-  const firstImage = ticket.ticketImages?.[0];
+  const firstImage = ticket.ticket_images?.[0];
   const image =
     typeof firstImage === 'object' && 'image' in firstImage
       ? firstImage.image
       : '';
+
   return (
     <div className='grid md:grid-cols-10 grid-cols-11 items-center px-4 py-1 border-b border-gray-300 last:border-b-0 md:gap-0 gap-1'>
       <div className='col-span-2 flex items-center gap-2'>
@@ -38,19 +40,19 @@ export const TicketTableRow = ({
         className='capitalize md:col-span-1 col-span-3'
       />
       <Text
-        text={ticket.departureAirport}
+        text={ticket.departure_airport}
         size='text-xs'
         font='font-medium'
         className='hidden md:flex uppercase px-4 py-2 w-max bg-blue-100 text-blue-600 rounded-2xl col-span-2'
       />
       <Text
-        text={ticket.arrivalAirport}
+        text={ticket.arrival_airport}
         size='text-xs'
         font='font-medium'
         className='hidden md:flex uppercase px-4 py-2 w-max bg-blue-100 text-blue-600 rounded-2xl col-span-2'
       />
       <Text
-        text={`${ticket.price}€`}
+        text={`${formattedPrice(Number(ticket.price))}€`}
         font='font-bold'
         size='text-lg'
         className='capitalize text-green-600 md:col-span-1 col-span-3'
@@ -62,7 +64,7 @@ export const TicketTableRow = ({
         />
         <DeleteOutlinedIcon
           className='text-red-400 hover:text-red-600 cursor-pointer'
-          onClick={() => ticket._id && handleDelete(ticket._id)}
+          onClick={() => ticket.id && handleDelete(ticket.id)}
         />
       </div>
     </div>

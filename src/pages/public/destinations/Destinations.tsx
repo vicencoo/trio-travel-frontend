@@ -1,84 +1,101 @@
-import { FAVORITE_DESTINATIONS } from '../../..';
-import { Button } from '../../../components/button';
+import { DestinationCard } from '../../../components/destinationCard';
 import { Image } from '../../../components/image';
+import { Pagination } from '../../../components/pagination';
 import { Text } from '../../../components/text';
-import { DestCard } from './DestCard';
+import { useScrollOnChange } from '../../../hooks/useScrollOnChange';
+import { DestinationHero } from './DestinationHero';
+import { useDestinations } from './useDestinations';
+
+const message = encodeURIComponent(`
+Përshëndetje
+Jam i interesuar për një udhëtim të personalizuar.
+
+Do të doja një ofertë sipas këtyre preferencave:
+📍 Destinacioni:
+📅 Data e nisjes:
+⏳ Kohëzgjatja:
+💰 Buxheti:
+🧭 Stili i udhëtimit:
+
+Faleminderit!
+`);
 
 export const Destinations = () => {
+  const { data, handlePageChange, page } = useDestinations();
+  const { scrollRef } = useScrollOnChange(page);
+
   return (
     <div className='flex flex-col gap-14'>
-      <div className='flex flex-col items-center justify-center gap-14 bg-gray-900 text-white md:py-32 py-10'>
-        <div className='flex flex-col items-center justify-center gap-3'>
-          <Text
-            text={' Explore the World Your Way'}
-            size='text-5xl'
-            font='font-serif'
-          />
-          <Text
-            text={`Handpicked destinations crafted for unforgettable journeys and
-         meaningful experiences.`}
-            size='text-lg'
-            font='font-medium'
-          />
-        </div>
-        <Button
-          name='Start Exploring'
-          bgHover='#059669'
-          bgColor='#10b981'
-          color='white'
-        />
-      </div>
+      <DestinationHero />
 
       <section className='container text-center'>
         <Text
-          text={` Whether you’re dreaming of pristine beaches, iconic cities, or
-                cultural adventures, our destinations are carefully curated to match
-                every travel style and budget.`}
-          size='text-2xl'
+          text={`Nëse ëndërron për plazhe të virgjëra, qytete ikonike apo aventura kulturore, destinacionet tona janë përzgjedhur me kujdes për t’u përshtatur me çdo stil udhëtimi dhe buxhet.`}
+          size='md:text-xl text-lg'
           font='font-medium'
           className='text-gray-600'
         />
       </section>
 
-      <div className='flex flex-col'>
-        <div className='bg-gray-50  '>
-          <div className='flex flex-col items-center justify-center py-10 gap-10 container'>
-            <Text
-              text={' Popular Destinations'}
-              size='text-3xl'
-              font='font-medium'
-              className='text-gray-700'
-            />
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5'>
-              {FAVORITE_DESTINATIONS.map((item) => (
-                <DestCard
-                  key={item.id}
-                  image={item.image}
-                  city={item.city}
-                  country={item.country}
-                  tagline={item.tagline}
-                />
-              ))}
+      <div className='flex flex-col gap-10'>
+        <div
+          className='flex flex-col items-center justify-center gap-10 container'
+          ref={scrollRef}
+        >
+          <Text
+            text={'Destinacionet më të Pëlqyera'}
+            size='text-4xl '
+            font='font-medium'
+            className='text-gray-700'
+          />
+
+          {data && data?.destinations?.length > 0 ? (
+            <div className='flex flex-col items-center gap-8'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5'>
+                {data &&
+                  data.destinations.map((destination) => {
+                    return (
+                      <DestinationCard
+                        key={destination.id}
+                        destination={destination}
+                        // image={img}
+                        // city={destination.city}
+                        // country={destination.country}
+                        // tagline={destination.slogan}
+                      />
+                    );
+                  })}
+              </div>
+              <Pagination
+                onChange={handlePageChange}
+                page={page}
+                pages={data.pagination.allPages}
+              />
             </div>
-          </div>
+          ) : (
+            <div></div>
+          )}
         </div>
         <div className='bg-purple-100 py-6 md:py-24'>
           <div className='grid grid-cols-1 md:grid-cols-2 container items-center'>
             <div className='flex flex-col gap-3 md:items-start items-center md:text-start text-center'>
               <Text
-                text={'Not Sure Where to Go?'}
-                size='text-4xl'
+                text={'Nuk Je i Sigurt se Ku të Shkosh?'}
+                size='md:text-4xl text-2xl'
                 font='font-medium'
               />
               <Text
-                text={`Our travel experts will help you choose the perfect destination
-           based on your interests, budget, and travel dates.`}
-                size='text-lg'
+                text={`Ekspertët tanë të udhëtimeve do të të ndihmojnë të zgjedhësh destinacionin e përsosur
+                bazuar në interesat, buxhetin dhe datat e udhëtimit.`}
+                size='md:text-lg text-base'
               />
               <Text
-                text={'Contact Us'}
-                size='text-xl'
-                className='flex w-fit px-8 py-3 rounded-full border border-black bg-purple-300 hover:bg-purple-600 hover:text-white cursor-pointer transition-all duration-300 will-change-transform select-none'
+                text={'Na Kontakto'}
+                size='md:text-xl text-lg'
+                className='flex w-fit px-6 md:px-8 py-2 md:py-3 rounded-full border border-black bg-purple-300 hover:bg-purple-600 hover:text-white cursor-pointer transition-all duration-300 will-change-transform select-none'
+                onClick={() =>
+                  window.open(`https://wa.me/355696900916?text=${message}`)
+                }
               />
             </div>
             <span className='flex justify-center'>

@@ -1,65 +1,111 @@
 import { Plane } from 'lucide-react';
+import SearchIcon from '@mui/icons-material/Search';
 import { Text } from '../../../components/text';
-import { FlightOfferCard } from '../../../components/flightCard';
+import { FlightOfferCard } from '../../../components/flightOfferCard';
 import { ViewAllButton } from '../../../components/viewAllButton/ViewAllButton';
 import { Button } from '../../../components/button';
 import { usePlaneTickets } from './usePlaneTickets';
+import { Input } from '../../../components/input';
+import { NoDataFound } from '../../../components/noDataFound';
 
 export const PlaneTickets = () => {
-  const { planeTickets, handleLoadMore, ticketsToAppear } = usePlaneTickets();
+  const {
+    planeTickets,
+    handleLoadMore,
+    ticketsToAppear,
+    handleSearchChange,
+    handleSearchClick,
+  } = usePlaneTickets();
+
+  const message = encodeURIComponent(
+    `Përshëndetje!
+Do të doja disa sugjerime për udhëtimin tim. Mund të më ndihmoni, ju lutem?`,
+  );
 
   return (
-    <div className='flex flex-col gap-7 md:gap-14 pb-10'>
-      <div className='bg-gradient-to-r from-indigo-600 to-purple-600 py-9 md:py-20'>
-        <div className='flex flex-col gap-5 items-center text-white container'>
+    <div className='flex flex-col gap-10 pb-10'>
+      <div className='bg-gradient-to-r from-indigo-600 to-purple-600 py-9 md:py-14 relative md:mb-4 mb-20'>
+        <div className='flex flex-col gap-5 items-center text-center text-white container'>
           <Plane className='w-14 h-14' />
-          <Text
-            text={' Explore the World'}
-            size='text-5xl'
-            font='font-medium'
-          />
+          <Text text={'Eksploroni Botën'} size='text-5xl' font='font-medium' />
           <Text
             text={
-              'Discover amazing flight deals to destinations around the globe.Book your next adventure today!'
+              'Zbuloni oferta të mrekullueshme fluturimesh drejt destinacioneve në mbarë botën. Rezervoni aventurën tuaj të radhës sot!'
             }
-            size='text-xl'
+            size='md:text-xl text-sm'
+            font='font-medium'
+            className='flex'
           />
+        </div>
+        <div className='container absolute md:-bottom-8 -bottom-24 '>
+          <div className='bg-white rounded-xl shadow-md p-3 flex flex-col md:flex-row gap-3'>
+            <Input
+              placeholder='Kërkoni destinacion ose aeroport (p.sh. Paris, BUD, Romë, AMS)'
+              className='flex-1'
+              onChange={handleSearchChange}
+              icon={<SearchIcon fontSize='small' className='text-gray-500' />}
+            />
+            <Button
+              name='kërko biletë'
+              onClick={handleSearchClick}
+              endIcon={<SearchIcon fontSize='small' />}
+              bgColor='#4f46e5'
+              bgHover='#9333ea'
+              color='white'
+              border='transparent'
+              borderHover='transparent'
+              padding='9px 35px'
+            />
+          </div>
         </div>
       </div>
 
-      <div className='container grid grid-cols-1 md:grid-cols-2 gap-4'>
-        {planeTickets.tickets.map((ticket) => (
-          <FlightOfferCard ticket={ticket} key={ticket._id} />
-        ))}
-      </div>
+      {planeTickets && planeTickets.tickets.length > 0 ? (
+        <div className='flex flex-col gap-10'>
+          <div className='container grid grid-cols-1 md:grid-cols-2 gap-4'>
+            {planeTickets.tickets.map((ticket) => (
+              <FlightOfferCard ticket={ticket} key={ticket.id} />
+            ))}
+          </div>
 
-      {planeTickets && planeTickets.totalTickets && (
-        <div className='flex w-full justify-center'>
-          <ViewAllButton
-            text='Load More Tickets'
-            onClick={handleLoadMore}
-            disabled={ticketsToAppear >= planeTickets.totalTickets}
-          />
+          {planeTickets.totalTickets && (
+            <div className='flex w-full justify-center'>
+              <ViewAllButton
+                text='Shiko më shumë bileta'
+                onClick={handleLoadMore}
+                disabled={ticketsToAppear >= planeTickets.totalTickets}
+              />
+            </div>
+          )}
+        </div>
+      ) : (
+        <div>
+          <NoDataFound text='Nuk u gjet asnjë biletë' />
         </div>
       )}
 
       <div className='container'>
-        <div className='flex flex-col bg-white rounded-lg border shadow-lg p-6 md:p-10 gap-4 md:gap-6 text-center'>
+        <div className='flex flex-col bg-white rounded-lg border shadow-lg p-5 md:p-10 gap-3 md:gap-6 text-center'>
           <Text
-            text={'Need Help Planning Your Trip?'}
-            size='text-3xl'
+            text={'Keni nevojë për ndihmë në planifikimin e udhëtimit tuaj?'}
+            size='md:text-3xl text-xl'
             font='font-medium'
           />
           <Text
             text={
-              'We are here to help you find the perfect flight and create unforgettable memories. Contact us for personalized assistance.'
+              'Jemi këtu për t’ju ndihmuar të gjeni fluturimin ideal dhe të krijoni kujtime të paharrueshme. Na kontaktoni për asistencë të personalizuar.'
             }
-            size='text-lg'
+            size='md:text-lg'
             font='font-medium'
             className='text-gray-500'
           />
           <span className='flex w-full justify-center'>
-            <Button name='Contact Travel Experts' />
+            <Button
+              name='Kontaktoni Ekspertët e Udhëtimit'
+              onClick={() => {
+                window.open(`https://wa.me/355696900916?text=${message}`);
+              }}
+            />
           </span>
         </div>
       </div>

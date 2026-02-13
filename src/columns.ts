@@ -27,3 +27,9 @@ export const PROPERTY_COLUMNS = [
   { header: 'cmimi', className: 'md:col-span-1 col-span-2' },
   { header: 'lokacioni', className: 'hidden md:flex col-span-1' },
 ];
+
+export const DESTINATION_COLUMNS = [
+  { header: 'imazhi', className: 'col-span-2' },
+  { header: 'qyteti', className: 'col-span-1' },
+  { header: 'shteti', className: 'col-span-1' },
+];

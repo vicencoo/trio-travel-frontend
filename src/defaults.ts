@@ -1,4 +1,5 @@
 import type {
+  DestinationTypes,
   HotelTypes,
   PlaneTicket,
   Property,
@@ -11,11 +12,12 @@ export const DEFAULT_URL =
   window.location.hostname === 'localhost'
     ? 'http://localhost:8001'
     : 'http://192.168.20.9:8001';
+// 'http://172.20.10.4:8001';
 
 export const DEFAULT_PROPERTY: Property = {
-  _id: '',
-  listeningType: 'rent',
-  propertyType: '',
+  id: '',
+  listing_type: 'rent',
+  property_type: '',
   title: '',
   description: '',
   city: '',
@@ -25,30 +27,30 @@ export const DEFAULT_PROPERTY: Property = {
   space: null,
   bedrooms: null,
   toilets: null,
-  floorNumber: null,
-  buildYear: null,
-  propertyImages: [],
+  floor_number: null,
+  build_year: null,
+  property_images: [],
 };
 
 export const DEFAULT_TICKET: PlaneTicket = {
   from: '',
   to: '',
-  departureAirport: '',
-  arrivalAirport: '',
+  departure_airport: '',
+  arrival_airport: '',
   price: null,
-  ticketImages: [],
+  ticket_images: [],
 };
 
 export const DEFAULT_PACKAGE: TouristPackage = {
-  _id: '',
+  id: '',
   title: '',
   destination: '',
   price: null,
   duration: null,
   description: '',
   accomodation: '',
-  mealIncluded: '',
-  packageImages: [],
+  meal_included: '',
+  package_images: [],
 };
 
 export const DEFAULT_CONTACT = {
@@ -59,12 +61,20 @@ export const DEFAULT_CONTACT = {
 };
 
 export const HOTEL_DATA: HotelTypes = {
-  hotelName: '',
+  hotel_name: '',
   location: '',
   description: '',
   rating: null,
   reviews: null,
   price: null,
   facilities: [],
-  hotelImages: [],
+  hotel_images: [],
+};
+
+export const DESTINATION_DATA: DestinationTypes = {
+  city: '',
+  country: '',
+  slogan: '',
+  destination_types: [],
+  destination_images: [],
 };

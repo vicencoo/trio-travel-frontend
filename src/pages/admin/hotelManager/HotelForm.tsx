@@ -35,13 +35,15 @@ export const HotelForm = ({
   handleImagesChange,
   handleSetFacilities,
   saveHotel,
+  setDeletedImages,
+  errors,
 }: HotelFormProps) => {
   return (
     <Card padding='p-0' width='md:w-2/3 w-full'>
       <div className='bg-gradient-to-r from-violet-600 to-indigo-600'>
         <div className='flex w-full items-center justify-between text-white py-5 px-7'>
           <Text
-            text={hotelData._id ? 'Edito hotelin' : 'Shto hotel të ri'}
+            text={hotelData.id ? 'Edito hotelin' : 'Shto hotel të ri'}
             size='text-xl'
             font='font-semibold font-serif'
           />
@@ -55,21 +57,24 @@ export const HotelForm = ({
         <Input
           label='Emri Hotelit *'
           placeholder='p.sh. Moncaffe Boutique Hotel & SPA'
-          value={hotelData.hotelName}
-          onChange={(e) => handleChangeData('hotelName', e.target.value)}
+          value={hotelData.hotel_name}
+          onChange={(e) => handleChangeData('hotel_name', e.target.value)}
+          errorMessage={errors?.hotel_name}
         />
         <Input
           label='Vendëndodhja *'
           placeholder='p.sh Vlore, Albania'
           value={hotelData.location}
           onChange={(e) => handleChangeData('location', e.target.value)}
+          errorMessage={errors?.location}
         />
         <Input
-          label='Përshkrimi i Hotelit'
+          label='Përshkrimi i Hotelit *'
           multiline
           placeholder='Përshkruaj cdo detaj mbi hotelin'
           value={hotelData.description}
           onChange={(e) => handleChangeData('description', e.target.value)}
+          errorMessage={errors?.description}
         />
         <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
           <Input
@@ -78,6 +83,7 @@ export const HotelForm = ({
             type='number'
             value={hotelData.rating || ''}
             onChange={(e) => handleChangeData('rating', e.target.value)}
+            errorMessage={errors?.rating}
           />
           <Input
             label='Reviews *'
@@ -85,6 +91,7 @@ export const HotelForm = ({
             type='number'
             value={hotelData.reviews || ''}
             onChange={(e) => handleChangeData('reviews', e.target.value)}
+            errorMessage={errors?.reviews}
           />
           <Input
             label='Cmimi/Natë(€)'
@@ -92,12 +99,13 @@ export const HotelForm = ({
             type='number'
             value={hotelData.price || ''}
             onChange={(e) => handleChangeData('price', e.target.value)}
+            errorMessage={errors?.price}
           />
         </div>
 
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-3'>
           <Text
-            text={'Shërbimet e Përfshira'}
+            text={'Shërbimet e Përfshira *'}
             size='text-lg'
             font='font-medium font-serif'
           />
@@ -120,14 +128,18 @@ export const HotelForm = ({
 
         <div className='flex flex-col gap-5'>
           <Text
-            text={'Imazhet e Hotelit'}
+            text={'Imazhet e Hotelit *'}
             size='text-lg'
             font='font-medium font-serif'
           />
           <ImageUploader
-            value={hotelData.hotelImages || []}
+            value={hotelData.hotel_images || []}
             onChange={handleImagesChange}
-            imageKey='hotelImage'
+            imageKey='hotel_image'
+            onDeleteOld={(img) => {
+              const filename = typeof img === 'string' ? img : img.hotel_image;
+              if (filename) setDeletedImages((prev) => [...prev, filename]);
+            }}
           />
         </div>
       </div>

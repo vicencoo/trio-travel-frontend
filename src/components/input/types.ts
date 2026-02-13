@@ -21,6 +21,7 @@ export type InputProps = {
   rows?: number;
   height?: string;
   className?: string;
+  errorMessage?: string;
   onBlur?: FocusEventHandler<HTMLInputElement>;
   onFocus?: FocusEventHandler<HTMLInputElement>;
 };

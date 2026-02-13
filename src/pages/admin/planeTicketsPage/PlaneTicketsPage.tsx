@@ -7,9 +7,9 @@ import { usePlaneTicketsPage } from './usePlaneTicketsPage';
 import { TicketTableRow } from './TicketTableRow';
 import { NoDataFound } from '../../../components/noDataFound';
 import { AdminPageHeader } from '../../../components/adminPageHeader/AdminPageHeader';
-import { MetricCard } from '../../../components/metricCard';
 import { TICKET_COLUMNS } from '../../../columns';
 import { Pagination } from '../../../components/pagination';
+import { MetricCard } from './MetricCard';
 
 export const PlaneTicketsPage = () => {
   const {
@@ -24,6 +24,7 @@ export const PlaneTicketsPage = () => {
     handleEditTicket,
     handlePageChange,
     pageNumber,
+    errors,
   } = usePlaneTicketsPage();
 
   return (
@@ -45,6 +46,7 @@ export const PlaneTicketsPage = () => {
           hadleTicketChange={hadleTicketChange}
           handleImageChange={handleImageChange}
           handleSubmit={handleSubmit}
+          errors={errors}
         />
       )}
 

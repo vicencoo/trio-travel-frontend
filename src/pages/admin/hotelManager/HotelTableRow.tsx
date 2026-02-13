@@ -3,16 +3,17 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { Image } from '../../../components/image';
 import { Text } from '../../../components/text';
 import type { HotelTableRowProps } from './types';
+import { formattedPrice } from '../../../utils/formattedPrice';
 
 export const HotelTableRow = ({
   data,
   handleEditHotel,
   handleDeleteHotel,
 }: HotelTableRowProps) => {
-  const firstImage = data.hotelImages?.[0];
+  const firstImage = data.hotel_images?.[0];
   const image =
-    typeof firstImage === 'object' && 'hotelImage' in firstImage
-      ? firstImage.hotelImage
+    typeof firstImage === 'object' && 'hotel_image' in firstImage
+      ? firstImage.hotel_image
       : 'null';
 
   return (
@@ -22,7 +23,7 @@ export const HotelTableRow = ({
         className='col-span-1 max-w-14 min-w-14 h-14 object-cover rounded-lg'
       />
       <Text
-        text={data.hotelName}
+        text={data.hotel_name}
         size='text-sm'
         font='font-medium'
         className='md:col-span-3 col-span-4 capitalize px-5'
@@ -34,7 +35,7 @@ export const HotelTableRow = ({
         className='hidden md:flex col-span-1 capitalize'
       />
       <Text
-        text={`${data.price}€`}
+        text={`${formattedPrice(Number(data.price))}€`}
         font='font-bold font-serif'
         className='md:col-span-1 col-span-2 text-violet-600'
       />

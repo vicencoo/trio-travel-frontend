@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { X, Plus } from 'lucide-react';
 import { DEFAULT_URL } from '../../defaults';
+import { Text } from '../text';
 
 type ImageObject = Record<string, unknown>;
 
@@ -9,6 +10,7 @@ interface ImageUploaderProps<T = ImageObject> {
   onChange: (images: (File | T)[]) => void;
   maxImages?: number;
   imageKey?: string;
+  onDeleteOld?: (img: string | T) => void; // NEW
 }
 
 export const ImageUploader = <T extends ImageObject>({
@@ -16,6 +18,7 @@ export const ImageUploader = <T extends ImageObject>({
   onChange,
   imageKey,
   maxImages = 10,
+  onDeleteOld,
 }: ImageUploaderProps<T>) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [images, setImages] = useState<(File | string | T)[]>(value);
@@ -33,6 +36,11 @@ export const ImageUploader = <T extends ImageObject>({
   };
 
   const removeImage = (index: number) => {
+    const removed = images[index];
+
+    if (!(removed instanceof File)) {
+      onDeleteOld?.(removed);
+    }
     const updated = images.filter((_, i) => i !== index);
     setImages(updated);
     onChange(updated);
@@ -88,9 +96,15 @@ export const ImageUploader = <T extends ImageObject>({
           <button
             type='button'
             onClick={() => inputRef.current?.click()}
-            className='flex h-32 items-center justify-center rounded-2xl border-2 border-dashed'
+            className='flex flex-col gap-3 h-32 items-center justify-center rounded-2xl border-2 border-dashed'
           >
-            <Plus />
+            <Plus className='text-gray-400' />
+            <Text
+              text={'Zgjidhni Imazh'}
+              size='text-xs'
+              font='font-semibold font-serif'
+              className='text-gray-400'
+            />
           </button>
         )}
       </div>

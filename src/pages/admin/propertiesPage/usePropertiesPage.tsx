@@ -1,6 +1,6 @@
 import { useEffect, useState, type ChangeEvent } from 'react';
-import type { PropertiesResponse } from '../../../types';
 import { axios } from '../../../api';
+import type { PropertiesResponse } from '../../../responseTypes';
 
 export const usePropertiesPage = () => {
   const [properties, setProperties] = useState<PropertiesResponse | null>(null);
@@ -12,7 +12,9 @@ export const usePropertiesPage = () => {
 
   const getProperties = async () => {
     try {
+      // const res = await axios(`/properties?limit=6&page=${pageNumber}`);
       const res = await axios(`/properties?limit=6&page=${pageNumber}`);
+
       if (res.data) setProperties(res.data);
     } catch (err) {
       console.error('Error getting properties', err);

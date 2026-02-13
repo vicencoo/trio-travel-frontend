@@ -12,5 +12,6 @@ export type SelectorProps = {
   options: SelectorOption[];
   border?: 'black' | 'white' | 'blue';
   multiple?: boolean;
+  errorMessage?: string;
   onChange: (event: SelectChangeEvent<string | string[]>) => void;
 };

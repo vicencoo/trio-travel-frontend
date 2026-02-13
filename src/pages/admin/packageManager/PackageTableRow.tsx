@@ -2,20 +2,15 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { Image } from '../../../components/image';
 import { Text } from '../../../components/text';
-import type { TouristPackage } from '../../../types';
-
-type PackageItemProps = {
-  packageItem: TouristPackage;
-  handleEditPackage: (packageItem: TouristPackage) => void;
-  handleDeletePackage: (id: string) => void;
-};
+import { formattedPrice } from '../../../utils/formattedPrice';
+import type { PackageItemProps } from './types';
 
 export const PackageTableRow = ({
   packageItem,
   handleDeletePackage,
   handleEditPackage,
 }: PackageItemProps) => {
-  const firstImage = packageItem.packageImages?.[0];
+  const firstImage = packageItem.package_images?.[0];
   const image =
     typeof firstImage === 'object' && 'image' in firstImage
       ? firstImage.image
@@ -39,7 +34,7 @@ export const PackageTableRow = ({
         className='hidden md:flex col-span-2 capitalize'
       />
       <Text
-        text={`${packageItem.price}€`}
+        text={`${formattedPrice(Number(packageItem.price))}€`}
         font='font-bold font-serif'
         className='md:col-span-1 col-span-2 text-violet-600'
       />
@@ -49,9 +44,7 @@ export const PackageTableRow = ({
           className='text-blue-400 hover:text-blue-600 cursor-pointer'
         />
         <DeleteOutlinedIcon
-          onClick={() =>
-            packageItem._id && handleDeletePackage(packageItem._id)
-          }
+          onClick={() => packageItem.id && handleDeletePackage(packageItem.id)}
           className='text-red-400 hover:text-red-500 cursor-pointer'
         />
       </div>

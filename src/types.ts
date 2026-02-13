@@ -1,12 +1,12 @@
 export type PropertyImage = {
-  _id?: string;
-  propertyImage?: string;
+  id?: string;
+  property_image?: string;
 };
 
 export type Property = {
-  _id?: string;
-  listeningType?: string;
-  propertyType?: string;
+  id?: string;
+  listing_type?: string;
+  property_type?: string;
   title?: string;
   description?: string;
   city?: string;
@@ -16,61 +16,41 @@ export type Property = {
   space?: number | null;
   bedrooms?: number | null;
   toilets?: number | null;
-  floorNumber?: number | null;
-  buildYear?: number | null;
-  propertyImages?: (File | string | PropertyImage)[];
-};
-
-type Pagination = {
-  totalProducts: number;
-  totalPages: number;
-};
-
-export type PropertiesResponse = {
-  properties: Property[];
-  pagination: Pagination;
+  floor_number?: number | null;
+  build_year?: number | null;
+  property_images?: (File | string | PropertyImage)[];
 };
 
 export type TicketImage = {
-  _id: string;
+  id: string;
   image: string;
 };
 
 export type PlaneTicket = {
-  _id?: string;
+  id?: string;
   from?: string;
   to?: string;
-  departureAirport?: string;
-  arrivalAirport?: string;
+  departure_airport?: string;
+  arrival_airport?: string;
   price?: number | null;
-  ticketImages?: (File | string | TicketImage)[];
+  ticket_images?: (File | string | TicketImage)[];
 };
 
-export type PackageImages = {
-  _id?: string;
+export type PackageImage = {
+  id?: string;
   image: string;
 };
 
 export type TouristPackage = {
-  _id?: string;
+  id?: string;
   title?: string;
   destination?: string;
   price?: number | null;
   duration?: number | null;
   description?: string;
   accomodation?: string;
-  mealIncluded?: string;
-  packageImages?: (PackageImages | File | string)[];
-};
-
-type PackagePagination = {
-  totalPackages: number;
-  totalPages: number;
-};
-
-export type PackageResponse = {
-  packages: TouristPackage[];
-  pagination: PackagePagination;
+  meal_included?: string;
+  package_images?: (PackageImage | File | string)[];
 };
 
 export type ContactTypes = {
@@ -81,28 +61,42 @@ export type ContactTypes = {
 };
 
 export type HotelImages = {
-  _id?: string | number;
-  hotelImage?: string;
+  id?: string | number;
+  hotel_image?: string;
+};
+
+type HotelFacilities = {
+  id?: string;
+  facility?: string;
 };
 
 export type HotelTypes = {
-  _id?: string;
-  hotelName: string;
+  id?: string;
+  hotel_name: string;
   location: string;
   description: string;
   rating: number | null;
   reviews: number | null;
   price: number | null;
-  facilities: string[];
-  hotelImages: (HotelImages | File | string)[];
+  facilities: (HotelFacilities | string)[];
+  hotel_images: (HotelImages | File | string)[];
 };
 
-type HotelPagination = {
-  allHotels: number;
-  allPages: number;
+type DestinationType = {
+  id?: string;
+  type?: string;
 };
 
-export type HotelsResponse = {
-  hotels: HotelTypes[];
-  pagination: HotelPagination;
+export type DestinationImages = {
+  id?: string | number;
+  destination_image?: string;
+};
+
+export type DestinationTypes = {
+  id?: string;
+  city?: string;
+  country?: string;
+  slogan?: string;
+  destination_types: DestinationType[];
+  destination_images: (DestinationImages | File | string)[];
 };

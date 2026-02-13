@@ -7,7 +7,6 @@ import { HotelTableRow } from './HotelTableRow';
 import { HOTEL_COLUMNS } from '../../../columns';
 import { NoDataFound } from '../../../components/noDataFound';
 import { Pagination } from '../../../components/pagination';
-import { useScrollOnChange } from '../../../hooks/useScrollOnChange';
 
 export const HotelManager = () => {
   const {
@@ -23,19 +22,17 @@ export const HotelManager = () => {
     handlePageChange,
     pageNumber,
     handleDeleteHotel,
+    setDeletedImages,
+    errors,
   } = useHotelManager();
-  const { scrollRef } = useScrollOnChange(isHotelFormOpen);
 
   return (
-    <div
-      className='flex flex-col py-10 gap-10 min-h-screen container'
-      ref={scrollRef}
-    >
+    <div className='flex flex-col py-10 gap-10 min-h-screen container'>
       <AdminPageHeader
         icon={<HotelOutlinedIcon className='text-white' />}
         iconBgColor='bg-blue-600'
         label='Menaxhimi i Hoteleve'
-        text='Shiko, modifiko dhe menaxho te gjithe hotelet'
+        text='Shiko, modifiko dhe menaxho të gjithë hotelet'
         buttonName={'shto hotel te ri'}
         buttonBg='#3b82f6'
         buttonBgHover='#2563eb'
@@ -52,6 +49,8 @@ export const HotelManager = () => {
             handleImagesChange={handleImagesChange}
             handleSetFacilities={handleSetFacilities}
             saveHotel={saveHotel}
+            setDeletedImages={setDeletedImages}
+            errors={errors}
           />
         </div>
       )}
@@ -68,9 +67,9 @@ export const HotelManager = () => {
               <HotelTableRow
                 data={hotel}
                 handleEditHotel={handleEditHotel}
-                key={hotel._id}
+                key={hotel.id}
                 handleDeleteHotel={() =>
-                  hotel._id && handleDeleteHotel(hotel._id)
+                  hotel.id && handleDeleteHotel(hotel.id)
                 }
               />
             ))}

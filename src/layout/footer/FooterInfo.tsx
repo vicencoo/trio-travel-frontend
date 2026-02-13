@@ -44,7 +44,7 @@ const CONTACT = [
   {
     id: 2,
     icon: <FacebookIcon fontSize='small' />,
-    url: 'https://facebook.com/Agjensi Trio',
+    url: 'https://facebook.com/agjensi.trio',
     color: 'text-blue-500',
   },
   { id: 3, icon: <TwitterIcon fontSize='small' />, color: 'text-blue-700' },
@@ -78,7 +78,7 @@ export const FooterInfo = () => {
           </span>
         ))}
       </div>
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-2 w-full md:items-start items-center'>
         <Text text={'Follow us'} font='font-bold' />
         <div className='flex gap-2'>
           {CONTACT.map((contact) => (

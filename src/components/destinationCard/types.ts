@@ -1,5 +1,5 @@
-import type { TouristPackage } from '../../types';
+import type { DestinationTypes } from '../../types';
 
-export type PackageCardProps = {
-  data: TouristPackage;
+export type DestCardProps = {
+  destination: DestinationTypes;
 };

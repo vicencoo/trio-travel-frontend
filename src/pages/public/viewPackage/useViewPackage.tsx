@@ -9,7 +9,7 @@ export const useViewPackage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
-  const images = packageData.packageImages || [];
+  const images = packageData.package_images || [];
 
   const next = () => {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));

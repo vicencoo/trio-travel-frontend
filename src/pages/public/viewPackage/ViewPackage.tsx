@@ -7,12 +7,14 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useViewPackage } from './useViewPackage';
 import { PackageImages } from './PackageImages';
 import { Text } from '../../../components/text';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Card } from '../../../components/card';
 import { Button } from '../../../components/button';
 import { InfoItem } from './InfoItem';
+import { formattedPrice } from '../../../utils/formattedPrice';
 
 export const ViewPackage = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const {
     packageData,
@@ -30,14 +32,47 @@ export const ViewPackage = () => {
       </div>
     );
 
+  const currentUrl = window.location.origin + location.pathname;
+
+  const reserveMessage = encodeURIComponent(`
+Përshëndetje! 
+
+Jam i interesuar të rezervoj paketën turistike: "${packageData.title}".
+Ju lutem më dërgoni detajet për rezervimin dhe disponueshmërinë.
+
+${currentUrl}
+
+Faleminderit! 
+`);
+
+  const contactMessage = encodeURIComponent(`
+Përshëndetje! 
+
+Jam i interesuar për paketën turistike: "${packageData.title}".
+Ju lutem më dërgoni më shumë detaje për këtë ofertë.
+
+${currentUrl}
+
+Faleminderit! 
+`);
+
   const formatMealPlan = (meal: string) => {
     const mealPlans: Record<string, string> = {
       allInclusive: 'All Inclusive',
       breakfastDinner: 'Mengjesi dhe Darka',
       breakfastOnly: 'Breakfast Only',
-      // fullBoard: 'Full Board',
     };
     return mealPlans[meal] || meal;
+  };
+
+  const formatAccomodationPlan = (accomodation: string) => {
+    const accomodationPlans: Record<string, string> = {
+      threeStarHotel: 'Hotel Me 3 Yje',
+      fourStarHotel: 'Hotel Me 4 Yje',
+      fiveStarHotel: 'Hotel Me 5 Yje',
+      resort: 'Resort',
+    };
+    return accomodationPlans[accomodation] || accomodation;
   };
 
   return (
@@ -107,8 +142,8 @@ export const ViewPackage = () => {
                 className='text-gray-300'
               />
               <div className='flex items-baseline justify-center gap-1'>
-                <span className='text-4xl font-bold text-gray-100'>
-                  €{packageData.price}
+                <span className='text-4xl font-bold font-serif text-gray-100'>
+                  €{formattedPrice(Number(packageData.price))}
                 </span>
                 <span className='text-lg font-medium text-gray-300'>
                   /personi
@@ -125,7 +160,7 @@ export const ViewPackage = () => {
                   />
                 }
                 label='Kohëzgjatja'
-                value={`${packageData?.duration || 0 + 1} ditë / ${packageData?.duration} netë`}
+                value={`${packageData?.duration && packageData?.duration + 1} ditë / ${packageData?.duration} netë`}
               />
 
               {/* Akomodimi */}
@@ -137,7 +172,7 @@ export const ViewPackage = () => {
                   />
                 }
                 label='Akomodimi'
-                value={packageData.accomodation}
+                value={formatAccomodationPlan(packageData.accomodation || '')}
               />
 
               {/* Included */}
@@ -149,13 +184,16 @@ export const ViewPackage = () => {
                   />
                 }
                 label='Vaktet e Përfshira'
-                value={formatMealPlan(packageData.mealIncluded || '')}
+                value={formatMealPlan(packageData.meal_included || '')}
               />
             </div>
             <Button
               name='rezervo tani'
               bgHover='#2563eb'
               borderHover='#1d4ed8'
+              onClick={() =>
+                window.open(`https://wa.me/355696900916?text=${reserveMessage}`)
+              }
             />
           </Card>
 
@@ -177,6 +215,9 @@ export const ViewPackage = () => {
               bgHover='#1d4ed8'
               color='white'
               borderHover='#1d4ed8 '
+              onClick={() =>
+                window.open(`https://wa.me/355696900916?text=${contactMessage}`)
+              }
             />
           </Card>
         </div>

@@ -2,6 +2,7 @@ import { useEffect, useState, type ChangeEvent } from 'react';
 import type { PlaneTicket, TicketImage } from '../../../types';
 import { DEFAULT_TICKET } from '../../../defaults';
 import { axios } from '../../../api';
+import type { PlaneTicketFieldError } from '../../../errorTypes';
 
 const ADMIN_PLANE_TICKETS = 6;
 
@@ -17,6 +18,7 @@ export const usePlaneTicketsPage = () => {
     totalTickets: null,
     totalPages: null,
   });
+  const [errors, setErrors] = useState<PlaneTicketFieldError>({});
 
   const handlePageChange = (_event: ChangeEvent<unknown>, page: number) => {
     setPageNumber(page);
@@ -43,6 +45,7 @@ export const usePlaneTicketsPage = () => {
     (async () => {
       await getAllTickets();
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNumber]);
 
   const handleEditTicket = (ticket: PlaneTicket) => {
@@ -80,7 +83,7 @@ export const usePlaneTicketsPage = () => {
   const handleImageChange = (images: (string | File | TicketImage)[]) => {
     setPlaneTicket((prev) => ({
       ...prev,
-      ticketImages: images,
+      ticket_images: images,
     }));
   };
   const handleSubmit = async () => {
@@ -88,21 +91,21 @@ export const usePlaneTicketsPage = () => {
       const formData = new FormData();
       if (planeTicket.from) formData.append('from', planeTicket.from);
       if (planeTicket.to) formData.append('to', planeTicket.to);
-      if (planeTicket.departureAirport)
-        formData.append('departureAirport', planeTicket.departureAirport);
-      if (planeTicket.arrivalAirport)
-        formData.append('arrivalAirport', planeTicket.arrivalAirport);
+      if (planeTicket.departure_airport)
+        formData.append('departure_airport', planeTicket.departure_airport);
+      if (planeTicket.arrival_airport)
+        formData.append('arrival_airport', planeTicket.arrival_airport);
       if (planeTicket.price)
         formData.append('price', planeTicket.price.toString());
-      if (planeTicket.ticketImages)
-        planeTicket.ticketImages.forEach((img) => {
+      if (planeTicket.ticket_images)
+        planeTicket.ticket_images.forEach((img) => {
           if (img instanceof File) {
-            formData.append('ticketImages', img);
+            formData.append('ticket_images', img);
           }
         });
 
       const url = editMode
-        ? `/admin/edit-ticket?ticketId=${planeTicket._id}`
+        ? `/admin/edit-ticket?ticketId=${planeTicket.id}`
         : '/admin/add-ticket';
 
       const res = await axios.post(url, formData);
@@ -113,8 +116,18 @@ export const usePlaneTicketsPage = () => {
         setEditMode(false);
         await getAllTickets();
       }
-    } catch (err) {
-      console.error('Editing ticket error', err);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error('Editing ticket error', error);
+      if (error?.response?.data?.errors) {
+        const fieldErrors: Record<string, string> = {};
+        error.response.data.errors.forEach(
+          (e: { path: string | number; msg: string }) => {
+            fieldErrors[e.path] = e.msg;
+          },
+        );
+        setErrors(fieldErrors);
+      }
     }
   };
 
@@ -130,5 +143,6 @@ export const usePlaneTicketsPage = () => {
     handleEditTicket,
     handlePageChange,
     pageNumber,
+    errors,
   };
 };

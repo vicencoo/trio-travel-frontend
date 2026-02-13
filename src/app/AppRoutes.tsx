@@ -14,6 +14,8 @@ import { PlaneTicketsPage } from '../pages/admin/planeTicketsPage';
 import { PackageManager } from '../pages/admin/packageManager';
 import { ViewPackage } from '../pages/public/viewPackage';
 import { HotelManager } from '../pages/admin/hotelManager';
+import { ViewHotel } from '../pages/public/viewHotel';
+import { DestinationManager } from '../pages/admin/destinationManager/DestinationManager';
 
 export const AppRoutes = () => {
   return (
@@ -24,7 +26,7 @@ export const AppRoutes = () => {
         <Route path='/packages' element={<Packages />} />
         <Route path='/destinations' element={<Destinations />} />
         <Route path='/planeTickets' element={<PlaneTickets />} />
-        <Route path='/hotel' element={<Hotel />} />
+        <Route path='/hotels' element={<Hotel />} />
         <Route path='/properties' element={<Properties />} />
         <Route path='/contact' element={<Contact />} />
         <Route
@@ -32,6 +34,7 @@ export const AppRoutes = () => {
           element={<ViewProperty />}
         />
         <Route path='/packages/view-package/:id' element={<ViewPackage />} />
+        <Route path='/hotels/view-hotel/:id' element={<ViewHotel />} />
 
         {/* Admin Routes */}
         <Route path='/admin/manage-properties' element={<PropertiesPage />} />
@@ -40,6 +43,10 @@ export const AppRoutes = () => {
         <Route path='/admin/plane-tickets' element={<PlaneTicketsPage />} />
         <Route path='/admin/manage-packages' element={<PackageManager />} />
         <Route path='/admin/manage-hotels' element={<HotelManager />} />
+        <Route
+          path='/admin/manage-destinations'
+          element={<DestinationManager />}
+        />
       </Route>
     </Routes>
   );

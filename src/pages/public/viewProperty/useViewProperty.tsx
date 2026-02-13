@@ -8,7 +8,7 @@ export const useViewProperty = () => {
   const [property, setProperty] = useState<Property>({});
   const [index, setIndex] = useState<number>(0);
 
-  const images = property.propertyImages || [];
+  const images = property.property_images || [];
 
   const next = () => {
     setIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
