@@ -1,4 +1,4 @@
-import { Text } from '../../../components/text';
+import { Text } from '@/components/text';
 
 const STATISTIC_INFO = [
   { id: 1, number: '+2K', text: 'Klientë të kënaqur' },

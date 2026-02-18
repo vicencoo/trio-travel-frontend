@@ -1,7 +1,7 @@
+import { axios } from '@/api';
+import type { HotelTypes } from '@/types/types';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import type { HotelTypes } from '../../../types';
-import { axios } from '../../../api';
 
 export const useViewHotel = () => {
   const { id } = useParams();

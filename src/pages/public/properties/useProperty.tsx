@@ -1,6 +1,6 @@
+import { axios } from '@/api';
+import type { PropertiesResponse } from '@/types/responseTypes';
 import { useEffect, useState, type ChangeEvent } from 'react';
-import { axios } from '../../../api';
-import type { PropertiesResponse } from '../../../responseTypes';
 
 const ITEMS_PER_PAGE = 9;
 
@@ -12,6 +12,7 @@ export const useProperty = () => {
   const [listingType, setListingType] = useState<'all' | 'rent' | 'sale'>(
     'all',
   );
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const hadleListingFilterChange = (type: 'all' | 'rent' | 'sale') => {
     setListingType(type);
@@ -39,6 +40,8 @@ export const useProperty = () => {
         if (res.data) setData(res.data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     };
     getProperties();
@@ -52,5 +55,6 @@ export const useProperty = () => {
     handleSearchClick,
     listingType,
     hadleListingFilterChange,
+    isLoading,
   };
 };

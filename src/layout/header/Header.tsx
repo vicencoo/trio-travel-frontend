@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
-import { Text } from '../../components/text';
-import { HEADER_ITEMS, SIDEBAR_ITEMS } from '../..';
-import { Image } from '../../components/image';
+import { useDisclosure } from '@/hooks/useDisclosure';
 import { Sidebar } from '../sidebar';
-import { useDisclosure } from '../../hooks/useDisclosure';
+import { HEADER_ITEMS, SIDEBAR_ITEMS } from '@/utils';
+import { Image } from '@/components/image';
+import { Text } from '@/components/text';
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -87,6 +87,12 @@ export const Header = () => {
             ))}
           </div>
         </div>
+      </span>
+      <span
+        className='text-sm font-semibold font-serif cursor-pointer'
+        onClick={() => navigate('/admin/login')}
+      >
+        LogIn
       </span>
     </div>
   );

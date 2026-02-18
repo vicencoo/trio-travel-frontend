@@ -1,14 +1,14 @@
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { Image } from '../../../components/image';
-import { Text } from '../../../components/text';
-import { formattedPrice } from '../../../utils/formattedPrice';
+import { Image } from '@/components/image';
 import type { PackageItemProps } from './types';
+import { Text } from '@/components/text';
+import { formattedPrice } from '@/utils/formattedPrice';
+import { ActionMenu } from '@/components/actionMenu';
 
 export const PackageTableRow = ({
   packageItem,
   handleDeletePackage,
   handleEditPackage,
+  handleRenew,
 }: PackageItemProps) => {
   const firstImage = packageItem.package_images?.[0];
   const image =
@@ -38,16 +38,14 @@ export const PackageTableRow = ({
         font='font-bold font-serif'
         className='md:col-span-1 col-span-2 text-violet-600'
       />
-      <div className='flex items-center gap-5 col-span-1 w-full justify-end'>
-        <EditOutlinedIcon
-          onClick={() => handleEditPackage(packageItem)}
-          className='text-blue-400 hover:text-blue-600 cursor-pointer'
-        />
-        <DeleteOutlinedIcon
-          onClick={() => packageItem.id && handleDeletePackage(packageItem.id)}
-          className='text-red-400 hover:text-red-500 cursor-pointer'
-        />
-      </div>
+      <ActionMenu
+        enableDelete
+        enableEdit
+        onEdit={() => handleEditPackage(packageItem)}
+        onDelete={() => packageItem.id && handleDeletePackage(packageItem.id)}
+        enableRenew
+        onRenew={() => packageItem.id && handleRenew(packageItem.id)}
+      />
     </div>
   );
 };

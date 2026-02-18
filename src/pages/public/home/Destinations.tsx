@@ -1,10 +1,10 @@
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useEffect, useState } from 'react';
-import { Image } from '../../../components/image';
-import { Text } from '../../../components/text';
 import { useNavigate } from 'react-router-dom';
 import type { DestinationsProps } from './types';
+import { Image } from '@/components/image';
+import { Text } from '@/components/text';
 
 const VISIBLE_COUNT = 8;
 

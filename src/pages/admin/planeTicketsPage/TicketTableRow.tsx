@@ -1,9 +1,8 @@
-import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { Image } from '../../../components/image';
-import { Text } from '../../../components/text';
-import type { PlaneTicket } from '../../../types';
-import { formattedPrice } from '../../../utils/formattedPrice';
+import { ActionMenu } from '@/components/actionMenu';
+import { Image } from '@/components/image';
+import { Text } from '@/components/text';
+import type { PlaneTicket } from '@/types/types';
+import { formattedPrice } from '@/utils/formattedPrice';
 
 type TicketItemProps = {
   ticket: PlaneTicket;
@@ -57,16 +56,13 @@ export const TicketTableRow = ({
         size='text-lg'
         className='capitalize text-green-600 md:col-span-1 col-span-3'
       />
-      <div className='col-span-1 flex items-center justify-end md:gap-5 gap-3'>
-        <ModeEditOutlineOutlinedIcon
-          className='text-blue-400 hover:text-blue-600 cursor-pointer'
-          onClick={() => handleEdit(ticket)}
-        />
-        <DeleteOutlinedIcon
-          className='text-red-400 hover:text-red-600 cursor-pointer'
-          onClick={() => ticket.id && handleDelete(ticket.id)}
-        />
-      </div>
+
+      <ActionMenu
+        enableEdit
+        onEdit={() => handleEdit(ticket)}
+        enableDelete
+        onDelete={() => ticket.id && handleDelete(ticket.id)}
+      />
     </div>
   );
 };

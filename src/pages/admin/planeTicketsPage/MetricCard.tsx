@@ -1,6 +1,6 @@
-import { IconBox } from '../../../components/iconBox';
-import { Text } from '../../../components/text';
+import { Text } from '@/components/text';
 import type { MetricCardProps } from './types';
+import { IconBox } from '@/components/iconBox';
 
 export const MetricCard = ({ label, value, icon, iconBg }: MetricCardProps) => {
   return (

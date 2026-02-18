@@ -1,9 +1,9 @@
+import { axios } from '@/api';
+import type { DestinationFieldError } from '@/types/errorTypes';
+import type { DestinationResponse } from '@/types/responseTypes';
+import type { DestinationImages, DestinationTypes } from '@/types/types';
+import { DESTINATION_DATA } from '@/utils/defaults';
 import { useEffect, useState, type ChangeEvent } from 'react';
-import { DESTINATION_DATA } from '../../../defaults';
-import type { DestinationImages, DestinationTypes } from '../../../types';
-import { axios } from '../../../api';
-import type { DestinationFieldError } from '../../../errorTypes';
-import type { DestinationResponse } from '../../../responseTypes';
 
 export const useDestinationManager = () => {
   const [data, setData] = useState<DestinationTypes>(DESTINATION_DATA);

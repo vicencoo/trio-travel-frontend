@@ -1,10 +1,10 @@
+import { axios } from '@/api';
+import type { PackageFieldError } from '@/types/errorTypes';
+import type { PackageResponse } from '@/types/responseTypes';
+import type { PackageImage, TouristPackage } from '@/types/types';
+import { DEFAULT_PACKAGE } from '@/utils/defaults';
 import type { SelectChangeEvent } from '@mui/material';
 import { useEffect, useState, type ChangeEvent } from 'react';
-import { DEFAULT_PACKAGE } from '../../../defaults';
-import type { PackageImage, TouristPackage } from '../../../types';
-import { axios } from '../../../api';
-import type { PackageResponse } from '../../../responseTypes';
-import type { PackageFieldError } from '../../../errorTypes';
 
 export const usePackageManager = () => {
   const [touristPackage, setTouristPackage] = useState(DEFAULT_PACKAGE);
@@ -14,6 +14,7 @@ export const usePackageManager = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [deletedImages, setDeletedImages] = useState<string[]>([]);
   const [errors, setErrors] = useState<PackageFieldError>({});
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleChangePage = (_event: ChangeEvent<unknown>, page: number) => {
     setPageNumber(page);
@@ -29,6 +30,19 @@ export const usePackageManager = () => {
     try {
       const res = await axios(`/packages?packageLimit=6&page=${pageNumber}`);
       if (res.data) setPackages(res.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleRenew = async (id: string) => {
+    try {
+      const res = await axios.post(`/admin/renew-package?packageId=${id}`);
+      if (res.data) {
+        await getPackages();
+      }
     } catch (err) {
       console.error(err);
     }
@@ -93,6 +107,9 @@ export const usePackageManager = () => {
       if (deletedImages.length) {
         formData.append('deletedImages', JSON.stringify(deletedImages));
       }
+      if (touristPackage.status) {
+        formData.append('status', touristPackage.status);
+      }
       if (touristPackage.package_images)
         touristPackage.package_images.map((img) => {
           if (img instanceof File) {
@@ -155,6 +172,8 @@ export const usePackageManager = () => {
     handleChangePage,
     pageNumber,
     setDeletedImages,
+    handleRenew,
     errors,
+    isLoading,
   };
 };

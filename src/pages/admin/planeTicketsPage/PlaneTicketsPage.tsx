@@ -2,14 +2,14 @@ import FlightIcon from '@mui/icons-material/Flight';
 import EuroIcon from '@mui/icons-material/Euro';
 import ModeStandbyIcon from '@mui/icons-material/ModeStandby';
 import { TicketModal } from './TicketModal';
-import { DataTable } from '../../../components/dataTable';
 import { usePlaneTicketsPage } from './usePlaneTicketsPage';
 import { TicketTableRow } from './TicketTableRow';
-import { NoDataFound } from '../../../components/noDataFound';
-import { AdminPageHeader } from '../../../components/adminPageHeader/AdminPageHeader';
-import { TICKET_COLUMNS } from '../../../columns';
-import { Pagination } from '../../../components/pagination';
 import { MetricCard } from './MetricCard';
+import { AdminPageHeader } from '@/components/adminPageHeader/AdminPageHeader';
+import { DataTable } from '@/components/dataTable';
+import { TICKET_COLUMNS } from '@/utils/columns';
+import { Pagination } from '@/components/pagination';
+import { NoDataFound } from '@/components/noDataFound';
 
 export const PlaneTicketsPage = () => {
   const {

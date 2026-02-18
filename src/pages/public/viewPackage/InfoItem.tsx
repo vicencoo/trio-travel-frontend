@@ -1,11 +1,5 @@
-import type { ReactNode } from 'react';
-import { Text } from '../../../components/text';
-
-type InfoItemProps = {
-  icon: ReactNode;
-  label: string;
-  value?: string;
-};
+import { Text } from '@/components/text';
+import type { InfoItemProps } from './types';
 
 export const InfoItem = ({ icon, label, value }: InfoItemProps) => {
   return (

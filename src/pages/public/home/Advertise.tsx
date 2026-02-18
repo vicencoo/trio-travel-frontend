@@ -1,6 +1,6 @@
+import { Image } from '@/components/image';
+import { Text } from '@/components/text';
 import { BadgeCheck, MapPin, Users } from 'lucide-react';
-import { Image } from '../../../components/image';
-import { Text } from '../../../components/text';
 
 const INFO = [
   { id: 1, icon: <Users />, text: 'Itinerare të personalizuara' },

@@ -1,14 +1,8 @@
-import { Button } from '../../../components/button';
-import { Card } from '../../../components/card';
-import { Input } from '../../../components/input';
-import { Text } from '../../../components/text';
-import type { ContactTypes } from '../../../types';
-
-type ContactFormProps = {
-  contact: ContactTypes;
-  handleChangeContact: (key: string, value: string) => void;
-  handleSubmit: () => void;
-};
+import { Text } from '@/components/text';
+import type { ContactFormProps } from './types';
+import { Card } from '@/components/card';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
 
 export const ContactForm = ({
   contact,

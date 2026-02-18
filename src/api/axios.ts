@@ -1,5 +1,5 @@
+import { DEFAULT_URL } from '@/utils/defaults';
 import AXIOS from 'axios';
-import { DEFAULT_URL } from '../defaults';
 
 export const axios = AXIOS.create({
   baseURL: DEFAULT_URL,

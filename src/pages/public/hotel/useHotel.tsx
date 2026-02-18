@@ -1,6 +1,6 @@
+import { axios } from '@/api';
+import type { HotelsResponse } from '@/types/responseTypes';
 import { useEffect, useState, type ChangeEvent } from 'react';
-import { axios } from '../../../api';
-import type { HotelsResponse } from '../../../responseTypes';
 
 const HOTEL_LIMIT = 9;
 

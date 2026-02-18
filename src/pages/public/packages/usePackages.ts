@@ -1,6 +1,6 @@
+import { axios } from '@/api';
+import type { PackageResponse } from '@/types/responseTypes';
 import { useEffect, useState, type ChangeEvent } from 'react';
-import { axios } from '../../../api';
-import type { PackageResponse } from '../../../responseTypes';
 
 const ITEMS_PER_PAGE = 9;
 
@@ -9,6 +9,7 @@ export const usePackages = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [inputValue, setInputValue] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handlePageChange = (_event: ChangeEvent<unknown>, page: number) => {
     setPageNumber(page);
@@ -32,6 +33,8 @@ export const usePackages = () => {
         if (res.data) setData(res.data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     };
     getAllPackages();
@@ -43,5 +46,6 @@ export const usePackages = () => {
     pageNumber,
     handleSearchChange,
     handleSearchClick,
+    isLoading,
   };
 };

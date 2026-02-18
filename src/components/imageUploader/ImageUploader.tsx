@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { X, Plus } from 'lucide-react';
-import { DEFAULT_URL } from '../../defaults';
 import { Text } from '../text';
+import { DEFAULT_URL } from '@/utils/defaults';
 
 type ImageObject = Record<string, unknown>;
 
@@ -27,10 +27,22 @@ export const ImageUploader = <T extends ImageObject>({
     setImages(value);
   }, [value]);
 
+  // const handleFiles = (files: FileList | null) => {
+  //   if (!files) return;
+  //   const newFiles = Array.from(files);
+  //   const updated = [...images, ...newFiles].slice(0, maxImages);
+  //   setImages(updated);
+  //   onChange(updated);
+  // };
   const handleFiles = (files: FileList | null) => {
     if (!files) return;
+
     const newFiles = Array.from(files);
-    const updated = [...images, ...newFiles].slice(0, maxImages);
+
+    const updated = [...images, ...newFiles]
+      .slice(0, maxImages)
+      .filter((f) => typeof f !== 'string') as (File | T)[];
+
     setImages(updated);
     onChange(updated);
   };
@@ -41,7 +53,10 @@ export const ImageUploader = <T extends ImageObject>({
     if (!(removed instanceof File)) {
       onDeleteOld?.(removed);
     }
-    const updated = images.filter((_, i) => i !== index);
+    // const updated = images.filter((_, i) => i !== index);
+    // setImages(updated);
+    // onChange(updated);
+    const updated = images.filter((_, i) => i !== index) as (File | T)[];
     setImages(updated);
     onChange(updated);
   };

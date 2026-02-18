@@ -1,11 +1,5 @@
-import { Text } from '../../../components/text';
-import type { ReactNode } from 'react';
-
-type PropertyStatsProps = {
-  icon: ReactNode;
-  value?: string | number;
-  label: string;
-};
+import { Text } from '@/components/text';
+import type { PropertyStatsProps } from './types';
 
 export const PropertyStats = ({ icon, value, label }: PropertyStatsProps) => {
   return (

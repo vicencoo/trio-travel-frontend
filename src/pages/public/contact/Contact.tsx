@@ -1,4 +1,4 @@
-import { Text } from '../../../components/text';
+import { Text } from '@/components/text';
 import { ContactForm } from './ContactForm';
 import { InfoCard } from './InfoCard';
 import { useContact } from './useContact';

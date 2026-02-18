@@ -1,6 +1,6 @@
+import type { ContactTypes } from '@/types/types';
+import { DEFAULT_CONTACT } from '@/utils/defaults';
 import { useState } from 'react';
-import { DEFAULT_CONTACT } from '../../../defaults';
-import type { ContactTypes } from '../../../types';
 
 export const useContact = () => {
   const [contact, setContact] = useState<ContactTypes>(DEFAULT_CONTACT);

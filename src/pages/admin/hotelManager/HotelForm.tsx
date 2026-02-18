@@ -1,9 +1,5 @@
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
-import { Card } from '../../../components/card';
-import { Text } from '../../../components/text';
-import { Input } from '../../../components/input';
-import { Button } from '../../../components/button';
 import type { HotelFormProps } from './types';
 import {
   AcUnit,
@@ -15,7 +11,11 @@ import {
   Spa,
   Wifi,
 } from '@mui/icons-material';
-import { ImageUploader } from '../../../components/imageUploader';
+import { Card } from '@/components/card';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
+import { ImageUploader } from '@/components/imageUploader';
 
 const AVAILABLE_FACILITIES = [
   { id: 'wifi', name: 'WiFi', icon: Wifi },

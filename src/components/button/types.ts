@@ -18,3 +18,18 @@ export type ButtonProps = {
   padding?: string;
   className?: string;
 };
+
+// import type { ReactNode } from 'react';
+// import type { ButtonProps as MuiButtonProps } from '@mui/material';
+
+// export interface ButtonProps extends Omit<MuiButtonProps, 'color'> {
+//   name: string;
+//   color?: string;
+//   hoverColor?: string;
+//   bgColor?: string;
+//   bgHover?: string;
+//   border?: string;
+//   borderHover?: string;
+//   padding?: string;
+//   icon?: ReactNode;
+// }

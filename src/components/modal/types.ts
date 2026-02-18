@@ -1,8 +1,8 @@
-import type { MouseEventHandler, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export type ModalProps = {
   isOpen: boolean;
-  onClose?: MouseEventHandler<SVGSVGElement>;
+  onClose: () => void;
   width?: string;
   height?: string;
   closeIcon?: boolean;

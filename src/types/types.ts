@@ -19,6 +19,7 @@ export type Property = {
   floor_number?: number | null;
   build_year?: number | null;
   property_images?: (File | string | PropertyImage)[];
+  status: 'active' | 'draft';
 };
 
 export type TicketImage = {
@@ -51,6 +52,7 @@ export type TouristPackage = {
   accomodation?: string;
   meal_included?: string;
   package_images?: (PackageImage | File | string)[];
+  status: 'active' | 'draft';
 };
 
 export type ContactTypes = {
@@ -60,7 +62,7 @@ export type ContactTypes = {
   message: string;
 };
 
-export type HotelImages = {
+export type HotelImage = {
   id?: string | number;
   hotel_image?: string;
 };
@@ -79,10 +81,10 @@ export type HotelTypes = {
   reviews: number | null;
   price: number | null;
   facilities: (HotelFacilities | string)[];
-  hotel_images: (HotelImages | File | string)[];
+  hotel_images: (HotelImage | File | string)[];
 };
 
-type DestinationType = {
+export type DestinationType = {
   id?: string;
   type?: string;
 };

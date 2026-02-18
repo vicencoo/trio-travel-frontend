@@ -1,6 +1,6 @@
+import { Button } from '@/components/button';
+import { Text } from '@/components/text';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { Button } from '../../../components/button';
-import { Text } from '../../../components/text';
 
 const message = encodeURIComponent(`
 Përshëndetje

@@ -1,7 +1,7 @@
+import type { PackageFieldError } from '@/types/errorTypes';
+import type { PackageImage, TouristPackage } from '@/types/types';
 import type { SelectChangeEvent } from '@mui/material';
-import type { PackageImage, TouristPackage } from '../../../types';
 import type { Dispatch, SetStateAction } from 'react';
-import type { PackageFieldError } from '../../../errorTypes';
 
 export type PackageFormProps = {
   onClose: () => void;
@@ -21,4 +21,5 @@ export type PackageItemProps = {
   packageItem: TouristPackage;
   handleEditPackage: (packageItem: TouristPackage) => void;
   handleDeletePackage: (id: string) => void;
+  handleRenew: (id: string) => void;
 };

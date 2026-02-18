@@ -1,4 +1,3 @@
-import { Spinner } from '../../../components/spinner';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import AirlineSeatIndividualSuiteOutlinedIcon from '@mui/icons-material/AirlineSeatIndividualSuiteOutlined';
@@ -6,12 +5,13 @@ import RestaurantMenuOutlinedIcon from '@mui/icons-material/RestaurantMenuOutlin
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useViewPackage } from './useViewPackage';
 import { PackageImages } from './PackageImages';
-import { Text } from '../../../components/text';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Card } from '../../../components/card';
-import { Button } from '../../../components/button';
 import { InfoItem } from './InfoItem';
-import { formattedPrice } from '../../../utils/formattedPrice';
+import { Spinner } from '@/components/spinner';
+import { Text } from '@/components/text';
+import { Card } from '@/components/card';
+import { formattedPrice } from '@/utils/formattedPrice';
+import { Button } from '@/components/button';
 
 export const ViewPackage = () => {
   const location = useLocation();

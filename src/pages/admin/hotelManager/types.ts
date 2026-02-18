@@ -1,12 +1,12 @@
+import type { HotelFieldError } from '@/types/errorTypes';
+import type { HotelImage, HotelTypes } from '@/types/types';
 import type { Dispatch, SetStateAction } from 'react';
-import type { HotelImages, HotelTypes } from '../../../types';
-import type { HotelFieldError } from '../../../errorTypes';
 
 export type HotelFormProps = {
   handleOpenForm: () => void;
   handleChangeData: (key: string, value: string) => void;
   hotelData: HotelTypes;
-  handleImagesChange: (images: (File | string | HotelImages)[]) => void;
+  handleImagesChange: (images: (File | string | HotelImage)[]) => void;
   handleSetFacilities: (itemId: string) => void;
   saveHotel: () => void;
   setDeletedImages: Dispatch<SetStateAction<string[]>>;

@@ -2,11 +2,11 @@ import RealEstateAgentOutlinedIcon from '@mui/icons-material/RealEstateAgentOutl
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { Card } from '../../../components/card';
-import { IconBox } from '../../../components/iconBox';
-import { Text } from '../../../components/text';
-import { Button } from '../../../components/button';
 import { useLocation } from 'react-router-dom';
+import { Card } from '@/components/card';
+import { IconBox } from '@/components/iconBox';
+import { Text } from '@/components/text';
+import { Button } from '@/components/button';
 
 export const ContactAgency = () => {
   const location = useLocation();

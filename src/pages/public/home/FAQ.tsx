@@ -1,8 +1,8 @@
+import { Text } from '@/components/text';
+import { FAQ_INFO } from '@/utils';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
-import { Text } from '../../../components/text';
-import { FAQ_INFO } from '../../..';
 
 export const FAQ = () => {
   const [openQuestions, setOpenQuestions] = useState<number[]>([]);

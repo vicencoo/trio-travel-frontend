@@ -1,12 +1,12 @@
-import { AdminPageHeader } from '../../../components/adminPageHeader/AdminPageHeader';
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
 import { useDestinationManager } from './useDestinationManager';
 import { DestinationModal } from './DestinationModal';
-import { DataTable } from '../../../components/dataTable';
-import { Pagination } from '../../../components/pagination';
-import { NoDataFound } from '../../../components/noDataFound';
-import { DESTINATION_COLUMNS } from '../../../columns';
 import { DestinationTableRow } from './DestinationTableRow';
+import { AdminPageHeader } from '@/components/adminPageHeader/AdminPageHeader';
+import { DataTable } from '@/components/dataTable';
+import { DESTINATION_COLUMNS } from '@/utils/columns';
+import { Pagination } from '@/components/pagination';
+import { NoDataFound } from '@/components/noDataFound';
 
 export const DestinationManager = () => {
   const {

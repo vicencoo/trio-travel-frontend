@@ -16,10 +16,13 @@ import { ViewPackage } from '../pages/public/viewPackage';
 import { HotelManager } from '../pages/admin/hotelManager';
 import { ViewHotel } from '../pages/public/viewHotel';
 import { DestinationManager } from '../pages/admin/destinationManager/DestinationManager';
+import { Login } from '../pages/auth/login';
 
 export const AppRoutes = () => {
   return (
     <Routes>
+      {/* Auth Routes */}
+      <Route path='/admin/login' element={<Login />} />
       <Route element={<Layout />}>
         {/* Public Routes */}
         <Route path='/' element={<Home />} />

@@ -1,6 +1,6 @@
+import { axios } from '@/api';
+import type { DestinationResponse } from '@/types/responseTypes';
 import { useEffect, useState, type ChangeEvent } from 'react';
-import type { DestinationResponse } from '../../../responseTypes';
-import { axios } from '../../../api';
 
 const DESTINATION_LIMIT = 12;
 

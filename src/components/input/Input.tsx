@@ -48,7 +48,7 @@ export const Input = ({
             rows={rows}
             value={value}
             onChange={onChange}
-            className={`w-full p-3 border border-gray-300 text-gray-500 rounded-xl
+            className={`w-full p-3 border border-gray-300 text-gray-500 rounded-xl hide-scrollbar
             focus:ring-2 focus:ring-blue-500 focus:border-transparent
             transition-all duration-100 bg-white/60 focus:bg-white/70
             backdrop-blur-sm ${className}`}

@@ -1,12 +1,14 @@
 import TourOutlinedIcon from '@mui/icons-material/TourOutlined';
-import { AdminPageHeader } from '../../../components/adminPageHeader/AdminPageHeader';
-import { DataTable } from '../../../components/dataTable';
-import { PackageForm } from './PackageForm';
 import { usePackageManager } from './usePackageManager';
+import { AdminPageHeader } from '@/components/adminPageHeader/AdminPageHeader';
+import { PackageForm } from './PackageForm';
+import { DataTable } from '@/components/dataTable';
+import { PackageManager_COLUMNS } from '@/utils/columns';
 import { PackageTableRow } from './PackageTableRow';
-import { NoDataFound } from '../../../components/noDataFound';
-import { PackageManager_COLUMNS } from '../../../columns';
-import { Pagination } from '../../../components/pagination';
+import { Pagination } from '@/components/pagination';
+import { NoDataFound } from '@/components/noDataFound';
+import { StatusFilter } from '@/components/statusFilter';
+import { Spinner } from '@/components/spinner';
 
 export const PackageManager = () => {
   const {
@@ -24,6 +26,8 @@ export const PackageManager = () => {
     pageNumber,
     setDeletedImages,
     errors,
+    handleRenew,
+    isLoading,
   } = usePackageManager();
 
   return (
@@ -41,6 +45,8 @@ export const PackageManager = () => {
         display={!isPackageFormOpen}
       />
 
+      {/* <StatusFilter /> */}
+
       {isPackageFormOpen && (
         <PackageForm
           onClose={handleOpenForm}
@@ -54,7 +60,11 @@ export const PackageManager = () => {
         />
       )}
 
-      {packages?.packages && packages.packages.length > 0 ? (
+      {isLoading ? (
+        <div className='flex w-full min-h-[61vh] items-center justify-center'>
+          <Spinner />
+        </div>
+      ) : packages?.packages && packages.packages.length > 0 ? (
         <div className='flex flex-col gap-10 w-full items-center min-h-[61vh] justify-between'>
           <DataTable
             headerText='text-white'
@@ -68,6 +78,7 @@ export const PackageManager = () => {
                 key={packageItem.id}
                 handleDeletePackage={handleDeletePackage}
                 handleEditPackage={handleEditPackage}
+                handleRenew={handleRenew}
               />
             ))}
           </DataTable>

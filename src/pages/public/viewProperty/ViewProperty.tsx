@@ -4,14 +4,14 @@ import SquareFootOutlinedIcon from '@mui/icons-material/SquareFootOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import { Text } from '../../../components/text';
-import { useViewProperty } from './useViewProperty';
 import { useNavigate } from 'react-router-dom';
-import { Card } from '../../../components/card';
+import { useViewProperty } from './useViewProperty';
 import { PropertyStats } from './PropertyStats';
 import { PropertyImages } from './PropertyImages';
-import { formattedPrice } from '../../../utils/formattedPrice';
 import { ContactAgency } from './ContactAgency';
+import { Text } from '@/components/text';
+import { Card } from '@/components/card';
+import { formattedPrice } from '@/utils/formattedPrice';
 
 export const ViewProperty = () => {
   const { property, index, next, prev, setIndex } = useViewProperty();

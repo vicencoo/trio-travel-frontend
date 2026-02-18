@@ -1,12 +1,12 @@
 import { Search } from '@mui/icons-material';
-import { Button } from '../../../components/button';
-import { Input } from '../../../components/input';
-import { Text } from '../../../components/text';
 import { useHotel } from './useHotel';
-import { NoDataFound } from '../../../components/noDataFound';
-import { Pagination } from '../../../components/pagination';
-import { useScrollOnChange } from '../../../hooks/useScrollOnChange';
-import { HotelCard } from '../../../components/hotelCard';
+import { useScrollOnChange } from '@/hooks/useScrollOnChange';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
+import { HotelCard } from '@/components/hotelCard';
+import { Pagination } from '@/components/pagination';
+import { NoDataFound } from '@/components/noDataFound';
 
 export const Hotel = () => {
   const { hotels, handlePageChange, pageNumber } = useHotel();

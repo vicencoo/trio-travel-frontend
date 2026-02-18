@@ -1,9 +1,9 @@
+import { axios } from '@/api';
+import type { HotelFieldError } from '@/types/errorTypes';
+import type { HotelsResponse } from '@/types/responseTypes';
+import type { HotelImage, HotelTypes } from '@/types/types';
+import { HOTEL_DATA } from '@/utils/defaults';
 import { useEffect, useState, type ChangeEvent } from 'react';
-import { HOTEL_DATA } from '../../../defaults';
-import type { HotelImages, HotelTypes } from '../../../types';
-import { axios } from '../../../api';
-import type { HotelsResponse } from '../../../responseTypes';
-import type { HotelFieldError } from '../../../errorTypes';
 
 export const useHotelManager = () => {
   const [isHotelFormOpen, setIsHotelFormOpen] = useState<boolean>(false);
@@ -38,7 +38,7 @@ export const useHotelManager = () => {
     }));
   };
 
-  const handleImagesChange = (images: (File | string | HotelImages)[]) => {
+  const handleImagesChange = (images: (File | string | HotelImage)[]) => {
     setHotelData((prev) => ({
       ...prev,
       hotel_images: images,

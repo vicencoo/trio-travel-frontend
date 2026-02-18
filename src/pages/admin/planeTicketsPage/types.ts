@@ -1,5 +1,5 @@
-import type { PlaneTicket, TicketImage } from '../../../types';
-import type { PlaneTicketFieldError } from '../../../errorTypes';
+import type { PlaneTicketFieldError } from '@/types/errorTypes';
+import type { PlaneTicket, TicketImage } from '@/types/types';
 import type { ReactNode } from 'react';
 
 export type TicketModalProps = {

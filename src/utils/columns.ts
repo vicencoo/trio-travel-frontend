@@ -26,10 +26,11 @@ export const PROPERTY_COLUMNS = [
   { header: 'lloji', className: 'hidden md:flex col-span-1' },
   { header: 'cmimi', className: 'md:col-span-1 col-span-2' },
   { header: 'lokacioni', className: 'hidden md:flex col-span-1' },
+  { header: 'statusi', className: 'flex col-span-1' },
 ];
 
 export const DESTINATION_COLUMNS = [
-  { header: 'imazhi', className: 'col-span-2' },
-  { header: 'qyteti', className: 'col-span-1' },
-  { header: 'shteti', className: 'col-span-1' },
+  { header: 'imazhi', className: 'md:col-span-2 col-span-1' },
+  { header: 'qyteti', className: 'md:col-span-1 col-span-2 md:pl-0 pl-3' },
+  { header: 'shteti', className: 'md:col-span-1 col-span-2' },
 ];

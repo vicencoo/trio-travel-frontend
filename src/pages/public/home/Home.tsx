@@ -1,21 +1,18 @@
 import { useNavigate } from 'react-router-dom';
-import { PropertyCard } from '../../../components/propertyCard';
-import { SectionHeader } from './SectionHeader';
-import { ViewAllButton } from '../../../components/viewAllButton/ViewAllButton';
-import { Advertise } from './Advertise';
-import { FAQ } from './FAQ';
-import { Destinations } from './Destinations';
-import { StatisticsSection } from './StatisticsSection';
+import type { PlaneTicket } from '@/types/types';
 import { useHome } from './useHome';
-import { PackageCard } from '../../../components/packageCard';
-import { FlightOfferCard } from '../../../components/flightOfferCard';
-import type { PlaneTicket } from '../../../types';
+import { Advertise } from './Advertise';
+import { SectionHeader } from './SectionHeader';
+import { PropertyCard } from '@/components/propertyCard';
+import { ViewAllButton } from '@/components/viewAllButton/ViewAllButton';
+import { PackageCard } from '@/components/packageCard';
+import { FlightOfferCard } from '@/components/flightOfferCard';
+import { StatisticsSection } from './StatisticsSection';
+import { Destinations } from './Destinations';
+import { FAQ } from './FAQ';
 
 export const Home = () => {
   const { properties, planeTickets, packages, destinations } = useHome();
-
-  console.log(destinations);
-
   const navigate = useNavigate();
   return (
     <div className='container flex flex-col md:gap-20 gap-14 md:mb-16 my-10'>
@@ -54,7 +51,7 @@ export const Home = () => {
             ))}
           </div>
           <div className='flex justify-center w-full'>
-            <ViewAllButton text='Load More Packages' path='/packages' />
+            <ViewAllButton text='Shiko Të Gjitha Paketat' path='/packages' />
           </div>
         </div>
       )}
@@ -75,7 +72,10 @@ export const Home = () => {
             </div>
 
             <div className='flex w-full justify-center'>
-              <ViewAllButton text='view all offers' path='planeTickets' />
+              <ViewAllButton
+                text='Shiko Të Gjitha Ofertat'
+                path='planeTickets'
+              />
             </div>
           </div>
         )}
@@ -84,17 +84,14 @@ export const Home = () => {
 
       <div className='flex flex-col gap-10'>
         <SectionHeader
-          title='top destinations'
-          text='Navigate the Globe with Confidence'
+          title='Destinacionet më të pëlqyera'
+          text='Udhëtoni botën me konfidencë te plotë'
         />
         <Destinations destinations={destinations} />
       </div>
 
       <div className='flex flex-col gap-10'>
-        <SectionHeader
-          title='frequently asked questions'
-          text='Youu need to come at least once in your life'
-        />
+        <SectionHeader title='Pyetjet më të shpeshta' />
         <FAQ />
       </div>
     </div>

@@ -1,10 +1,11 @@
 import { useProperty } from './useProperty';
-import { NoPropertyFound } from '../../../components/noPropertyFound';
-import { PropertyCard } from '../../../components/propertyCard';
-import { Pagination } from '../../../components/pagination';
-import { useScrollOnChange } from '../../../hooks/useScrollOnChange';
 import { PropertyHero } from './PropertyHero';
 import { PropertyFilters } from './PropertyFilters';
+import { useScrollOnChange } from '@/hooks/useScrollOnChange';
+import { PropertyCardSkeleton } from '@/components/skeletons';
+import { PropertyCard } from '@/components/propertyCard';
+import { Pagination } from '@/components/pagination';
+import { NoPropertyFound } from '@/components/noPropertyFound';
 
 export const Properties = () => {
   const {
@@ -15,6 +16,7 @@ export const Properties = () => {
     handleSearchClick,
     hadleListingFilterChange,
     listingType,
+    isLoading,
   } = useProperty();
   const { scrollRef } = useScrollOnChange(pageNumber);
 
@@ -32,7 +34,13 @@ export const Properties = () => {
         />
       </div>
 
-      {data?.properties && data.properties.length > 0 ? (
+      {isLoading ? (
+        <div className='container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:gap-4 gap-5'>
+          {Array.from({ length: 6 }).map((_, index) => (
+            <PropertyCardSkeleton key={index} />
+          ))}
+        </div>
+      ) : data?.properties && data.properties.length > 0 ? (
         <div className='flex flex-col gap-10 items-center'>
           <div className='container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:gap-4 gap-5'>
             {data &&

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { axios } from '../../../api';
+import { axios } from '@/api';
 import type {
   AllTicketsResponse,
   PackageResponse,
   PropertiesResponse,
-} from '../../../responseTypes';
-import type { DestinationTypes } from '../../../types';
+} from '@/types/responseTypes';
+import type { DestinationTypes } from '@/types/types';
+import { useEffect, useState } from 'react';
 
 const PACKAGE_LIMIT = 6;
 const TICKET_LIMIT = 4;

@@ -1,10 +1,10 @@
-import { DestinationCard } from '../../../components/destinationCard';
-import { Image } from '../../../components/image';
-import { Pagination } from '../../../components/pagination';
-import { Text } from '../../../components/text';
-import { useScrollOnChange } from '../../../hooks/useScrollOnChange';
+import { useScrollOnChange } from '@/hooks/useScrollOnChange';
 import { DestinationHero } from './DestinationHero';
 import { useDestinations } from './useDestinations';
+import { Text } from '@/components/text';
+import { DestinationCard } from '@/components/destinationCard';
+import { Pagination } from '@/components/pagination';
+import { Image } from '@/components/image';
 
 const message = encodeURIComponent(`
 Përshëndetje
@@ -58,10 +58,6 @@ export const Destinations = () => {
                       <DestinationCard
                         key={destination.id}
                         destination={destination}
-                        // image={img}
-                        // city={destination.city}
-                        // country={destination.country}
-                        // tagline={destination.slogan}
                       />
                     );
                   })}

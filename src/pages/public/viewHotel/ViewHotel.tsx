@@ -10,12 +10,12 @@ import Pool from '@mui/icons-material/Pool';
 import FitnessCenter from '@mui/icons-material/FitnessCenter';
 import RoomService from '@mui/icons-material/RoomService';
 import AcUnit from '@mui/icons-material/AcUnit';
-import { Text } from '../../../components/text';
 import { HotelImages } from './HotelImages';
 import { useViewHotel } from './useViewHotel';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Card } from '../../../components/card';
-import { Button } from '../../../components/button';
+import { Text } from '@/components/text';
+import { Card } from '@/components/card';
+import { Button } from '@/components/button';
 
 const FACILITY_ICON = {
   wifi: Wifi,
@@ -149,8 +149,18 @@ ${currentUrl}`,
               font='font-semibold font-serif'
             />
             <div className='grid grid-cols-2 gap-3 select-none'>
-              {hotel?.facilities?.map((facility, index) => {
+              {/* {hotel?.facilities?.map((facility, index) => {
                 const Icon = FACILITY_ICON[facility.facility];
+                if (!Icon) return null; */}
+              {hotel?.facilities?.map((facility, index) => {
+                if (
+                  !facility ||
+                  typeof facility !== 'object' ||
+                  !('facility' in facility)
+                )
+                  return null;
+                const key = (facility as { facility: string }).facility;
+                const Icon = FACILITY_ICON[key as keyof typeof FACILITY_ICON];
                 if (!Icon) return null;
                 return (
                   <span

@@ -1,8 +1,8 @@
+import { axios } from '@/api';
+import type { PlaneTicketFieldError } from '@/types/errorTypes';
+import type { PlaneTicket, TicketImage } from '@/types/types';
+import { DEFAULT_TICKET } from '@/utils/defaults';
 import { useEffect, useState, type ChangeEvent } from 'react';
-import type { PlaneTicket, TicketImage } from '../../../types';
-import { DEFAULT_TICKET } from '../../../defaults';
-import { axios } from '../../../api';
-import type { PlaneTicketFieldError } from '../../../errorTypes';
 
 const ADMIN_PLANE_TICKETS = 6;
 

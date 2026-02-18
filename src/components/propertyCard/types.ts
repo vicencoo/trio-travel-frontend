@@ -1,4 +1,4 @@
-import type { Property } from '../../types';
+import type { Property } from '@/types/types';
 
 export type PropertyCardProps = {
   property: Property;

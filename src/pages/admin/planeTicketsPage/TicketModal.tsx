@@ -1,10 +1,10 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Modal } from '../../../components/modal';
-import { Input } from '../../../components/input';
-import { Text } from '../../../components/text';
-import { Button } from '../../../components/button';
-import { ImageUploader } from '../../../components/imageUploader';
 import type { TicketModalProps } from './types';
+import { Modal } from '@/components/modal';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
+import { ImageUploader } from '@/components/imageUploader';
+import { Button } from '@/components/button';
 
 export const TicketModal = ({
   openModal,

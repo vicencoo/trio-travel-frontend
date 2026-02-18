@@ -1,6 +1,6 @@
+import type { DestinationFieldError } from '@/types/errorTypes';
+import type { DestinationImages, DestinationTypes } from '@/types/types';
 import type { Dispatch, SetStateAction } from 'react';
-import type { DestinationImages, DestinationTypes } from '../../../types';
-import type { DestinationFieldError } from '../../../errorTypes';
 
 export type DestinationFormProps = {
   handleOpenModal: () => void;

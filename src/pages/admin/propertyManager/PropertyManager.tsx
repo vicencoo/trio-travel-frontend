@@ -5,15 +5,16 @@ import EuroSymbolOutlinedIcon from '@mui/icons-material/EuroSymbolOutlined';
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
-import { Card } from '../../../components/card';
-import { Text } from '../../../components/text';
-import { Button } from '../../../components/button';
-import { useAddProperty } from './useAddProperty';
-import { Input } from '../../../components/input';
-import { Selector } from '../../../components/selector';
-import { ImageUploader } from '../../../components/imageUploader';
 import { useNavigate } from 'react-router-dom';
-import { PROPERTY_TYPE } from '../../..';
+import { useAddProperty } from './useAddProperty';
+import { Card } from '@/components/card';
+import { Text } from '@/components/text';
+import { Button } from '@/components/button';
+import { Selector } from '@/components/selector';
+import { PROPERTY_TYPE } from '@/utils';
+import { Input } from '@/components/input';
+import { ImageUploader } from '@/components/imageUploader';
+import { StatusToggle } from '@/components/statusToggle';
 
 export const PropertyManager = () => {
   const navigate = useNavigate();
@@ -52,7 +53,11 @@ export const PropertyManager = () => {
       </Card>
 
       <Card width='w-full md:w-3/5'>
-        <Text text={'Lloji I Listimit *'} size='text-lg' font='font-medium' />
+        <Text
+          text={'Lloji I Listimit *'}
+          size='text-lg'
+          font='font-semibold font-serif'
+        />
         <div className=' flex w-full gap-3'>
           <Button
             name='per qera'
@@ -73,6 +78,15 @@ export const PropertyManager = () => {
             color={propertyData.listing_type === 'sale' ? 'white' : 'black'}
           />
         </div>
+
+        <StatusToggle
+          activeText='✓ Kjo pronë do të jetë e dukshme për publikun.'
+          draftText='✎ Kjo pronë do të ruhet si draft. Ju mund ta ndryshoni ne një moment të dytë dhe ta beni pronën aktive.'
+          status={propertyData.status}
+          onChange={(newStatus) =>
+            handleChangePropertyData('status', newStatus)
+          }
+        />
       </Card>
 
       <Card className='w-full md:w-3/5'>

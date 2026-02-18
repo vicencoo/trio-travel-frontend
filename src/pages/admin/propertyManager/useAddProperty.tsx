@@ -1,10 +1,10 @@
+import { axios } from '@/api';
+import type { PropertyFieldError } from '@/types/errorTypes';
+import type { PropertyImage } from '@/types/types';
+import { DEFAULT_PROPERTY } from '@/utils/defaults';
 import type { SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { DEFAULT_PROPERTY } from '../../../defaults';
-import { axios } from '../../../api';
 import { useNavigate, useParams } from 'react-router-dom';
-import type { PropertyImage } from '../../../types';
-import type { PropertyFieldError } from '../../../errorTypes';
 
 export const useAddProperty = () => {
   const { id } = useParams();
@@ -80,6 +80,9 @@ export const useAddProperty = () => {
         formData.append('build_year', propertyData.build_year.toString());
       if (deletedImages.length) {
         formData.append('deletedImages', JSON.stringify(deletedImages));
+      }
+      if (propertyData.status) {
+        formData.append('status', propertyData.status);
       }
 
       if (propertyData.property_images)

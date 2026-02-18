@@ -4,12 +4,11 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import EmailIcon from '@mui/icons-material/Email';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import { Icon } from '../../components/icon';
-import { Text } from '../../components/text';
-import { Image } from '../../components/image';
 import { useNavigate } from 'react-router-dom';
+import { Image } from '@/components/image';
+import { Icon } from '@/components/icon';
+import { Text } from '@/components/text';
 
 const FOOTER_INFO = [
   {
@@ -25,7 +24,7 @@ const FOOTER_INFO = [
   {
     id: 3,
     icon: <EmailIcon fontSize='small' />,
-    text: 'triotravelagency@gmail.com',
+    text: 'triotravel.imobiliare@gmail.com',
   },
   {
     id: 4,
@@ -47,7 +46,7 @@ const CONTACT = [
     url: 'https://facebook.com/agjensi.trio',
     color: 'text-blue-500',
   },
-  { id: 3, icon: <TwitterIcon fontSize='small' />, color: 'text-blue-700' },
+  { id: 3, icon: <EmailIcon fontSize='small' />, color: 'text-orange-500' },
   {
     id: 4,
     icon: <WhatsAppIcon fontSize='small' />,

@@ -1,12 +1,12 @@
-import { AdminPageHeader } from '../../../components/adminPageHeader/AdminPageHeader';
 import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
 import { useHotelManager } from './useHotelManager';
 import { HotelForm } from './HotelForm';
-import { DataTable } from '../../../components/dataTable';
 import { HotelTableRow } from './HotelTableRow';
-import { HOTEL_COLUMNS } from '../../../columns';
-import { NoDataFound } from '../../../components/noDataFound';
-import { Pagination } from '../../../components/pagination';
+import { AdminPageHeader } from '@/components/adminPageHeader/AdminPageHeader';
+import { DataTable } from '@/components/dataTable';
+import { HOTEL_COLUMNS } from '@/utils/columns';
+import { Pagination } from '@/components/pagination';
+import { NoDataFound } from '@/components/noDataFound';
 
 export const HotelManager = () => {
   const {

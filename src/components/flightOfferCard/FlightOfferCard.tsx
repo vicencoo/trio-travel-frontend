@@ -2,8 +2,8 @@ import { RepeatIcon } from 'lucide-react';
 import { Image } from '../image';
 import { Text } from '../text';
 import { Button } from '../button';
-import type { PlaneTicket } from '../../types';
-import { formattedPrice } from '../../utils/formattedPrice';
+import type { PlaneTicket } from '@/types/types';
+import { formattedPrice } from '@/utils/formattedPrice';
 
 export const FlightOfferCard = ({ ticket }: { ticket: PlaneTicket }) => {
   const firstImage = ticket?.ticket_images?.[0];

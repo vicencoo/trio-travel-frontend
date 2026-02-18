@@ -1,13 +1,14 @@
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import EuroOutlinedIcon from '@mui/icons-material/EuroOutlined';
-import { Card } from '../../../components/card';
-import { Input } from '../../../components/input';
-import { Text } from '../../../components/text';
-import { Button } from '../../../components/button';
-import { ImageUploader } from '../../../components/imageUploader';
-import { Selector } from '../../../components/selector';
 import type { PackageFormProps } from './types';
+import { Card } from '@/components/card';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
+import { Selector } from '@/components/selector';
+import { ImageUploader } from '@/components/imageUploader';
+import { Button } from '@/components/button';
+import { StatusToggle } from '@/components/statusToggle';
 
 const akomodimi = [
   { label: 'Hotel Me 3 Yje', value: 'threeStarHotel' },
@@ -32,6 +33,8 @@ export const PackageForm = ({
   setDeletedImages,
   errors,
 }: PackageFormProps) => {
+  console.log(touristPackage);
+
   return (
     <Card padding='p-0'>
       <div className='flex w-full justify-between bg-blue-600 px-7 text-white py-5'>
@@ -45,7 +48,16 @@ export const PackageForm = ({
           onClick={onClose}
         />
       </div>
+
       <div className='flex flex-col gap-6 px-7 py-4'>
+        {/*  */}
+        <StatusToggle
+          activeText='✓ Kjo paketë turistike do të jetë e dukshme për publikun.'
+          draftText='✎ Kjo paketë turistike do të ruhet si draft. Ju mund ta ndryshoni ne një moment të dytë dhe ta beni pronën aktive.'
+          onChange={(newStatus) => handleChangePackageData('status', newStatus)}
+          status={touristPackage.status}
+        />
+
         <div className='bg-blue-50 rounded-lg p-4 flex flex-col gap-3'>
           <Text text={'Basic information'} size='text-lg' font='font-medium' />
           <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>

@@ -1,12 +1,13 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { Text } from '../../../components/text';
-import { Input } from '../../../components/input';
-import { PackageCard } from '../../../components/packageCard';
 import { usePackages } from './usePackages';
-import { NoDataFound } from '../../../components/noDataFound';
-import { Pagination } from '../../../components/pagination';
-import { useScrollOnChange } from '../../../hooks/useScrollOnChange';
-import { Button } from '../../../components/button';
+import { useScrollOnChange } from '@/hooks/useScrollOnChange';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
+import { PackageCard } from '@/components/packageCard';
+import { Pagination } from '@/components/pagination';
+import { PackageCardSkeleton } from '@/components/skeletons';
+import { NoDataFound } from '@/components/noDataFound';
 
 export const Packages = () => {
   const {
@@ -15,6 +16,7 @@ export const Packages = () => {
     pageNumber,
     handleSearchChange,
     handleSearchClick,
+    isLoading,
   } = usePackages();
 
   const { scrollRef } = useScrollOnChange(pageNumber);
@@ -55,7 +57,13 @@ export const Packages = () => {
         </div>
       </div>
 
-      {data?.packages && data.packages.length > 0 ? (
+      {isLoading ? (
+        <div className='grid grid-cols-1 md:grid-cols-3 md:gap-4 gap-5 container'>
+          {Array.from({ length: 6 }).map((_, index) => (
+            <PackageCardSkeleton key={index} />
+          ))}
+        </div>
+      ) : data?.packages && data.packages.length > 0 ? (
         <div className='flex flex-col items-center gap-10'>
           <div className='grid grid-cols-1 md:grid-cols-3 md:gap-4 gap-5 container'>
             {data.packages.map((item) => (

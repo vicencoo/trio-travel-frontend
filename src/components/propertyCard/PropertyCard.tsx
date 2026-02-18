@@ -7,7 +7,7 @@ import { Image } from '../image';
 import { Text } from '../text';
 import { Button } from '../button';
 import type { PropertyCardProps } from './types';
-import { formattedPrice } from '../../utils/formattedPrice';
+import { formattedPrice } from '@/utils/formattedPrice';
 
 export const PropertyCard = ({ property }: PropertyCardProps) => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
+import { axios } from '@/api';
+import type { AllTicketsResponse } from '@/types/responseTypes';
 import { useEffect, useState } from 'react';
-import { axios } from '../../../api';
-import type { AllTicketsResponse } from '../../../responseTypes';
 
 const DISPLAY_TICKETS = 6;
 
@@ -15,6 +15,7 @@ export const usePlaneTickets = () => {
     useState<number>(DISPLAY_TICKETS);
   const [inputValue, setInputValue] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleLoadMore = () => {
     setTicketsToAppear((prev) => {
@@ -41,6 +42,8 @@ export const usePlaneTickets = () => {
         if (res.data) setPlaneTicketS(res.data);
       } catch (err) {
         console.error('Error getting all tickets: ', err);
+      } finally {
+        setIsLoading(false);
       }
     };
     getAllTickets();
@@ -52,5 +55,6 @@ export const usePlaneTickets = () => {
     ticketsToAppear,
     handleSearchChange,
     handleSearchClick,
+    isLoading,
   };
 };

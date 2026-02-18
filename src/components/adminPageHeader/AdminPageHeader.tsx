@@ -1,20 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
-import { Button } from '../button';
 import { Text } from '../text';
-import type { ReactNode } from 'react';
-
-type AdminPageHeaderProps = {
-  icon: ReactNode;
-  iconBgColor: string;
-  label: string;
-  text: string;
-  buttonName: string;
-  buttonBg?: string;
-  buttonBgHover?: string;
-  buttonBorderHover?: string;
-  onClick: () => void;
-  display?: boolean;
-};
+import type { AdminPageHeaderProps } from './types';
+import { Button } from '../button';
 
 export const AdminPageHeader = ({
   icon,

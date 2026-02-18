@@ -1,10 +1,10 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Text } from '../../components/text';
 import { useNavigate } from 'react-router-dom';
 import type { SidebarProps } from './types';
-import { useDisclosure } from '../../hooks/useDisclosure';
 import { useEffect } from 'react';
+import { useDisclosure } from '@/hooks/useDisclosure';
+import { Text } from '@/components/text';
 // import { useEffect } from 'react';
 // import { jwtDecode } from 'jwt-decode';
 // import { Roles, UserToken } from '../../types';

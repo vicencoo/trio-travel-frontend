@@ -4,15 +4,12 @@ import type {
   PlaneTicket,
   Property,
   TouristPackage,
-} from './types';
+} from '@/types/types';
 
-// export const DEFAULT_URL = 'http://localhost:8001';
-// export const DEFAULT_URL = 'http://192.168.20.9:8001';
 export const DEFAULT_URL =
   window.location.hostname === 'localhost'
-    ? 'http://localhost:8001'
-    : 'http://192.168.20.9:8001';
-// 'http://172.20.10.4:8001';
+    ? import.meta.env.VITE_LOCAL
+    : import.meta.env.VITE_NETWORK;
 
 export const DEFAULT_PROPERTY: Property = {
   id: '',
@@ -30,6 +27,7 @@ export const DEFAULT_PROPERTY: Property = {
   floor_number: null,
   build_year: null,
   property_images: [],
+  status: 'draft',
 };
 
 export const DEFAULT_TICKET: PlaneTicket = {
@@ -51,6 +49,7 @@ export const DEFAULT_PACKAGE: TouristPackage = {
   accomodation: '',
   meal_included: '',
   package_images: [],
+  status: 'draft',
 };
 
 export const DEFAULT_CONTACT = {

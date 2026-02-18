@@ -45,12 +45,7 @@ export const PackageCard = ({ data }: PackageCardProps) => {
               font='font-medium'
               className='text-gray-500 capitalize'
             />
-            {/* <Text
-              text={`${data?.duration} nights`}
-              size='text-sm'
-              font='font-medium'
-              className='text-gray-500'
-            /> */}
+
             <Text
               text={formatAccomodationPlan(data.accomodation || '')}
               size='text-xs'
@@ -64,12 +59,7 @@ export const PackageCard = ({ data }: PackageCardProps) => {
             font='font-medium'
             className='text-gray-500'
           />
-          {/* <Text
-            text={formatAccomodationPlan(data.accomodation || '')}
-            size='text-xs'
-            font='font-bold'
-            className='text-blue-600 px-3 py-1 bg-blue-100 w-max uppercase rounded-2xl'
-          /> */}
+
           <div className='flex items-center justify-between'>
             <div className='flex items-center gap-1'>
               <Text

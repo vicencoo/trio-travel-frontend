@@ -11,9 +11,9 @@ import AcUnit from '@mui/icons-material/AcUnit';
 import { useNavigate } from 'react-router-dom';
 import { Image } from '../image';
 import { Text } from '../text';
-import { formattedPrice } from '../../utils/formattedPrice';
 import { Button } from '../button';
 import type { HotelCardProps } from './types';
+import { formattedPrice } from '@/utils/formattedPrice';
 
 const FACILITY_ICON = {
   wifi: Wifi,
@@ -26,6 +26,8 @@ const FACILITY_ICON = {
   ac: AcUnit,
 };
 
+type FacilityKey = keyof typeof FACILITY_ICON;
+
 export const HotelCard = ({ data }: HotelCardProps) => {
   const navigate = useNavigate();
   const firstImage = data?.hotel_images?.[0];
@@ -33,6 +35,7 @@ export const HotelCard = ({ data }: HotelCardProps) => {
     typeof firstImage === 'object' &&
     'hotel_image' in firstImage &&
     firstImage.hotel_image;
+
   return (
     <div
       className='flex flex-col bg-white rounded-xl overflow-hidden border shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300 will-change-transform h-full cursor-pointer select-none'
@@ -73,7 +76,9 @@ export const HotelCard = ({ data }: HotelCardProps) => {
           </span>
           <div className='flex items-center flex-wrap gap-3'>
             {data.facilities?.map((facility, index) => {
-              const Icon = FACILITY_ICON[facility.facility];
+              const key =
+                typeof facility === 'string' ? facility : facility.facility;
+              const Icon = FACILITY_ICON[key as FacilityKey];
               if (!Icon) return null;
               return (
                 <span

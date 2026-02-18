@@ -1,12 +1,13 @@
 import { Plane } from 'lucide-react';
 import SearchIcon from '@mui/icons-material/Search';
-import { Text } from '../../../components/text';
-import { FlightOfferCard } from '../../../components/flightOfferCard';
-import { ViewAllButton } from '../../../components/viewAllButton/ViewAllButton';
-import { Button } from '../../../components/button';
 import { usePlaneTickets } from './usePlaneTickets';
-import { Input } from '../../../components/input';
-import { NoDataFound } from '../../../components/noDataFound';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
+import { PlaneTicketSkeleton } from '@/components/skeletons';
+import { FlightOfferCard } from '@/components/flightOfferCard';
+import { ViewAllButton } from '@/components/viewAllButton/ViewAllButton';
+import { NoDataFound } from '@/components/noDataFound';
 
 export const PlaneTickets = () => {
   const {
@@ -15,6 +16,7 @@ export const PlaneTickets = () => {
     ticketsToAppear,
     handleSearchChange,
     handleSearchClick,
+    isLoading,
   } = usePlaneTickets();
 
   const message = encodeURIComponent(
@@ -60,7 +62,13 @@ Do të doja disa sugjerime për udhëtimin tim. Mund të më ndihmoni, ju lutem?
         </div>
       </div>
 
-      {planeTickets && planeTickets.tickets.length > 0 ? (
+      {isLoading ? (
+        <div className='container grid grid-cols-1 md:grid-cols-2 gap-4'>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <PlaneTicketSkeleton key={index} />
+          ))}
+        </div>
+      ) : planeTickets && planeTickets.tickets.length > 0 ? (
         <div className='flex flex-col gap-10'>
           <div className='container grid grid-cols-1 md:grid-cols-2 gap-4'>
             {planeTickets.tickets.map((ticket) => (

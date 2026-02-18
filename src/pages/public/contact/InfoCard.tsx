@@ -1,9 +1,9 @@
-import { Card } from '../../../components/card';
-import { Text } from '../../../components/text';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import { Card } from '@/components/card';
+import { Text } from '@/components/text';
 
 const INFO = [
   {
@@ -16,7 +16,7 @@ const INFO = [
     id: 2,
     icon: <EmailOutlinedIcon fontSize='small' className='text-white' />,
     label: 'email',
-    value: 'triotravel@gmail.com',
+    value: 'triotravel.imobiliare@gmail.com',
   },
   {
     id: 3,

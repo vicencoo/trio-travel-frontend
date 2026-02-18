@@ -1,4 +1,4 @@
-import type { DestinationTypes } from '../../types';
+import type { DestinationTypes } from '@/types/types';
 
 export type DestCardProps = {
   destination: DestinationTypes;

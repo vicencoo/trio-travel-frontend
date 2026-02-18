@@ -1,9 +1,8 @@
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { Image } from '../../../components/image';
-import { Text } from '../../../components/text';
+import { Image } from '@/components/image';
 import type { HotelTableRowProps } from './types';
-import { formattedPrice } from '../../../utils/formattedPrice';
+import { Text } from '@/components/text';
+import { formattedPrice } from '@/utils/formattedPrice';
+import { ActionMenu } from '@/components/actionMenu';
 
 export const HotelTableRow = ({
   data,
@@ -39,16 +38,13 @@ export const HotelTableRow = ({
         font='font-bold font-serif'
         className='md:col-span-1 col-span-2 text-violet-600'
       />
-      <div className='col-span-1 flex w-full justify-end md:gap-5 gap-3 '>
-        <EditOutlinedIcon
-          className='text-blue-400 hover:text-blue-600 cursor-pointer'
-          onClick={() => handleEditHotel(data)}
-        />
-        <DeleteOutlinedIcon
-          className='text-red-400 hover:text-red-500 cursor-pointer'
-          onClick={handleDeleteHotel}
-        />
-      </div>
+
+      <ActionMenu
+        enableDelete
+        enableEdit
+        onDelete={handleDeleteHotel}
+        onEdit={() => handleEditHotel(data)}
+      />
     </div>
   );
 };

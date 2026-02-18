@@ -1,12 +1,12 @@
-import { Modal } from '../../../components/modal';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AddIcon from '@mui/icons-material/Add';
-import { Text } from '../../../components/text';
 import type { DestinationFormProps } from './types';
-import { Button } from '../../../components/button';
-import { Input } from '../../../components/input';
-import { ImageUploader } from '../../../components/imageUploader';
+import { Modal } from '@/components/modal';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
+import { ImageUploader } from '@/components/imageUploader';
+import { Button } from '@/components/button';
 
 export const DestinationModal = ({
   handleOpenModal,
@@ -91,7 +91,7 @@ export const DestinationModal = ({
             </div>
             {data?.destination_types?.length > 0 && (
               <div className='flex items-center gap-3 flex-wrap'>
-                {data.destination_types.map((type, index) => {
+                {data.destination_types.map((type, index: number) => {
                   const value = type.type;
                   return (
                     <span
