@@ -1,5 +1,5 @@
-import type { DestinationFieldError } from '@/types/errorTypes';
-import type { DestinationImages, DestinationTypes } from '@/types/types';
+import type { DestinationFieldError } from '@/shared/types/errorTypes';
+import type { DestinationImages, DestinationTypes } from '@/shared/types/types';
 import type { Dispatch, SetStateAction } from 'react';
 
 export type DestinationFormProps = {
@@ -19,5 +19,5 @@ export type DestinationFormProps = {
 export type DestinationTableRowProps = {
   data: DestinationTypes;
   handleEditDestination: (destination: DestinationTypes) => void;
-  handleDeleteHotel: () => void;
+  handleDeleteDestination: () => void;
 };

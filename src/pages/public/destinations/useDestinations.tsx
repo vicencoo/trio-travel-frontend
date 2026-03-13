@@ -1,5 +1,5 @@
 import { axios } from '@/api';
-import type { DestinationResponse } from '@/types/responseTypes';
+import type { DestinationResponse } from '@/shared/types/responseTypes';
 import { useEffect, useState, type ChangeEvent } from 'react';
 
 const DESTINATION_LIMIT = 12;

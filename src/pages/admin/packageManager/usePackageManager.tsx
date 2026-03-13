@@ -1,7 +1,7 @@
 import { axios } from '@/api';
-import type { PackageFieldError } from '@/types/errorTypes';
-import type { PackageResponse } from '@/types/responseTypes';
-import type { PackageImage, TouristPackage } from '@/types/types';
+import type { PackageFieldError } from '@/shared/types/errorTypes';
+import type { PackageResponse } from '@/shared/types/responseTypes';
+import type { PackageImage, TouristPackage } from '@/shared/types/types';
 import { DEFAULT_PACKAGE } from '@/utils/defaults';
 import type { SelectChangeEvent } from '@mui/material';
 import { useEffect, useState, type ChangeEvent } from 'react';
@@ -15,9 +15,27 @@ export const usePackageManager = () => {
   const [deletedImages, setDeletedImages] = useState<string[]>([]);
   const [errors, setErrors] = useState<PackageFieldError>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [status, setStatus] = useState<'all' | 'active' | 'draft'>('all');
+
+  const getPackages = async () => {
+    try {
+      const res = await axios(
+        `/packages?packageLimit=6&page=${pageNumber}&status=${status}`,
+      );
+      if (res.data) setPackages(res.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleChangePage = (_event: ChangeEvent<unknown>, page: number) => {
     setPageNumber(page);
+  };
+
+  const handleStatusChange = (status: 'all' | 'active' | 'draft') => {
+    setStatus(status);
   };
 
   const handleOpenForm = () => {
@@ -26,16 +44,12 @@ export const usePackageManager = () => {
     setEditMode(false);
   };
 
-  const getPackages = async () => {
-    try {
-      const res = await axios(`/packages?packageLimit=6&page=${pageNumber}`);
-      if (res.data) setPackages(res.data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  useEffect(() => {
+    (async () => {
+      await getPackages();
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageNumber, status]);
 
   const handleRenew = async (id: string) => {
     try {
@@ -48,12 +62,14 @@ export const usePackageManager = () => {
     }
   };
 
-  useEffect(() => {
-    (async () => {
+  const publishOrDraftPackage = async (id: string) => {
+    try {
+      await axios.post(`/admin/package/publishOrDraftPackage?packageId=${id}`);
       await getPackages();
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageNumber]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handleEditPackage = (packageItem: TouristPackage) => {
     setTouristPackage(packageItem);
@@ -175,5 +191,8 @@ export const usePackageManager = () => {
     handleRenew,
     errors,
     isLoading,
+    publishOrDraftPackage,
+    handleStatusChange,
+    status,
   };
 };

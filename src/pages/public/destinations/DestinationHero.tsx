@@ -1,5 +1,5 @@
-import { Button } from '@/components/button';
-import { Text } from '@/components/text';
+import { Button } from '@/shared/components/button';
+import { Text } from '@/shared/components/text';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 const message = encodeURIComponent(`

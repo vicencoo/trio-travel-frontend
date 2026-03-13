@@ -1,6 +1,6 @@
 import { axios } from '@/api';
-import type { PropertyFieldError } from '@/types/errorTypes';
-import type { PropertyImage } from '@/types/types';
+import type { PropertyFieldError } from '@/shared/types/errorTypes';
+import type { PropertyImage } from '@/shared/types/types';
 import { DEFAULT_PROPERTY } from '@/utils/defaults';
 import type { SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';

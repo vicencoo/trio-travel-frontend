@@ -1,11 +1,11 @@
 import { useProperty } from './useProperty';
 import { PropertyHero } from './PropertyHero';
 import { PropertyFilters } from './PropertyFilters';
-import { useScrollOnChange } from '@/hooks/useScrollOnChange';
-import { PropertyCardSkeleton } from '@/components/skeletons';
-import { PropertyCard } from '@/components/propertyCard';
-import { Pagination } from '@/components/pagination';
-import { NoPropertyFound } from '@/components/noPropertyFound';
+import { useScrollOnChange } from '@/shared/hooks/useScrollOnChange';
+import { PropertyCardSkeleton } from '@/shared/components/skeletons';
+import { PropertyCard } from '@/shared/components/propertyCard';
+import { Pagination } from '@/shared/components/pagination';
+import { NoPropertyFound } from '@/shared/components/noPropertyFound';
 
 export const Properties = () => {
   const {

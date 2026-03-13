@@ -3,8 +3,8 @@ import type {
   AllTicketsResponse,
   PackageResponse,
   PropertiesResponse,
-} from '@/types/responseTypes';
-import type { DestinationTypes } from '@/types/types';
+} from '@/shared/types/responseTypes';
+import type { DestinationTypes } from '@/shared/types/types';
 import { useEffect, useState } from 'react';
 
 const PACKAGE_LIMIT = 6;

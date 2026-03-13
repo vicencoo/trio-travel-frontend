@@ -33,7 +33,8 @@
       "@layout/*": ["src/layout/*"],
       "@pages/*": ["src/pages/*"],
       "@types/*": ["src/types/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@features/*": ["src/features/*"]
     }
   },
   "include": ["vite.config.ts"]

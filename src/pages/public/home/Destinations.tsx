@@ -3,8 +3,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { DestinationsProps } from './types';
-import { Image } from '@/components/image';
-import { Text } from '@/components/text';
+import { Image } from '@/shared/components/image';
+import { Text } from '@/shared/components/text';
 
 const VISIBLE_COUNT = 8;
 

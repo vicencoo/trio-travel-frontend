@@ -1,6 +1,6 @@
 import { axios } from '@/api';
-import type { PlaneTicketFieldError } from '@/types/errorTypes';
-import type { PlaneTicket, TicketImage } from '@/types/types';
+import type { PlaneTicketFieldError } from '@/shared/types/errorTypes';
+import type { PlaneTicket, TicketImage } from '@/shared/types/types';
 import { DEFAULT_TICKET } from '@/utils/defaults';
 import { useEffect, useState, type ChangeEvent } from 'react';
 
@@ -13,9 +13,7 @@ export const usePlaneTicketsPage = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [data, setData] = useState({
     tickets: [],
-    minPrice: null,
-    averagePrice: null,
-    totalTickets: null,
+    // totalTickets: null,
     totalPages: null,
   });
   const [errors, setErrors] = useState<PlaneTicketFieldError>({});

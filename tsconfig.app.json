@@ -31,11 +31,12 @@
       "@app/*": ["src/app/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
+      "@hooks/*": ["src/shared/hooks/*"],
       "@layout/*": ["src/layout/*"],
       "@pages/*": ["src/pages/*"],
       "@types/*": ["src/types/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@features/*": ["src/features/*"]
     }
   },
   "include": ["src"]

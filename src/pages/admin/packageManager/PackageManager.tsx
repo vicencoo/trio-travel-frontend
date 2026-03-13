@@ -1,14 +1,14 @@
 import TourOutlinedIcon from '@mui/icons-material/TourOutlined';
 import { usePackageManager } from './usePackageManager';
-import { AdminPageHeader } from '@/components/adminPageHeader/AdminPageHeader';
 import { PackageForm } from './PackageForm';
-import { DataTable } from '@/components/dataTable';
+import { DataTable } from '@/shared/components/dataTable';
 import { PackageManager_COLUMNS } from '@/utils/columns';
 import { PackageTableRow } from './PackageTableRow';
-import { Pagination } from '@/components/pagination';
-import { NoDataFound } from '@/components/noDataFound';
-import { StatusFilter } from '@/components/statusFilter';
-import { Spinner } from '@/components/spinner';
+import { Pagination } from '@/shared/components/pagination';
+import { NoDataFound } from '@/shared/components/noDataFound';
+import { Spinner } from '@/shared/components/spinner';
+import { StatusFilter } from '@/shared/components/statusFilter';
+import { AdminPageHeader } from '@/shared/components/adminPageHeader';
 
 export const PackageManager = () => {
   const {
@@ -28,6 +28,9 @@ export const PackageManager = () => {
     errors,
     handleRenew,
     isLoading,
+    publishOrDraftPackage,
+    handleStatusChange,
+    status,
   } = usePackageManager();
 
   return (
@@ -45,7 +48,10 @@ export const PackageManager = () => {
         display={!isPackageFormOpen}
       />
 
-      {/* <StatusFilter /> */}
+      <StatusFilter
+        handleStatusChange={(newStatus) => handleStatusChange(newStatus)}
+        status={status}
+      />
 
       {isPackageFormOpen && (
         <PackageForm
@@ -79,6 +85,7 @@ export const PackageManager = () => {
                 handleDeletePackage={handleDeletePackage}
                 handleEditPackage={handleEditPackage}
                 handleRenew={handleRenew}
+                publishOrDraftPackage={publishOrDraftPackage}
               />
             ))}
           </DataTable>

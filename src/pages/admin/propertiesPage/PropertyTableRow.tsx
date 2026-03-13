@@ -1,6 +1,6 @@
-import { ActionMenu } from '@/components/actionMenu';
-import { Image } from '@/components/image';
-import { Text } from '@/components/text';
+import { ActionMenu } from '@/shared/components/actionMenu';
+import { Image } from '@/shared/components/image';
+import { Text } from '@/shared/components/text';
 import { formattedPrice } from '@/utils/formattedPrice';
 import { useNavigate } from 'react-router-dom';
 import type { PropertyItemProps } from './types';
@@ -19,7 +19,7 @@ export const PropertyTableRow = ({
       ? firstImage.property_image
       : '';
   return (
-    <div className='grid grid-cols-8 items-center px-4 py-1 border-b border-gray-300 last:border-b-0 gap-1 '>
+    <div className='grid grid-cols-8 items-center px-4 py-1 border-b border-gray-300 dark:border-slate-700 last:border-b-0 gap-1 '>
       <div className='md:col-span-3 col-span-4 flex items-center gap-2 overflow-hidden'>
         <Image
           src={image}
@@ -29,36 +29,36 @@ export const PropertyTableRow = ({
           text={property.title}
           size='md:text-sm text-xs'
           font='font-semibold font-serif'
-          className='capitalize truncate w-2/3'
+          className='capitalize truncate w-2/3 text-slate-900 dark:text-slate-300'
         />
       </div>
       <Text
         text={property.property_type}
         size='text-sm'
         font='font-medium font-serif'
-        className='capitalize col-span-1 hidden md:flex'
+        className='capitalize col-span-1 hidden md:flex text-gray-900 dark:text-slate-300'
       />
       <Text
         text={`${formattedPrice(Number(property.price))}€`}
         size='md:text-base text-sm'
         font='font-semibold font-serif'
-        className='capitalize md:col-span-1 col-span-2 text-stone-700'
+        className='capitalize md:col-span-1 col-span-2 text-stone-700 dark:text-slate-400'
       />
       <Text
         text={`${property.city}, albania`}
         size='text-sm'
         font='font-medium'
-        className='capitalize col-span-1 hidden md:flex'
+        className='capitalize col-span-1 hidden md:flex text-slate-800 dark:text-slate-500'
       />
 
       <span
-        className={`flex w-max px-2 py-1 text-white shadow-sm ${property.status === 'active' ? 'bg-green-500 shadow-green-400' : 'bg-red-500 shadow-red-400'} rounded-xl`}
+        className={`col-span-1 flex w-max px-2 py-1 text-white shadow-sm ${property.status === 'active' ? 'bg-green-500 shadow-green-400' : 'bg-red-500 shadow-red-400'} rounded-xl`}
       >
         <Text
           text={property.status}
           size='text-sm'
           font='font-medium'
-          className={`capitalize col-span-1 flex`}
+          className={`capitalize`}
         />
       </span>
       <ActionMenu
@@ -71,6 +71,7 @@ export const PropertyTableRow = ({
         enableStatus
         statusText={property.status === 'active' ? 'Draft' : 'Publiko'}
         handleStatus={() => property.id && publishOrDraft(property.id)}
+        disableRenew={property.status === 'draft'}
       />
     </div>
   );

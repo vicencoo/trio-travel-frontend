@@ -1,5 +1,5 @@
-import { Image } from '@/components/image';
-import { Text } from '@/components/text';
+import { Image } from '@/shared/components/image';
+import { Text } from '@/shared/components/text';
 import { BadgeCheck, MapPin, Users } from 'lucide-react';
 
 const INFO = [

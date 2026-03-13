@@ -1,4 +1,4 @@
-import { Text } from '@/components/text';
+import { Text } from '@/shared/components/text';
 import type { PropertyStatsProps } from './types';
 
 export const PropertyStats = ({ icon, value, label }: PropertyStatsProps) => {

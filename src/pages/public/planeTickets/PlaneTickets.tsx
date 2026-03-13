@@ -1,13 +1,13 @@
 import { Plane } from 'lucide-react';
 import SearchIcon from '@mui/icons-material/Search';
 import { usePlaneTickets } from './usePlaneTickets';
-import { Text } from '@/components/text';
-import { Input } from '@/components/input';
-import { Button } from '@/components/button';
-import { PlaneTicketSkeleton } from '@/components/skeletons';
-import { FlightOfferCard } from '@/components/flightOfferCard';
-import { ViewAllButton } from '@/components/viewAllButton/ViewAllButton';
-import { NoDataFound } from '@/components/noDataFound';
+import { Text } from '@/shared/components/text';
+import { Input } from '@/shared/components/input';
+import { Button } from '@/shared/components/button';
+import { PlaneTicketSkeleton } from '@/shared/components/skeletons';
+import { FlightOfferCard } from '@/shared/components/flightOfferCard';
+import { NoDataFound } from '@/shared/components/noDataFound';
+import { ViewAllButton } from '@/shared/components/viewAllButton';
 
 export const PlaneTickets = () => {
   const {

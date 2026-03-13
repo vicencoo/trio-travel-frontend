@@ -2,11 +2,11 @@ import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlin
 import { useDestinationManager } from './useDestinationManager';
 import { DestinationModal } from './DestinationModal';
 import { DestinationTableRow } from './DestinationTableRow';
-import { AdminPageHeader } from '@/components/adminPageHeader/AdminPageHeader';
-import { DataTable } from '@/components/dataTable';
+import { DataTable } from '@/shared/components/dataTable';
 import { DESTINATION_COLUMNS } from '@/utils/columns';
-import { Pagination } from '@/components/pagination';
-import { NoDataFound } from '@/components/noDataFound';
+import { Pagination } from '@/shared/components/pagination';
+import { NoDataFound } from '@/shared/components/noDataFound';
+import { AdminPageHeader } from '@/shared/components/adminPageHeader';
 
 export const DestinationManager = () => {
   const {
@@ -66,7 +66,7 @@ export const DestinationManager = () => {
           <DataTable
             columns={DESTINATION_COLUMNS}
             headerBg='bg-blue-600'
-            headerText='text-white'
+            headerText='text-white dark:text-slate-200'
             layout='destination'
           >
             {destinations.destinations.map((destination) => (
@@ -74,7 +74,7 @@ export const DestinationManager = () => {
                 data={destination}
                 key={destination.id}
                 handleEditDestination={handleEditDestination}
-                handleDeleteHotel={() =>
+                handleDeleteDestination={() =>
                   destination.id && handleDeleteDestination(destination.id)
                 }
               />

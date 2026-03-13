@@ -2,13 +2,13 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import EuroOutlinedIcon from '@mui/icons-material/EuroOutlined';
 import type { PackageFormProps } from './types';
-import { Card } from '@/components/card';
-import { Text } from '@/components/text';
-import { Input } from '@/components/input';
-import { Selector } from '@/components/selector';
-import { ImageUploader } from '@/components/imageUploader';
-import { Button } from '@/components/button';
-import { StatusToggle } from '@/components/statusToggle';
+import { Card } from '@/shared/components/card';
+import { Text } from '@/shared/components/text';
+import { Input } from '@/shared/components/input';
+import { Selector } from '@/shared/components/selector';
+import { ImageUploader } from '@/shared/components/imageUploader';
+import { Button } from '@/shared/components/button';
+import { StatusToggle } from '@/shared/components/statusToggle';
 
 const akomodimi = [
   { label: 'Hotel Me 3 Yje', value: 'threeStarHotel' },
@@ -33,8 +33,6 @@ export const PackageForm = ({
   setDeletedImages,
   errors,
 }: PackageFormProps) => {
-  console.log(touristPackage);
-
   return (
     <Card padding='p-0'>
       <div className='flex w-full justify-between bg-blue-600 px-7 text-white py-5'>
@@ -58,8 +56,13 @@ export const PackageForm = ({
           status={touristPackage.status}
         />
 
-        <div className='bg-blue-50 rounded-lg p-4 flex flex-col gap-3'>
-          <Text text={'Basic information'} size='text-lg' font='font-medium' />
+        <div className='bg-blue-50 dark:bg-slate-600 rounded-lg p-4 flex flex-col gap-3'>
+          <Text
+            text={'Informacioni Baze'}
+            size='text-lg'
+            font='font-medium'
+            className='text-slate-900 dark:text-slate-300'
+          />
           <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>
             <div className='flex flex-col gap-1'>
               <Input
@@ -119,12 +122,12 @@ export const PackageForm = ({
           </div>
         </div>
 
-        <div className='flex flex-col gap-4 bg-green-50 p-4 rounded-lg'>
+        <div className='flex flex-col gap-4 bg-green-50 dark:bg-slate-600 p-4 rounded-lg'>
           <Text
             text={'Pershkrimi i Paketes *'}
             font='font-medium'
             size='text-lg'
-            className='text-gray-700'
+            className='text-gray-700 dark:text-slate-300'
           />
 
           <div className='flex flex-col gap-1'>
@@ -140,12 +143,12 @@ export const PackageForm = ({
           </div>
         </div>
 
-        <div className='flex flex-col gap-4 bg-orange-50 p-4 rounded-lg'>
+        <div className='flex flex-col gap-4 bg-orange-50 dark:bg-slate-600 p-4 rounded-lg'>
           <Text
             text={'Detaje te Paketes'}
             font='font-medium'
             size='text-lg'
-            className='text-gray-700'
+            className='text-gray-700 dark:text-slate-300'
           />
           <div className=' flex flex-col md:flex-row gap-4'>
             <div className='flex-1 flex-col gap-1'>
@@ -173,12 +176,12 @@ export const PackageForm = ({
           </div>
         </div>
 
-        <div className='flex flex-col gap-5 w-full bg-purple-50 p-4 rounded-lg'>
+        <div className='flex flex-col gap-5 w-full bg-purple-50 dark:bg-slate-600 p-4 rounded-lg'>
           <Text
             size='text-lg'
             text={'Zgjidhni Imazhet e Paketes *'}
             font='font-semibold'
-            className='text-gray-700'
+            className='text-gray-700 dark:text-slate-300'
           />
           <ImageUploader
             value={touristPackage.package_images || []}

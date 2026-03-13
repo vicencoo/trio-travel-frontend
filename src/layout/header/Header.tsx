@@ -1,21 +1,23 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
-import { useDisclosure } from '@/hooks/useDisclosure';
-import { Sidebar } from '../sidebar';
-import { HEADER_ITEMS, SIDEBAR_ITEMS } from '@/utils';
-import { Image } from '@/components/image';
-import { Text } from '@/components/text';
+import { useDisclosure } from '@/shared/hooks/useDisclosure';
+// import { Sidebar } from '../sidebar';
+import { HEADER_ITEMS } from '@/utils';
+import { Image } from '@/shared/components/image';
+import { Text } from '@/shared/components/text';
+import { useAuth } from '@/shared/context/authContext';
 
 export const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { handleLogout } = useAuth();
 
   const { ref: wrapperRef, isOpen, toggle } = useDisclosure();
   return (
     <div className='flex items-center w-full border-b shadow-lg pl-14 pr-4 py-3 md:py-3 justify-between sticky top-0 z-[9999] bg-white/95'>
       <div className='flex items-center gap-4 '>
-        <Sidebar items={SIDEBAR_ITEMS} />
+        {/* <Sidebar items={SIDEBAR_ITEMS} /> */}
         <Image
           img='/images/TrioTravel.png'
           className='min-w-[100px] max-w-[100px] h-[20px] object-cover cursor-pointer hover:scale-110 transition-all duration-300 will-change-transform'
@@ -88,12 +90,20 @@ export const Header = () => {
           </div>
         </div>
       </span>
-      <span
-        className='text-sm font-semibold font-serif cursor-pointer'
-        onClick={() => navigate('/admin/login')}
-      >
-        LogIn
-      </span>
+      <div className='flex gap-3'>
+        <span
+          className='text-sm font-semibold font-serif cursor-pointer'
+          onClick={() => navigate('/authenticate')}
+        >
+          LogIn
+        </span>
+        <span
+          className='text-sm font-semibold font-serif cursor-pointer'
+          onClick={handleLogout}
+        >
+          LogOut
+        </span>
+      </div>
     </div>
   );
 };

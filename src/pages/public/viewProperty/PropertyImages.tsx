@@ -1,8 +1,8 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import type { PropertyImagesProps } from './types';
-import { Image } from '@/components/image';
-import type { PropertyImage } from '@/types/types';
+import { Image } from '@/shared/components/image';
+import type { PropertyImage } from '@/shared/types/types';
 
 export const PropertyImages = ({
   prev,
@@ -62,7 +62,8 @@ export const PropertyImages = ({
       </div>
 
       {/* Images */}
-      <div className='flex md:grid md:grid-cols-7 gap-3 overflow-x-auto md:overflow-visible hide-scrollbar snap-x snap-mandatory'>
+      {/* <div className='flex md:grid md:grid-cols-7 gap-3 overflow-x-auto md:overflow-visible hide-scrollbar snap-x snap-mandatory'> */}
+      <div className='flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory'>
         {property &&
           property?.property_images
             ?.filter(

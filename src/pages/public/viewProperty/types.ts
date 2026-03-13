@@ -1,4 +1,4 @@
-import type { Property } from '@/types/types';
+import type { Property } from '@/shared/types/types';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 
 export type PropertyImagesProps = {

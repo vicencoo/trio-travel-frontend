@@ -1,9 +1,9 @@
-type Items = {
-  id: string | number;
-  text: string;
-  path: string;
-};
+import type { User } from '@/shared/types/types';
 
-export type SidebarProps = {
-  items: Items[];
+export type SideBarProps = {
+  isCollapsed: boolean;
+  handleOpenSubItems: (label: string) => void;
+  openSubItem: string | null;
+  user?: User;
+  onClose: () => void;
 };

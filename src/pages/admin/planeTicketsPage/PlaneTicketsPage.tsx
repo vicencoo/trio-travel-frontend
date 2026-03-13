@@ -1,15 +1,12 @@
 import FlightIcon from '@mui/icons-material/Flight';
-import EuroIcon from '@mui/icons-material/Euro';
-import ModeStandbyIcon from '@mui/icons-material/ModeStandby';
 import { TicketModal } from './TicketModal';
 import { usePlaneTicketsPage } from './usePlaneTicketsPage';
 import { TicketTableRow } from './TicketTableRow';
-import { MetricCard } from './MetricCard';
-import { AdminPageHeader } from '@/components/adminPageHeader/AdminPageHeader';
-import { DataTable } from '@/components/dataTable';
+import { DataTable } from '@/shared/components/dataTable';
 import { TICKET_COLUMNS } from '@/utils/columns';
-import { Pagination } from '@/components/pagination';
-import { NoDataFound } from '@/components/noDataFound';
+import { Pagination } from '@/shared/components/pagination';
+import { NoDataFound } from '@/shared/components/noDataFound';
+import { AdminPageHeader } from '@/shared/components/adminPageHeader';
 
 export const PlaneTicketsPage = () => {
   const {
@@ -52,7 +49,7 @@ export const PlaneTicketsPage = () => {
 
       {data.tickets && data.tickets.length > 0 ? (
         <div className='flex flex-col gap-10 min-h-screen'>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
+          {/* <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
             <MetricCard
               icon={<FlightIcon className='text-indigo-600' />}
               iconBg='bg-indigo-100'
@@ -71,12 +68,12 @@ export const PlaneTicketsPage = () => {
               label='Cmimi me i Ulet'
               value={`${data.minPrice || 0}€`}
             />
-          </div>
+          </div> */}
 
           <div className='flex flex-col w-full gap-10 items-center min-h-[61vh] justify-between'>
             <DataTable
               headerBg='bg-indigo-500'
-              headerText='text-white'
+              headerText='text-white dark:text-slate-300'
               columns={TICKET_COLUMNS}
               layout='tickets'
             >

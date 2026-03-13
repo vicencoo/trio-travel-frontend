@@ -2,8 +2,8 @@ import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
-import { Card } from '@/components/card';
-import { Text } from '@/components/text';
+import { Card } from '@/shared/components/card';
+import { Text } from '@/shared/components/text';
 
 const INFO = [
   {

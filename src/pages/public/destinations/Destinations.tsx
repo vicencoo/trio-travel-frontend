@@ -1,10 +1,10 @@
-import { useScrollOnChange } from '@/hooks/useScrollOnChange';
+import { useScrollOnChange } from '@/shared/hooks/useScrollOnChange';
 import { DestinationHero } from './DestinationHero';
 import { useDestinations } from './useDestinations';
-import { Text } from '@/components/text';
-import { DestinationCard } from '@/components/destinationCard';
-import { Pagination } from '@/components/pagination';
-import { Image } from '@/components/image';
+import { Text } from '@/shared/components/text';
+import { DestinationCard } from '@/shared/components/destinationCard';
+import { Pagination } from '@/shared/components/pagination';
+import { Image } from '@/shared/components/image';
 
 const message = encodeURIComponent(`
 Përshëndetje

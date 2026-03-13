@@ -2,11 +2,11 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import type { DestinationFormProps } from './types';
-import { Modal } from '@/components/modal';
-import { Text } from '@/components/text';
-import { Input } from '@/components/input';
-import { ImageUploader } from '@/components/imageUploader';
-import { Button } from '@/components/button';
+import { Modal } from '@/shared/components/modal';
+import { Text } from '@/shared/components/text';
+import { Input } from '@/shared/components/input';
+import { ImageUploader } from '@/shared/components/imageUploader';
+import { Button } from '@/shared/components/button';
 
 export const DestinationModal = ({
   handleOpenModal,
@@ -73,6 +73,7 @@ export const DestinationModal = ({
             text={'Tipet e destinacionit'}
             font='font-semibold'
             size='text-sm'
+            className='text-slate-900 dark:text-slate-300'
           />
           <div className='flex flex-col gap-2'>
             <div className='flex gap-2'>
@@ -113,7 +114,11 @@ export const DestinationModal = ({
         </div>
 
         <div className='flex flex-col w-full gap-5'>
-          <Text text={'Imazhi I Destinacionit '} font='font-semibold' />
+          <Text
+            text={'Imazhi I Destinacionit '}
+            font='font-semibold'
+            className='text-slate-900 dark:text-slate-300'
+          />
           <ImageUploader
             value={data.destination_images || []}
             onChange={handleImagesChange}

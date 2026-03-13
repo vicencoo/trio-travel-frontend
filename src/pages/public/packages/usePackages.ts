@@ -1,5 +1,5 @@
 import { axios } from '@/api';
-import type { PackageResponse } from '@/types/responseTypes';
+import type { PackageResponse } from '@/shared/types/responseTypes';
 import { useEffect, useState, type ChangeEvent } from 'react';
 
 const ITEMS_PER_PAGE = 9;

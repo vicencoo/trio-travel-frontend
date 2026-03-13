@@ -1,10 +1,15 @@
 import type {
+  LoginFieldError,
+  SignupFieldError,
+} from '@/shared/types/errorTypes';
+import type {
   DestinationTypes,
-  HotelTypes,
   PlaneTicket,
   Property,
   TouristPackage,
-} from '@/types/types';
+  SoldTicket,
+  Insurance,
+} from '@/shared/types/types';
 
 export const DEFAULT_URL =
   window.location.hostname === 'localhost'
@@ -59,21 +64,36 @@ export const DEFAULT_CONTACT = {
   message: '',
 };
 
-export const HOTEL_DATA: HotelTypes = {
-  hotel_name: '',
-  location: '',
-  description: '',
-  rating: null,
-  reviews: null,
-  price: null,
-  facilities: [],
-  hotel_images: [],
-};
-
 export const DESTINATION_DATA: DestinationTypes = {
   city: '',
   country: '',
   slogan: '',
   destination_types: [],
   destination_images: [],
+};
+
+export const DEFAULT_SIGN_UP_DATA: SignupFieldError = {
+  username: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
+
+export const DEFAULT_LOGIN_DATA: LoginFieldError = {
+  email: '',
+  password: '',
+};
+
+export const WORK_FORM_DEFAULT: SoldTicket = {
+  client_name: '',
+  ticket_date: new Date(),
+  ticket_code: '',
+  ticket_price: '',
+};
+
+export const DEFAULT_INSURANCE: Insurance = {
+  client_name: '',
+  contact_number: '',
+  car_plate: '',
+  expiration_date: new Date(),
 };

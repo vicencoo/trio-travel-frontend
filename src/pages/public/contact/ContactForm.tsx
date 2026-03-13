@@ -1,8 +1,8 @@
-import { Text } from '@/components/text';
+import { Text } from '@/shared/components/text';
 import type { ContactFormProps } from './types';
-import { Card } from '@/components/card';
-import { Input } from '@/components/input';
-import { Button } from '@/components/button';
+import { Card } from '@/shared/components/card';
+import { Input } from '@/shared/components/input';
+import { Button } from '@/shared/components/button';
 
 export const ContactForm = ({
   contact,

@@ -1,11 +1,11 @@
-import { Image } from '@/components/image';
+import { Image } from '@/shared/components/image';
 import type { DestinationTableRowProps } from './types';
-import { Text } from '@/components/text';
-import { ActionMenu } from '@/components/actionMenu';
+import { Text } from '@/shared/components/text';
+import { ActionMenu } from '@/shared/components/actionMenu';
 
 export const DestinationTableRow = ({
   data,
-  handleDeleteHotel,
+  handleDeleteDestination,
   handleEditDestination,
 }: DestinationTableRowProps) => {
   const firstImage = data.destination_images?.[0];
@@ -15,7 +15,7 @@ export const DestinationTableRow = ({
       : 'null';
 
   return (
-    <div className='grid md:grid-cols-5 grid-cols-6 items-center px-4 py-1 border-b border-gray-300 last:border-b-0'>
+    <div className='grid md:grid-cols-5 grid-cols-6 items-center px-4 py-1 border-b border-gray-300 dark:border-slate-700 last:border-b-0'>
       <Image
         src={image}
         className='md:col-span-2 col-span-1 max-w-14 min-w-14 h-14 object-cover rounded-lg'
@@ -24,19 +24,19 @@ export const DestinationTableRow = ({
         text={data.city}
         size='text-sm'
         font='font-medium'
-        className='md:col-span-1 col-span-2 md:pl-0 pl-3 capitalize'
+        className='md:col-span-1 col-span-2 md:pl-0 pl-3 capitalize text-slate-900 dark:text-slate-300'
       />
       <Text
         text={data.country}
         size='text-sm'
         font='font-medium'
-        className='md:col-span-1 col-span-2 capitalize'
+        className='md:col-span-1 col-span-2 capitalize text-slate-900 dark:text-slate-300'
       />
 
       <ActionMenu
         enableEdit
         enableDelete
-        onDelete={handleDeleteHotel}
+        onDelete={handleDeleteDestination}
         onEdit={() => handleEditDestination(data)}
       />
     </div>

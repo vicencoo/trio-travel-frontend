@@ -3,10 +3,10 @@ import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { useLocation } from 'react-router-dom';
-import { Card } from '@/components/card';
-import { IconBox } from '@/components/iconBox';
-import { Text } from '@/components/text';
-import { Button } from '@/components/button';
+import { Card } from '@/shared/components/card';
+import { IconBox } from '@/shared/components/iconBox';
+import { Text } from '@/shared/components/text';
+import { Button } from '@/shared/components/button';
 
 export const ContactAgency = () => {
   const location = useLocation();

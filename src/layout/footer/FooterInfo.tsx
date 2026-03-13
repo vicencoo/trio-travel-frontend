@@ -6,9 +6,9 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { useNavigate } from 'react-router-dom';
-import { Image } from '@/components/image';
-import { Icon } from '@/components/icon';
-import { Text } from '@/components/text';
+import { Image } from '@/shared/components/image';
+import { Icon } from '@/shared/components/icon';
+import { Text } from '@/shared/components/text';
 
 const FOOTER_INFO = [
   {

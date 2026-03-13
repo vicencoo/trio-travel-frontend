@@ -1,4 +1,4 @@
-import { Text } from '@/components/text';
+import { Text } from '@/shared/components/text';
 import { FAQ_INFO } from '@/utils';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';

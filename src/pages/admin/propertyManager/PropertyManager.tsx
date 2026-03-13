@@ -7,14 +7,14 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
 import { useAddProperty } from './useAddProperty';
-import { Card } from '@/components/card';
-import { Text } from '@/components/text';
-import { Button } from '@/components/button';
-import { Selector } from '@/components/selector';
+import { Card } from '@/shared/components/card';
+import { Text } from '@/shared/components/text';
+import { Button } from '@/shared/components/button';
+import { Selector } from '@/shared/components/selector';
 import { PROPERTY_TYPE } from '@/utils';
-import { Input } from '@/components/input';
-import { ImageUploader } from '@/components/imageUploader';
-import { StatusToggle } from '@/components/statusToggle';
+import { Input } from '@/shared/components/input';
+import { ImageUploader } from '@/shared/components/imageUploader';
+import { StatusToggle } from '@/shared/components/statusToggle';
 
 export const PropertyManager = () => {
   const navigate = useNavigate();

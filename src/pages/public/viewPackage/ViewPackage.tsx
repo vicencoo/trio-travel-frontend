@@ -7,11 +7,11 @@ import { useViewPackage } from './useViewPackage';
 import { PackageImages } from './PackageImages';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { InfoItem } from './InfoItem';
-import { Spinner } from '@/components/spinner';
-import { Text } from '@/components/text';
-import { Card } from '@/components/card';
+import { Spinner } from '@/shared/components/spinner';
+import { Text } from '@/shared/components/text';
+import { Card } from '@/shared/components/card';
 import { formattedPrice } from '@/utils/formattedPrice';
-import { Button } from '@/components/button';
+import { Button } from '@/shared/components/button';
 
 export const ViewPackage = () => {
   const location = useLocation();
@@ -37,7 +37,7 @@ export const ViewPackage = () => {
   const reserveMessage = encodeURIComponent(`
 Përshëndetje! 
 
-Jam i interesuar të rezervoj paketën turistike: "${packageData.title}".
+Jam i interesuar të rezervoj paketën turistike: "${packageData?.title}".
 Ju lutem më dërgoni detajet për rezervimin dhe disponueshmërinë.
 
 ${currentUrl}
@@ -48,7 +48,7 @@ Faleminderit!
   const contactMessage = encodeURIComponent(`
 Përshëndetje! 
 
-Jam i interesuar për paketën turistike: "${packageData.title}".
+Jam i interesuar për paketën turistike: "${packageData?.title}".
 Ju lutem më dërgoni më shumë detaje për këtë ofertë.
 
 ${currentUrl}
@@ -86,20 +86,22 @@ Faleminderit!
           <Text text={'Kthehu Tek Paketat Turistike'} font='font-medium' />
         </span>
         <div className='flex w-full justify-center'>
-          <PackageImages
-            packageData={packageData}
-            next={next}
-            prev={prev}
-            currentImageIndex={currentImageIndex}
-            setCurrentImageIndex={setCurrentImageIndex}
-          />
+          {packageData && (
+            <PackageImages
+              packageData={packageData}
+              next={next}
+              prev={prev}
+              currentImageIndex={currentImageIndex}
+              setCurrentImageIndex={setCurrentImageIndex}
+            />
+          )}
         </div>
       </div>
       <div className='grid md:grid-cols-3 grid-cols-1 gap-8'>
         <div className='flex flex-col gap-6 md:col-span-2'>
           <Card>
             <Text
-              text={packageData.title}
+              text={packageData?.title}
               size='text-4xl md:text-5xl'
               font='font-serif font-bold'
               className='capitalize'
@@ -110,7 +112,7 @@ Faleminderit!
                 className='text-blue-600'
               />
               <Text
-                text={packageData.destination}
+                text={packageData?.destination}
                 size='text-lg'
                 font='font-medium font-serif'
                 className='tracking-wide capitalize'
@@ -125,7 +127,7 @@ Faleminderit!
             />
 
             <Text
-              text={packageData.description}
+              text={packageData?.description}
               font='font-serif'
               className='text-slate-700 leading-relaxed whitespace-pre-line'
             />
@@ -143,7 +145,7 @@ Faleminderit!
               />
               <div className='flex items-baseline justify-center gap-1'>
                 <span className='text-4xl font-bold font-serif text-gray-100'>
-                  €{formattedPrice(Number(packageData.price))}
+                  €{formattedPrice(Number(packageData?.price))}
                 </span>
                 <span className='text-lg font-medium text-gray-300'>
                   /personi
@@ -172,7 +174,7 @@ Faleminderit!
                   />
                 }
                 label='Akomodimi'
-                value={formatAccomodationPlan(packageData.accomodation || '')}
+                value={formatAccomodationPlan(packageData?.accomodation || '')}
               />
 
               {/* Included */}
@@ -184,7 +186,7 @@ Faleminderit!
                   />
                 }
                 label='Vaktet e Përfshira'
-                value={formatMealPlan(packageData.meal_included || '')}
+                value={formatMealPlan(packageData?.meal_included || '')}
               />
             </div>
             <Button

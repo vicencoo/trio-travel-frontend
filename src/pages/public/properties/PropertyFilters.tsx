@@ -2,9 +2,9 @@ import { Search } from '@mui/icons-material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import TuneIcon from '@mui/icons-material/Tune';
 import type { PropertyFiltersTypes } from './types';
-import { Input } from '@/components/input';
-import { Button } from '@/components/button';
-import { Text } from '@/components/text';
+import { Input } from '@/shared/components/input';
+import { Button } from '@/shared/components/button';
+import { Text } from '@/shared/components/text';
 
 export const PropertyFilters = ({
   handleSearchChange,

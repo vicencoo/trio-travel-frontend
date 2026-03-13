@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import type { PlaneTicket } from '@/types/types';
+import type { PlaneTicket } from '@/shared/types/types';
 import { useHome } from './useHome';
 import { Advertise } from './Advertise';
 import { SectionHeader } from './SectionHeader';
-import { PropertyCard } from '@/components/propertyCard';
-import { ViewAllButton } from '@/components/viewAllButton/ViewAllButton';
-import { PackageCard } from '@/components/packageCard';
-import { FlightOfferCard } from '@/components/flightOfferCard';
+import { PropertyCard } from '@/shared/components/propertyCard';
+import { PackageCard } from '@/shared/components/packageCard';
+import { FlightOfferCard } from '@/shared/components/flightOfferCard';
 import { StatisticsSection } from './StatisticsSection';
 import { Destinations } from './Destinations';
 import { FAQ } from './FAQ';
+import { ViewAllButton } from '@/shared/components/viewAllButton';
 
 export const Home = () => {
   const { properties, planeTickets, packages, destinations } = useHome();

@@ -1,14 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import type { Property } from '@/types/types';
-import axios from 'axios';
+import type { Property } from '@/shared/types/types';
+import { axios } from '@/api';
 
 export const useViewProperty = () => {
   const { id } = useParams();
-  const [property, setProperty] = useState<Property>({});
+  const [property, setProperty] = useState<Property | null>(null);
   const [index, setIndex] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const images = property.property_images || [];
+  const images = property?.property_images || [];
 
   const next = () => {
     setIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
@@ -26,6 +27,8 @@ export const useViewProperty = () => {
         if (res.data) setProperty(res.data);
       } catch (err) {
         console.error('Getting property error', err);
+      } finally {
+        setIsLoading(false);
       }
     };
     getProperty();
@@ -37,5 +40,6 @@ export const useViewProperty = () => {
     next,
     prev,
     setIndex,
+    isLoading,
   };
 };

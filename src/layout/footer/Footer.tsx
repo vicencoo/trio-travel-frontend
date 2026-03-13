@@ -1,6 +1,6 @@
-import { Text } from '@/components/text';
+import { Text } from '@/shared/components/text';
 import { FooterInfo } from './FooterInfo';
-import { Map } from '@/components/map';
+import { Map } from '@/shared/components/map';
 
 const SERVICES = [
   { id: 1, text: 'Plane Tickets' },

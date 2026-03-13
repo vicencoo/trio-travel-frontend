@@ -1,5 +1,5 @@
 import { axios } from '@/api';
-import type { AllTicketsResponse } from '@/types/responseTypes';
+import type { AllTicketsResponse } from '@/shared/types/responseTypes';
 import { useEffect, useState } from 'react';
 
 const DISPLAY_TICKETS = 6;

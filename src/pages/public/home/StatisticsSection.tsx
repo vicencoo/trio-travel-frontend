@@ -1,11 +1,5 @@
-import { Text } from '@/components/text';
-
-const STATISTIC_INFO = [
-  { id: 1, number: '+2K', text: 'Klientë të kënaqur' },
-  { id: 2, number: '+18K', text: 'Destinacione të ofruara' },
-  { id: 3, number: '+49', text: 'Shërbim Ndërkombëtar' },
-  { id: 4, number: '+4K', text: 'Rezervime & Shitje' },
-];
+import { Text } from '@/shared/components/text';
+import { STATISTIC_INFO } from '@/utils';
 
 export const StatisticsSection = () => {
   return (

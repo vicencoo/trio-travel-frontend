@@ -9,13 +9,22 @@ import { useViewProperty } from './useViewProperty';
 import { PropertyStats } from './PropertyStats';
 import { PropertyImages } from './PropertyImages';
 import { ContactAgency } from './ContactAgency';
-import { Text } from '@/components/text';
-import { Card } from '@/components/card';
+import { Text } from '@/shared/components/text';
+import { Card } from '@/shared/components/card';
 import { formattedPrice } from '@/utils/formattedPrice';
+import { Spinner } from '@/shared/components/spinner';
 
 export const ViewProperty = () => {
-  const { property, index, next, prev, setIndex } = useViewProperty();
+  const { property, index, next, prev, setIndex, isLoading } =
+    useViewProperty();
   const navigate = useNavigate();
+
+  if (isLoading)
+    return (
+      <div className='flex w-full min-h-screen items-center justify-center'>
+        <Spinner />
+      </div>
+    );
 
   return (
     <div className='container flex flex-col pt-3 gap-10 pb-20'>
@@ -28,13 +37,15 @@ export const ViewProperty = () => {
           <Text text={'Kthehu Tek Pronat'} font='font-medium' />
         </span>
 
-        <PropertyImages
-          currentIndexImage={index}
-          next={next}
-          prev={prev}
-          setCurrentIndex={setIndex}
-          property={property}
-        />
+        {property && (
+          <PropertyImages
+            currentIndexImage={index}
+            next={next}
+            prev={prev}
+            setCurrentIndex={setIndex}
+            property={property}
+          />
+        )}
       </div>
 
       <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
@@ -43,13 +54,13 @@ export const ViewProperty = () => {
             <div className='flex flex-col gap-3 pb-5 border-b-2'>
               <div className='flex items-center w-full justify-between gap-3'>
                 <Text
-                  text={property.title}
+                  text={property?.title}
                   size='text-xl md:text-2xl'
                   font='font-medium'
                   className='capitalize'
                 />
                 <Text
-                  text={`${formattedPrice(Number(property.price))}€`}
+                  text={`${formattedPrice(Number(property?.price))}€`}
                   size='text-2xl'
                   font='font-bold font-serif'
                   className='capitalize text-blue-500'
@@ -62,7 +73,7 @@ export const ViewProperty = () => {
                     className='text-gray-500'
                   />
                   <Text
-                    text={`${property.city}, ${property.street}, ${property.area}`}
+                    text={`${property?.city}, ${property?.street}, ${property?.area}`}
                     font='font-medium'
                     className='capitalize text-gray-500'
                   />
@@ -74,7 +85,7 @@ export const ViewProperty = () => {
                 >
                   Tipi i prones:{' '}
                   <span className='text-base capitalize'>
-                    {property.property_type}
+                    {property?.property_type}
                   </span>
                 </Text>
               </div>
@@ -121,7 +132,7 @@ export const ViewProperty = () => {
             />
 
             <Text
-              text={property.description}
+              text={property?.description}
               font='font-medium'
               className='text-gray-500 whitespace-pre-line'
             />

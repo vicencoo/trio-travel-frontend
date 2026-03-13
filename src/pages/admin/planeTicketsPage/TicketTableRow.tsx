@@ -1,7 +1,7 @@
-import { ActionMenu } from '@/components/actionMenu';
-import { Image } from '@/components/image';
-import { Text } from '@/components/text';
-import type { PlaneTicket } from '@/types/types';
+import { ActionMenu } from '@/shared/components/actionMenu';
+import { Image } from '@/shared/components/image';
+import { Text } from '@/shared/components/text';
+import type { PlaneTicket } from '@/shared/types/types';
 import { formattedPrice } from '@/utils/formattedPrice';
 
 type TicketItemProps = {
@@ -22,7 +22,7 @@ export const TicketTableRow = ({
       : '';
 
   return (
-    <div className='grid md:grid-cols-10 grid-cols-11 items-center px-4 py-1 border-b border-gray-300 last:border-b-0 md:gap-0 gap-1'>
+    <div className='grid md:grid-cols-10 grid-cols-11 items-center px-4 py-1 border-b border-gray-300 dark:border-slate-700 last:border-b-0 md:gap-0 gap-1'>
       <div className='col-span-2 flex items-center gap-2'>
         <Image src={image} className='w-14 h-14 rounded-lg object-cover' />
       </div>
@@ -30,19 +30,19 @@ export const TicketTableRow = ({
         text={ticket.from}
         size='text-sm'
         font='font-semibold'
-        className='capitalize md:col-span-1 col-span-2'
+        className='capitalize md:col-span-1 col-span-2 text-slate-900 dark:text-slate-300'
       />
       <Text
         text={ticket.to}
         size='text-sm'
         font='font-semibold'
-        className='capitalize md:col-span-1 col-span-3'
+        className='capitalize md:col-span-1 col-span-3 text-slate-900 dark:text-slate-300'
       />
       <Text
         text={ticket.departure_airport}
         size='text-xs'
         font='font-medium'
-        className='hidden md:flex uppercase px-4 py-2 w-max bg-blue-100 text-blue-600 rounded-2xl col-span-2'
+        className='hidden md:flex uppercase px-4 py-2 w-max  bg-blue-100 text-blue-600 rounded-2xl col-span-2'
       />
       <Text
         text={ticket.arrival_airport}

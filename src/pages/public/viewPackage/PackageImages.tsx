@@ -1,8 +1,8 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import type { PackageImagesProps } from './types';
-import { Image } from '@/components/image';
-import type { PackageImage } from '@/types/types';
+import { Image } from '@/shared/components/image';
+import type { PackageImage } from '@/shared/types/types';
 
 export const PackageImages = ({
   packageData,

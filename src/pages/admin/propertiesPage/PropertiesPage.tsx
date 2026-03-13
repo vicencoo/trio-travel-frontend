@@ -2,14 +2,14 @@ import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
 import { useNavigate } from 'react-router-dom';
 import { usePropertiesPage } from './usePropertiesPage';
 import { PropertyTableRow } from './PropertyTableRow';
-import { AdminPageHeader } from '@/components/adminPageHeader/AdminPageHeader';
-import { DataTable } from '@/components/dataTable';
+import { DataTable } from '@/shared/components/dataTable';
 import { PROPERTY_COLUMNS } from '@/utils/columns';
-import { Pagination } from '@/components/pagination';
-import { NoPropertyFound } from '@/components/noPropertyFound';
-import { Text } from '@/components/text';
-import { Spinner } from '@/components/spinner';
-import { StatusFilter } from '@/components/statusFilter';
+import { Pagination } from '@/shared/components/pagination';
+import { NoPropertyFound } from '@/shared/components/noPropertyFound';
+import { Text } from '@/shared/components/text';
+import { Spinner } from '@/shared/components/spinner';
+import { StatusFilter } from '@/shared/components/statusFilter';
+import { AdminPageHeader } from '@/shared/components/adminPageHeader';
 
 export const PropertiesPage = () => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export const PropertiesPage = () => {
       />
       <StatusFilter status={status} handleStatusChange={handleStatusChange} />
       {toast && (
-        <div className='absolute top-3 right-4 px-3 py-7 border border-green-600 bg-green-50 rounded-lg'>
+        <div className='fixed bottom-5 right-4 px-3 py-7 border border-green-600 bg-green-50 rounded-lg z-[9999]'>
           <Text
             text={toast}
             font='font-semibold font-serif'
@@ -58,8 +58,8 @@ export const PropertiesPage = () => {
         <div className='flex flex-col w-full items-center gap-10 min-h-[61vh] justify-between'>
           <DataTable
             columns={PROPERTY_COLUMNS}
-            headerBg='bg-gray-300'
-            headerText='text-gray-700'
+            headerBg='bg-gray-300 dark:bg-slate-700'
+            headerText='text-gray-700 dark:text-slate-300'
             layout='property'
           >
             {properties.properties.map((property) => (

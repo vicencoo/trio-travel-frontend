@@ -1,15 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import type { TouristPackage } from '@/types/types';
+import type { TouristPackage } from '@/shared/types/types';
 import { axios } from '@/api';
 
 export const useViewPackage = () => {
   const { id } = useParams();
-  const [packageData, setPackageData] = useState<TouristPackage>({});
+  const [packageData, setPackageData] = useState<TouristPackage | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
-  const images = packageData.package_images || [];
+  const images = packageData?.package_images || [];
 
   const next = () => {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
@@ -23,7 +23,6 @@ export const useViewPackage = () => {
     const getPackage = async () => {
       try {
         const res = await axios(`/package?packageId=${id}`);
-        console.log(res.data);
         if (res.data) setPackageData(res.data);
       } catch (err) {
         console.error(err);

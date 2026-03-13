@@ -1,4 +1,4 @@
-import type { Property } from '@/types/types';
+import type { Property } from '@/shared/types/types';
 
 export type PropertyItemProps = {
   property: Property;

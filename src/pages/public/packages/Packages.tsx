@@ -1,13 +1,13 @@
 import SearchIcon from '@mui/icons-material/Search';
 import { usePackages } from './usePackages';
-import { useScrollOnChange } from '@/hooks/useScrollOnChange';
-import { Text } from '@/components/text';
-import { Input } from '@/components/input';
-import { Button } from '@/components/button';
-import { PackageCard } from '@/components/packageCard';
-import { Pagination } from '@/components/pagination';
-import { PackageCardSkeleton } from '@/components/skeletons';
-import { NoDataFound } from '@/components/noDataFound';
+import { useScrollOnChange } from '@/shared/hooks/useScrollOnChange';
+import { Text } from '@/shared/components/text';
+import { Input } from '@/shared/components/input';
+import { Button } from '@/shared/components/button';
+import { PackageCard } from '@/shared/components/packageCard';
+import { Pagination } from '@/shared/components/pagination';
+import { PackageCardSkeleton } from '@/shared/components/skeletons';
+import { NoDataFound } from '@/shared/components/noDataFound';
 
 export const Packages = () => {
   const {

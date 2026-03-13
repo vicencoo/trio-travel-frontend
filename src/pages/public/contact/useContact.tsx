@@ -1,4 +1,4 @@
-import type { ContactTypes } from '@/types/types';
+import type { ContactTypes } from '@/shared/types/types';
 import { DEFAULT_CONTACT } from '@/utils/defaults';
 import { useState } from 'react';
 

@@ -1,4 +1,4 @@
-import { Text } from '@/components/text';
+import { Text } from '@/shared/components/text';
 import type { InfoItemProps } from './types';
 
 export const InfoItem = ({ icon, label, value }: InfoItemProps) => {

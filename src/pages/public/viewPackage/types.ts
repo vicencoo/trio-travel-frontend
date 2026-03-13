@@ -1,4 +1,4 @@
-import type { TouristPackage } from '@/types/types';
+import type { TouristPackage } from '@/shared/types/types';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 
 export type InfoItemProps = {
@@ -8,7 +8,7 @@ export type InfoItemProps = {
 };
 
 export type PackageImagesProps = {
-  packageData: TouristPackage;
+  packageData?: TouristPackage;
   next: () => void;
   prev: () => void;
   currentImageIndex: number;
