@@ -1,4 +1,4 @@
-import { DEFAULT_URL } from '@/constants/config';
+const DEFAULT_URL = 'https://trio-travel-frontend-vercel-henna.vercel.app';
 import AXIOS from 'axios';
 import type { NavigateFunction } from 'react-router-dom';
 
