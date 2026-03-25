@@ -37,7 +37,9 @@
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"],
       "@features/*": ["src/features/*"],
-      "@guards/*": ["src/guards/*"]
+      "@guards/*": ["src/guards/*"],
+      "@constants/*": ["src/constants/*"],
+      "@defaults/*": ["src/defaults/*"]
     }
   },
   "include": ["src"]
