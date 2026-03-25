@@ -71,7 +71,7 @@ export const AppRoutes = () => {
             element={<InsuranceManagementPage />}
           />
           <Route
-            path='admin/insurance-expiration'
+            path='/admin/insurance-expiration'
             element={<InsuranceExpirationPage />}
           />
           <Route path='/admin/manage-packages' element={<PackageManager />} />
