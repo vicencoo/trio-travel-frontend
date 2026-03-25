@@ -1,14 +1,12 @@
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import EuroOutlinedIcon from '@mui/icons-material/EuroOutlined';
 import type { PackageFormProps } from './types';
-import { Card } from '@/shared/components/card';
-import { Text } from '@/shared/components/text';
-import { Input } from '@/shared/components/input';
-import { Selector } from '@/shared/components/selector';
-import { ImageUploader } from '@/shared/components/imageUploader';
-import { Button } from '@/shared/components/button';
-import { StatusToggle } from '@/shared/components/statusToggle';
+import { Card } from '@/components/card';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
+import { Selector } from '@/components/selector';
+import { ImageUploader } from '@/components/imageUploader';
+import { Button } from '@/components/button';
+import { StatusToggle } from '@/components/statusToggle';
+import { AddIcon, Close, EuroOutlined } from '@/icons';
 
 const akomodimi = [
   { label: 'Hotel Me 3 Yje', value: 'threeStarHotel' },
@@ -34,14 +32,18 @@ export const PackageForm = ({
   errors,
 }: PackageFormProps) => {
   return (
-    <Card padding='p-0'>
+    <Card
+      padding='p-0'
+      bgColor='bg-white dark:bg-slate-600'
+      borderColor='dark:border-slate-600'
+    >
       <div className='flex w-full justify-between bg-blue-600 px-7 text-white py-5'>
         <Text
           text={touristPackage.id ? 'Edito Paketen' : 'Krijo nje pakete te re'}
           size='text-xl'
           font='font-semibold font-serif'
         />
-        <CloseOutlinedIcon
+        <Close
           className='cursor-pointer hover:text-red-500'
           onClick={onClose}
         />
@@ -98,10 +100,7 @@ export const PackageForm = ({
                   handleChangePackageData('price', e.target.value)
                 }
                 icon={
-                  <EuroOutlinedIcon
-                    className='text-gray-500'
-                    fontSize='inherit'
-                  />
+                  <EuroOutlined className='text-gray-500' fontSize='inherit' />
                 }
                 errorMessage={errors?.price}
               />
@@ -201,7 +200,7 @@ export const PackageForm = ({
           fullWidth
           borderHover='#dc2626'
           bgHover='#ef4444 '
-          endIcon={<CloseOutlinedIcon />}
+          endIcon={<Close />}
           onClick={onClose}
         />
         <Button
@@ -212,7 +211,7 @@ export const PackageForm = ({
           bgColor='#3b82f6'
           bgHover='#2563eb'
           color='white'
-          endIcon={<AddOutlinedIcon />}
+          endIcon={<AddIcon />}
           onClick={handleSave}
         />
       </div>

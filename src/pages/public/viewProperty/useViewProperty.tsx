@@ -1,13 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import type { Property } from '@/shared/types/types';
-import { axios } from '@/api';
+import type { Property } from '@/types/types';
+import { propertyService } from '@/services/propertyServices';
 
 export const useViewProperty = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [property, setProperty] = useState<Property | null>(null);
   const [index, setIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const id = slug?.split('-').pop();
 
   const images = property?.property_images || [];
 
@@ -22,7 +23,7 @@ export const useViewProperty = () => {
   useEffect(() => {
     const getProperty = async () => {
       try {
-        const res = await axios(`/property?id=${id}`);
+        const res = await propertyService.getOne(Number(id));
 
         if (res.data) setProperty(res.data);
       } catch (err) {

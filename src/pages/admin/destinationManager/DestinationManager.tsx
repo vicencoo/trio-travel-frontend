@@ -1,12 +1,13 @@
-import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
 import { useDestinationManager } from './useDestinationManager';
 import { DestinationModal } from './DestinationModal';
 import { DestinationTableRow } from './DestinationTableRow';
-import { DataTable } from '@/shared/components/dataTable';
-import { DESTINATION_COLUMNS } from '@/utils/columns';
-import { Pagination } from '@/shared/components/pagination';
-import { NoDataFound } from '@/shared/components/noDataFound';
-import { AdminPageHeader } from '@/shared/components/adminPageHeader';
+import { DataTable } from '@/components/dataTable';
+import { Pagination } from '@/components/pagination';
+import { NoDataFound } from '@/components/noDataFound';
+import { AdminPageHeader } from '@/components/adminPageHeader';
+import { Spinner } from '@/components/spinner';
+import { AddLocationAltOutlined } from '@/icons';
+import { DESTINATION_COLUMNS } from './columns';
 
 export const DestinationManager = () => {
   const {
@@ -26,12 +27,21 @@ export const DestinationManager = () => {
     handlePageChange,
     page,
     handleEditDestination,
+    isLoading,
   } = useDestinationManager();
+
+  if (isLoading) {
+    return (
+      <div className='flex w-full h-full items-center justify-center'>
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className='flex flex-col py-10 gap-10 min-h-screen container'>
       <AdminPageHeader
-        icon={<AddLocationAltOutlinedIcon className='text-white' />}
+        icon={<AddLocationAltOutlined className='text-white' />}
         iconBgColor='bg-blue-600'
         label='Menaxhimi i Destinacioneve'
         text='Shiko, modifiko dhe menaxho të gjithë destinacionet'

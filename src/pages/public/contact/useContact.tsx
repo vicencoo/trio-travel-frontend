@@ -1,5 +1,5 @@
-import type { ContactTypes } from '@/shared/types/types';
-import { DEFAULT_CONTACT } from '@/utils/defaults';
+import { DEFAULT_CONTACT } from '@/defaults/contact';
+import type { ContactTypes } from '@/types/types';
 import { useState } from 'react';
 
 export const useContact = () => {

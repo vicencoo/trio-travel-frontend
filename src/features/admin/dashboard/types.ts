@@ -4,6 +4,10 @@ export type DataCountsResponse = {
   dataCounts: DataCounts[];
 };
 
+export type DashboardHeaderProps = {
+  formattedDate: string;
+};
+
 export type DataCounts = {
   key: string;
   count: number;

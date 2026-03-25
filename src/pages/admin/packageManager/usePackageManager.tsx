@@ -1,8 +1,8 @@
-import { axios } from '@/api';
-import type { PackageFieldError } from '@/shared/types/errorTypes';
-import type { PackageResponse } from '@/shared/types/responseTypes';
-import type { PackageImage, TouristPackage } from '@/shared/types/types';
-import { DEFAULT_PACKAGE } from '@/utils/defaults';
+import { DEFAULT_PACKAGE } from '@/defaults/package';
+import { packageServices } from '@/services/packageServices';
+import type { PackageFieldError } from '@/types/errorTypes';
+import type { PackageResponse } from '@/types/responseTypes';
+import type { PackageImage, TouristPackage } from '@/types/types';
 import type { SelectChangeEvent } from '@mui/material';
 import { useEffect, useState, type ChangeEvent } from 'react';
 
@@ -10,7 +10,6 @@ export const usePackageManager = () => {
   const [touristPackage, setTouristPackage] = useState(DEFAULT_PACKAGE);
   const [packages, setPackages] = useState<PackageResponse | null>(null);
   const [isPackageFormOpen, setIsPackageFormOpen] = useState<boolean>(false);
-  const [editMode, setEditMode] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [deletedImages, setDeletedImages] = useState<string[]>([]);
   const [errors, setErrors] = useState<PackageFieldError>({});
@@ -19,9 +18,11 @@ export const usePackageManager = () => {
 
   const getPackages = async () => {
     try {
-      const res = await axios(
-        `/packages?packageLimit=6&page=${pageNumber}&status=${status}`,
-      );
+      const res = await packageServices.getAll({
+        packageLimit: 6,
+        page: pageNumber,
+        status,
+      });
       if (res.data) setPackages(res.data);
     } catch (err) {
       console.error(err);
@@ -41,7 +42,6 @@ export const usePackageManager = () => {
   const handleOpenForm = () => {
     setIsPackageFormOpen((prev) => !prev);
     setTouristPackage(DEFAULT_PACKAGE);
-    setEditMode(false);
   };
 
   useEffect(() => {
@@ -51,9 +51,9 @@ export const usePackageManager = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNumber, status]);
 
-  const handleRenew = async (id: string) => {
+  const handleRenew = async (id: number) => {
     try {
-      const res = await axios.post(`/admin/renew-package?packageId=${id}`);
+      const res = await packageServices.renew(id);
       if (res.data) {
         await getPackages();
       }
@@ -62,9 +62,9 @@ export const usePackageManager = () => {
     }
   };
 
-  const publishOrDraftPackage = async (id: string) => {
+  const publishOrDraftPackage = async (id: number) => {
     try {
-      await axios.post(`/admin/package/publishOrDraftPackage?packageId=${id}`);
+      await packageServices.publishOrDraft(id);
       await getPackages();
     } catch (err) {
       console.error(err);
@@ -73,12 +73,11 @@ export const usePackageManager = () => {
 
   const handleEditPackage = (packageItem: TouristPackage) => {
     setTouristPackage(packageItem);
-    setEditMode(true);
     setIsPackageFormOpen(true);
   };
 
   const handleChangePackageData = (key: string, value: string) => {
-    setTouristPackage((prev) => ({
+    setTouristPackage((prev: TouristPackage) => ({
       ...prev,
       [key]: value,
     }));
@@ -98,7 +97,7 @@ export const usePackageManager = () => {
   };
 
   const handleImagesChange = (images: (File | string | PackageImage)[]) => {
-    setTouristPackage((prev) => ({
+    setTouristPackage((prev: TouristPackage) => ({
       ...prev,
       package_images: images,
     }));
@@ -133,15 +132,12 @@ export const usePackageManager = () => {
           }
         });
 
-      const url = editMode
-        ? `/admin/edit-package?packageId=${touristPackage.id}`
-        : '/admin/add-package';
-
-      const res = await axios.post(url, formData);
+      const res = touristPackage.id
+        ? await packageServices.edit(touristPackage.id, formData)
+        : await packageServices.add(formData);
       if (res.data) {
         setTouristPackage(DEFAULT_PACKAGE);
         handleOpenForm();
-        setEditMode(false);
         await getPackages();
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -159,13 +155,13 @@ export const usePackageManager = () => {
     }
   };
 
-  const handleDeletePackage = async (id: string) => {
+  const handleDeletePackage = async (id: number) => {
     try {
       const confirm = window.confirm(
         'Jeni te sigurt qe doni ta fshini kete pakete turistike?',
       );
       if (confirm) {
-        const res = await axios.post(`/admin/delete-package?packageId=${id}`);
+        const res = await packageServices.delete(id);
         if (res.data) {
           await getPackages();
         }

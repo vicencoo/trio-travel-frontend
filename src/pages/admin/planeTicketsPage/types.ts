@@ -1,6 +1,5 @@
-import type { PlaneTicketFieldError } from '@/shared/types/errorTypes';
-import type { PlaneTicket, TicketImage } from '@/shared/types/types';
-import type { ReactNode } from 'react';
+import type { PlaneTicketFieldError } from '@/types/errorTypes';
+import type { PlaneTicket, TicketImage } from '@/types/types';
 
 export type TicketModalProps = {
   openModal: boolean;
@@ -12,9 +11,8 @@ export type TicketModalProps = {
   errors?: PlaneTicketFieldError;
 };
 
-export type MetricCardProps = {
-  label: string;
-  value?: string | number;
-  icon: ReactNode;
-  iconBg: string;
+export type TicketItemProps = {
+  ticket: PlaneTicket;
+  handleDelete: (ticketId: number) => void;
+  handleEdit: (ticket: PlaneTicket) => void;
 };

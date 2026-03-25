@@ -1,5 +1,5 @@
-import { axios } from '@/api';
-import type { AllTicketsResponse } from '@/shared/types/responseTypes';
+import { ticketServices } from '@/services/ticketServices';
+import type { AllTicketsResponse } from '@/types/responseTypes';
 import { useEffect, useState } from 'react';
 
 const DISPLAY_TICKETS = 6;
@@ -36,9 +36,10 @@ export const usePlaneTickets = () => {
   useEffect(() => {
     const getAllTickets = async () => {
       try {
-        const res = await axios(
-          `/tickets?limit=${ticketsToAppear}&searchQuery=${searchQuery}`,
-        );
+        const res = await ticketServices.getAll({
+          limit: ticketsToAppear,
+          searchQuery,
+        });
         if (res.data) setPlaneTicketS(res.data);
       } catch (err) {
         console.error('Error getting all tickets: ', err);

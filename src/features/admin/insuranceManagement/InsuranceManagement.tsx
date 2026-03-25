@@ -1,12 +1,14 @@
-import { AdminPageHeader } from '@/shared/components/adminPageHeader';
-import { Shield } from 'lucide-react';
+import { AdminPageHeader } from '@/components/adminPageHeader';
 import { InsuranceModal } from './InsuranceModal';
 import { useInsuranceManagement } from './useInsuranceManagement';
-import { DataTable } from '@/shared/components/dataTable';
-import { INSURANCE_COLUMNS } from '@/utils/columns';
+import { DataTable } from '@/components/dataTable';
 import { InsuranceRow } from './InsuranceRow';
-import { NoDataFound } from '@/shared/components/noDataFound';
-import { Pagination } from '@/shared/components/pagination';
+import { NoDataFound } from '@/components/noDataFound';
+import { Pagination } from '@/components/pagination';
+import { Input } from '@/components/input';
+import { Spinner } from '@/components/spinner';
+import { Search, Shield } from '@/icons';
+import { INSURANCE_COLUMNS } from './columns';
 
 const InsuranceManagement = () => {
   const {
@@ -22,7 +24,18 @@ const InsuranceManagement = () => {
     handleDelete,
     handlePageChange,
     page,
+    filter,
+    handleChangeFilter,
+    isLoading,
   } = useInsuranceManagement();
+
+  if (isLoading) {
+    return (
+      <div className='flex w-full h-full items-center justify-center'>
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className='flex flex-col gap-10 py-10 container'>
@@ -35,6 +48,17 @@ const InsuranceManagement = () => {
         buttonName='shto sigurim'
         onClick={openModal}
       />
+
+      <div className='flex w-full'>
+        <Input
+          placeholder='Kërkoni me emër ose me targë...'
+          icon={<Search size={16} />}
+          iconPosition='end'
+          className='flex-1'
+          value={filter.value}
+          onChange={(e) => handleChangeFilter(e.target.value)}
+        />
+      </div>
 
       <InsuranceModal
         closeModal={closeModal}

@@ -82,3 +82,34 @@ body.dash-open #root {
 .recharts-pie-sector:hover path {
   transform: scale(1.04);
 }
+
+/* Custom horizontal scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px; /* 👈 LOWER HEIGHT */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5f5; /* light slate */
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* darker on hover */
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5f5 transparent;
+}
+
+@media (min-width: 768px) {
+  .custom-scrollbar::-webkit-scrollbar {
+    display: block;
+  }
+}

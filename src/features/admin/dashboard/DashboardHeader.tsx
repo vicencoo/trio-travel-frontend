@@ -1,8 +1,5 @@
-import { Text } from '@/shared/components/text';
-
-type DashboardHeaderProps = {
-  formattedDate: string;
-};
+import { Text } from '@/components/text';
+import type { DashboardHeaderProps } from './types';
 
 export const DashboardHeader = ({ formattedDate }: DashboardHeaderProps) => {
   return (

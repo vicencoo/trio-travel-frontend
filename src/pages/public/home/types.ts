@@ -1,4 +1,4 @@
-import type { DestinationTypes } from '@/shared/types/types';
+import type { DestinationTypes } from '@/types/types';
 
 export type SectionHeaderProps = {
   title: string;

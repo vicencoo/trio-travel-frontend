@@ -12,15 +12,15 @@ export default {
     },
 
     container: {
+      center: true,
       padding: {
         DEFAULT: '16px',
-        sm: '16px',
-        md: '30px',
-        lg: '50px',
-        xl: '70px',
-        xxl: '140px',
+        sm: '20px',
+        md: '24px',
+        lg: '32px',
+        xl: '48px',
+        '2xl': '64px',
       },
-      center: true,
     },
 
     extend: {

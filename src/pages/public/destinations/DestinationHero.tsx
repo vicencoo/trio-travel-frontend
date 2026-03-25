@@ -1,6 +1,6 @@
-import { Button } from '@/shared/components/button';
-import { Text } from '@/shared/components/text';
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import { Button } from '@/components/button';
+import { Text } from '@/components/text';
+import { ArrowRightAlt } from '@/icons';
 
 const message = encodeURIComponent(`
 Përshëndetje
@@ -66,7 +66,7 @@ export const DestinationHero = () => {
           className='text-gray-400 '
         />
 
-        <Button
+        {/* <Button
           name='Na Kontakto'
           bgHover='#059669'
           bgColor='#10b981'
@@ -74,7 +74,19 @@ export const DestinationHero = () => {
           onClick={() =>
             window.open(`https://wa.me/355696900916?text=${message}`)
           }
-          endIcon={<ArrowRightAltIcon />}
+          endIcon={<ArrowRightAlt />}
+        /> */}
+        <Button
+          name='Na Kontakto'
+          bgColor='#065f46' // emerald-900 — dark enough for white text ✅
+          bgHover='#064e3b' // emerald-950 on hover
+          border='#065f46'
+          borderHover='#064e3b'
+          color='white'
+          onClick={() =>
+            window.open(`https://wa.me/355696900916?text=${message}`)
+          }
+          endIcon={<ArrowRightAlt />}
         />
       </div>
 

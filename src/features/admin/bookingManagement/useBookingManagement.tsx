@@ -1,7 +1,7 @@
-import { axios } from '@/api';
-import type { BookingFieldError } from '@/shared/types/errorTypes';
-import type { SoldTicket } from '@/shared/types/types';
-import { WORK_FORM_DEFAULT } from '@/utils/defaults';
+import { WORK_FORM_DEFAULT } from '@/defaults/soldTicket';
+import { bookingServices } from '@/services/bookingServices';
+import type { BookingFieldError } from '@/types/errorTypes';
+import type { SoldTicket } from '@/types/types';
 import { useEffect, useState } from 'react';
 
 export const useWorkManagement = () => {
@@ -11,14 +11,9 @@ export const useWorkManagement = () => {
   const [errors, setErrors] = useState<BookingFieldError>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  //   const payload = {
-  //   ...formData,
-  //   checkInDate: new Date(formData.checkInDate),
-  // };
-
   const getBookings = async () => {
     try {
-      const res = await axios('/admin/get-bookings');
+      const res = await bookingServices.getBookings();
       if (res.data) {
         setBookings(res.data);
       }
@@ -36,7 +31,7 @@ export const useWorkManagement = () => {
   }, []);
 
   const handleChange = (key: string, value: string) => {
-    setFormData((prev) => ({
+    setFormData((prev: SoldTicket) => ({
       ...prev,
       [key]: value,
     }));
@@ -58,9 +53,9 @@ export const useWorkManagement = () => {
     }
   };
 
-  const handleDelete = async (id: number | string) => {
+  const handleDelete = async (id: number) => {
     try {
-      const res = await axios.post(`/admin/delete-booking?bookingId=${id}`);
+      const res = await bookingServices.delete(id);
       if (res.data) {
         await getBookings();
       }
@@ -71,11 +66,9 @@ export const useWorkManagement = () => {
 
   const handleSave = async () => {
     try {
-      const url = formData.id
-        ? `/admin/edit-booking?bookingId=${formData.id}`
-        : '/admin/add-booking';
-
-      const res = await axios.post(url, formData);
+      const res = formData.id
+        ? await bookingServices.edit(formData.id, formData)
+        : await bookingServices.add(formData);
       if (res.data) {
         closeModal();
         await getBookings();

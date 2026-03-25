@@ -1,5 +1,5 @@
-import { Card } from '@/shared/components/card';
-import { Text } from '@/shared/components/text';
+import { Card } from '@/components/card';
+import { Text } from '@/components/text';
 import type { InsuranceCardProps } from './types';
 
 type StatusType = 'expired' | 'expiring_soon' | 'active';
@@ -60,6 +60,8 @@ export const InsuranceCard = ({ insurance, openPanel }: InsuranceCardProps) => {
     <Card
       padding='0px'
       width='w-full'
+      bgColor='bg-white dark:bg-slate-700'
+      borderColor='dark:border-slate-600'
       className='relative cursor-pointer hover:scale-[1.03] '
       onClick={() => openPanel(insurance)}
     >

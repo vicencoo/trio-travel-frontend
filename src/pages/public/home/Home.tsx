@@ -1,15 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import type { PlaneTicket } from '@/shared/types/types';
 import { useHome } from './useHome';
 import { Advertise } from './Advertise';
 import { SectionHeader } from './SectionHeader';
-import { PropertyCard } from '@/shared/components/propertyCard';
-import { PackageCard } from '@/shared/components/packageCard';
-import { FlightOfferCard } from '@/shared/components/flightOfferCard';
+import { PropertyCard } from '@/components/propertyCard';
+import { PackageCard } from '@/components/packageCard';
+import { FlightOfferCard } from '@/components/flightOfferCard';
 import { StatisticsSection } from './StatisticsSection';
 import { Destinations } from './Destinations';
 import { FAQ } from './FAQ';
-import { ViewAllButton } from '@/shared/components/viewAllButton';
+import { ViewAllButton } from '@/components/viewAllButton';
 
 export const Home = () => {
   const { properties, planeTickets, packages, destinations } = useHome();
@@ -25,15 +24,19 @@ export const Home = () => {
             text='Shfleto pronat më të mira në treg'
           />
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-            {properties.properties.map((property) => (
-              <PropertyCard property={property} key={property.id} />
+            {properties.properties.map((property, index) => (
+              <PropertyCard
+                property={property}
+                index={index}
+                key={property.id}
+              />
             ))}
           </div>
 
           <div className='flex w-full justify-center'>
             <ViewAllButton
               text='shiko te gjitha pronat'
-              onClick={() => navigate('/properties')}
+              onClick={() => navigate('/pronat')}
             />
           </div>
         </div>
@@ -46,12 +49,19 @@ export const Home = () => {
             text='Zbuloni eksperienca unike udhëtimi ose na kontaktoni për të krijuar paketën tuaj të personalizuar'
           />
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-            {packages.packages.map((packageItem) => (
-              <PackageCard key={packageItem.id} data={packageItem} />
+            {packages.packages.map((packageItem, index) => (
+              <PackageCard
+                key={packageItem.id}
+                index={index}
+                data={packageItem}
+              />
             ))}
           </div>
           <div className='flex justify-center w-full'>
-            <ViewAllButton text='Shiko Të Gjitha Paketat' path='/packages' />
+            <ViewAllButton
+              text='Shiko Të Gjitha Paketat'
+              path='/paketa-turistike'
+            />
           </div>
         </div>
       )}
@@ -66,15 +76,19 @@ export const Home = () => {
             />
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
               {planeTickets.tickets &&
-                planeTickets.tickets.map((ticket: PlaneTicket) => (
-                  <FlightOfferCard ticket={ticket} key={ticket.id} />
+                planeTickets.tickets.map((ticket, index) => (
+                  <FlightOfferCard
+                    ticket={ticket}
+                    index={index}
+                    key={ticket.id}
+                  />
                 ))}
             </div>
 
             <div className='flex w-full justify-center'>
               <ViewAllButton
                 text='Shiko Të Gjitha Ofertat'
-                path='planeTickets'
+                path='/bileta-avioni'
               />
             </div>
           </div>

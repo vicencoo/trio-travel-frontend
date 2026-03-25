@@ -1,9 +1,30 @@
-import { ActionMenu } from '@/shared/components/actionMenu';
-import { Image } from '@/shared/components/image';
-import { Text } from '@/shared/components/text';
+import { ActionMenu } from '@/components/actionMenu';
+import { Image } from '@/components/image';
+import { Text } from '@/components/text';
 import { formattedPrice } from '@/utils/formattedPrice';
 import { useNavigate } from 'react-router-dom';
 import type { PropertyItemProps } from './types';
+
+const availabilityConfig = {
+  available: {
+    label: 'E LIRË',
+    wrapper:
+      'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20',
+    dot: 'bg-emerald-500',
+  },
+  sold: {
+    label: 'E SHITUR',
+    wrapper:
+      'bg-red-50 text-red-700 border border-red-200 dark:bg-red-500/10 dark:text-red-300 dark:border-red-500/20',
+    dot: 'bg-red-500',
+  },
+  rented: {
+    label: 'E DHËNË ME QIRA',
+    wrapper:
+      'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/10 dark:text-blue-300 dark:border-blue-500/20',
+    dot: 'bg-blue-500',
+  },
+};
 
 export const PropertyTableRow = ({
   property,
@@ -18,11 +39,15 @@ export const PropertyTableRow = ({
     typeof firstImage === 'object' && 'property_image' in firstImage
       ? firstImage.property_image
       : '';
+
+  const config =
+    property.availability && availabilityConfig[property.availability];
   return (
-    <div className='grid grid-cols-8 items-center px-4 py-1 border-b border-gray-300 dark:border-slate-700 last:border-b-0 gap-1 '>
+    <div className='grid md:grid-cols-9 grid-cols-8 items-center px-4 py-1 border-b border-gray-300 dark:border-slate-700 last:border-b-0 gap-1 '>
       <div className='md:col-span-3 col-span-4 flex items-center gap-2 overflow-hidden'>
         <Image
           src={image}
+          alt={property.title}
           className='max-w-14 min-w-14 max-h-14 min-h-14 rounded-lg object-cover'
         />
         <Text
@@ -61,6 +86,14 @@ export const PropertyTableRow = ({
           className={`capitalize`}
         />
       </span>
+
+      <span
+        className={`hidden col-span-1 md:inline-flex w-max items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase whitespace-nowrap ${config?.wrapper}`}
+      >
+        <span className={`h-2 w-2 rounded-full ${config?.dot}`} />
+        {config?.label}
+      </span>
+
       <ActionMenu
         enableEdit
         enableDelete

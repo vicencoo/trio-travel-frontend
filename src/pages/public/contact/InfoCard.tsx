@@ -1,26 +1,28 @@
-import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
-import { Card } from '@/shared/components/card';
-import { Text } from '@/shared/components/text';
+import { Card } from '@/components/card';
+import { Text } from '@/components/text';
+import {
+  AccessTimeOutlined,
+  EmailOutlined,
+  LocalPhoneIcon,
+  LocationOnOutlined,
+} from '@/icons';
 
 const INFO = [
   {
     id: 1,
-    icon: <LocalPhoneOutlinedIcon fontSize='small' className='text-white' />,
+    icon: <LocalPhoneIcon fontSize='small' className='text-white' />,
     label: 'kontakt',
     value: '+355 69 690 0916',
   },
   {
     id: 2,
-    icon: <EmailOutlinedIcon fontSize='small' className='text-white' />,
+    icon: <EmailOutlined fontSize='small' className='text-white' />,
     label: 'email',
     value: 'triotravel.imobiliare@gmail.com',
   },
   {
     id: 3,
-    icon: <LocationOnOutlinedIcon fontSize='small' className='text-white' />,
+    icon: <LocationOnOutlined fontSize='small' className='text-white' />,
     label: 'vendëndodhja',
     value: 'Kryqëzimi Rinia, Vlorë, Albania',
   },
@@ -54,7 +56,7 @@ export const InfoCard = () => {
                 text={item.label}
                 size='text-sm'
                 font='font-medium'
-                className='capitalize text-gray-500'
+                className='capitalize text-gray-600'
               />
               <Text
                 text={item.value}
@@ -67,7 +69,7 @@ export const InfoCard = () => {
       </div>
       <div className='flex flex-col gap-3 bg-blue-50 rounded-md px-5 py-3'>
         <span className='flex items-center gap-1'>
-          <AccessTimeOutlinedIcon className='text-red-500' />
+          <AccessTimeOutlined className='text-red-500' />
           <Text text={'Orari i Punës'} size='text-lg' font='font-medium' />
         </span>
         <Text

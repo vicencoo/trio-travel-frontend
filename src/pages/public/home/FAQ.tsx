@@ -1,7 +1,6 @@
-import { Text } from '@/shared/components/text';
-import { FAQ_INFO } from '@/utils';
-import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close';
+import { Text } from '@/components/text';
+import { FAQ_INFO } from '@/constants/faq';
+import { AddIcon, Close } from '@/icons';
 import { useState } from 'react';
 
 export const FAQ = () => {
@@ -51,7 +50,7 @@ export const FAQ = () => {
                 }`}
               >
                 {openQuestions.includes(faq.id) ? (
-                  <CloseIcon fontSize='small' />
+                  <Close fontSize='small' />
                 ) : (
                   <AddIcon />
                 )}

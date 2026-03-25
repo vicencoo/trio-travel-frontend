@@ -1,12 +1,13 @@
-import FlightIcon from '@mui/icons-material/Flight';
 import { TicketModal } from './TicketModal';
 import { usePlaneTicketsPage } from './usePlaneTicketsPage';
 import { TicketTableRow } from './TicketTableRow';
-import { DataTable } from '@/shared/components/dataTable';
-import { TICKET_COLUMNS } from '@/utils/columns';
-import { Pagination } from '@/shared/components/pagination';
-import { NoDataFound } from '@/shared/components/noDataFound';
-import { AdminPageHeader } from '@/shared/components/adminPageHeader';
+import { DataTable } from '@/components/dataTable';
+import { Pagination } from '@/components/pagination';
+import { NoDataFound } from '@/components/noDataFound';
+import { AdminPageHeader } from '@/components/adminPageHeader';
+import { Spinner } from '@/components/spinner';
+import { PlaneTakeoff } from '@/icons';
+import { TICKET_COLUMNS } from './columns';
 
 export const PlaneTicketsPage = () => {
   const {
@@ -22,12 +23,21 @@ export const PlaneTicketsPage = () => {
     handlePageChange,
     pageNumber,
     errors,
+    isLoading,
   } = usePlaneTicketsPage();
+
+  if (isLoading) {
+    return (
+      <div className='flex w-full h-full items-center justify-center'>
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className='flex flex-col gap-10 py-10 min-h-screen container'>
       <AdminPageHeader
-        icon={<FlightIcon className='text-white' />}
+        icon={<PlaneTakeoff className='text-white' />}
         iconBgColor='bg-indigo-600'
         label='Menaxhimi i Biletave'
         text='Shiko, modifiko dhe menaxho te gjitha biletave'
@@ -49,27 +59,6 @@ export const PlaneTicketsPage = () => {
 
       {data.tickets && data.tickets.length > 0 ? (
         <div className='flex flex-col gap-10 min-h-screen'>
-          {/* <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
-            <MetricCard
-              icon={<FlightIcon className='text-indigo-600' />}
-              iconBg='bg-indigo-100'
-              label='Totali i Biletave'
-              value={data.totalTickets || 0}
-            />
-            <MetricCard
-              icon={<EuroIcon className='text-green-600' />}
-              iconBg='bg-green-100'
-              label='Cmimi Mesatar'
-              value={`${data.averagePrice || 0}€`}
-            />
-            <MetricCard
-              icon={<ModeStandbyIcon className='text-red-600' />}
-              iconBg='bg-red-50'
-              label='Cmimi me i Ulet'
-              value={`${data.minPrice || 0}€`}
-            />
-          </div> */}
-
           <div className='flex flex-col w-full gap-10 items-center min-h-[61vh] justify-between'>
             <DataTable
               headerBg='bg-indigo-500'

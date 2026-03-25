@@ -1,20 +1,22 @@
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import EuroSymbolOutlinedIcon from '@mui/icons-material/EuroSymbolOutlined';
-import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
-import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
-import { useAddProperty } from './useAddProperty';
-import { Card } from '@/shared/components/card';
-import { Text } from '@/shared/components/text';
-import { Button } from '@/shared/components/button';
-import { Selector } from '@/shared/components/selector';
-import { PROPERTY_TYPE } from '@/utils';
-import { Input } from '@/shared/components/input';
-import { ImageUploader } from '@/shared/components/imageUploader';
-import { StatusToggle } from '@/shared/components/statusToggle';
+import { usePropertyManager } from './usePropertyManager';
+import { Card } from '@/components/card';
+import { Text } from '@/components/text';
+import { Button } from '@/components/button';
+import { Selector } from '@/components/selector';
+import { Input } from '@/components/input';
+import { ImageUploader } from '@/components/imageUploader';
+import { StatusToggle } from '@/components/statusToggle';
+import {
+  AddIcon,
+  Close,
+  EuroOutlined,
+  FeedOutlined,
+  House,
+  InsertPhotoOutlined,
+  LocationOnOutlined,
+} from '@/icons';
+import { PROPERTY_TYPE } from '@/constants/property';
 
 export const PropertyManager = () => {
   const navigate = useNavigate();
@@ -26,37 +28,47 @@ export const PropertyManager = () => {
     handleSave,
     error,
     setDeletedImages,
-  } = useAddProperty();
+  } = usePropertyManager();
 
   return (
     <div className='flex flex-col gap-5 py-10 items-center justify-center container'>
-      <Card width='w-full md:w-3/5'>
+      <Card
+        width='w-full md:w-3/5'
+        bgColor='bg-white dark:bg-slate-600'
+        borderColor='dark:border-slate-600'
+      >
         <div className='flex items-start gap-3'>
           <span className='bg-blue-100 flex w-12 h-12 items-center justify-center rounded-lg'>
-            <HomeOutlinedIcon className='text-blue-600' fontSize='large' />
+            <House className='text-blue-600' fontSize='large' />
           </span>
           <div className='flex flex-col gap-3'>
             <Text
               text={propertyData.id ? 'Edito Pronen' : 'Shto Prone Te Re'}
               size='text-4xl'
               font='font-bold'
+              className='text-slate-900 dark:text-slate-300'
             />
             {!propertyData.id && (
               <Text
                 text={'Shto nje prone per qera ose shitje'}
                 font='font-medium'
-                className='text-gray-500'
+                className='text-gray-500 dark:text-slate-400'
               />
             )}
           </div>
         </div>
       </Card>
 
-      <Card width='w-full md:w-3/5'>
+      <Card
+        width='w-full md:w-3/5'
+        bgColor='bg-white dark:bg-slate-600'
+        borderColor='dark:border-slate-600'
+      >
         <Text
           text={'Lloji I Listimit *'}
           size='text-lg'
           font='font-semibold font-serif'
+          className='text-slate-900 dark:text-slate-300'
         />
         <div className=' flex w-full gap-3'>
           <Button
@@ -87,16 +99,52 @@ export const PropertyManager = () => {
             handleChangePropertyData('status', newStatus)
           }
         />
+
+        <div className='flex flex-col gap-1 mt-4'>
+          <Text
+            text='Disponueshmëria'
+            font='font-semibold'
+            size='text-sm'
+            className='text-slate-900 dark:text-slate-300'
+          />
+
+          <Selector
+            options={[
+              { label: 'E LIRË', value: 'available' },
+              { label: 'E SHITUR', value: 'sold' },
+              { label: 'E DHËNË ME QIRA', value: 'rented' },
+            ]}
+            value={propertyData.availability}
+            onChange={(e) =>
+              handleChangePropertyData('availability', e.target.value as string)
+            }
+            // errorMessage={error?.availability}
+          />
+        </div>
       </Card>
 
-      <Card className='w-full md:w-3/5'>
+      <Card
+        className='w-full md:w-3/5'
+        bgColor='bg-white dark:bg-slate-600'
+        borderColor='dark:border-slate-600'
+      >
         <div className='flex items-center gap-1'>
-          <FeedOutlinedIcon fontSize='medium' className='text-blue-600' />
-          <Text text={'Informacion Baze'} size='text-lg' font='font-medium' />
+          <FeedOutlined fontSize='medium' className='text-blue-600' />
+          <Text
+            text={'Informacion Baze'}
+            size='text-lg'
+            font='font-medium'
+            className='text-slate-900 dark:text-slate-300'
+          />
         </div>
 
         <div className='flex flex-col gap-1'>
-          <Text text={'Tipi I Prones *'} font='font-semibold' size='text-sm' />
+          <Text
+            text={'Tipi I Prones *'}
+            font='font-semibold'
+            size='text-sm'
+            className='text-slate-900 dark:text-slate-300'
+          />
           <Selector
             options={PROPERTY_TYPE || ''}
             value={propertyData.property_type}
@@ -128,10 +176,19 @@ export const PropertyManager = () => {
         </div>
       </Card>
 
-      <Card className='w-full md:w-3/5'>
+      <Card
+        className='w-full md:w-3/5'
+        bgColor='bg-white dark:bg-slate-600'
+        borderColor='dark:border-slate-600'
+      >
         <div className='flex items-center gap-1'>
-          <LocationOnOutlinedIcon fontSize='medium' className='text-blue-600' />
-          <Text text={'Locationi I Prones'} size='text-lg' font='font-medium' />
+          <LocationOnOutlined fontSize='medium' className='text-blue-600' />
+          <Text
+            text={'Locationi I Prones'}
+            size='text-lg'
+            font='font-medium'
+            className='text-slate-900 dark:text-slate-300'
+          />
         </div>
 
         <div className='flex flex-col gap-1'>
@@ -167,10 +224,19 @@ export const PropertyManager = () => {
         </div>
       </Card>
 
-      <Card className='w-full md:w-3/5'>
+      <Card
+        className='w-full md:w-3/5'
+        bgColor='bg-white dark:bg-slate-600'
+        borderColor='dark:border-slate-600'
+      >
         <div className='flex items-center gap-1'>
-          <EuroSymbolOutlinedIcon fontSize='medium' className='text-blue-600' />
-          <Text text={'Detajet E Prones'} size='text-lg' font='font-medium' />
+          <EuroOutlined fontSize='medium' className='text-blue-600' />
+          <Text
+            text={'Detajet E Prones'}
+            size='text-lg'
+            font='font-medium'
+            className='text-slate-900 dark:text-slate-300'
+          />
         </div>
 
         <div className='grid md:grid-cols-2 grid-cols-1 gap-5'>
@@ -187,12 +253,16 @@ export const PropertyManager = () => {
               onChange={(e) =>
                 handleChangePropertyData('price', e.target.value)
               }
-              icon={<EuroSymbolOutlinedIcon fontSize='inherit' />}
+              icon={<EuroOutlined fontSize='inherit' />}
               errorMessage={error?.price}
             />
           </div>
           <div className='flex flex-col gap-1'>
-            <Text font='font-semibold' size='text-sm'>
+            <Text
+              font='font-semibold'
+              size='text-sm'
+              className='text-slate-900 dark:text-slate-300'
+            >
               Hapesira E Prones{' '}
               <span className='text-gray-500'>
                 (m<sup>2</sup>)
@@ -253,13 +323,19 @@ export const PropertyManager = () => {
         </div>
       </Card>
 
-      <Card className='w-full md:w-3/5'>
+      <Card
+        className='w-full md:w-3/5'
+        bgColor='bg-white dark:bg-slate-600'
+        borderColor='dark:border-slate-600'
+      >
         <div className='flex items-center gap-1'>
-          <InsertPhotoOutlinedIcon
-            fontSize='medium'
-            className='text-blue-600'
+          <InsertPhotoOutlined fontSize='medium' className='text-blue-600' />
+          <Text
+            text={'Imazhet E Prones *'}
+            size='text-lg'
+            font='font-medium'
+            className='text-slate-900 dark:text-slate-300'
           />
-          <Text text={'Imazhet E Prones *'} size='text-lg' font='font-medium' />
         </div>
 
         <ImageUploader
@@ -270,7 +346,7 @@ export const PropertyManager = () => {
           onDeleteOld={(img) => {
             const filename = typeof img === 'string' ? img : img.property_image;
             if (filename) {
-              setDeletedImages((prev) => [...prev, filename]);
+              setDeletedImages((prev: string[]) => [...prev, String(filename)]);
             }
           }}
         />
@@ -283,7 +359,7 @@ export const PropertyManager = () => {
           fullWidth
           bgHover='#ef4444'
           borderHover='#b91c1c'
-          endIcon={<CloseIcon />}
+          endIcon={<Close />}
         />
         <Button
           name={

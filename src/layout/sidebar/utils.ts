@@ -1,4 +1,4 @@
-import { SIDEBAR_ITEMS } from '@/utils';
+import { SIDEBAR_ITEMS } from '@/constants/navigation';
 
 export const getLabelFromPath = (path: string) => {
   for (const item of SIDEBAR_ITEMS) {

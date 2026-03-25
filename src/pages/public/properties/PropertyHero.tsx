@@ -1,10 +1,16 @@
-import { Image } from '@/shared/components/image';
-import { Text } from '@/shared/components/text';
+import { Image } from '@/components/image';
+import { Text } from '@/components/text';
 
 export const PropertyHero = () => {
   return (
     <div className='flex w-full md:h-[300px] h-[200px] relative overflow-hidden'>
-      <Image img='/images/property-cover.png' className='w-full object-cover' />
+      <Image
+        img='/images/property-cover.webp'
+        alt='Property Page Hero Image'
+        loading='eager'
+        priority='high'
+        className='w-full object-cover'
+      />
 
       <div className='absolute inset-0 bg-black/50' />
 

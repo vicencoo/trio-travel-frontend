@@ -1,8 +1,8 @@
-import { Card } from '@/shared/components/card';
+import { Card } from '@/components/card';
 import type { CheckinTicketCardProps } from './types';
-import { Text } from '@/shared/components/text';
-import { Check, Clock, CreditCard } from 'lucide-react';
-import { Button } from '@/shared/components/button';
+import { Text } from '@/components/text';
+import { Button } from '@/components/button';
+import { Check, Clock, CreditCard } from '@/icons';
 
 export const CheckinTicketCard = ({
   ticket,
@@ -22,6 +22,8 @@ export const CheckinTicketCard = ({
   return (
     <Card
       padding='p-5'
+      bgColor='bg-white dark:bg-slate-700'
+      borderColor='dark:border-slate-600'
       gap='gap-5'
       className='cursor-pointer'
       onClick={() => openModal(ticket)}

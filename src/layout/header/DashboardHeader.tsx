@@ -1,6 +1,6 @@
-import { Text } from '@/shared/components/text';
+import { Text } from '@/components/text';
 import {
-  ChevronDownIcon,
+  ChevronDown,
   ChevronUp,
   LogOut,
   Moon,
@@ -8,8 +8,8 @@ import {
   PanelLeftOpen,
   Settings,
   Sun,
-} from 'lucide-react';
-import { useDisclosure } from '@/shared/hooks/useDisclosure';
+} from '@/icons';
+import { useDisclosure } from '@/hooks/useDisclosure';
 import type { AvatarProps, DashboardHeaderProps } from './types';
 
 const Avatar = ({ letter, size = ' w-12 min-w-12 h-12' }: AvatarProps) => {
@@ -95,11 +95,7 @@ export const DashboardHeader = ({
                 />
               </div>
               <span className='text-black dark:text-slate-200'>
-                {isOpen ? (
-                  <ChevronUp size={12} />
-                ) : (
-                  <ChevronDownIcon size={12} />
-                )}
+                {isOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
               </span>
             </div>
 
@@ -116,17 +112,18 @@ export const DashboardHeader = ({
                 <div className='flex flex-col gap-1'>
                   <Text
                     text={user?.username}
-                    size='text-xs'
+                    size='text-sm'
                     font='font-semibold font-serif'
                     className='capitalize leading-4 text-slate-900 dark:text-slate-200'
                   />
                   <Text
                     text={user?.email}
                     size='text-xs'
-                    className='text-gray-500 dark:text-slate-400'
+                    font='font-medium'
+                    className='text-gray-500 dark:text-slate-400 '
                   />
                   <div className='flex items-center w-max px-3 py-1 bg-green-100 rounded-xl text-green-900 gap-1 uppercase text-[10px] font-medium font-serif tracking-widest'>
-                    <span className='w-1.5 h-1.5 bg-green-900 rounded-full' />
+                    <span className='w-1 h-1 bg-green-900 rounded-full' />
                     {user?.role}
                   </div>
                 </div>

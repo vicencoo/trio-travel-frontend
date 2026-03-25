@@ -1,12 +1,11 @@
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
-import AddIcon from '@mui/icons-material/Add';
 import type { DestinationFormProps } from './types';
-import { Modal } from '@/shared/components/modal';
-import { Text } from '@/shared/components/text';
-import { Input } from '@/shared/components/input';
-import { ImageUploader } from '@/shared/components/imageUploader';
-import { Button } from '@/shared/components/button';
+import { Modal } from '@/components/modal';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
+import { ImageUploader } from '@/components/imageUploader';
+import { Button } from '@/components/button';
+
+import { AddIcon, Close, SaveOutlined } from '@/icons';
 
 export const DestinationModal = ({
   handleOpenModal,
@@ -36,7 +35,7 @@ export const DestinationModal = ({
             size='text-xl'
             font='font-medium'
           />
-          <CloseOutlinedIcon
+          <Close
             onClick={handleOpenModal}
             className='hover:text-red-500 cursor-pointer'
           />
@@ -100,7 +99,7 @@ export const DestinationModal = ({
                       key={index}
                     >
                       {value}
-                      <CloseOutlinedIcon
+                      <Close
                         fontSize='inherit'
                         className='hover:text-red-500 cursor-pointer'
                         onClick={() => value && removeType(value)}
@@ -131,14 +130,14 @@ export const DestinationModal = ({
           <Button
             name='anullo'
             fullWidth
-            endIcon={<CloseOutlinedIcon />}
+            endIcon={<Close />}
             bgHover='#ef4444'
             onClick={handleOpenModal}
           />
           <Button
             name='konfirmo'
             fullWidth
-            endIcon={<SaveOutlinedIcon />}
+            endIcon={<SaveOutlined />}
             bgColor='#0284c7'
             bgHover='#0369a1'
             color='white'

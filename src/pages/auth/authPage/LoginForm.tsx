@@ -1,4 +1,4 @@
-import { Input } from '@/shared/components/input';
+import { Input } from '@/components/input';
 import type { LoginDataProps } from './types';
 
 export const LoginForm = ({

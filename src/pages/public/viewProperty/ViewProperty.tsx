@@ -1,23 +1,30 @@
-import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
-import BathtubOutlinedIcon from '@mui/icons-material/BathtubOutlined';
-import SquareFootOutlinedIcon from '@mui/icons-material/SquareFootOutlined';
-import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import { useNavigate } from 'react-router-dom';
 import { useViewProperty } from './useViewProperty';
 import { PropertyStats } from './PropertyStats';
-import { PropertyImages } from './PropertyImages';
 import { ContactAgency } from './ContactAgency';
-import { Text } from '@/shared/components/text';
-import { Card } from '@/shared/components/card';
+import { Text } from '@/components/text';
+import { Card } from '@/components/card';
 import { formattedPrice } from '@/utils/formattedPrice';
-import { Spinner } from '@/shared/components/spinner';
+import { Spinner } from '@/components/spinner';
+import {
+  ArrowBack,
+  BathtubOutlinedIcon,
+  CalendarMonthOutlined,
+  HotelOutlinedIcon,
+  LocationOnOutlined,
+  Share2,
+  SquareFootOutlinedIcon,
+} from '@/icons';
+import { ViewImages } from '@/components/viewImages/ViewImages';
+import { useDisclosure } from '@/hooks/useDisclosure';
+import { ShareModal } from '@/components/shareModal/ShareModal';
 
 export const ViewProperty = () => {
-  const { property, index, next, prev, setIndex, isLoading } =
-    useViewProperty();
+  const { property, isLoading } = useViewProperty();
+  const { close, isOpen, open } = useDisclosure();
   const navigate = useNavigate();
+
+  const shareUrl = window.location.href;
 
   if (isLoading)
     return (
@@ -29,23 +36,29 @@ export const ViewProperty = () => {
   return (
     <div className='container flex flex-col pt-3 gap-10 pb-20'>
       <div className='flex flex-col gap-3'>
-        <span
-          className='flex items-center cursor-pointer w-max text-gray-500 hover:underline hover:scale-110 hover:text-black transition-all duration-300 will-change-transform'
-          onClick={() => navigate('/properties')}
-        >
-          <ArrowBackIcon fontSize='small' />
-          <Text text={'Kthehu Tek Pronat'} font='font-medium' />
-        </span>
+        <div className='flex w-full items-center justify-between'>
+          <span
+            className='flex items-center cursor-pointer w-max text-gray-500 hover:underline hover:scale-110 hover:text-black transition-all duration-300 will-change-transform'
+            onClick={() => navigate('/pronat')}
+          >
+            <ArrowBack fontSize='small' />
+            <Text text={'Kthehu Tek Pronat'} font='font-medium' />
+          </span>
 
-        {property && (
-          <PropertyImages
-            currentIndexImage={index}
-            next={next}
-            prev={prev}
-            setCurrentIndex={setIndex}
-            property={property}
-          />
-        )}
+          <div
+            className='flex items-center gap-1 hover:underline cursor-pointer hover:scale-105 transition-all duration-150 will-change-transform'
+            onClick={open}
+          >
+            <Share2 size={18} />
+            <Text
+              text={'Shpërndaj'}
+              font='font-medium'
+              className='hidden md:flex'
+            />
+          </div>
+        </div>
+
+        {property && <ViewImages images={property.property_images} />}
       </div>
 
       <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
@@ -59,16 +72,20 @@ export const ViewProperty = () => {
                   font='font-medium'
                   className='capitalize'
                 />
-                <Text
-                  text={`${formattedPrice(Number(property?.price))}€`}
-                  size='text-2xl'
-                  font='font-bold font-serif'
-                  className='capitalize text-blue-500'
-                />
+                <div className='flex items-center gap-2'>
+                  <Text
+                    text={`${formattedPrice(Number(property?.price))}€`}
+                    size='text-2xl'
+                    font='font-bold font-serif'
+                    className='capitalize text-blue-500'
+                  />
+                  <Share2 size={20} className='cursor-pointer' onClick={open} />
+                </div>
               </div>
+
               <div className='flex md:flex-row flex-col m:items-center items-start w-full md:justify-between gap-1'>
                 <span className='flex items-center'>
-                  <LocationOnOutlinedIcon
+                  <LocationOnOutlined
                     fontSize='small'
                     className='text-gray-500'
                   />
@@ -116,7 +133,7 @@ export const ViewProperty = () => {
               )}
               {property?.build_year && (
                 <PropertyStats
-                  icon={<CalendarTodayOutlinedIcon fontSize='small' />}
+                  icon={<CalendarMonthOutlined fontSize='small' />}
                   value={property?.build_year}
                   label='viti ndertimit'
                 />
@@ -141,6 +158,8 @@ export const ViewProperty = () => {
         <div className='md:col-span-1'>
           <ContactAgency />
         </div>
+
+        <ShareModal isOpen={isOpen} close={close} path={shareUrl} />
       </div>
     </div>
   );

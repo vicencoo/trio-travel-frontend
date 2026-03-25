@@ -1,4 +1,4 @@
-import type { User } from '@/shared/types/types';
+import type { User } from '@/types/types';
 
 export type DashboardHeaderProps = {
   toggleCollapse: () => void;

@@ -1,5 +1,5 @@
-import { ActionMenu } from '@/shared/components/actionMenu';
-import { Text } from '@/shared/components/text';
+import { ActionMenu } from '@/components/actionMenu';
+import { Text } from '@/components/text';
 import { formattedPrice } from '@/utils/formattedPrice';
 import type { BookingRowProps } from './types';
 import { format } from 'date-fns';

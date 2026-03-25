@@ -1,10 +1,11 @@
-import { axios } from '@/api';
-import { useAuth } from '@/shared/context/authContext';
+import { useAuth } from '@/context/authContext';
+import { DEFAULT_LOGIN_DATA, DEFAULT_SIGN_UP_DATA } from '@/defaults/auth';
+import { authServices } from '@/services/authServices';
 import {
   type LoginFieldError,
   type SignupFieldError,
-} from '@/shared/types/errorTypes';
-import { DEFAULT_LOGIN_DATA, DEFAULT_SIGN_UP_DATA } from '@/utils/defaults';
+} from '@/types/errorTypes';
+import { UserRole } from '@/types/user';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,18 +39,17 @@ export const useAuthenticate = () => {
 
   const handleSave = async () => {
     try {
-      const endpoint =
-        authMode === 'login' ? '/authenticate/login' : '/authenticate/signup';
-      const dataToSend = authMode === 'login' ? loginData : signUpData;
-
-      const res = await axios.post(endpoint, dataToSend);
+      const res =
+        authMode === 'login'
+          ? await authServices.login(loginData)
+          : await authServices.signup(signUpData);
       if (res.data) {
         if (authMode === 'login') {
           localStorage.setItem('accessToken', res.data.accessToken);
 
           await getUser();
           const role = res.data.user.role;
-          if (role === 'admin') {
+          if (role === UserRole.ADMIN) {
             navigate('/admin/dashboard');
           } else {
             navigate('/');

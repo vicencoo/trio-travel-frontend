@@ -1,10 +1,9 @@
-import { Text } from '@/shared/components/text';
-import { SIDEBAR_ITEMS } from '@/utils';
-import { Person } from '@mui/icons-material';
-import { ChevronDown, ChevronUp, TypeOutline } from 'lucide-react';
+import { Text } from '@/components/text';
 import { useNavigate } from 'react-router-dom';
 import type { SideBarProps } from './types';
 import { useEffect } from 'react';
+import { ChevronDown, ChevronUp, Person, TypeOutline } from '@/icons';
+import { SIDEBAR_ITEMS } from '@/constants/navigation';
 
 export const SideBar = ({
   isCollapsed,

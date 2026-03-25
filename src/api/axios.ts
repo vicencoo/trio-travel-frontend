@@ -1,4 +1,4 @@
-import { DEFAULT_URL } from '@/utils/defaults';
+import { DEFAULT_URL } from '@/constants/config';
 import AXIOS from 'axios';
 import type { NavigateFunction } from 'react-router-dom';
 

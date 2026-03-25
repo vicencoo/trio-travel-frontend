@@ -1,9 +1,9 @@
-import { useAuth } from '@/shared/context/authContext';
+import { useAuth } from '@/context/authContext';
 import { Outlet } from 'react-router-dom';
 import { SideBar } from './sidebar/SideBar';
 import { DashboardHeader } from './header/DashboardHeader';
 import { useSidebar } from './sidebar/useSidebar';
-import { useToggleDarkMode } from '@/shared/hooks/useToggleDarkMode';
+import { useToggleDarkMode } from '@/hooks/useToggleDarkMode';
 
 export const AdminLayout = () => {
   const {

@@ -1,29 +1,28 @@
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import AirlineSeatIndividualSuiteOutlinedIcon from '@mui/icons-material/AirlineSeatIndividualSuiteOutlined';
-import RestaurantMenuOutlinedIcon from '@mui/icons-material/RestaurantMenuOutlined';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useViewPackage } from './useViewPackage';
-import { PackageImages } from './PackageImages';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { InfoItem } from './InfoItem';
-import { Spinner } from '@/shared/components/spinner';
-import { Text } from '@/shared/components/text';
-import { Card } from '@/shared/components/card';
+import { Spinner } from '@/components/spinner';
+import { Text } from '@/components/text';
+import { Card } from '@/components/card';
 import { formattedPrice } from '@/utils/formattedPrice';
-import { Button } from '@/shared/components/button';
+import { Button } from '@/components/button';
+
+import {
+  AirlineSeatIndividualSuiteOutlined,
+  ArrowBack,
+  CalendarMonthOutlined,
+  LocationOnOutlined,
+  RestaurantMenuOutlined,
+  Share2,
+} from '@/icons';
+import { ViewImages } from '@/components/viewImages/ViewImages';
+import { useDisclosure } from '@/hooks/useDisclosure';
+import { ShareModal } from '@/components/shareModal/ShareModal';
 
 export const ViewPackage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const {
-    packageData,
-    isLoading,
-    currentImageIndex,
-    next,
-    prev,
-    setCurrentImageIndex,
-  } = useViewPackage();
+  const { packageData, isLoading } = useViewPackage();
+  const { close, isOpen, open } = useDisclosure();
 
   if (isLoading)
     return (
@@ -32,7 +31,7 @@ export const ViewPackage = () => {
       </div>
     );
 
-  const currentUrl = window.location.origin + location.pathname;
+  const currentUrl = window.location.href;
 
   const reserveMessage = encodeURIComponent(`
 Përshëndetje! 
@@ -78,23 +77,29 @@ Faleminderit!
   return (
     <div className='flex flex-col gap-10 container pt-3 pb-20'>
       <div className='flex flex-col gap-3'>
-        <span
-          className='flex items-center cursor-pointer w-max text-gray-500 hover:underline hover:scale-110 hover:text-black transition-all duration-300 will-change-transform'
-          onClick={() => navigate('/packages')}
-        >
-          <ArrowBackIcon fontSize='small' />
-          <Text text={'Kthehu Tek Paketat Turistike'} font='font-medium' />
-        </span>
-        <div className='flex w-full justify-center'>
-          {packageData && (
-            <PackageImages
-              packageData={packageData}
-              next={next}
-              prev={prev}
-              currentImageIndex={currentImageIndex}
-              setCurrentImageIndex={setCurrentImageIndex}
+        <div className='flex items-center w-full justify-between'>
+          <span
+            className='flex items-center cursor-pointer w-max text-gray-500 hover:underline hover:scale-110 hover:text-black transition-all duration-300 will-change-transform'
+            onClick={() => navigate('/paketa-turistike')}
+          >
+            <ArrowBack fontSize='small' />
+            <Text text={'Kthehu Tek Paketat Turistike'} font='font-medium' />
+          </span>
+          <div
+            className='flex items-center gap-1 hover:underline cursor-pointer hover:scale-105 transition-all duration-150 will-change-transform'
+            onClick={open}
+          >
+            <Share2 size={18} />
+            <Text
+              text={'Shpërndaj'}
+              font='font-medium'
+              className='hidden md:flex'
             />
-          )}
+          </div>
+        </div>
+
+        <div className='flex w-full justify-center'>
+          {packageData && <ViewImages images={packageData.package_images} />}
         </div>
       </div>
       <div className='grid md:grid-cols-3 grid-cols-1 gap-8'>
@@ -102,15 +107,12 @@ Faleminderit!
           <Card>
             <Text
               text={packageData?.title}
-              size='text-4xl md:text-5xl'
+              size='text-2xl md:text-4xl'
               font='font-serif font-bold'
               className='capitalize'
             />
             <span className='flex items-center gap-1'>
-              <LocationOnOutlinedIcon
-                fontSize='small'
-                className='text-blue-600'
-              />
+              <LocationOnOutlined fontSize='small' className='text-blue-600' />
               <Text
                 text={packageData?.destination}
                 size='text-lg'
@@ -137,13 +139,16 @@ Faleminderit!
         <div className='md:col-span-1 flex flex-col gap-5'>
           <Card bgColor='bg-gradient-to-b from-slate-900 to-slate-800'>
             <div className='flex flex-col text-center gap-4 pb-6 border-b border-slate-500'>
-              <Text
-                text={'DUKE FILLUAR NGA'}
-                size='text-sm'
-                font='font-medium'
-                className='text-gray-300'
-              />
-              <div className='flex items-baseline justify-center gap-1'>
+              <div className='flex justify-between items-center'>
+                <Text
+                  text={'DUKE FILLUAR NGA'}
+                  size='text-sm'
+                  font='font-medium'
+                  className='text-gray-300'
+                />
+                <Share2 onClick={open} className='cursor-pointer text-white' />
+              </div>
+              <div className='flex items-baseline gap-1'>
                 <span className='text-4xl font-bold font-serif text-gray-100'>
                   €{formattedPrice(Number(packageData?.price))}
                 </span>
@@ -156,7 +161,7 @@ Faleminderit!
               {/* Kohezgjatja */}
               <InfoItem
                 icon={
-                  <CalendarMonthOutlinedIcon
+                  <CalendarMonthOutlined
                     className='text-blue-500'
                     fontSize='small'
                   />
@@ -168,7 +173,7 @@ Faleminderit!
               {/* Akomodimi */}
               <InfoItem
                 icon={
-                  <AirlineSeatIndividualSuiteOutlinedIcon
+                  <AirlineSeatIndividualSuiteOutlined
                     className='text-blue-500'
                     fontSize='small'
                   />
@@ -180,7 +185,7 @@ Faleminderit!
               {/* Included */}
               <InfoItem
                 icon={
-                  <RestaurantMenuOutlinedIcon
+                  <RestaurantMenuOutlined
                     className='text-blue-500'
                     fontSize='small'
                   />
@@ -224,6 +229,7 @@ Faleminderit!
           </Card>
         </div>
       </div>
+      <ShareModal isOpen={isOpen} close={close} path={currentUrl} />
     </div>
   );
 };

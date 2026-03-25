@@ -1,8 +1,8 @@
-import { axios } from '@/api';
-import type { PackageResponse } from '@/shared/types/responseTypes';
+import { packageServices } from '@/services/packageServices';
+import type { PackageResponse } from '@/types/responseTypes';
 import { useEffect, useState, type ChangeEvent } from 'react';
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 12;
 
 export const usePackages = () => {
   const [data, setData] = useState<PackageResponse | null>(null);
@@ -27,9 +27,11 @@ export const usePackages = () => {
   useEffect(() => {
     const getAllPackages = async () => {
       try {
-        const res = await axios(
-          `/packages?packageLimit=${ITEMS_PER_PAGE}&page=${pageNumber}&searchQuery=${searchQuery}`,
-        );
+        const res = await packageServices.getAll({
+          packageLimit: ITEMS_PER_PAGE,
+          page: pageNumber,
+          searchQuery: searchQuery,
+        });
         if (res.data) setData(res.data);
       } catch (err) {
         console.error(err);

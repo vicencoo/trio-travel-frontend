@@ -1,24 +1,26 @@
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import EmailIcon from '@mui/icons-material/Email';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { useNavigate } from 'react-router-dom';
-import { Image } from '@/shared/components/image';
-import { Icon } from '@/shared/components/icon';
-import { Text } from '@/shared/components/text';
+import { Image } from '@/components/image';
+import { Icon } from '@/components/icon';
+import { Text } from '@/components/text';
+import {
+  AccessTimeOutlined,
+  EmailIcon,
+  FacebookIcon,
+  InstagramIcon,
+  LocalPhoneIcon,
+  LocationOnOutlined,
+  WhatsAppIcon,
+} from '@/icons';
 
 const FOOTER_INFO = [
   {
     id: 1,
-    icon: <LocationOnIcon fontSize='small' />,
+    icon: <LocationOnOutlined fontSize='small' />,
     text: 'Kryqezimi Rinia ,Vlore, Albania',
   },
   {
     id: 2,
-    icon: <AccessTimeIcon fontSize='small' />,
+    icon: <AccessTimeOutlined fontSize='small' />,
     text: 'Hours: 8:00-13:00 15:00-20:00 Monday-Saturday',
   },
   {
@@ -60,8 +62,9 @@ export const FooterInfo = () => {
   return (
     <div className='flex flex-col gap-4'>
       <Image
-        img='/images/TrioTravel.png'
-        className='w-[200px] cursor-pointer hover:scale-110 transition-all duration-300 will-change-transform'
+        img='/images/TrioTravel.webp'
+        alt='Trio Travel Agency Logo'
+        className='w-[200px] cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform'
         onClick={() => navigate('/')}
       />
       <div className='flex flex-col gap-2'>

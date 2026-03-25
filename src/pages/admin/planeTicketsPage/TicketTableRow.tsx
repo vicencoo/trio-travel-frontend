@@ -1,14 +1,8 @@
-import { ActionMenu } from '@/shared/components/actionMenu';
-import { Image } from '@/shared/components/image';
-import { Text } from '@/shared/components/text';
-import type { PlaneTicket } from '@/shared/types/types';
+import { ActionMenu } from '@/components/actionMenu';
+import { Image } from '@/components/image';
+import { Text } from '@/components/text';
 import { formattedPrice } from '@/utils/formattedPrice';
-
-type TicketItemProps = {
-  ticket: PlaneTicket;
-  handleDelete: (ticketId: string) => void;
-  handleEdit: (ticket: PlaneTicket) => void;
-};
+import type { TicketItemProps } from './types';
 
 export const TicketTableRow = ({
   ticket,
@@ -24,7 +18,11 @@ export const TicketTableRow = ({
   return (
     <div className='grid md:grid-cols-10 grid-cols-11 items-center px-4 py-1 border-b border-gray-300 dark:border-slate-700 last:border-b-0 md:gap-0 gap-1'>
       <div className='col-span-2 flex items-center gap-2'>
-        <Image src={image} className='w-14 h-14 rounded-lg object-cover' />
+        <Image
+          src={image}
+          className='w-14 h-14 rounded-lg object-cover'
+          alt={`Ticket from ${ticket.from} to ${ticket.to}`}
+        />
       </div>
       <Text
         text={ticket.from}

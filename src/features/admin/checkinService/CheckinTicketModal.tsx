@@ -1,7 +1,7 @@
-import { Modal } from '@/shared/components/modal';
+import { Modal } from '@/components/modal';
 import type { CheckinTicketModalProps, TicketInfoProps } from './types';
-import { Text } from '@/shared/components/text';
-import { Button } from '@/shared/components/button';
+import { Text } from '@/components/text';
+import { Button } from '@/components/button';
 
 const TicketInfo = ({ label, value, onClick, className }: TicketInfoProps) => {
   return (

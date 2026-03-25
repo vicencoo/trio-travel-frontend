@@ -1,14 +1,15 @@
-import { axios } from '@/api';
 import { useEffect, useState } from 'react';
 import type { CheckinTicketsResponse } from './types';
-import type { SoldTicket } from '@/shared/types/types';
+import type { SoldTicket } from '@/types/types';
+import { bookingServices } from '@/services/bookingServices';
 
 export const useCheckinService = () => {
   const [dateFilter, setDateFilter] = useState<Date>(new Date());
   const [data, setData] = useState<CheckinTicketsResponse>({});
   const [activeTicket, setActiveTicket] = useState<SoldTicket | null>(null);
-  // const [loadingButton, setLoadingButton] = useState<boolean>(false);
-  const [loadingId, setLoadingId] = useState<number | 'refresh' | null>(null);
+  const [loadingId, setLoadingId] = useState<
+    number | 'loading' | 'refresh' | null
+  >('loading');
 
   const formattedDate = dateFilter.toLocaleDateString('sq-AL', {
     weekday: 'long',
@@ -37,17 +38,16 @@ export const useCheckinService = () => {
     });
   };
 
-  const handleSetCurrentDay = () => {
-    setDateFilter(new Date());
-  };
+  const handleSetCurrentDay = () => setDateFilter(new Date());
 
   const openModal = (ticket: SoldTicket) => setActiveTicket(ticket);
   const closeModal = () => setActiveTicket(null);
 
   const getCheckinTickets = async () => {
-    setLoadingId('refresh');
+    // setLoadingId('refresh');
+
     try {
-      const res = await axios(`/admin/get-checkin-tickets?date=${dateFilter}`);
+      const res = await bookingServices.getCheckInTickets({ date: dateFilter });
       if (res.data) {
         setData(res.data);
       }
@@ -65,14 +65,15 @@ export const useCheckinService = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateFilter]);
 
-  const refreshPage = () => setDateFilter(new Date());
+  const refreshPage = () => {
+    setLoadingId('refresh');
+    setDateFilter(new Date());
+  };
 
   const toggleStatus = async (id: number) => {
     setLoadingId(id);
     try {
-      const res = await axios.post(
-        `/admin/bookings/toggle-status?bookingId=${id}`,
-      );
+      const res = await bookingServices.toggleStatus(id);
 
       if (res.data) {
         await getCheckinTickets();

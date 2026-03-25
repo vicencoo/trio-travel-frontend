@@ -1,7 +1,7 @@
-import { axios } from '@/api';
-import type { PlaneTicketFieldError } from '@/shared/types/errorTypes';
-import type { PlaneTicket, TicketImage } from '@/shared/types/types';
-import { DEFAULT_TICKET } from '@/utils/defaults';
+import { DEFAULT_TICKET } from '@/defaults/planeTicket';
+import { ticketServices } from '@/services/ticketServices';
+import type { PlaneTicketFieldError } from '@/types/errorTypes';
+import type { PlaneTicket, TicketImage } from '@/types/types';
 import { useEffect, useState, type ChangeEvent } from 'react';
 
 const ADMIN_PLANE_TICKETS = 6;
@@ -9,14 +9,13 @@ const ADMIN_PLANE_TICKETS = 6;
 export const usePlaneTicketsPage = () => {
   const [planeTicket, setPlaneTicket] = useState<PlaneTicket>(DEFAULT_TICKET);
   const [openModal, setOpenModal] = useState(false);
-  const [editMode, setEditMode] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [data, setData] = useState({
     tickets: [],
-    // totalTickets: null,
     totalPages: null,
   });
   const [errors, setErrors] = useState<PlaneTicketFieldError>({});
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handlePageChange = (_event: ChangeEvent<unknown>, page: number) => {
     setPageNumber(page);
@@ -25,17 +24,19 @@ export const usePlaneTicketsPage = () => {
   const handleOpenModal = () => {
     setOpenModal((prev) => !prev);
     setPlaneTicket(DEFAULT_TICKET);
-    setEditMode(false);
   };
 
   const getAllTickets = async () => {
     try {
-      const res = await axios(
-        `/tickets?limit=${ADMIN_PLANE_TICKETS}&page=${pageNumber}`,
-      );
+      const res = await ticketServices.getAll({
+        limit: ADMIN_PLANE_TICKETS,
+        page: pageNumber,
+      });
       if (res.data) setData(res.data);
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -49,18 +50,15 @@ export const usePlaneTicketsPage = () => {
   const handleEditTicket = (ticket: PlaneTicket) => {
     setPlaneTicket(ticket);
     setOpenModal(true);
-    setEditMode(true);
   };
 
-  const handleDeleteTicket = async (ticketId: string) => {
+  const handleDeleteTicket = async (ticketId: number) => {
     try {
       const confirm = window.confirm(
         'Are you sure that you want to delete this Plane Ticket?',
       );
       if (confirm) {
-        const res = await axios.post(
-          `/admin/delete-ticket?ticketId=${ticketId}`,
-        );
+        const res = await ticketServices.delete(ticketId);
 
         if (res.data) {
           await getAllTickets();
@@ -102,16 +100,13 @@ export const usePlaneTicketsPage = () => {
           }
         });
 
-      const url = editMode
-        ? `/admin/edit-ticket?ticketId=${planeTicket.id}`
-        : '/admin/add-ticket';
-
-      const res = await axios.post(url, formData);
+      const res = planeTicket.id
+        ? await ticketServices.edit(planeTicket.id, formData)
+        : await ticketServices.add(formData);
 
       if (res.data) {
         setPlaneTicket(DEFAULT_TICKET);
         handleOpenModal();
-        setEditMode(false);
         await getAllTickets();
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -142,5 +137,6 @@ export const usePlaneTicketsPage = () => {
     handlePageChange,
     pageNumber,
     errors,
+    isLoading,
   };
 };

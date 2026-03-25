@@ -1,11 +1,11 @@
 import { useDashboard } from './useDashboard';
-import { ChartBarIncreasing, Database } from 'lucide-react';
 import { BookingAnalytics } from './BookingAnalytics';
 import { DashboardSectionHeader } from './DashboardSectionHeader';
 import { DashboardHeader } from './DashboardHeader';
-import { Text } from '@/shared/components/text';
+import { Text } from '@/components/text';
 import { StatsCard } from './StatsCard';
-import { BookingAnalyticsSkeleton } from '@/shared/components/skeletons/BookingAnalyticsSkeleton';
+import { BookingAnalyticsSkeleton } from '@/components/skeletons';
+import { ChartBarIncreasing, Database } from '@/icons';
 
 const Dashboard = () => {
   const { dataCounts, formattedDate, analytics, isLoading } = useDashboard();

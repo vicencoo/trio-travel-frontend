@@ -1,10 +1,10 @@
-import { Button } from '@/shared/components/button';
-import { Card } from '@/shared/components/card';
-import { Text } from '@/shared/components/text';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Button } from '@/components/button';
+import { Card } from '@/components/card';
+import { Text } from '@/components/text';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import type { CheckinDateFilterProps } from './types';
+import { ChevronLeft, ChevronRight } from '@/icons';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export const CheckinDateFilter = ({
   isCurrentDay,
@@ -17,7 +17,12 @@ export const CheckinDateFilter = ({
   stats,
 }: CheckinDateFilterProps) => {
   return (
-    <Card padding='p-5'>
+    <Card
+      padding='p-5'
+      bgColor='bg-white dark:bg-slate-700'
+      borderColor='dark:border-slate-600'
+      className='overflow-visible z-[9998]'
+    >
       <div className='flex md:flex-row flex-col w-full md:items-center items-start md:justify-between md:gap-0 gap-5 select-none'>
         <div className='flex flex-col gap-1 truncate'>
           <Text
@@ -43,6 +48,7 @@ export const CheckinDateFilter = ({
             <DatePicker
               selected={dateFilter}
               onChange={handleDateChange}
+              withPortal
               dateFormat='yyyy-MM-dd'
               placeholderText='Select date and time'
               showMonthDropdown

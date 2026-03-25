@@ -1,5 +1,6 @@
-import { Text } from '@/shared/components/text';
+import { Text } from '@/components/text';
 import type { StatsCardProps } from './types';
+import { Icon } from '@/components/icon';
 import {
   House,
   Map,
@@ -7,8 +8,7 @@ import {
   TicketsPlane,
   TrendingDown,
   TrendingUp,
-} from 'lucide-react';
-import { Icon } from '@/shared/components/icon';
+} from '@/icons';
 
 const cardDetails: Record<string, { icon: React.ElementType; color: string }> =
   {

@@ -1,5 +1,5 @@
-import { axios } from '@/api';
-import type { PropertiesResponse } from '@/shared/types/responseTypes';
+import { propertyService } from '@/services/propertyServices';
+import type { PropertiesResponse } from '@/types/responseTypes';
 import { useEffect, useState, type ChangeEvent } from 'react';
 
 export const usePropertiesPage = () => {
@@ -8,6 +8,22 @@ export const usePropertiesPage = () => {
   const [toast, setToast] = useState<string | null>(null);
   const [status, setStatus] = useState<'all' | 'active' | 'draft'>('all');
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [filter, setFilter] = useState({
+    value: '',
+    applied: '',
+  });
+
+  const handleChangeFilter = (value: string) => {
+    setFilter((prev) => ({ ...prev, value }));
+  };
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setFilter((prev) => ({ ...prev, applied: prev.value }));
+    }, 500);
+
+    return () => clearTimeout(handler);
+  }, [filter.value]);
 
   const handleStatusChange = (type: 'all' | 'active' | 'draft') => {
     setStatus(type);
@@ -20,9 +36,12 @@ export const usePropertiesPage = () => {
 
   const getProperties = async () => {
     try {
-      const res = await axios(
-        `/properties?limit=6&page=${pageNumber}&status=${status}`,
-      );
+      const res = await propertyService.getAll({
+        limit: 6,
+        page: pageNumber,
+        status,
+        searchQuery: filter.applied,
+      });
 
       if (res.data) setProperties(res.data);
     } catch (err) {
@@ -37,7 +56,7 @@ export const usePropertiesPage = () => {
       await getProperties();
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageNumber, status]);
+  }, [pageNumber, status, filter.applied]);
 
   const showToast = (message: string) => {
     setToast(message);
@@ -48,7 +67,7 @@ export const usePropertiesPage = () => {
 
   const renewProperty = async (propertyId: string | number) => {
     try {
-      const res = await axios.post(`/admin/renew-property?id=${propertyId}`);
+      const res = await propertyService.renewProperty(propertyId);
       if (res.data) {
         await getProperties();
         showToast('Prona u rifreskua me sukses!');
@@ -58,13 +77,13 @@ export const usePropertiesPage = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     try {
       const confirmation = window.confirm(
         'A jeni te sigurt se doni ta fshini kete prone?',
       );
       if (confirmation) {
-        await axios.post(`/admin/delete-property?id=${id}`);
+        await propertyService.deleteProperty(id);
         await getProperties();
       }
     } catch (err) {
@@ -72,9 +91,9 @@ export const usePropertiesPage = () => {
     }
   };
 
-  const publishOrDraft = async (id: string) => {
+  const publishOrDraft = async (id: number) => {
     try {
-      await axios.post(`/admin/property/publishOrDraft?id=${id}`);
+      await propertyService.publishOrDraft(id);
       await getProperties();
     } catch (err) {
       console.error(err);
@@ -92,5 +111,6 @@ export const usePropertiesPage = () => {
     handleStatusChange,
     status,
     isLoading,
+    handleChangeFilter,
   };
 };

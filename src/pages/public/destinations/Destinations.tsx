@@ -1,10 +1,10 @@
-import { useScrollOnChange } from '@/shared/hooks/useScrollOnChange';
+import { useScrollOnChange } from '@/hooks/useScrollOnChange';
 import { DestinationHero } from './DestinationHero';
 import { useDestinations } from './useDestinations';
-import { Text } from '@/shared/components/text';
-import { DestinationCard } from '@/shared/components/destinationCard';
-import { Pagination } from '@/shared/components/pagination';
-import { Image } from '@/shared/components/image';
+import { Text } from '@/components/text';
+import { DestinationCard } from '@/components/destinationCard';
+import { Pagination } from '@/components/pagination';
+import { Image } from '@/components/image';
 
 const message = encodeURIComponent(`
 Përshëndetje
@@ -53,9 +53,10 @@ export const Destinations = () => {
             <div className='flex flex-col items-center gap-8'>
               <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5'>
                 {data &&
-                  data.destinations.map((destination) => {
+                  data.destinations.map((destination, idx) => {
                     return (
                       <DestinationCard
+                        index={idx}
                         key={destination.id}
                         destination={destination}
                       />
@@ -97,6 +98,7 @@ export const Destinations = () => {
             <span className='flex justify-center'>
               <Image
                 img='/images/confused.png'
+                alt='Confused Image'
                 className='h-[150px] md:h-[280px]'
               />
             </span>

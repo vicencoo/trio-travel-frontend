@@ -1,8 +1,8 @@
-import { axios } from '@/api';
-import type { DestinationFieldError } from '@/shared/types/errorTypes';
-import type { DestinationResponse } from '@/shared/types/responseTypes';
-import type { DestinationImages, DestinationTypes } from '@/shared/types/types';
-import { DESTINATION_DATA } from '@/utils/defaults';
+import { DESTINATION_DATA } from '@/defaults/destination';
+import { destinationServices } from '@/services/destinationServices';
+import type { DestinationFieldError } from '@/types/errorTypes';
+import type { DestinationResponse } from '@/types/responseTypes';
+import type { DestinationImages, DestinationTypes } from '@/types/types';
 import { useEffect, useState, type ChangeEvent } from 'react';
 
 export const useDestinationManager = () => {
@@ -14,13 +14,16 @@ export const useDestinationManager = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [errors, setErrors] = useState<DestinationFieldError>({});
   const [page, setPage] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getDestinations = async () => {
     try {
-      const res = await axios(`/destinations?limit=6&page=${page}`);
+      const res = await destinationServices.getAll({ limit: 6, page });
       if (res.data) setDestinations(res.data);
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -85,13 +88,13 @@ export const useDestinationManager = () => {
     }));
   };
 
-  const handleDeleteDestination = async (id: string) => {
+  const handleDeleteDestination = async (id: number) => {
     try {
       const confirm = window.confirm(
         'Jeni të sigurt që doni ta fshini këtë destinacion?',
       );
       if (confirm) {
-        await axios.post(`/admin/delete-destination?destination_id=${id}`);
+        await destinationServices.delete(id);
         getDestinations();
       }
     } catch (err) {
@@ -122,11 +125,9 @@ export const useDestinationManager = () => {
           }
         });
 
-      const url = data.id
-        ? `/admin/edit-destination?destination_id=${data.id}`
-        : '/admin/add-destination';
-
-      const res = await axios.post(url, formData);
+      const res = data.id
+        ? await destinationServices.edit(data.id, formData)
+        : await destinationServices.add(formData);
       if (res.data) {
         handleOpenModal();
         getDestinations();
@@ -163,5 +164,6 @@ export const useDestinationManager = () => {
     handlePageChange,
     page,
     handleEditDestination,
+    isLoading,
   };
 };

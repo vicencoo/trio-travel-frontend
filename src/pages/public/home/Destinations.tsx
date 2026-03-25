@@ -1,10 +1,9 @@
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { DestinationsProps } from './types';
-import { Image } from '@/shared/components/image';
-import { Text } from '@/shared/components/text';
+import { Image } from '@/components/image';
+import { Text } from '@/components/text';
+import { ChevronLeft, ChevronRight } from '@/icons';
 
 const VISIBLE_COUNT = 8;
 
@@ -46,12 +45,12 @@ export const Destinations = ({ destinations }: DestinationsProps) => {
     }
   }
   return (
-    <div className='flex items-center gap-3'>
+    <div className='flex items-center gap-3 select-none'>
       <div
         className='flex p-1 bg-gray-200 rounded-full items-center justify-center cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform'
         onClick={prev}
       >
-        <ChevronLeftIcon fontSize='medium' />
+        <ChevronLeft fontSize='medium' />
       </div>
       <div className='flex items-center sm:justify-between justify-center sm:gap-0 gap-10 w-full'>
         {visibleItems.slice(0, visibleCount).map((destination) => {
@@ -67,8 +66,9 @@ export const Destinations = ({ destinations }: DestinationsProps) => {
             >
               <Image
                 src={image}
+                alt={`${destination.country} ${destination.city}`}
                 className='w-[100px] h-[130px] object-cover rounded-full cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform'
-                onClick={() => navigate('/destinations')}
+                onClick={() => navigate('/destinacionet')}
               />
               <Text
                 text={destination.city}
@@ -84,7 +84,7 @@ export const Destinations = ({ destinations }: DestinationsProps) => {
         className='flex p-1 bg-slate-200 rounded-full items-center justify-center cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform'
         onClick={next}
       >
-        <ChevronRightIcon />
+        <ChevronRight />
       </div>
     </div>
   );

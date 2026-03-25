@@ -1,5 +1,5 @@
-import type { PackageFieldError } from '@/shared/types/errorTypes';
-import type { PackageImage, TouristPackage } from '@/shared/types/types';
+import type { PackageFieldError } from '@/types/errorTypes';
+import type { PackageImage, TouristPackage } from '@/types/types';
 import type { SelectChangeEvent } from '@mui/material';
 import type { Dispatch, SetStateAction } from 'react';
 
@@ -20,7 +20,7 @@ export type PackageFormProps = {
 export type PackageItemProps = {
   packageItem: TouristPackage;
   handleEditPackage: (packageItem: TouristPackage) => void;
-  handleDeletePackage: (id: string) => void;
-  handleRenew: (id: string) => void;
-  publishOrDraftPackage: (id: string) => void;
+  handleDeletePackage: (id: number) => void;
+  handleRenew: (id: number) => void;
+  publishOrDraftPackage: (id: number) => void;
 };

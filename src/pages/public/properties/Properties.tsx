@@ -1,11 +1,11 @@
 import { useProperty } from './useProperty';
 import { PropertyHero } from './PropertyHero';
 import { PropertyFilters } from './PropertyFilters';
-import { useScrollOnChange } from '@/shared/hooks/useScrollOnChange';
-import { PropertyCardSkeleton } from '@/shared/components/skeletons';
-import { PropertyCard } from '@/shared/components/propertyCard';
-import { Pagination } from '@/shared/components/pagination';
-import { NoPropertyFound } from '@/shared/components/noPropertyFound';
+import { useScrollOnChange } from '@/hooks/useScrollOnChange';
+import { PropertyCardSkeleton } from '@/components/skeletons';
+import { PropertyCard } from '@/components/propertyCard';
+import { Pagination } from '@/components/pagination';
+import { NoPropertyFound } from '@/components/noPropertyFound';
 
 export const Properties = () => {
   const {
@@ -44,8 +44,12 @@ export const Properties = () => {
         <div className='flex flex-col gap-10 items-center'>
           <div className='container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:gap-4 gap-5'>
             {data &&
-              data.properties.map((property) => (
-                <PropertyCard key={property.id} property={property} />
+              data.properties.map((property, idx) => (
+                <PropertyCard
+                  key={property.id}
+                  index={idx}
+                  property={property}
+                />
               ))}
           </div>
           <Pagination

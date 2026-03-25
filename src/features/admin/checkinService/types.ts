@@ -1,4 +1,4 @@
-import type { SoldTicket } from '@/shared/types/types';
+import type { SoldTicket } from '@/types/types';
 
 type Stats = {
   completedTickets?: number;
@@ -26,7 +26,7 @@ export type CheckinDateFilterProps = {
 export type CheckinTicketCardProps = {
   ticket: SoldTicket;
   openModal: (ticket: SoldTicket) => void;
-  loadingId: number | 'refresh' | null;
+  loadingId: number | 'loading' | 'refresh' | null;
   toggleStatus: (id: number) => void;
 };
 

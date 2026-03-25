@@ -1,10 +1,10 @@
-import { Modal } from '@/shared/components/modal';
-import { Text } from '@/shared/components/text';
+import { Modal } from '@/components/modal';
+import { Text } from '@/components/text';
 import type { RenewInsuranceModalProps } from './types';
-import { Close } from '@mui/icons-material';
-import { Button } from '@/shared/components/button';
+import { Button } from '@/components/button';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Close } from '@/icons';
 
 export const RenewInsuranceModal = ({
   closeModal,

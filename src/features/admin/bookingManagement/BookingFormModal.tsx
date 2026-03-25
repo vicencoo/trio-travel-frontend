@@ -1,11 +1,11 @@
-import { Modal } from '@/shared/components/modal';
-import { LayersPlus } from 'lucide-react';
-import { Text } from '@/shared/components/text';
-import { Input } from '@/shared/components/input';
-import { Button } from '@/shared/components/button';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import type { WorkFormModalProps } from './types';
+import { Modal } from '@/components/modal';
+import { LayersPlus } from '@/icons';
 
 export const BookingFormModal = ({
   isModalOpen,
@@ -52,6 +52,7 @@ export const BookingFormModal = ({
             onChange={(date: Date | null) =>
               handleChange('ticket_date', date ? date.toISOString() : '')
             }
+            withPortal
             showTimeSelect
             timeFormat='HH:mm'
             timeIntervals={10}

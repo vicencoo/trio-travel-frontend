@@ -1,14 +1,14 @@
-import { IconBox } from '@/shared/components/iconBox';
-import { Text } from '@/shared/components/text';
-import { STATISTIC_INFO } from '@/utils';
-import RealEstateAgentOutlinedIcon from '@mui/icons-material/RealEstateAgentOutlined';
+import { IconBox } from '@/components/iconBox';
+import { Text } from '@/components/text';
+import { STATISTIC_INFO } from '@/constants/statistics';
+import { RealEstateAgentOutlined } from '@/icons';
 
 export const AuthSidePanel = () => {
   return (
     <div className='hidden md:flex flex-col gap-7'>
       <div className='flex items-center gap-2 '>
         <IconBox
-          icon={<RealEstateAgentOutlinedIcon className='text-white' />}
+          icon={<RealEstateAgentOutlined className='text-white' />}
           bgColor='bg-gradient-to-br from-teal via-teal to-teal2'
         />
         <div>

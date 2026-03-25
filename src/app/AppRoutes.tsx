@@ -15,7 +15,6 @@ import { DestinationManager } from '../pages/admin/destinationManager/Destinatio
 import { AuthPage } from '@/pages/auth/authPage/AuthPage';
 import { useLayoutEffect } from 'react';
 import { setUpInterceptors } from '@/api/axios';
-import { ProtectedRoute } from '@/shared/guards/ProtectedRoute';
 import { AdminLayout } from '@/layout/AdminLayout';
 import { UserLayout } from '@/layout/UserLayout';
 import DashboardPage from '@/pages/admin/DashboardPage';
@@ -23,6 +22,8 @@ import BookingManagementPage from '@/pages/admin/BookingManagementPage';
 import CheckinServicePage from '@/pages/admin/CheckinServicePage';
 import InsuranceManagementPage from '@/pages/admin/InsuranceManagementPage';
 import InsuranceExpirationPage from '@/pages/admin/InsuranceExpirationPage';
+import { ProtectedRoute } from '@/guards/ProtectedRoute';
+import { UserRole } from '@/types/user';
 
 export const AppRoutes = () => {
   const navigate = useNavigate();
@@ -41,20 +42,17 @@ export const AppRoutes = () => {
       > */}
       <Route element={<UserLayout />}>
         <Route path='/' element={<Home />} />
-        <Route path='/packages' element={<Packages />} />
-        <Route path='/destinations' element={<Destinations />} />
-        <Route path='/planeTickets' element={<PlaneTickets />} />
-        <Route path='/properties' element={<Properties />} />
+        <Route path='/paketa-turistike' element={<Packages />} />
+        <Route path='/destinacionet' element={<Destinations />} />
+        <Route path='/bileta-avioni' element={<PlaneTickets />} />
+        <Route path='/pronat' element={<Properties />} />
         <Route path='/contact' element={<Contact />} />
-        <Route
-          path='/properties/view-property/:id'
-          element={<ViewProperty />}
-        />
-        <Route path='/packages/view-package/:id' element={<ViewPackage />} />
+        <Route path='/pronat/:slug' element={<ViewProperty />} />
+        <Route path='/paketa-turistike/:slug' element={<ViewPackage />} />
       </Route>
       {/* </Route> */}
 
-      <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+      <Route element={<ProtectedRoute allowedRoles={[UserRole.ADMIN]} />}>
         <Route element={<AdminLayout />}>
           <Route path='/admin/dashboard' element={<DashboardPage />} />
           <Route

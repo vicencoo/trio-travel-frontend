@@ -1,6 +1,6 @@
-import { axios } from '@/api';
 import { useEffect, useState } from 'react';
 import type { AnalyticsResponse, DataCountsResponse } from './types';
+import { dashboardServices } from '@/services/dashboardServices';
 
 export const useDashboard = () => {
   const [dataCounts, setDataCounts] = useState<DataCountsResponse | null>(null);
@@ -16,7 +16,7 @@ export const useDashboard = () => {
 
   const getDataCounts = async () => {
     try {
-      const res = await axios('/admin/dashboard');
+      const res = await dashboardServices.getCounts();
       setDataCounts(res.data);
     } catch (err) {
       console.error(err);
@@ -25,9 +25,8 @@ export const useDashboard = () => {
 
   const getAnalytics = async () => {
     try {
-      const res = await axios('/admin/analytics');
+      const res = await dashboardServices.getAnalytics();
       setAnalytics(res.data);
-      console.log('Analytics:', res.data);
     } catch (err) {
       console.error(err);
     } finally {

@@ -1,13 +1,13 @@
-import { Plane } from 'lucide-react';
-import SearchIcon from '@mui/icons-material/Search';
 import { usePlaneTickets } from './usePlaneTickets';
-import { Text } from '@/shared/components/text';
-import { Input } from '@/shared/components/input';
-import { Button } from '@/shared/components/button';
-import { PlaneTicketSkeleton } from '@/shared/components/skeletons';
-import { FlightOfferCard } from '@/shared/components/flightOfferCard';
-import { NoDataFound } from '@/shared/components/noDataFound';
-import { ViewAllButton } from '@/shared/components/viewAllButton';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
+import { PlaneTicketSkeleton } from '@/components/skeletons';
+import { FlightOfferCard } from '@/components/flightOfferCard';
+import { NoDataFound } from '@/components/noDataFound';
+import { ViewAllButton } from '@/components/viewAllButton';
+import { Plane, Search } from '@/icons';
+import { Image } from '@/components/image';
 
 export const PlaneTickets = () => {
   const {
@@ -26,31 +26,38 @@ Do të doja disa sugjerime për udhëtimin tim. Mund të më ndihmoni, ju lutem?
 
   return (
     <div className='flex flex-col gap-10 pb-10'>
-      <div className='bg-gradient-to-r from-indigo-600 to-purple-600 py-9 md:py-14 relative md:mb-4 mb-20'>
-        <div className='flex flex-col gap-5 items-center text-center text-white container'>
+      <div className='flex flex-col w-full md:h-[300px] h-[250px] relative md:mb-4 mb-20'>
+        <Image
+          img='/images/plane-ticket-cover.webp'
+          alt='Plane Tickets Hero Image'
+          className='absolute inset-0 w-full h-full object-cover'
+        />
+
+        <div className='absolute inset-0 bg-black/50' />
+
+        <div className='relative z-10 flex flex-col gap-5 items-center justify-center text-center text-white container h-full'>
           <Plane className='w-14 h-14' />
           <Text text={'Eksploroni Botën'} size='text-5xl' font='font-medium' />
           <Text
-            text={
-              'Zbuloni oferta të mrekullueshme fluturimesh drejt destinacioneve në mbarë botën. Rezervoni aventurën tuaj të radhës sot!'
-            }
+            text='Zbuloni oferta të mrekullueshme fluturimesh drejt destinacioneve në mbarë botën. Rezervoni aventurën tuaj të radhës sot!'
             size='md:text-xl text-sm'
             font='font-medium'
             className='flex'
           />
         </div>
-        <div className='container absolute md:-bottom-8 -bottom-24 '>
+        {/* Search box */}
+        <div className='container absolute md:-bottom-8 -bottom-24 left-1/2 -translate-x-1/2'>
           <div className='bg-white rounded-xl shadow-md p-3 flex flex-col md:flex-row gap-3'>
             <Input
               placeholder='Kërkoni destinacion ose aeroport (p.sh. Paris, BUD, Romë, AMS)'
               className='flex-1'
               onChange={handleSearchChange}
-              icon={<SearchIcon fontSize='small' className='text-gray-500' />}
+              icon={<Search size={16} className='text-gray-500' />}
             />
             <Button
               name='kërko biletë'
               onClick={handleSearchClick}
-              endIcon={<SearchIcon fontSize='small' />}
+              endIcon={<Search size={14} />}
               bgColor='#4f46e5'
               bgHover='#9333ea'
               color='white'
@@ -71,8 +78,8 @@ Do të doja disa sugjerime për udhëtimin tim. Mund të më ndihmoni, ju lutem?
       ) : planeTickets && planeTickets.tickets.length > 0 ? (
         <div className='flex flex-col gap-10'>
           <div className='container grid grid-cols-1 md:grid-cols-2 gap-4'>
-            {planeTickets.tickets.map((ticket) => (
-              <FlightOfferCard ticket={ticket} key={ticket.id} />
+            {planeTickets.tickets.map((ticket, idx) => (
+              <FlightOfferCard ticket={ticket} index={idx} key={ticket.id} />
             ))}
           </div>
 
@@ -93,7 +100,7 @@ Do të doja disa sugjerime për udhëtimin tim. Mund të më ndihmoni, ju lutem?
       )}
 
       <div className='container'>
-        <div className='flex flex-col bg-white rounded-lg border shadow-lg p-5 md:p-10 gap-3 md:gap-6 text-center'>
+        <div className='flex flex-col bg-white rounded-lg border border-blue-400/50 shadow-lg shadow-blue-100 p-5 md:p-10 gap-3 md:gap-6 text-center'>
           <Text
             text={'Keni nevojë për ndihmë në planifikimin e udhëtimit tuaj?'}
             size='md:text-3xl text-xl'
@@ -105,7 +112,7 @@ Do të doja disa sugjerime për udhëtimin tim. Mund të më ndihmoni, ju lutem?
             }
             size='md:text-lg'
             font='font-medium'
-            className='text-gray-500'
+            className='text-gray-500 tracking-wide'
           />
           <span className='flex w-full justify-center'>
             <Button

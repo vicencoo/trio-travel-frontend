@@ -1,6 +1,6 @@
-import { Image } from '@/shared/components/image';
-import { Text } from '@/shared/components/text';
-import { BadgeCheck, MapPin, Users } from 'lucide-react';
+import { Image } from '@/components/image';
+import { Text } from '@/components/text';
+import { BadgeCheck, MapPin, Users } from '@/icons';
 
 const INFO = [
   { id: 1, icon: <Users />, text: 'Itinerare të personalizuara' },
@@ -24,10 +24,13 @@ Faleminderit! 😊
 
 export const Advertise = () => {
   return (
-    <div className='relative w-full h-[550px] rounded-3xl overflow-hidden select-none'>
+    <div className='relative w-full h-[80vh] rounded-3xl overflow-hidden select-none'>
       <Image
-        img='/images/advertise.png'
-        className='w-full h-full object-cover'
+        img='/images/advertise.webp'
+        alt='Advertise image'
+        loading='eager'
+        priority='high'
+        className='w-full h-fit object-cover'
       />
       <div className='absolute inset-0 bg-black/40' />
 

@@ -1,5 +1,5 @@
-import type { InsuranceFieldError } from '@/shared/types/errorTypes';
-import type { Insurance } from '@/shared/types/types';
+import type { InsuranceFieldError } from '@/types/errorTypes';
+import type { Insurance } from '@/types/types';
 
 export type InsuranceModalProps = {
   isModalOpen: boolean;

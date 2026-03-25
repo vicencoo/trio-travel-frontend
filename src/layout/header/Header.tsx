@@ -1,12 +1,13 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
-import { useDisclosure } from '@/shared/hooks/useDisclosure';
-// import { Sidebar } from '../sidebar';
-import { HEADER_ITEMS } from '@/utils';
-import { Image } from '@/shared/components/image';
-import { Text } from '@/shared/components/text';
-import { useAuth } from '@/shared/context/authContext';
+import { useDisclosure } from '@/hooks/useDisclosure';
+import { Image } from '@/components/image';
+import { Text } from '@/components/text';
+import { useAuth } from '@/context/authContext';
+import {
+  KeyboardArrowDownOutlinedIcon,
+  KeyboardArrowUpOutlinedIcon,
+} from '@/icons';
+import { HEADER_ITEMS } from '@/constants/navigation';
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -15,15 +16,13 @@ export const Header = () => {
 
   const { ref: wrapperRef, isOpen, toggle } = useDisclosure();
   return (
-    <div className='flex items-center w-full border-b shadow-lg pl-14 pr-4 py-3 md:py-3 justify-between sticky top-0 z-[9999] bg-white/95'>
-      <div className='flex items-center gap-4 '>
-        {/* <Sidebar items={SIDEBAR_ITEMS} /> */}
-        <Image
-          img='/images/TrioTravel.png'
-          className='min-w-[100px] max-w-[100px] h-[20px] object-cover cursor-pointer hover:scale-110 transition-all duration-300 will-change-transform'
-          onClick={() => navigate('/')}
-        />
-      </div>
+    <div className='flex items-center w-full border-b shadow-lg py-3 px-8 justify-between sticky top-0 z-[9999] bg-white/95'>
+      <Image
+        img='/images/TrioTravel.webp'
+        alt='Trio Travel Agency Logo'
+        className='min-w-[100px] max-w-[100px] h-[20px] object-cover cursor-pointer hover:scale-110 transition-all duration-300 will-change-transform'
+        onClick={() => navigate('/')}
+      />
 
       <div className='hidden md:flex w-full justify-center items-center gap-7 pr-10'>
         {HEADER_ITEMS.map((item) => (

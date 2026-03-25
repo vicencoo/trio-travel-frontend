@@ -1,11 +1,11 @@
-import { Modal } from '@/shared/components/modal';
+import { Modal } from '@/components/modal';
 import type { InsuranceModalProps } from './types';
-import { Button } from '@/shared/components/button';
-import { LayersPlus } from 'lucide-react';
-import { Text } from '@/shared/components/text';
-import { Input } from '@/shared/components/input';
+import { Button } from '@/components/button';
+import { Text } from '@/components/text';
+import { Input } from '@/components/input';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { LayersPlus } from '@/icons';
 
 export const InsuranceModal = ({
   isModalOpen,

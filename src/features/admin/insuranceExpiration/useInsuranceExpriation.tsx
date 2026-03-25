@@ -1,8 +1,7 @@
-import { axios } from '@/api';
-import type { InsurancesResponse } from '@/shared/types/responseTypes';
-import type { Insurance } from '@/shared/types/types';
+import { insuranceServices } from '@/services/insuranceServices';
+import type { InsurancesResponse } from '@/types/responseTypes';
+import type { Insurance } from '@/types/types';
 import { useEffect, useState, type ChangeEvent } from 'react';
-
 const PAGE_LIMIT = 7;
 
 export const useInsuranceExpiration = () => {
@@ -23,6 +22,7 @@ export const useInsuranceExpiration = () => {
     value: '',
     applied: '',
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleChangeFilter = (value: string) => {
     setFilter((prev) => ({ ...prev, value }));
@@ -49,18 +49,21 @@ export const useInsuranceExpiration = () => {
     return () => clearTimeout(handler);
   }, [filter.value]);
 
-  console.log(filter.applied);
-
   const getExpiringInsurances = async () => {
     try {
-      const res = await axios.get(
-        `/admin/expiring-insurances?days=${selectedInterval}&limit=${PAGE_LIMIT}&page=${page}&searchQuery=${filter.applied}`,
-      );
+      const res = await insuranceServices.expiringInsurances({
+        days: selectedInterval,
+        limit: PAGE_LIMIT,
+        page,
+        searchQuery: filter.applied,
+      });
       if (res.data) {
         setData(res.data);
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -93,9 +96,7 @@ export const useInsuranceExpiration = () => {
 
   const handleRenewInsurance = async (id: number) => {
     try {
-      const res = await axios.post(`/admin/renew-insurance?insuranceId=${id}`, {
-        expiration_date: newExpirationDate,
-      });
+      const res = await insuranceServices.renewInsurance(id, newExpirationDate);
       if (res.data) {
         closeModal();
         closePanel();
@@ -124,5 +125,6 @@ export const useInsuranceExpiration = () => {
     page,
     handleChangeFilter,
     filter,
+    isLoading,
   };
 };

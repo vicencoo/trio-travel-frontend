@@ -1,6 +1,6 @@
-import { Text } from '@/shared/components/text';
+import { Text } from '@/components/text';
 import { FooterInfo } from './FooterInfo';
-import { Map } from '@/shared/components/map';
+import { Map } from '@/components/map';
 
 const SERVICES = [
   { id: 1, text: 'Plane Tickets' },
@@ -11,8 +11,9 @@ const SERVICES = [
 
 export const Footer = () => {
   return (
-    <div className='container border-t border-gray-300 py-8'>
-      <div className='grid grid-cols-1 md:grid-cols-3 border-b border-gray-500 pb-5 md:gap-10 gap-5'>
+    <div className='flex flex-col w-full border-t border-gray-300 py-8 md:gap-10 gap-5'>
+      {/* <div className=' container '> */}
+      <div className=' container grid grid-cols-1 md:grid-cols-3 border-b border-gray-500 md:gap-10 gap-5 pb-5'>
         <FooterInfo />
 
         <div className='flex flex-col gap-4 md:mx-auto mx-0 md:items-start items-center'>
@@ -22,7 +23,7 @@ export const Footer = () => {
               <Text
                 text={service.text}
                 key={service.id}
-                className='hover:underline w-fit text-gray-400 cursor-pointer hover:text-gray-700 transition-colors duration-300'
+                className='hover:underline w-fit text-gray-600 cursor-pointer hover:text-gray-700 transition-colors duration-300'
                 font='font-medium'
               />
             ))}
@@ -37,5 +38,6 @@ export const Footer = () => {
         </Text>
       </span>
     </div>
+    // </div>
   );
 };

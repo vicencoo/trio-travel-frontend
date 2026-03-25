@@ -1,8 +1,8 @@
-import { axios } from '@/api';
-import type { PropertiesResponse } from '@/shared/types/responseTypes';
+import { propertyService } from '@/services/propertyServices';
+import type { PropertiesResponse } from '@/types/responseTypes';
 import { useEffect, useState, type ChangeEvent } from 'react';
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 12;
 
 export const useProperty = () => {
   const [data, setData] = useState<PropertiesResponse | null>(null);
@@ -34,9 +34,12 @@ export const useProperty = () => {
   useEffect(() => {
     const getProperties = async () => {
       try {
-        const res = await axios(
-          `/properties?limit=${ITEMS_PER_PAGE}&page=${pageNumber}&searchQuery=${searchQuery}&listingType=${listingType}`,
-        );
+        const res = await propertyService.getAll({
+          limit: ITEMS_PER_PAGE,
+          page: pageNumber,
+          searchQuery,
+          listingType,
+        });
         if (res.data) setData(res.data);
       } catch (err) {
         console.error(err);

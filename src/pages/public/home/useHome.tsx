@@ -1,10 +1,13 @@
-import { axios } from '@/api';
+import { destinationServices } from '@/services/destinationServices';
+import { packageServices } from '@/services/packageServices';
+import { propertyService } from '@/services/propertyServices';
+import { ticketServices } from '@/services/ticketServices';
 import type {
   AllTicketsResponse,
   PackageResponse,
   PropertiesResponse,
-} from '@/shared/types/responseTypes';
-import type { DestinationTypes } from '@/shared/types/types';
+} from '@/types/responseTypes';
+import type { DestinationTypes } from '@/types/types';
 import { useEffect, useState } from 'react';
 
 const PACKAGE_LIMIT = 6;
@@ -21,7 +24,7 @@ export const useHome = () => {
 
   const getDestinations = async () => {
     try {
-      const res = await axios('/destinations');
+      const res = await destinationServices.getAll();
       if (res.data) setDestinations(res.data);
     } catch (err) {
       console.error(err);
@@ -30,7 +33,7 @@ export const useHome = () => {
 
   const getPackages = async () => {
     try {
-      const res = await axios(`/packages?packageLimit=${PACKAGE_LIMIT}`);
+      const res = await packageServices.getAll({ packageLimit: PACKAGE_LIMIT });
       if (res.data) setPackages(res.data);
     } catch (err) {
       console.error('Error getting all packages: ', err);
@@ -39,7 +42,7 @@ export const useHome = () => {
 
   const getTickets = async () => {
     try {
-      const res = await axios(`/tickets?limit=${TICKET_LIMIT}`);
+      const res = await ticketServices.getAll({ limit: TICKET_LIMIT });
       if (res.data) setPlaneTicketS(res.data);
     } catch (err) {
       console.error('Error getting all tickets: ', err);
@@ -48,8 +51,7 @@ export const useHome = () => {
 
   const getProperties = async () => {
     try {
-      const res = await axios(`/properties?limit=${PROPERTY_LIMIT}`);
-
+      const res = await propertyService.getAll({ limit: PROPERTY_LIMIT });
       if (res.data) setProperties(res.data);
     } catch (err) {
       console.error('Error getting properties:', err);

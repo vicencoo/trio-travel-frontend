@@ -1,11 +1,11 @@
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Button } from '@/shared/components/button';
-import { Card } from '@/shared/components/card';
-import { Text } from '@/shared/components/text';
+import { Button } from '@/components/button';
+import { Card } from '@/components/card';
+import { Text } from '@/components/text';
 import type { AuthCardProps } from './types';
 import { LoginForm } from './LoginForm';
 import { SignUpForm } from './SignUpForm';
 import { Link } from 'react-router-dom';
+import { LockOutlined } from '@/icons';
 
 export const AuthCard = ({
   authMode,
@@ -102,7 +102,7 @@ export const AuthCard = ({
             className='text-gray-600 text-nowrap'
           />
           <div className='flex items-center gap-1'>
-            <LockOutlinedIcon
+            <LockOutlined
               fontSize='inherit'
               className='text-gray-600'
               sx={{ fontSize: 11 }}

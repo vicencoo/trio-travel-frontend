@@ -1,8 +1,7 @@
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import type { PropertyImagesProps } from './types';
-import { Image } from '@/shared/components/image';
-import type { PropertyImage } from '@/shared/types/types';
+import { Image } from '@/components/image';
+import { ChevronLeft, ChevronRight } from '@/icons';
+import type { PropertyImage } from '@/types/types';
 
 export const PropertyImages = ({
   prev,
@@ -45,14 +44,14 @@ export const PropertyImages = ({
           className='bg-white rounded-full absolute left-2 top-1/2 -translate-y-1/2 p-1 hover:scale-110 transition-all duration-300 will-change-transform'
           onClick={prev}
         >
-          <ChevronLeftIcon fontSize='large' />
+          <ChevronLeft fontSize='large' />
         </button>
 
         <button
           className='bg-white rounded-full absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:scale-110 transition-all duration-300 will-change-transform'
           onClick={next}
         >
-          <ChevronRightIcon fontSize='large' />
+          <ChevronRight fontSize='large' />
         </button>
 
         {/* Image Number */}

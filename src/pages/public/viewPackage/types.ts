@@ -1,4 +1,4 @@
-import type { TouristPackage } from '@/shared/types/types';
+import type { TouristPackage } from '@/types/types';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 
 export type InfoItemProps = {

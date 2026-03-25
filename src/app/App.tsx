@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import { AppRoutes } from './AppRoutes';
 import { ScrollToTop } from '@/utils/scrollToTop';
-import AuthProvider from '@/shared/context/AuthProvider';
+import AuthProvider from '@/context/AuthProvider';
 
 export const App = () => {
   return (

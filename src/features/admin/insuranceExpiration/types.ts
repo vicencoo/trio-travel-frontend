@@ -1,4 +1,4 @@
-import type { Insurance } from '@/shared/types/types';
+import type { Insurance } from '@/types/types';
 
 export type InsuranceCardProps = {
   insurance: Insurance;

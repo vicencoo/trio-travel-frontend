@@ -1,13 +1,14 @@
-import { Button } from '@/shared/components/button';
-import { Input } from '@/shared/components/input';
-import { Text } from '@/shared/components/text';
-import { Search } from 'lucide-react';
+import { Search } from '@/icons';
+import { Button } from '@/components/button';
+import { Input } from '@/components/input';
+import { Text } from '@/components/text';
 import { InsuranceCard } from './InsuranceCard';
 import { useInsuranceExpiration } from './useInsuranceExpriation';
 import { InsuranceDetailPanel } from './InsuranceDetailPanel ';
 import { RenewInsuranceModal } from './RenewInsuranceModal';
-import { Pagination } from '@/shared/components/pagination';
-import { NoDataFound } from '@/shared/components/noDataFound';
+import { Pagination } from '@/components/pagination';
+import { NoDataFound } from '@/components/noDataFound';
+import { Spinner } from '@/components/spinner';
 
 const intervals = [
   { label: 'Të gjitha', value: 'all' },
@@ -35,7 +36,16 @@ const InsuranceExpiration = () => {
     page,
     filter,
     handleChangeFilter,
+    isLoading,
   } = useInsuranceExpiration();
+
+  if (isLoading) {
+    return (
+      <div className='flex w-full h-full items-center justify-center'>
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className={`relative flex flex-col gap-10 pt-5 pb-10 container`}>

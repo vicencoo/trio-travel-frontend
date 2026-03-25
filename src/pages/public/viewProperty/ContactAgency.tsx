@@ -1,12 +1,14 @@
-import RealEstateAgentOutlinedIcon from '@mui/icons-material/RealEstateAgentOutlined';
-import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { useLocation } from 'react-router-dom';
-import { Card } from '@/shared/components/card';
-import { IconBox } from '@/shared/components/iconBox';
-import { Text } from '@/shared/components/text';
-import { Button } from '@/shared/components/button';
+import { Card } from '@/components/card';
+import { IconBox } from '@/components/iconBox';
+import { Text } from '@/components/text';
+import { Button } from '@/components/button';
+import {
+  ArrowRightAlt,
+  InstagramIcon,
+  LocalPhoneIcon,
+  RealEstateAgentOutlined,
+} from '@/icons';
 
 export const ContactAgency = () => {
   const location = useLocation();
@@ -23,7 +25,7 @@ ${currentUrl}
         <IconBox
           bgColor='bg-gradient-to-br from-blue-500 via-indigo-500 to-violet-600'
           size='min-w-14 max-w-14 h-14'
-          icon={<RealEstateAgentOutlinedIcon className='text-white' />}
+          icon={<RealEstateAgentOutlined className='text-white' />}
         />
 
         <div className='flex flex-col gap-1'>
@@ -37,7 +39,7 @@ ${currentUrl}
             text={'Kontaktoni agjencinë tonë për më shumë informacion'}
             size='text-sm'
             font='font-medium'
-            className='text-gray-500'
+            className='text-gray-600'
           />
         </div>
       </div>
@@ -48,13 +50,13 @@ ${currentUrl}
         <IconBox
           bgColor='bg-gradient-to-br from-blue-500 via-indigo-500 to-violet-600'
           size='w-12 h-12'
-          icon={<LocalPhoneOutlinedIcon className='text-white' />}
+          icon={<LocalPhoneIcon className='text-white' />}
         />
         <div className='flex flex-col gap-1'>
           <Text
             text={'TELEFONO TANI'}
             size='text-sm'
-            className='text-gray-500'
+            className='text-gray-600'
           />
           <Text text={'+355 69 690 0916'} font='font-medium' />
         </div>
@@ -72,7 +74,7 @@ ${currentUrl}
           <Text
             text={'SHIKO INSTAGRAMIN'}
             size='text-sm'
-            className='text-gray-500'
+            className='text-gray-600'
           />
           <Text text={'trio_travel_immo_'} font='font-medium' />
         </div>
@@ -80,7 +82,7 @@ ${currentUrl}
       <Button
         name='kontakto agjencinë'
         padding='17px'
-        endIcon={<ArrowRightAltIcon />}
+        endIcon={<ArrowRightAlt />}
         border='transparent'
         borderHover='transparent'
         color='white'
@@ -97,7 +99,7 @@ ${currentUrl}
           text={'Në dispozicion cdo ditë , 9:00 - 21:00'}
           size='text-sm'
           font='font-medium'
-          className='text-gray-500'
+          className='text-gray-600'
         />
       </span>
     </Card>

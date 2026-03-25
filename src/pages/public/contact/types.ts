@@ -1,4 +1,4 @@
-import type { ContactTypes } from '@/shared/types/types';
+import type { ContactTypes } from '@/types/types';
 
 export type ContactFormProps = {
   contact: ContactTypes;

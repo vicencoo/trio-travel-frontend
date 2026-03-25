@@ -1,6 +1,6 @@
-import { Text } from '@/shared/components/text';
+import { Text } from '@/components/text';
 import type { InsuranceRowProps } from './types';
-import { ActionMenu } from '@/shared/components/actionMenu';
+import { ActionMenu } from '@/components/actionMenu';
 
 export const InsuranceRow = ({
   insurance,

@@ -1,5 +1,5 @@
-import { Text } from '@/shared/components/text';
-import { STATISTIC_INFO } from '@/utils';
+import { Text } from '@/components/text';
+import { STATISTIC_INFO } from '@/constants/statistics';
 
 export const StatisticsSection = () => {
   return (

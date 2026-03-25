@@ -1,8 +1,8 @@
-import { Close, Refresh } from '@mui/icons-material';
 import type { InsuranceDetailPanelProps } from './types';
 import './styles.css';
-import { Text } from '@/shared/components/text';
-import { Button } from '@/shared/components/button';
+import { Text } from '@/components/text';
+import { Button } from '@/components/button';
+import { Close, RefreshIcon } from '@/icons';
 
 export const InsuranceDetailPanel = ({
   closePanel,
@@ -92,7 +92,7 @@ export const InsuranceDetailPanel = ({
             <Button
               name='rinovo siguracionin'
               fullWidth
-              icon={<Refresh />}
+              icon={<RefreshIcon />}
               color='white'
               border='transparent'
               bgColor='#f97316'

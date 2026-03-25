@@ -34,7 +34,8 @@
       "@pages/*": ["src/pages/*"],
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"],
-      "@features/*": ["src/features/*"]
+      "@features/*": ["src/features/*"],
+      "@guards/*": ["src/guards/*"]
     }
   },
   "include": ["vite.config.ts"]

@@ -1,14 +1,14 @@
-import TourOutlinedIcon from '@mui/icons-material/TourOutlined';
 import { usePackageManager } from './usePackageManager';
 import { PackageForm } from './PackageForm';
-import { DataTable } from '@/shared/components/dataTable';
-import { PackageManager_COLUMNS } from '@/utils/columns';
+import { DataTable } from '@/components/dataTable';
 import { PackageTableRow } from './PackageTableRow';
-import { Pagination } from '@/shared/components/pagination';
-import { NoDataFound } from '@/shared/components/noDataFound';
-import { Spinner } from '@/shared/components/spinner';
-import { StatusFilter } from '@/shared/components/statusFilter';
-import { AdminPageHeader } from '@/shared/components/adminPageHeader';
+import { Pagination } from '@/components/pagination';
+import { NoDataFound } from '@/components/noDataFound';
+import { Spinner } from '@/components/spinner';
+import { StatusFilter } from '@/components/statusFilter';
+import { AdminPageHeader } from '@/components/adminPageHeader';
+import { TourOutlined } from '@/icons';
+import { PACKAGE_COLUMNS } from './columns';
 
 export const PackageManager = () => {
   const {
@@ -36,7 +36,7 @@ export const PackageManager = () => {
   return (
     <div className='flex flex-col py-10 gap-10 min-h-screen container'>
       <AdminPageHeader
-        icon={<TourOutlinedIcon className='text-white' />}
+        icon={<TourOutlined className='text-white' />}
         iconBgColor='bg-blue-600'
         label='Menaxhimi i Paketave Turistike'
         text='Shiko, modifiko dhe menaxho te gjitha paketave turistike'
@@ -75,7 +75,7 @@ export const PackageManager = () => {
           <DataTable
             headerText='text-white'
             headerBg='bg-blue-600'
-            columns={PackageManager_COLUMNS}
+            columns={PACKAGE_COLUMNS}
             layout='package'
           >
             {packages.packages.map((packageItem) => (

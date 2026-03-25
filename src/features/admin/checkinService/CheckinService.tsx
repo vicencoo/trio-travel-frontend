@@ -1,13 +1,13 @@
-import { Button } from '@/shared/components/button';
-import { IconBox } from '@/shared/components/iconBox';
-import { Text } from '@/shared/components/text';
-import { Refresh } from '@mui/icons-material';
+import { Button } from '@/components/button';
+import { IconBox } from '@/components/iconBox';
+import { Text } from '@/components/text';
 import { useCheckinService } from './useCheckinService';
 import { CheckinDateFilter } from './CheckinDateFilter';
-import { PlaneTakeoff } from 'lucide-react';
-import { NoDataFound } from '@/shared/components/noDataFound';
+import { NoDataFound } from '@/components/noDataFound';
 import { CheckinTicketCard } from './CheckinTicketCard';
 import { CheckinTicketModal } from './CheckinTicketModal';
+import { Spinner } from '@/components/spinner';
+import { PlaneTakeoff, RefreshIcon } from '@/icons';
 
 const CheckinService = () => {
   const {
@@ -28,6 +28,14 @@ const CheckinService = () => {
 
   const isCurrentDay = dateFilter.toDateString() === new Date().toDateString();
 
+  if (loadingId === 'loading') {
+    return (
+      <div className='flex w-full h-full justify-center items-center'>
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <div className='flex flex-col gap-10 pb-10'>
       <div className='flex items-center w-full bg-white dark:bg-slate-700 container py-3 justify-between border-b border-slate-200/50 dark:border-slate-700/50'>
@@ -47,7 +55,7 @@ const CheckinService = () => {
         <Button
           name='Rifresko'
           padding='5px 18px'
-          icon={<Refresh />}
+          icon={<RefreshIcon />}
           border='rgb(100 116 139 / 1)'
           bgColor='rgb(203 213 225 / 0.6)'
           bgHover='rgb(203 213 225 / 0.6)'

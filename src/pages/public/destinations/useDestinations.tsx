@@ -1,7 +1,6 @@
-import { axios } from '@/api';
-import type { DestinationResponse } from '@/shared/types/responseTypes';
+import { destinationServices } from '@/services/destinationServices';
+import type { DestinationResponse } from '@/types/responseTypes';
 import { useEffect, useState, type ChangeEvent } from 'react';
-
 const DESTINATION_LIMIT = 12;
 
 export const useDestinations = () => {
@@ -14,9 +13,10 @@ export const useDestinations = () => {
 
   const getDestinations = async () => {
     try {
-      const res = await axios(
-        `/destinations?limit=${DESTINATION_LIMIT}&page=${page}`,
-      );
+      const res = await destinationServices.getAll({
+        limit: DESTINATION_LIMIT,
+        page,
+      });
       if (res.data) setData(res.data);
     } catch (err) {
       console.error(err);

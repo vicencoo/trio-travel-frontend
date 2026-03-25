@@ -1,7 +1,4 @@
-import type {
-  LoginFieldError,
-  SignupFieldError,
-} from '@/shared/types/errorTypes';
+import type { LoginFieldError, SignupFieldError } from '@/types/errorTypes';
 
 type LoginData = {
   email?: string;

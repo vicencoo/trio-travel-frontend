@@ -1,10 +1,8 @@
-import { Search } from '@mui/icons-material';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import TuneIcon from '@mui/icons-material/Tune';
 import type { PropertyFiltersTypes } from './types';
-import { Input } from '@/shared/components/input';
-import { Button } from '@/shared/components/button';
-import { Text } from '@/shared/components/text';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
+import { Text } from '@/components/text';
+import { Search, Tune } from '@/icons';
 
 export const PropertyFilters = ({
   handleSearchChange,
@@ -17,14 +15,14 @@ export const PropertyFilters = ({
     <div className='flex flex-col w-full bg-white p-5 shadow-md rounded-lg items-center gap-7'>
       <div className='flex w-full gap-3 flex-col md:flex-row'>
         <Input
-          icon={<Search fontSize='small' className='text-gray-500' />}
+          icon={<Search size={16} className='text-gray-500' />}
           placeholder='Kërko sipas qytetit, lagjes, rrugës ose emrit të pronës'
           className='flex-1 w-full '
           onChange={handleSearchChange}
         />
         <Button
           name='kërko pronë'
-          endIcon={<SearchOutlinedIcon />}
+          endIcon={<Search size={16} />}
           bgColor='#2563eb'
           bgHover='#1d4ed8'
           border='transparent'
@@ -39,7 +37,7 @@ export const PropertyFilters = ({
         <div className='flex w-full items-center gap-2'>
           <div className='flex-1 w-full h-[1px] bg-gray-400' />
           <div className='flex items-center gap-2 select-none'>
-            <TuneIcon fontSize='small' className='text-gray-600' />
+            <Tune fontSize='small' className='text-gray-600' />
             <Text
               text={'Opsione Filtrimi'}
               size='text-sm'

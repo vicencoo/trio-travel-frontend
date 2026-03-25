@@ -1,4 +1,4 @@
-import { Text } from '@/shared/components/text';
+import { Text } from '@/components/text';
 import type { SectionHeaderProps } from './types';
 
 export const SectionHeader = ({ title, text }: SectionHeaderProps) => {
