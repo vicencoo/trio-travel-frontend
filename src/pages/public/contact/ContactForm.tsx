@@ -8,6 +8,7 @@ export const ContactForm = ({
   contact,
   handleChangeContact,
   handleSubmit,
+  isLoading,
 }: ContactFormProps) => {
   return (
     <Card padding='px-5 py-3'>
@@ -53,6 +54,7 @@ export const ContactForm = ({
         border='transparent'
         borderHover='transparent'
         onClick={handleSubmit}
+        loading={isLoading}
       />
     </Card>
   );

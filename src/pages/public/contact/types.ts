@@ -4,4 +4,5 @@ export type ContactFormProps = {
   contact: ContactTypes;
   handleChangeContact: (key: string, value: string) => void;
   handleSubmit: () => void;
+  isLoading: boolean;
 };

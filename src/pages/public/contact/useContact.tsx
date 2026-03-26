@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 export const useContact = () => {
   const [contact, setContact] = useState<ContactTypes>(DEFAULT_CONTACT);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleChangeContact = (key: string, value: string) => {
     setContact((prev) => ({
@@ -14,12 +15,15 @@ export const useContact = () => {
   };
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     try {
       const res = await axios.post('/send-email', contact);
       if (res.data) setContact(DEFAULT_CONTACT);
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
-  return { handleChangeContact, contact, handleSubmit };
+  return { handleChangeContact, contact, handleSubmit, isLoading };
 };

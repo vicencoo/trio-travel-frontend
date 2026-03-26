@@ -4,7 +4,8 @@ import { InfoCard } from './InfoCard';
 import { useContact } from './useContact';
 
 export const Contact = () => {
-  const { contact, handleChangeContact, handleSubmit } = useContact();
+  const { contact, handleChangeContact, handleSubmit, isLoading } =
+    useContact();
   return (
     <div className='flex flex-col gap-10 pb-7 md:pb-20'>
       <div className='relative w-full overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 py-12 md:py-20'>
@@ -55,6 +56,7 @@ export const Contact = () => {
           contact={contact}
           handleChangeContact={handleChangeContact}
           handleSubmit={handleSubmit}
+          isLoading={isLoading}
         />
       </div>
     </div>
