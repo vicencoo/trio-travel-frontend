@@ -48,7 +48,12 @@ const CONTACT = [
     url: 'https://facebook.com/agjensi.trio',
     color: 'text-blue-500',
   },
-  { id: 3, icon: <EmailIcon fontSize='small' />, color: 'text-orange-500' },
+  {
+    id: 3,
+    icon: <EmailIcon fontSize='small' />,
+    url: 'mailto:triotravel.imobiliare@gmail.com',
+    color: 'text-orange-500',
+  },
   {
     id: 4,
     icon: <WhatsAppIcon fontSize='small' />,
