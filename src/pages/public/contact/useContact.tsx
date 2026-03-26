@@ -1,3 +1,4 @@
+import { axios } from '@/api';
 import { DEFAULT_CONTACT } from '@/defaults/contact';
 import type { ContactTypes } from '@/types/types';
 import { useState } from 'react';
@@ -14,7 +15,8 @@ export const useContact = () => {
 
   const handleSubmit = async () => {
     try {
-      console.log('contact', contact);
+      const res = await axios.post('/send-email', contact);
+      if (res.data) setContact(DEFAULT_CONTACT);
     } catch (err) {
       console.log(err);
     }
