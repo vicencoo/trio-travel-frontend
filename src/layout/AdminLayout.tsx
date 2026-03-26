@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { DashboardHeader } from './header/DashboardHeader';
 import { useSidebar } from './sidebar/useSidebar';
 import { useToggleDarkMode } from '@/hooks/useToggleDarkMode';
+import { SideBar } from './sidebar/SideBar';
 
 export const AdminLayout = () => {
   const {

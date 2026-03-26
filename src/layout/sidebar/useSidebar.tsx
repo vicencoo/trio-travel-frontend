@@ -22,6 +22,7 @@ export const useSidebar = () => {
     setOpenSubItem(null);
     setIsCollapsed((prev) => !prev);
   };
+
   return {
     isCollapsed,
     toggleCollapse,
