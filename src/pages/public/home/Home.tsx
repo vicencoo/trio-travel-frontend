@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { useHome } from './useHome';
 import { Advertise } from './Advertise';
 import { SectionHeader } from './SectionHeader';
-import { PropertyCard } from '@/components/propertyCard';
-import { PackageCard } from '@/components/packageCard';
-import { FlightOfferCard } from '@/components/flightOfferCard';
+// import { PropertyCard } from '@/components/propertyCard';
+// import { PackageCard } from '@/components/packageCard';
+// import { FlightOfferCard } from '@/components/flightOfferCard';
 import { StatisticsSection } from './StatisticsSection';
 import { Destinations } from './Destinations';
 import { FAQ } from './FAQ';
@@ -23,7 +23,7 @@ export const Home = () => {
             title='Ofertat më të fundit për prona'
             text='Shfleto pronat më të mira në treg'
           />
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+          {/* <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
             {properties.properties.map((property, index) => (
               <PropertyCard
                 property={property}
@@ -31,7 +31,7 @@ export const Home = () => {
                 key={property.id}
               />
             ))}
-          </div>
+          </div> */}
 
           <div className='flex w-full justify-center'>
             <ViewAllButton
@@ -48,7 +48,7 @@ export const Home = () => {
             title='Paketat tona turistike'
             text='Zbuloni eksperienca unike udhëtimi ose na kontaktoni për të krijuar paketën tuaj të personalizuar'
           />
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+          {/* <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
             {packages.packages.map((packageItem, index) => (
               <PackageCard
                 key={packageItem.id}
@@ -56,7 +56,7 @@ export const Home = () => {
                 data={packageItem}
               />
             ))}
-          </div>
+          </div> */}
           <div className='flex justify-center w-full'>
             <ViewAllButton
               text='Shiko Të Gjitha Paketat'
@@ -74,7 +74,7 @@ export const Home = () => {
               title='Ofertat e fluturimeve'
               text='Gjeni ofertat më të mira të fluturimeve sipas destinacionit dhe datave tuaja të udhëtimit'
             />
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+            {/* <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
               {planeTickets.tickets &&
                 planeTickets.tickets.map((ticket, index) => (
                   <FlightOfferCard
@@ -83,7 +83,7 @@ export const Home = () => {
                     key={ticket.id}
                   />
                 ))}
-            </div>
+            </div> */}
 
             <div className='flex w-full justify-center'>
               <ViewAllButton
