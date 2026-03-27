@@ -1,7 +1,6 @@
 export type PropertyImage = {
   id?: string;
   property_image: string;
-  public_id: string;
 };
 
 export type Property = {
