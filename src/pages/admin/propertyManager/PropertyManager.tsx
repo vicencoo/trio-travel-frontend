@@ -344,7 +344,7 @@ export const PropertyManager = () => {
           maxImages={20}
           imageKey='property_image'
           onDeleteOld={(img) => {
-            const filename = typeof img === 'string' ? img : img.property_image;
+            const filename = typeof img === 'string' ? img : img.public_id;
             if (filename) {
               setDeletedImages((prev: string[]) => [...prev, String(filename)]);
             }
