@@ -103,6 +103,7 @@ export const usePropertyManager = () => {
       if (res.data) {
         navigate('/admin/manage-properties');
         setPropertyData(DEFAULT_PROPERTY);
+        setDeletedImages([]);
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
