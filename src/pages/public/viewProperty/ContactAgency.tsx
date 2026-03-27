@@ -4,10 +4,10 @@ import { IconBox } from '@/components/iconBox';
 import { Text } from '@/components/text';
 import { Button } from '@/components/button';
 import {
-  ArrowRightAlt,
   InstagramIcon,
   LocalPhoneIcon,
   RealEstateAgentOutlined,
+  WhatsAppIcon,
 } from '@/icons';
 
 export const ContactAgency = () => {
@@ -82,7 +82,7 @@ ${currentUrl}
       <Button
         name='kontakto agjencinë'
         padding='17px'
-        endIcon={<ArrowRightAlt />}
+        endIcon={<WhatsAppIcon />}
         border='transparent'
         borderHover='transparent'
         color='white'
