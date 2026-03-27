@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import type { ImageProps } from './types';
-import { DEFAULT_URL } from '@/constants/config';
+// import { DEFAULT_URL } from '@/constants/config';
 
 export const Image = ({
   className,
@@ -11,7 +11,7 @@ export const Image = ({
   onClick,
   src,
 }: ImageProps) => {
-  const imageSrc = src ? `${DEFAULT_URL}${src}` : img;
+  const imageSrc = src ? `${src}` : img;
   const loadingType = priority === 'high' ? 'eager' : loading;
   const imgRef = useRef<HTMLImageElement>(null);
 
