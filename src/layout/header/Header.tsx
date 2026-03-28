@@ -2,18 +2,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDisclosure } from '@/hooks/useDisclosure';
 import { Image } from '@/components/image';
 import { Text } from '@/components/text';
-import { useAuth } from '@/context/authContext';
-import {
-  KeyboardArrowDownOutlinedIcon,
-  KeyboardArrowUpOutlinedIcon,
-  Menu,
-} from '@/icons';
+import { Menu } from '@/icons';
 import { HEADER_ITEMS } from '@/constants/navigation';
 
 export const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { handleLogout } = useAuth();
 
   const { ref: wrapperRef, isOpen, toggle } = useDisclosure();
   return (
