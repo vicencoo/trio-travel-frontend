@@ -88,6 +88,7 @@ export {
   Share2,
   MessageCircleMore,
   Bird,
+  Menu,
 } from 'lucide-react';
 
 // export { default as X } from 'lucide-react/dist/esm/icons/x';

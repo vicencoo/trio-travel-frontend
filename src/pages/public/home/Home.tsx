@@ -67,8 +67,8 @@ export const Home = () => {
       )}
 
       {planeTickets &&
-        planeTickets.totalTickets &&
-        planeTickets.totalTickets > 0 && (
+        planeTickets?.totalTickets &&
+        planeTickets?.totalTickets > 0 && (
           <div className='flex flex-col gap-10'>
             <SectionHeader
               title='Ofertat e fluturimeve'

@@ -6,6 +6,7 @@ import { useAuth } from '@/context/authContext';
 import {
   KeyboardArrowDownOutlinedIcon,
   KeyboardArrowUpOutlinedIcon,
+  Menu,
 } from '@/icons';
 import { HEADER_ITEMS } from '@/constants/navigation';
 
@@ -42,7 +43,7 @@ export const Header = () => {
       <span className='md:hidden flex w-full justify-end relative'>
         <div ref={wrapperRef} className='relative'>
           {/* Toggle button */}
-          {isOpen ? (
+          {/* {isOpen ? (
             <KeyboardArrowUpOutlinedIcon
               fontSize='large'
               onClick={(e) => {
@@ -58,7 +59,15 @@ export const Header = () => {
                 toggle();
               }}
             />
-          )}
+          )} */}
+
+          <Menu
+            size={18}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggle();
+            }}
+          />
 
           {/* Dropdown menu */}
           <div
@@ -89,20 +98,6 @@ export const Header = () => {
           </div>
         </div>
       </span>
-      <div className='flex gap-3'>
-        <span
-          className='text-sm font-semibold font-serif cursor-pointer'
-          onClick={() => navigate('/authenticate')}
-        >
-          LogIn
-        </span>
-        <span
-          className='text-sm font-semibold font-serif cursor-pointer'
-          onClick={handleLogout}
-        >
-          LogOut
-        </span>
-      </div>
     </div>
   );
 };
