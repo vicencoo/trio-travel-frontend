@@ -28,7 +28,7 @@ export const PackageCard = ({ data, index }: PackageCardProps) => {
   const handleNavigate = () => navigate(`/paketa-turistike/${slug}`);
   return (
     <div
-      className='flex flex-col border h-[440px] rounded-3xl overflow-hidden bg-white relative shadow-sm cursor-pointer hover:scale-105 hover:shadow-md transition-all duration-300 will-change-transform group select-none'
+      className='flex flex-col border h-[440px] rounded-3xl overflow-hidden bg-white relative shadow-sm cursor-pointer hover:-translate-y-1 hover:shadow-md transition-all duration-300 will-change-transform group select-none'
       onClick={handleNavigate}
     >
       <Image
