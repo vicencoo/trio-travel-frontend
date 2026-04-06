@@ -9,38 +9,50 @@ import { StatisticsSection } from './StatisticsSection';
 import { Destinations } from './Destinations';
 import { FAQ } from './FAQ';
 import { ViewAllButton } from '@/components/viewAllButton';
+import { PropertyCardSkeleton } from '@/components/skeletons';
 
 export const Home = () => {
-  const { properties, planeTickets, packages, destinations } = useHome();
+  const {
+    properties,
+    planeTickets,
+    packages,
+    destinations,
+    propertiesLoading,
+  } = useHome();
   const navigate = useNavigate();
   return (
     <div className='container flex flex-col md:gap-20 gap-14 md:mb-16 my-10'>
       <Advertise />
 
-      {properties?.properties && properties.properties.length > 0 && (
-        <div className='flex flex-col gap-10'>
-          <SectionHeader
-            title='Ofertat më të fundit për prona'
-            text='Shfleto pronat më të mira në treg'
-          />
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-            {properties.properties.map((property, index) => (
-              <PropertyCard
-                property={property}
-                index={index}
-                key={property.id}
+      {propertiesLoading
+        ? Array.from({ length: 6 }).map((_, index) => (
+            <PropertyCardSkeleton key={index} />
+          ))
+        : properties?.properties &&
+          properties.properties.length > 0 && (
+            <div className='flex flex-col gap-10'>
+              <SectionHeader
+                title='Ofertat më të fundit për prona'
+                text='Shfleto pronat më të mira në treg'
               />
-            ))}
-          </div>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+                {properties.properties.map((property, index) => (
+                  <PropertyCard
+                    property={property}
+                    index={index}
+                    key={property.id}
+                  />
+                ))}
+              </div>
 
-          <div className='flex w-full justify-center'>
-            <ViewAllButton
-              text='shiko te gjitha pronat'
-              onClick={() => navigate('/pronat')}
-            />
-          </div>
-        </div>
-      )}
+              <div className='flex w-full justify-center'>
+                <ViewAllButton
+                  text='shiko te gjitha pronat'
+                  onClick={() => navigate('/pronat')}
+                />
+              </div>
+            </div>
+          )}
 
       {packages?.packages && packages.packages.length > 0 && (
         <div className='flex flex-col gap-10'>

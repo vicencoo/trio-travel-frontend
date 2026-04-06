@@ -21,6 +21,7 @@ export const useHome = () => {
   });
   const [packages, setPackages] = useState<PackageResponse | null>(null);
   const [destinations, setDestinations] = useState<DestinationTypes[] | []>([]);
+  const [propertiesLoading, setPropertiesLoading] = useState<boolean>(true);
 
   const getDestinations = async () => {
     try {
@@ -55,6 +56,8 @@ export const useHome = () => {
       if (res.data) setProperties(res.data);
     } catch (err) {
       console.error('Error getting properties:', err);
+    } finally {
+      setPropertiesLoading(false);
     }
   };
 
@@ -66,5 +69,11 @@ export const useHome = () => {
       await getDestinations();
     })();
   }, []);
-  return { properties, planeTickets, packages, destinations };
+  return {
+    properties,
+    planeTickets,
+    packages,
+    destinations,
+    propertiesLoading,
+  };
 };
