@@ -8,6 +8,7 @@ export type TicketModalProps = {
   handleImageChange: (images: (File | string | TicketImage)[]) => void;
   handleSubmit: () => void;
   planeTicket: PlaneTicket;
+  isAddingticket: boolean;
   errors?: PlaneTicketFieldError;
 };
 

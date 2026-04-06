@@ -15,6 +15,7 @@ export type PackageFormProps = {
   handleSave: () => void;
   setDeletedImages: Dispatch<SetStateAction<string[]>>;
   errors: PackageFieldError;
+  isAddingPackage: boolean;
 };
 
 export type PackageItemProps = {

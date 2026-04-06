@@ -30,6 +30,7 @@ export const PackageForm = ({
   handleSave,
   setDeletedImages,
   errors,
+  isAddingPackage,
 }: PackageFormProps) => {
   return (
     <Card
@@ -213,6 +214,7 @@ export const PackageForm = ({
           color='white'
           endIcon={<AddIcon />}
           onClick={handleSave}
+          disabled={isAddingPackage}
         />
       </div>
     </Card>

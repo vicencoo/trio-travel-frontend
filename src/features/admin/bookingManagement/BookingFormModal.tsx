@@ -14,6 +14,7 @@ export const BookingFormModal = ({
   handleChange,
   handleSave,
   errors,
+  isAddingTicket,
 }: WorkFormModalProps) => {
   return (
     <Modal
@@ -104,6 +105,7 @@ export const BookingFormModal = ({
             bgHover='#1d4ed8'
             color='white'
             onClick={handleSave}
+            disabled={isAddingTicket}
           />
         </div>
       </div>

@@ -28,6 +28,7 @@ export const PropertyManager = () => {
     handleSave,
     error,
     setDeletedImages,
+    isLoading,
   } = usePropertyManager();
 
   return (
@@ -372,6 +373,7 @@ export const PropertyManager = () => {
           borderHover='#1d4ed8'
           bgColor='#3b82f6'
           bgHover='#2563eb'
+          disabled={isLoading}
           endIcon={<AddIcon />}
         />
       </div>

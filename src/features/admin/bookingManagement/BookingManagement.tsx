@@ -22,6 +22,7 @@ const BookingManagement = () => {
     handleDelete,
     errors,
     isLoading,
+    isAddingTicket,
   } = useWorkManagement();
 
   if (isLoading)
@@ -59,6 +60,7 @@ const BookingManagement = () => {
         handleChange={handleChange}
         handleSave={handleSave}
         errors={errors}
+        isAddingTicket={isAddingTicket}
       />
 
       {bookings && bookings.length > 0 ? (

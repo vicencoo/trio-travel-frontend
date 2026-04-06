@@ -15,6 +15,7 @@ export const usePackageManager = () => {
   const [errors, setErrors] = useState<PackageFieldError>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [status, setStatus] = useState<'all' | 'active' | 'draft'>('all');
+  const [isAddingPackage, setIsLoadingPackage] = useState<boolean>(false);
 
   const getPackages = async () => {
     try {
@@ -104,6 +105,7 @@ export const usePackageManager = () => {
   };
 
   const handleSave = async () => {
+    setIsLoadingPackage(true);
     try {
       const formData = new FormData();
       if (touristPackage.title) formData.append('title', touristPackage.title);
@@ -152,6 +154,8 @@ export const usePackageManager = () => {
         );
         setErrors(fieldErrors);
       }
+    } finally {
+      setIsLoadingPackage(false);
     }
   };
 
@@ -190,5 +194,6 @@ export const usePackageManager = () => {
     publishOrDraftPackage,
     handleStatusChange,
     status,
+    isAddingPackage,
   };
 };

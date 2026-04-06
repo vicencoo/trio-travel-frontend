@@ -16,6 +16,7 @@ export const usePlaneTicketsPage = () => {
   });
   const [errors, setErrors] = useState<PlaneTicketFieldError>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAddingticket, setIsAddingTicket] = useState<boolean>(false);
 
   const handlePageChange = (_event: ChangeEvent<unknown>, page: number) => {
     setPageNumber(page);
@@ -83,6 +84,7 @@ export const usePlaneTicketsPage = () => {
     }));
   };
   const handleSubmit = async () => {
+    setIsAddingTicket(true);
     try {
       const formData = new FormData();
       if (planeTicket.from) formData.append('from', planeTicket.from);
@@ -121,6 +123,8 @@ export const usePlaneTicketsPage = () => {
         );
         setErrors(fieldErrors);
       }
+    } finally {
+      setIsAddingTicket(false);
     }
   };
 
@@ -138,5 +142,6 @@ export const usePlaneTicketsPage = () => {
     pageNumber,
     errors,
     isLoading,
+    isAddingticket,
   };
 };

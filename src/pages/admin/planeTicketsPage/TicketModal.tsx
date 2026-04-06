@@ -14,6 +14,7 @@ export const TicketModal = ({
   handleImageChange,
   planeTicket,
   errors,
+  isAddingticket,
 }: TicketModalProps) => {
   return (
     <Modal
@@ -113,6 +114,7 @@ export const TicketModal = ({
             bgColor='#6366f1'
             bgHover='#4f46e5'
             onClick={handleSubmit}
+            disabled={isAddingticket}
           />
         </div>
       </div>

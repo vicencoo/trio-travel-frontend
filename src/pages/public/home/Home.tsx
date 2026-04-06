@@ -24,33 +24,38 @@ export const Home = () => {
     <div className='container flex flex-col md:gap-20 gap-14 md:mb-16 my-10'>
       <Advertise />
 
-      {properties?.properties && properties.properties.length > 0 && (
-        <div className='flex flex-col gap-10'>
-          <SectionHeader
-            title='Ofertat më të fundit për prona'
-            text='Shfleto pronat më të mira në treg'
-          />
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-            {propertiesLoading
-              ? Array.from({ length: 6 }).map((_, index) => (
-                  <PropertyCardSkeleton key={index} />
-                ))
-              : properties.properties.map((property, index) => (
-                  <PropertyCard
-                    property={property}
-                    index={index}
-                    key={property.id}
-                  />
-                ))}
-          </div>
-
-          <div className='flex w-full justify-center'>
-            <ViewAllButton
-              text='shiko te gjitha pronat'
-              onClick={() => navigate('/pronat')}
-            />
-          </div>
+      {propertiesLoading ? (
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+          {Array.from({ length: 6 }).map((_, index) => (
+            <PropertyCardSkeleton key={index} />
+          ))}
         </div>
+      ) : (
+        properties?.properties &&
+        properties.properties.length > 0 && (
+          <div className='flex flex-col gap-10'>
+            <SectionHeader
+              title='Ofertat më të fundit për prona'
+              text='Shfleto pronat më të mira në treg'
+            />
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+              {properties.properties.map((property, index) => (
+                <PropertyCard
+                  property={property}
+                  index={index}
+                  key={property.id}
+                />
+              ))}
+            </div>
+
+            <div className='flex w-full justify-center'>
+              <ViewAllButton
+                text='shiko te gjitha pronat'
+                onClick={() => navigate('/pronat')}
+              />
+            </div>
+          </div>
+        )
       )}
 
       {packages?.packages && packages.packages.length > 0 && (

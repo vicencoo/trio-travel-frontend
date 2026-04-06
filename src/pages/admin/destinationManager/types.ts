@@ -14,6 +14,7 @@ export type DestinationFormProps = {
   handleSave: () => void;
   errors: DestinationFieldError;
   isDestinationFormOpen: boolean;
+  isAddingDestination: boolean;
 };
 
 export type DestinationTableRowProps = {

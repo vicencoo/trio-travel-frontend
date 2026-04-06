@@ -19,6 +19,7 @@ export const DestinationModal = ({
   handleSave,
   errors,
   isDestinationFormOpen,
+  isAddingDestination,
 }: DestinationFormProps) => {
   return (
     <Modal
@@ -144,6 +145,7 @@ export const DestinationModal = ({
             border='transparent'
             borderHover='transparent'
             onClick={handleSave}
+            disabled={isAddingDestination}
           />
         </div>
       </div>

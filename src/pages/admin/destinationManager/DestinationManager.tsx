@@ -28,6 +28,7 @@ export const DestinationManager = () => {
     page,
     handleEditDestination,
     isLoading,
+    isAddingDestination,
   } = useDestinationManager();
 
   if (isLoading) {
@@ -67,6 +68,7 @@ export const DestinationManager = () => {
             handleSave={handleSave}
             errors={errors}
             isDestinationFormOpen={isModalOpen}
+            isAddingDestination={isAddingDestination}
           />
         </div>
       )}

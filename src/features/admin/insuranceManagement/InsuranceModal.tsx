@@ -14,6 +14,7 @@ export const InsuranceModal = ({
   data,
   handleSave,
   errors,
+  isAddingInsurance,
 }: InsuranceModalProps) => {
   return (
     <Modal isOpen={isModalOpen} onClose={closeModal} width='w-4/5 md:w-2/5'>
@@ -99,6 +100,7 @@ export const InsuranceModal = ({
             bgHover='#1d4ed8'
             color='white'
             onClick={handleSave}
+            disabled={isAddingInsurance}
           />
         </div>
       </div>

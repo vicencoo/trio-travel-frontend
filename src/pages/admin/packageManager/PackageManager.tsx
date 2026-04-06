@@ -31,6 +31,7 @@ export const PackageManager = () => {
     publishOrDraftPackage,
     handleStatusChange,
     status,
+    isAddingPackage,
   } = usePackageManager();
 
   return (
@@ -62,6 +63,7 @@ export const PackageManager = () => {
           handleImagesChange={handleImagesChange}
           handleSave={handleSave}
           setDeletedImages={setDeletedImages}
+          isAddingPackage={isAddingPackage}
           errors={errors}
         />
       )}

@@ -11,6 +11,7 @@ export const usePropertyManager = () => {
   const [propertyData, setPropertyData] = useState(DEFAULT_PROPERTY);
   const [error, setError] = useState<PropertyFieldError>({});
   const [deletedImages, setDeletedImages] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +28,6 @@ export const usePropertyManager = () => {
     if (id) {
       getProperty();
     } else {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPropertyData(DEFAULT_PROPERTY);
     }
   }, [id]);
@@ -55,6 +55,7 @@ export const usePropertyManager = () => {
   };
 
   const handleSave = async () => {
+    setIsLoading(true);
     try {
       const formData = new FormData();
       if (propertyData.listing_type)
@@ -117,6 +118,8 @@ export const usePropertyManager = () => {
         );
         setError(fieldErrors);
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -128,5 +131,6 @@ export const usePropertyManager = () => {
     handleSave,
     error,
     setDeletedImages,
+    isLoading,
   };
 };

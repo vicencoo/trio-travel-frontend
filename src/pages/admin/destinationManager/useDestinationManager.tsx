@@ -15,6 +15,8 @@ export const useDestinationManager = () => {
   const [errors, setErrors] = useState<DestinationFieldError>({});
   const [page, setPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAddingDestination, setIsAddingDestination] =
+    useState<boolean>(false);
 
   const getDestinations = async () => {
     try {
@@ -108,6 +110,7 @@ export const useDestinationManager = () => {
   };
 
   const handleSave = async () => {
+    setIsAddingDestination(true);
     try {
       const formData = new FormData();
       if (data.city) formData.append('city', data.city);
@@ -144,6 +147,8 @@ export const useDestinationManager = () => {
         );
         setErrors(fieldErrors);
       }
+    } finally {
+      setIsAddingDestination(false);
     }
   };
 
@@ -165,5 +170,6 @@ export const useDestinationManager = () => {
     page,
     handleEditDestination,
     isLoading,
+    isAddingDestination,
   };
 };

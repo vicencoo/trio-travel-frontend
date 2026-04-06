@@ -27,6 +27,7 @@ const InsuranceManagement = () => {
     filter,
     handleChangeFilter,
     isLoading,
+    isAddingInsurance,
   } = useInsuranceManagement();
 
   if (isLoading) {
@@ -67,6 +68,7 @@ const InsuranceManagement = () => {
         handleChangeData={handleChangeData}
         handleSave={handleSave}
         errors={errors}
+        isAddingInsurance={isAddingInsurance}
       />
 
       {data && data.insurances.length > 0 ? (

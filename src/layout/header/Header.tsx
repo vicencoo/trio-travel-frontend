@@ -56,7 +56,7 @@ export const Header = () => {
           )} */}
 
           <Menu
-            size={18}
+            size={21}
             onClick={(e) => {
               e.stopPropagation();
               toggle();

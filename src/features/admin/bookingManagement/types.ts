@@ -8,6 +8,7 @@ export type WorkFormModalProps = {
   handleChange: (key: string, value: string) => void;
   handleSave: () => void;
   errors: BookingFieldError;
+  isAddingTicket: boolean;
 };
 
 export type BookingRowProps = {

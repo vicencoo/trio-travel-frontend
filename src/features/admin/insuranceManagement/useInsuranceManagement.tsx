@@ -21,6 +21,7 @@ export const useInsuranceManagement = () => {
     applied: '',
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAddingInsurance, setIsAddingInsurance] = useState<boolean>(false);
 
   const handleChangeFilter = (value: string) => {
     setFilter((prev) => ({ ...prev, value }));
@@ -95,6 +96,7 @@ export const useInsuranceManagement = () => {
   };
 
   const handleSave = async () => {
+    setIsAddingInsurance(true);
     try {
       const res = formData.id
         ? await insuranceServices.edit(formData.id, formData)
@@ -115,6 +117,8 @@ export const useInsuranceManagement = () => {
         );
         setErrors(fieldErrors);
       }
+    } finally {
+      setIsAddingInsurance(false);
     }
   };
 
@@ -134,5 +138,6 @@ export const useInsuranceManagement = () => {
     filter,
     handleChangeFilter,
     isLoading,
+    isAddingInsurance,
   };
 };

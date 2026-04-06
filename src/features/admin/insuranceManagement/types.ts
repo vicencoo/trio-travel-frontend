@@ -8,6 +8,7 @@ export type InsuranceModalProps = {
   handleChangeData: (key: string, value: string | number | Date) => void;
   handleSave: () => void;
   errors: InsuranceFieldError;
+  isAddingInsurance: boolean;
 };
 
 export type InsuranceRowProps = {

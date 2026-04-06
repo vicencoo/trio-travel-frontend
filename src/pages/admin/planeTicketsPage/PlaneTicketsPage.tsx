@@ -24,6 +24,7 @@ export const PlaneTicketsPage = () => {
     pageNumber,
     errors,
     isLoading,
+    isAddingticket,
   } = usePlaneTicketsPage();
 
   if (isLoading) {
@@ -53,6 +54,7 @@ export const PlaneTicketsPage = () => {
           hadleTicketChange={hadleTicketChange}
           handleImageChange={handleImageChange}
           handleSubmit={handleSubmit}
+          isAddingticket={isAddingticket}
           errors={errors}
         />
       )}

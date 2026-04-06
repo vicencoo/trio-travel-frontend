@@ -10,6 +10,7 @@ export const useWorkManagement = () => {
   const [bookings, setBookings] = useState<SoldTicket[] | []>([]);
   const [errors, setErrors] = useState<BookingFieldError>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAddingTicket, setIsAddingTicket] = useState<boolean>(false);
 
   const getBookings = async () => {
     try {
@@ -65,6 +66,7 @@ export const useWorkManagement = () => {
   };
 
   const handleSave = async () => {
+    setIsAddingTicket(true);
     try {
       const res = formData.id
         ? await bookingServices.edit(formData.id, formData)
@@ -85,6 +87,8 @@ export const useWorkManagement = () => {
         );
         setErrors(fieldErrors);
       }
+    } finally {
+      setIsAddingTicket(false);
     }
   };
 
@@ -100,5 +104,6 @@ export const useWorkManagement = () => {
     handleDelete,
     errors,
     isLoading,
+    isAddingTicket,
   };
 };
