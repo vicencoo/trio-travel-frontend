@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import type { DestinationsProps } from './types';
-import { Image } from '@/components/image';
-import { Text } from '@/components/text';
-import { ChevronLeft, ChevronRight } from '@/icons';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import type { DestinationsProps } from "./types";
+import { Image } from "@/components/image";
+import { Text } from "@/components/text";
+import { ChevronLeft, ChevronRight } from "@/icons";
 
 const VISIBLE_COUNT = 8;
 
@@ -26,8 +26,8 @@ export const Destinations = ({ destinations }: DestinationsProps) => {
       }
     };
     handleResize(); // run on mount
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const prev = () => {
@@ -45,43 +45,43 @@ export const Destinations = ({ destinations }: DestinationsProps) => {
     }
   }
   return (
-    <div className='flex items-center gap-3 select-none'>
+    <div className="flex items-center gap-3 select-none">
       <div
-        className='flex p-1 bg-gray-200 rounded-full items-center justify-center cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform'
+        className="flex p-1 bg-gray-200 rounded-full items-center justify-center cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform"
         onClick={prev}
       >
-        <ChevronLeft fontSize='medium' />
+        <ChevronLeft fontSize="medium" />
       </div>
-      <div className='flex items-center sm:justify-between justify-center sm:gap-0 gap-10 w-full'>
-        {visibleItems.slice(0, visibleCount).map((destination) => {
-          const firstImage = destination.destination_images[0];
+      <div className="flex items-center sm:justify-between justify-center sm:gap-0 gap-10 w-full">
+        {visibleItems?.slice(0, visibleCount).map((destination) => {
+          const firstImage = destination?.destination_images?.[0];
           const image =
-            typeof firstImage === 'object' && 'destination_image' in firstImage
+            typeof firstImage === "object" && "destination_image" in firstImage
               ? firstImage.destination_image
-              : '';
+              : "";
           return (
             <div
-              className='flex flex-col items-center gap-1'
+              className="flex flex-col items-center gap-1"
               key={destination.id}
             >
               <Image
                 src={image}
                 alt={`${destination.country} ${destination.city}`}
-                className='w-[100px] h-[130px] object-cover rounded-full cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform'
-                onClick={() => navigate('/destinacionet')}
+                className="w-[100px] h-[130px] object-cover rounded-full cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform"
+                onClick={() => navigate("/destinacionet")}
               />
               <Text
                 text={destination.city}
-                className='capitalize'
-                size='text-sm'
-                font='font-medium'
+                className="capitalize"
+                size="text-sm"
+                font="font-medium"
               />
             </div>
           );
         })}
       </div>
       <div
-        className='flex p-1 bg-slate-200 rounded-full items-center justify-center cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform'
+        className="flex p-1 bg-slate-200 rounded-full items-center justify-center cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform"
         onClick={next}
       >
         <ChevronRight />
