@@ -10,60 +10,76 @@ import {
   ShieldCheck,
   TicketsPlane,
   Workflow,
-} from '@/icons';
+} from "@/icons";
 
 export const HEADER_ITEMS = [
-  { id: 1, name: 'faqja kryesore', path: '/' },
-  { id: 2, name: 'pronat', path: '/pronat' },
-  { id: 3, name: 'bileta avioni', path: '/bileta-avioni' },
-  { id: 4, name: 'paketa turistike', path: '/paketa-turistike' },
-  { id: 5, name: 'destinacione', path: '/destinacionet' },
-  { id: 6, name: 'kontakt', path: '/contact' },
+  { id: 1, name: "faqja kryesore", path: "/" },
+  { id: 2, name: "pronat", path: "/pronat" },
+  { id: 3, name: "bileta avioni", path: "/bileta-avioni" },
+  { id: 4, name: "paketa turistike", path: "/paketa-turistike" },
+  { id: 5, name: "destinacione", path: "/destinacionet" },
+  { id: 6, name: "kontakt", path: "/contact" },
 ];
 
 export const SIDEBAR_ITEMS = [
   {
     icon: LayoutDashboard,
-    label: 'Dashboard',
-    path: '/admin/dashboard',
+    label: "Dashboard",
+    path: "/admin/dashboard",
   },
   {
     icon: Layers,
-    label: 'Menaxhimi i Datave',
+    label: "Menaxhimi i Datave",
     subItems: [
-      { label: 'Pronat', icon: House, path: '/admin/manage-properties' },
-      { label: 'Paketat', icon: Package, path: '/admin/manage-packages' },
-      { label: 'Biletat', icon: Plane, path: '/admin/plane-tickets' },
+      { label: "Pronat", icon: House, path: "/admin/manage-properties" },
+      { label: "Paketat", icon: Package, path: "/admin/manage-packages" },
+      { label: "Biletat", icon: Plane, path: "/admin/plane-tickets" },
       {
-        label: 'Destinacionet',
+        label: "Destinacionet",
         icon: MapPin,
-        path: '/admin/manage-destinations',
+        path: "/admin/manage-destinations",
       },
     ],
   },
   {
     icon: TicketsPlane,
-    label: 'Check-in i Fluturimeve',
-    path: '/admin/check-in-service',
+    label: "Check-in i Fluturimeve",
+    path: "/admin/check-in-service",
   },
   {
-    icon: Workflow,
-    label: 'Menaxhimi i Biletave',
-    path: '/admin/work-management',
-  },
-  {
-    icon: ShieldCheck,
-    label: 'Siguracionet',
+    icon: Plane,
+    label: "Menaxho Fluturimet",
     subItems: [
       {
-        label: 'Menaxhimi i Siguracioneve',
-        icon: LayoutList,
-        path: '/admin/insurance-management',
+        icon: Workflow,
+        label: "Menaxho Biletat",
+        path: "/admin/work-management",
       },
       {
-        label: 'Skadencat e Siguracioneve',
+        icon: Workflow,
+        label: "Menaxho Kompanite",
+        path: "/admin/flight-companies",
+      },
+    ],
+  },
+  // {
+  //   icon: Workflow,
+  //   label: "Menaxhimi i Biletave",
+  //   path: "/admin/work-management",
+  // },
+  {
+    icon: ShieldCheck,
+    label: "Siguracionet",
+    subItems: [
+      {
+        label: "Menaxhimi i Siguracioneve",
+        icon: LayoutList,
+        path: "/admin/insurance-management",
+      },
+      {
+        label: "Skadencat e Siguracioneve",
         icon: CalendarClock,
-        path: '/admin/insurance-expiration',
+        path: "/admin/insurance-expiration",
       },
     ],
   },

@@ -1,6 +1,6 @@
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import type { SelectorProps } from './types';
-import { Text } from '../text';
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import type { SelectorProps } from "./types";
+import { Text } from "../text";
 
 export const Selector = ({
   value,
@@ -8,15 +8,16 @@ export const Selector = ({
   onChange,
   options = [],
   label,
-  border = 'black',
+  border = "black",
   multiple = false,
   errorMessage,
+  disablePortal = false,
 }: SelectorProps) => {
   return (
     <FormControl
       fullWidth
-      className='flex flex-col gap-1'
-      variant='outlined'
+      className="flex flex-col gap-1"
+      variant="outlined"
       sx={{ mb: 2 }}
     >
       <InputLabel
@@ -24,11 +25,11 @@ export const Selector = ({
           fontSize: 14,
           transform:
             value && (!Array.isArray(value) || value.length > 0)
-              ? 'translate(14px, -8px) scale(0.75)'
-              : 'translate(14px, 12px) scale(1)',
-          '&.Mui-focused': {
-            color: 'black',
-            transform: 'translate(14px, -8px) scale(0.75)',
+              ? "translate(14px, -8px) scale(0.75)"
+              : "translate(14px, 12px) scale(1)",
+          "&.Mui-focused": {
+            color: "black",
+            transform: "translate(14px, -8px) scale(0.75)",
           },
         }}
       >
@@ -41,35 +42,38 @@ export const Selector = ({
         value={value}
         onChange={onChange}
         label={label}
+        MenuProps={{
+          disablePortal,
+        }}
         sx={{
           height: 37,
           fontSize: 14,
-          borderRadius: '8px',
-          '& .MuiSelect-select': {
-            display: 'flex',
-            alignItems: 'center',
-            py: '6px',
-            minHeight: 'unset',
+          borderRadius: "8px",
+          "& .MuiSelect-select": {
+            display: "flex",
+            alignItems: "center",
+            py: "6px",
+            minHeight: "unset",
             color: border,
-            flexWrap: 'wrap',
+            flexWrap: "wrap",
           },
-          '& .MuiSvgIcon-root': {
+          "& .MuiSvgIcon-root": {
             color: border,
           },
-          '.MuiOutlinedInput-notchedOutline': {
+          ".MuiOutlinedInput-notchedOutline": {
             borderColor: border,
           },
-          '&:hover .MuiOutlinedInput-notchedOutline': {
+          "&:hover .MuiOutlinedInput-notchedOutline": {
             borderColor: border,
           },
-          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: border,
           },
         }}
       >
         {options &&
           options.map((opt) => (
-            <MenuItem key={opt.value} value={opt.value} className='text-white'>
+            <MenuItem key={opt.value} value={opt.value}>
               {opt.label}
             </MenuItem>
           ))}
@@ -80,12 +84,14 @@ export const Selector = ({
             </MenuItem>
           ))} */}
       </Select>
-      <Text
-        text={errorMessage}
-        size='text-xs'
-        font='font-medium'
-        className='text-red-500'
-      />
+      {errorMessage && (
+        <Text
+          text={errorMessage}
+          size="text-xs"
+          font="font-medium"
+          className="text-red-500"
+        />
+      )}
     </FormControl>
   );
 };
