@@ -53,40 +53,40 @@ export const AppRoutes = () => {
       </Route>
       {/* </Route> */}
 
-      {/* <Route element={<ProtectedRoute allowedRoles={[UserRole.ADMIN]} />}> */}
-      <Route element={<AdminLayout />}>
-        <Route path="/admin/dashboard" element={<DashboardPage />} />
-        <Route
-          path="/admin/work-management"
-          element={<BookingManagementPage />}
-        />
-        <Route
-          path="/admin/flight-companies"
-          element={<FlightCompaniesPage />}
-        />
-        <Route
-          path="/admin/check-in-service"
-          element={<CheckinServicePage />}
-        />
-        <Route path="/admin/manage-properties" element={<PropertiesPage />} />
-        <Route path="/admin/add-property" element={<PropertyManager />} />
-        <Route path="/admin/editProperty/:id" element={<PropertyManager />} />
-        <Route
-          path="/admin/insurance-management"
-          element={<InsuranceManagementPage />}
-        />
-        <Route
-          path="/admin/insurance-expiration"
-          element={<InsuranceExpirationPage />}
-        />
-        <Route path="/admin/manage-packages" element={<PackageManager />} />
-        <Route path="/admin/plane-tickets" element={<PlaneTicketsPage />} />
-        <Route
-          path="/admin/manage-destinations"
-          element={<DestinationManager />}
-        />
+      <Route element={<ProtectedRoute allowedRoles={[UserRole.ADMIN]} />}>
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/dashboard" element={<DashboardPage />} />
+          <Route
+            path="/admin/work-management"
+            element={<BookingManagementPage />}
+          />
+          <Route
+            path="/admin/flight-companies"
+            element={<FlightCompaniesPage />}
+          />
+          <Route
+            path="/admin/check-in-service"
+            element={<CheckinServicePage />}
+          />
+          <Route path="/admin/manage-properties" element={<PropertiesPage />} />
+          <Route path="/admin/add-property" element={<PropertyManager />} />
+          <Route path="/admin/editProperty/:id" element={<PropertyManager />} />
+          <Route
+            path="/admin/insurance-management"
+            element={<InsuranceManagementPage />}
+          />
+          <Route
+            path="/admin/insurance-expiration"
+            element={<InsuranceExpirationPage />}
+          />
+          <Route path="/admin/manage-packages" element={<PackageManager />} />
+          <Route path="/admin/plane-tickets" element={<PlaneTicketsPage />} />
+          <Route
+            path="/admin/manage-destinations"
+            element={<DestinationManager />}
+          />
+        </Route>
       </Route>
-      {/* </Route> */}
     </Routes>
   );
 };

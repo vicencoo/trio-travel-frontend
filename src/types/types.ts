@@ -102,7 +102,7 @@ export type SoldTicket = {
 
 export type FlightCompany = {
   id?: number;
-  name: string;
+  flight_company: string;
 };
 
 export type Insurance = {

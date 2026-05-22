@@ -5,10 +5,10 @@ import {
   ModeEditOutlineOutlinedIcon,
   Plane,
   Plus,
-  Search,
 } from "@/icons";
 import { useFlightCompanies } from "./useFlightCompanies";
 import { Input } from "@/components/input";
+import { Text } from "@/components/text";
 // import { useState } from "react";
 
 // const initialCompanies = [
@@ -22,37 +22,48 @@ import { Input } from "@/components/input";
 const FlightCompanies = () => {
   const {
     handleOpenForm,
-    isAddOrEditOpen,
+    isAddCompanyOpen,
     companies,
     formData,
     handleChangeCompanyName,
     handleSaveCompany,
+    handleStartEditing,
+    handleCloseEditing,
+    handleDeleteCompany,
   } = useFlightCompanies();
 
   console.log(companies);
 
   return (
     <div className="min-h-screen bg-slate-50 p-6 md:p-8">
-      {/* Header */}
+      {/* Header */ isAddCompanyOpen}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-7">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-200 flex-shrink-0">
             <Plane size={20} />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-800 leading-tight">
-              Kompanitë e Fluturimeve
-            </h1>
-            <p className="text-sm text-slate-400 font-medium mt-0.5">
-              Shiko, shto, modifiko dhe fshij kompanitë
-            </p>
+            <Text
+              text={"Kompanitë e Fluturimeve"}
+              size="text-xl"
+              font="font-extrabold"
+              className="text-slate-800 leading-tight"
+            />
+            <Text
+              text={" Shiko, shto, modifiko dhe fshij kompanitë"}
+              size="text-sm"
+              font="font-medium"
+              className="text-slate-400 mt-0.5"
+            />
           </div>
         </div>
         <button
           onClick={() => handleOpenForm()}
           className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-sm font-bold px-5 py-2.5 rounded-xl shadow-md shadow-blue-200 transition-all duration-150 hover:-translate-y-0.5 whitespace-nowrap"
         >
-          <Plus /> Shto Kompani
+          {isAddCompanyOpen ? <Close /> : <Plus />}
+
+          {isAddCompanyOpen ? "Mbyll" : "Shto Kompani"}
         </button>
       </div>
 
@@ -63,21 +74,11 @@ const FlightCompanies = () => {
           <p className="text-sm font-semibold text-slate-400">
             Gjithsej:{" "}
             <span className="text-blue-600 font-extrabold">
-              {/* {companies.length} */}
-            </span>{" "}
+              {companies.length}
+            </span>
+            {"  "}
             kompani
           </p>
-          {/* <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 focus-within:border-blue-500 transition-colors">
-            <span className="text-slate-400">
-              <Search />
-            </span>
-            <input
-              className="bg-transparent outline-none text-sm text-slate-700 placeholder-slate-400 w-44 font-medium"
-              placeholder="Kërko kompani..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div> */}
         </div>
 
         {/* Table */}
@@ -97,38 +98,35 @@ const FlightCompanies = () => {
           </thead>
           <tbody>
             {/* Add row */}
-            {isAddOrEditOpen && (
+            {isAddCompanyOpen && (
               <tr className="bg-blue-50 border-b border-blue-100">
                 <td className="px-6 py-3.5"></td>
                 <td className="px-6 py-3.5">
-                  {/* <input
-                    autoFocus
-                    className="border-2 border-blue-500 rounded-lg px-3 py-2 text-sm font-semibold text-slate-800 outline-none bg-white w-72 max-w-full shadow-sm shadow-blue-100 focus:ring-2 focus:ring-blue-100"
-                    placeholder="Emri i kompanisë..."
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") saveAdd();
-                      if (e.key === "Escape") setAdding(false);
-                    }}
-                  /> */}
                   <Input
-                    value={formData}
+                    autoFocus
+                    value={formData.flight_company}
                     placeholder="Emri i kompanise"
-                    onChange={(e) => handleChangeCompanyName(e.target.value)}
+                    onChange={(e) =>
+                      handleChangeCompanyName("flight_company", e.target.value)
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") handleSaveCompany();
+                      if (e.key === "Escape") handleOpenForm();
+                    }}
+                    className="border-blue-400"
                   />
                 </td>
                 <td className="px-6 py-3.5">
                   <div className="flex items-center justify-end gap-2">
                     <button
-                      onClick={handleSaveCompany}
+                      onClick={() => handleSaveCompany()}
                       className="w-8 h-8 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-600 flex items-center justify-center transition-colors"
                       title="Ruaj"
                     >
                       <Check />
                     </button>
                     <button
-                      //   onClick={() => setAdding(false)}
+                      onClick={() => handleOpenForm()}
                       className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors"
                       title="Anulo"
                     >
@@ -146,44 +144,52 @@ const FlightCompanies = () => {
                     className="border-b border-slate-50 last:border-0 hover:bg-slate-50/60 transition-colors"
                   >
                     <td className="px-6 py-4">
-                      <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-slate-100 text-xs font-bold text-slate-400">
-                        {i + 1}
-                      </span>
+                      <Text
+                        text={i + 1}
+                        className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-slate-100 text-slate-400"
+                        size="text-xs"
+                        font="font-bold"
+                      />
                     </td>
                     <td className="px-6 py-4">
-                      {editingId === c.id ? (
-                        <input
+                      {formData.id === c.id ? (
+                        <Input
                           autoFocus
-                          className="border-2 border-blue-500 rounded-lg px-3 py-1.5 text-sm font-semibold text-slate-800 outline-none bg-blue-50 w-64 max-w-full focus:ring-2 focus:ring-blue-100"
-                          value={editValue}
-                          onChange={(e) => setEditValue(e.target.value)}
+                          value={formData.flight_company}
+                          className="max-w-max"
+                          onChange={(e) =>
+                            handleChangeCompanyName(
+                              "flight_company",
+                              e.target.value,
+                            )
+                          }
                           onKeyDown={(e) => {
-                            if (e.key === "Enter") saveEdit();
-                            if (e.key === "Escape") cancelEdit();
+                            if (e.key === "Enter") handleSaveCompany();
+                            if (e.key === "Escape") handleCloseEditing();
                           }}
                         />
                       ) : (
                         <div className="flex items-center gap-3">
                           <div className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
                           <span className="text-sm font-semibold text-slate-700">
-                            {c.name}
+                            {c.flight_company}
                           </span>
                         </div>
                       )}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-end gap-2">
-                        {editingId === c.id ? (
+                        {formData.id === c.id ? (
                           <>
                             <button
-                              onClick={saveEdit}
+                              onClick={handleSaveCompany}
                               className="w-8 h-8 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-600 flex items-center justify-center transition-colors"
                               title="Ruaj"
                             >
                               <Check />
                             </button>
                             <button
-                              onClick={cancelEdit}
+                              onClick={handleCloseEditing}
                               className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors"
                               title="Anulo"
                             >
@@ -193,14 +199,16 @@ const FlightCompanies = () => {
                         ) : (
                           <>
                             <button
-                              onClick={() => startEdit(c)}
+                              onClick={() => handleStartEditing(c)}
                               className="w-8 h-8 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-600 flex items-center justify-center transition-colors"
                               title="Edito"
                             >
                               <ModeEditOutlineOutlinedIcon />
                             </button>
                             <button
-                              onClick={() => setDeleteId(c.id)}
+                              onClick={() => {
+                                if (c.id) handleDeleteCompany(c.id);
+                              }}
                               className="w-8 h-8 rounded-lg bg-red-50 hover:bg-red-100 text-red-500 flex items-center justify-center transition-colors"
                               title="Fshi"
                             >

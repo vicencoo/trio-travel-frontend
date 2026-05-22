@@ -13,9 +13,9 @@ export const useWorkManagement = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAddingTicket, setIsAddingTicket] = useState<boolean>(false);
   const [flightCompanies, setFlightCompanies] = useState<FlightCompany[]>([
-    { id: 1, name: "Wizz Air" },
-    { id: 2, name: "Rayan Air" },
-    { id: 3, name: "Turkish Airlines" },
+    { id: 1, flight_company: "Wizz Air" },
+    { id: 2, flight_company: "Rayan Air" },
+    { id: 3, flight_company: "Turkish Airlines" },
   ]);
 
   const getBookings = async () => {

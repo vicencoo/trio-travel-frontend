@@ -2,27 +2,33 @@ import type {
   ChangeEventHandler,
   ComponentType,
   FocusEventHandler,
+  KeyboardEventHandler,
   ReactElement,
-} from 'react';
+} from "react";
 
 export type InputProps = {
   label?: string;
   labelColor?: string;
   placeholder?: string;
   type?:
-    | 'text'
-    | 'email'
-    | 'password'
-    | 'number'
-    | 'tel'
-    | 'date'
-    | 'datetime-local';
+    | "text"
+    | "email"
+    | "password"
+    | "number"
+    | "tel"
+    | "date"
+    | "datetime-local";
   name?: string;
   value?: string | number;
+
   onChange?: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+
+  onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+  autoFocus?: boolean;
+
   icon?: ReactElement | ComponentType;
   img?: string;
-  iconPosition?: 'start' | 'end';
+  iconPosition?: "start" | "end";
   isPassword?: boolean;
   multiline?: boolean;
   rows?: number;
