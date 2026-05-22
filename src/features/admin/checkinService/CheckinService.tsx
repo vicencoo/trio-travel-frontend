@@ -1,13 +1,13 @@
-import { Button } from '@/components/button';
-import { IconBox } from '@/components/iconBox';
-import { Text } from '@/components/text';
-import { useCheckinService } from './useCheckinService';
-import { CheckinDateFilter } from './CheckinDateFilter';
-import { NoDataFound } from '@/components/noDataFound';
-import { CheckinTicketCard } from './CheckinTicketCard';
-import { CheckinTicketModal } from './CheckinTicketModal';
-import { Spinner } from '@/components/spinner';
-import { PlaneTakeoff, RefreshIcon } from '@/icons';
+import { Button } from "@/components/button";
+import { IconBox } from "@/components/iconBox";
+import { Text } from "@/components/text";
+import { useCheckinService } from "./useCheckinService";
+import { CheckinDateFilter } from "./CheckinDateFilter";
+import { NoDataFound } from "@/components/noDataFound";
+import { CheckinTicketCard } from "./CheckinTicketCard";
+import { CheckinTicketModal } from "./CheckinTicketModal";
+import { Spinner } from "@/components/spinner";
+import { PlaneTakeoff, RefreshIcon } from "@/icons";
 
 const CheckinService = () => {
   const {
@@ -28,45 +28,45 @@ const CheckinService = () => {
 
   const isCurrentDay = dateFilter.toDateString() === new Date().toDateString();
 
-  if (loadingId === 'loading') {
+  if (loadingId === "loading") {
     return (
-      <div className='flex w-full h-full justify-center items-center'>
+      <div className="flex w-full h-full justify-center items-center">
         <Spinner />
       </div>
     );
   }
 
   return (
-    <div className='flex flex-col gap-10 pb-10'>
-      <div className='flex items-center w-full bg-white dark:bg-slate-700 container py-3 justify-between border-b border-slate-200/50 dark:border-slate-700/50'>
-        <div className='flex items-center gap-3'>
+    <div className="flex flex-col gap-10 pb-10">
+      <div className="flex items-center w-full bg-white dark:bg-slate-700 py-4 px-7 justify-between border-b border-slate-200/50 dark:border-slate-700/50">
+        <div className="flex items-center gap-3 w-full">
           <IconBox
-            size='w-8 h-8'
-            icon={<PlaneTakeoff size={16} className='text-white' />}
-            bgColor='bg-gradient-to-br from-violet-700 via-violet-600 to-indigo-500'
+            size="w-8 h-8"
+            icon={<PlaneTakeoff size={16} className="text-white" />}
+            bgColor="bg-gradient-to-br from-violet-700 via-violet-600 to-indigo-500"
           />
           <Text
-            text={'Check-In Fluturimi'}
-            size='text-sm'
-            font='font-bold font-serif'
-            className='text-slate-900 dark:text-slate-300'
+            text={"Check-In Fluturimi"}
+            size="text-sm"
+            font="font-bold font-serif"
+            className="text-slate-900 dark:text-slate-300"
           />
         </div>
         <Button
-          name='Rifresko'
-          padding='5px 18px'
+          name="Rifresko"
+          padding="5px 18px"
           icon={<RefreshIcon />}
-          border='rgb(100 116 139 / 1)'
-          bgColor='rgb(203 213 225 / 0.6)'
-          bgHover='rgb(203 213 225 / 0.6)'
-          hoverColor='#334155'
-          borderHover='rgb(100 116 139 / 1)'
-          color='#334155'
-          disabled={loadingId === 'refresh'}
+          border="rgb(100 116 139 / 1)"
+          bgColor="rgb(203 213 225 / 0.6)"
+          bgHover="rgb(203 213 225 / 0.6)"
+          hoverColor="#334155"
+          borderHover="rgb(100 116 139 / 1)"
+          color="#334155"
+          disabled={loadingId === "refresh"}
           onClick={refreshPage}
         />
       </div>
-      <div className='flex flex-col container gap-10'>
+      <div className="flex flex-col container gap-10">
         <CheckinDateFilter
           handleDateChange={handleDateChange}
           isCurrentDay={isCurrentDay}
@@ -79,7 +79,7 @@ const CheckinService = () => {
         />
 
         {data.tickets && data.tickets.length > 0 ? (
-          <div className='flex flex-col gap-3'>
+          <div className="flex flex-col gap-3">
             {data.tickets.map((ticket) => (
               <CheckinTicketCard
                 ticket={ticket}

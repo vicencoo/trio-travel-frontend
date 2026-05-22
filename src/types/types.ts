@@ -95,6 +95,7 @@ export type SoldTicket = {
   ticket_date: Date;
   ticket_code: string;
   flight_company_id: "";
+  flight_company?: FlightCompany;
   ticket_price: string;
   status?: "pending" | "completed";
   createdAt?: Date;

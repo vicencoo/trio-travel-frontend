@@ -50,6 +50,7 @@ export type BookingFieldError = {
   ticket_date?: string;
   ticket_code?: string;
   ticket_price?: string;
+  flight_ticket_id?: string;
 };
 
 export type InsuranceFieldError = {

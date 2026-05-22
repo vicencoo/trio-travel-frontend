@@ -9,15 +9,6 @@ import {
 import { useFlightCompanies } from "./useFlightCompanies";
 import { Input } from "@/components/input";
 import { Text } from "@/components/text";
-// import { useState } from "react";
-
-// const initialCompanies = [
-//   { id: 1, name: "Air Albania" },
-//   { id: 2, name: "Turkish Airlines" },
-//   { id: 3, name: "Wizz Air" },
-//   { id: 4, name: "Ryanair" },
-//   { id: 5, name: "Lufthansa" },
-// ];
 
 const FlightCompanies = () => {
   const {
@@ -30,12 +21,13 @@ const FlightCompanies = () => {
     handleStartEditing,
     handleCloseEditing,
     handleDeleteCompany,
+    isSubmitting,
   } = useFlightCompanies();
 
   console.log(companies);
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6 md:p-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-800 p-6 md:p-8">
       {/* Header */ isAddCompanyOpen}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-7">
         <div className="flex items-center gap-4">
@@ -47,7 +39,7 @@ const FlightCompanies = () => {
               text={"Kompanitë e Fluturimeve"}
               size="text-xl"
               font="font-extrabold"
-              className="text-slate-800 leading-tight"
+              className="text-slate-800 dark:text-slate-100 leading-tight"
             />
             <Text
               text={" Shiko, shto, modifiko dhe fshij kompanitë"}
@@ -68,10 +60,11 @@ const FlightCompanies = () => {
       </div>
 
       {/* Card */}
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+      {/* <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden"> */}
+      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
         {/* Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-b border-slate-100">
-          <p className="text-sm font-semibold text-slate-400">
+          <p className="text-sm font-semibold text-slate-400 dark:text-slate-300">
             Gjithsej:{" "}
             <span className="text-blue-600 font-extrabold">
               {companies.length}
@@ -99,7 +92,7 @@ const FlightCompanies = () => {
           <tbody>
             {/* Add row */}
             {isAddCompanyOpen && (
-              <tr className="bg-blue-50 border-b border-blue-100">
+              <tr className="bg-blue-50 dark:bg-slate-700 border-b border-blue-100 dark:border-slate-600">
                 <td className="px-6 py-3.5"></td>
                 <td className="px-6 py-3.5">
                   <Input
@@ -110,6 +103,7 @@ const FlightCompanies = () => {
                       handleChangeCompanyName("flight_company", e.target.value)
                     }
                     onKeyDown={(e) => {
+                      if (isSubmitting) return;
                       if (e.key === "Enter") handleSaveCompany();
                       if (e.key === "Escape") handleOpenForm();
                     }}
@@ -118,10 +112,22 @@ const FlightCompanies = () => {
                 </td>
                 <td className="px-6 py-3.5">
                   <div className="flex items-center justify-end gap-2">
-                    <button
+                    {/* <button
                       onClick={() => handleSaveCompany()}
                       className="w-8 h-8 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-600 flex items-center justify-center transition-colors"
                       title="Ruaj"
+                    >
+                      <Check />
+                    </button> */}
+                    <button
+                      disabled={isSubmitting}
+                      onClick={() => handleSaveCompany()}
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors
+                      ${
+                        isSubmitting
+                          ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                          : "bg-emerald-50 hover:bg-emerald-100 text-emerald-600"
+                      }`}
                     >
                       <Check />
                     </button>
@@ -141,12 +147,12 @@ const FlightCompanies = () => {
               ? companies?.map((c, i) => (
                   <tr
                     key={c.id}
-                    className="border-b border-slate-50 last:border-0 hover:bg-slate-50/60 transition-colors"
+                    className="border-b border-slate-50 dark:border-slate-700 last:border-0 hover:bg-slate-50/60 dark:hover:bg-slate-700/60 transition-colors"
                   >
                     <td className="px-6 py-4">
                       <Text
                         text={i + 1}
-                        className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-slate-100 text-slate-400"
+                        className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-400 dark:text-slate-200"
                         size="text-xs"
                         font="font-bold"
                       />
@@ -164,6 +170,7 @@ const FlightCompanies = () => {
                             )
                           }
                           onKeyDown={(e) => {
+                            if (isSubmitting) return;
                             if (e.key === "Enter") handleSaveCompany();
                             if (e.key === "Escape") handleCloseEditing();
                           }}
@@ -171,9 +178,12 @@ const FlightCompanies = () => {
                       ) : (
                         <div className="flex items-center gap-3">
                           <div className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
-                          <span className="text-sm font-semibold text-slate-700">
-                            {c.flight_company}
-                          </span>
+                          <Text
+                            text={c.flight_company}
+                            size="text-sm"
+                            font="font-semibold"
+                            className="text-slate-700 dark:text-slate-100 capitalize"
+                          />
                         </div>
                       )}
                     </td>
@@ -183,7 +193,7 @@ const FlightCompanies = () => {
                           <>
                             <button
                               onClick={handleSaveCompany}
-                              className="w-8 h-8 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-600 flex items-center justify-center transition-colors"
+                              className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-500 dark:text-slate-200 flex items-center justify-center transition-colors"
                               title="Ruaj"
                             >
                               <Check />
@@ -205,12 +215,18 @@ const FlightCompanies = () => {
                             >
                               <ModeEditOutlineOutlinedIcon />
                             </button>
+
                             <button
+                              disabled={isSubmitting}
                               onClick={() => {
                                 if (c.id) handleDeleteCompany(c.id);
                               }}
-                              className="w-8 h-8 rounded-lg bg-red-50 hover:bg-red-100 text-red-500 flex items-center justify-center transition-colors"
-                              title="Fshi"
+                              className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors
+                              ${
+                                isSubmitting
+                                  ? "bg-gray-300 dark:bg-slate-600 text-gray-400 dark:text-slate-400 cursor-not-allowed"
+                                  : "bg-red-50 hover:bg-red-100 text-red-500"
+                              }`}
                             >
                               <DeleteOutlinedIcon />
                             </button>
@@ -224,46 +240,6 @@ const FlightCompanies = () => {
           </tbody>
         </table>
       </div>
-
-      {/* {deleteId && (
-        <div
-          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50"
-          onClick={() => setDeleteId(null)}
-        >
-          <div
-            className="bg-white rounded-2xl p-8 w-80 max-w-[90vw] text-center shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-4 text-red-500">
-              <DeleteOutlinedIcon size={22} />
-            </div>
-            <h3 className="text-base font-extrabold text-slate-800 mb-2">
-              Fshi Kompaninë
-            </h3>
-            <p className="text-sm text-slate-500 font-medium mb-6 leading-relaxed">
-              Jeni i sigurt që doni të fshini{" "}
-              <span className="font-bold text-slate-700">
-                "{companies.find((c) => c.id === deleteId)?.name}"
-              </span>
-              ? Ky veprim nuk mund të kthehet.
-            </p>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setDeleteId(null)}
-                className="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition-colors"
-              >
-                Anulo
-              </button>
-              <button
-                onClick={doDelete}
-                className="flex-1 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white text-sm font-bold shadow-md shadow-red-100 transition-colors"
-              >
-                Fshi
-              </button>
-            </div>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };

@@ -13,11 +13,11 @@ export const useWorkManagement = () => {
   const [errors, setErrors] = useState<BookingFieldError>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAddingTicket, setIsAddingTicket] = useState<boolean>(false);
-  const [flightCompanies, setFlightCompanies] = useState<FlightCompany[] | []>([
-    // { id: 1, flight_company: "Wizz Air" },
-    // { id: 2, flight_company: "Rayan Air" },
-    // { id: 3, flight_company: "Turkish Airlines" },
-  ]);
+  const [flightCompanies, setFlightCompanies] = useState<FlightCompany[] | []>(
+    [],
+  );
+
+  console.log(bookings);
 
   const getBookings = async () => {
     try {
