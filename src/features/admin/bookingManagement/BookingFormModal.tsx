@@ -91,7 +91,7 @@ export const BookingFormModal = ({
             disablePortal
             options={
               flightCompanies?.map((company) => ({
-                label: company.name,
+                label: company.flight_company,
                 value: String(company.id),
               })) || []
             }

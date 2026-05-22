@@ -1,10 +1,10 @@
-import { DEFAULT_PROPERTY } from '@/defaults/property';
-import { propertyService } from '@/services/propertyServices';
-import type { PropertyFieldError } from '@/types/errorTypes';
-import type { Property, PropertyImage } from '@/types/types';
-import type { SelectChangeEvent } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { DEFAULT_PROPERTY } from "@/defaults/property";
+import { propertyService } from "@/services/propertyServices";
+import type { PropertyFieldError } from "@/types/errorTypes";
+import type { Property, PropertyImage } from "@/types/types";
+import type { SelectChangeEvent } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const usePropertyManager = () => {
   const { id } = useParams();
@@ -21,7 +21,7 @@ export const usePropertyManager = () => {
         const res = await propertyService.getOne(Number(id));
         if (res.data) setPropertyData(res.data);
       } catch (err) {
-        console.error('Error getting properties', err);
+        console.error("Error getting properties", err);
       }
     };
 
@@ -40,11 +40,11 @@ export const usePropertyManager = () => {
   };
 
   const handlePropertyChange = (
-    event: SelectChangeEvent<string | string[]>,
+    event: SelectChangeEvent<string | number | string[]>,
   ) => {
     const value = event.target.value;
     const stringValue = Array.isArray(value) ? value[0] : value;
-    handleChangePropertyData('property_type', stringValue);
+    handleChangePropertyData("property_type", String(stringValue));
   };
 
   const handleImagesChange = (images: (File | string | PropertyImage)[]) => {
@@ -59,50 +59,50 @@ export const usePropertyManager = () => {
     try {
       const formData = new FormData();
       if (propertyData.listing_type)
-        formData.append('listing_type', propertyData.listing_type);
+        formData.append("listing_type", propertyData.listing_type);
       if (propertyData.property_type)
-        formData.append('property_type', propertyData.property_type);
-      if (propertyData.title) formData.append('title', propertyData.title);
+        formData.append("property_type", propertyData.property_type);
+      if (propertyData.title) formData.append("title", propertyData.title);
       if (propertyData.description)
-        formData.append('description', propertyData.description);
-      if (propertyData.city) formData.append('city', propertyData.city);
-      if (propertyData.area) formData.append('area', propertyData.area);
-      if (propertyData.street) formData.append('street', propertyData.street);
+        formData.append("description", propertyData.description);
+      if (propertyData.city) formData.append("city", propertyData.city);
+      if (propertyData.area) formData.append("area", propertyData.area);
+      if (propertyData.street) formData.append("street", propertyData.street);
       if (propertyData.price)
-        formData.append('price', propertyData.price.toString());
+        formData.append("price", propertyData.price.toString());
       if (propertyData.space)
-        formData.append('space', propertyData.space.toString());
+        formData.append("space", propertyData.space.toString());
       if (propertyData.bedrooms)
-        formData.append('bedrooms', propertyData.bedrooms.toString());
+        formData.append("bedrooms", propertyData.bedrooms.toString());
       if (propertyData.toilets)
-        formData.append('toilets', propertyData.toilets.toString());
+        formData.append("toilets", propertyData.toilets.toString());
       if (propertyData.floor_number)
-        formData.append('floor_number', propertyData.floor_number.toString());
+        formData.append("floor_number", propertyData.floor_number.toString());
       if (propertyData.build_year)
-        formData.append('build_year', propertyData.build_year.toString());
+        formData.append("build_year", propertyData.build_year.toString());
       if (deletedImages.length) {
-        formData.append('deletedImages', JSON.stringify(deletedImages));
+        formData.append("deletedImages", JSON.stringify(deletedImages));
       }
       if (propertyData.status) {
-        formData.append('status', propertyData.status);
+        formData.append("status", propertyData.status);
       }
 
       if (propertyData.property_images)
         propertyData.property_images.forEach((img) => {
           if (img instanceof File) {
-            formData.append('property_images', img);
+            formData.append("property_images", img);
           }
         });
 
       if (propertyData.availability) {
-        formData.append('availability', propertyData.availability);
+        formData.append("availability", propertyData.availability);
       }
 
       const res = id
         ? await propertyService.edit(Number(id), formData)
         : await propertyService.add(formData);
       if (res.data) {
-        navigate('/admin/manage-properties');
+        navigate("/admin/manage-properties");
         setPropertyData(DEFAULT_PROPERTY);
         setDeletedImages([]);
       }

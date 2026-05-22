@@ -74,7 +74,7 @@ const BookingManagement = () => {
           headerBg="bg-slate-300 dark:bg-slate-700"
           headerText="text-slate-700 dark:text-slate-300"
         >
-          {/* {bookings &&
+          {bookings &&
             bookings?.map((booking) => (
               <BookingRow
                 booking={booking}
@@ -82,7 +82,7 @@ const BookingManagement = () => {
                 handleDelete={handleDelete}
                 key={booking.id}
               />
-            ))} */}
+            ))}
         </DataTable>
       ) : (
         <NoDataFound text="No Bookings Found!" />

@@ -1,5 +1,6 @@
 import { WORK_FORM_DEFAULT } from "@/defaults/soldTicket";
 import { bookingServices } from "@/services/bookingServices";
+import { flightCompanyServices } from "@/services/flightCompanySerices";
 import type { BookingFieldError } from "@/types/errorTypes";
 import type { FlightCompany, SoldTicket } from "@/types/types";
 import type { SelectChangeEvent } from "@mui/material";
@@ -12,10 +13,10 @@ export const useWorkManagement = () => {
   const [errors, setErrors] = useState<BookingFieldError>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAddingTicket, setIsAddingTicket] = useState<boolean>(false);
-  const [flightCompanies, setFlightCompanies] = useState<FlightCompany[]>([
-    { id: 1, flight_company: "Wizz Air" },
-    { id: 2, flight_company: "Rayan Air" },
-    { id: 3, flight_company: "Turkish Airlines" },
+  const [flightCompanies, setFlightCompanies] = useState<FlightCompany[] | []>([
+    // { id: 1, flight_company: "Wizz Air" },
+    // { id: 2, flight_company: "Rayan Air" },
+    // { id: 3, flight_company: "Turkish Airlines" },
   ]);
 
   const getBookings = async () => {
@@ -28,6 +29,17 @@ export const useWorkManagement = () => {
       console.error(err);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const getFlightCompanies = async () => {
+    try {
+      const res = await flightCompanyServices.getCompanies();
+      if (res.data) {
+        setFlightCompanies(res.data);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -45,6 +57,7 @@ export const useWorkManagement = () => {
   useEffect(() => {
     (async () => {
       await getBookings();
+      await getFlightCompanies();
     })();
   }, []);
 
