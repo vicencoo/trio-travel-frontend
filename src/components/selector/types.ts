@@ -1,17 +1,18 @@
-import type { SelectChangeEvent } from '@mui/material';
+import type { SelectChangeEvent } from "@mui/material";
 
 type SelectorOption = {
   label: string;
-  value: string;
+  value: string | number;
 };
 
 export type SelectorProps = {
-  value?: string;
+  value?: string | number;
   name?: string;
   label?: string;
   options: SelectorOption[];
-  border?: 'black' | 'white' | 'blue';
+  border?: "black" | "white" | "blue";
   multiple?: boolean;
   errorMessage?: string;
-  onChange: (event: SelectChangeEvent<string | string[]>) => void;
+  disablePortal?: boolean;
+  onChange: (event: SelectChangeEvent<string | number | string[]>) => void;
 };

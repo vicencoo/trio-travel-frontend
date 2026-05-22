@@ -1,8 +1,9 @@
-import { WORK_FORM_DEFAULT } from '@/defaults/soldTicket';
-import { bookingServices } from '@/services/bookingServices';
-import type { BookingFieldError } from '@/types/errorTypes';
-import type { SoldTicket } from '@/types/types';
-import { useEffect, useState } from 'react';
+import { WORK_FORM_DEFAULT } from "@/defaults/soldTicket";
+import { bookingServices } from "@/services/bookingServices";
+import type { BookingFieldError } from "@/types/errorTypes";
+import type { FlightCompany, SoldTicket } from "@/types/types";
+import type { SelectChangeEvent } from "@mui/material";
+import { useEffect, useState } from "react";
 
 export const useWorkManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -11,6 +12,11 @@ export const useWorkManagement = () => {
   const [errors, setErrors] = useState<BookingFieldError>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAddingTicket, setIsAddingTicket] = useState<boolean>(false);
+  const [flightCompanies, setFlightCompanies] = useState<FlightCompany[]>([
+    { id: 1, flight_company: "Wizz Air" },
+    { id: 2, flight_company: "Rayan Air" },
+    { id: 3, flight_company: "Turkish Airlines" },
+  ]);
 
   const getBookings = async () => {
     try {
@@ -23,6 +29,17 @@ export const useWorkManagement = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleChangeCompany = (
+    event: SelectChangeEvent<string | number | string[]>,
+  ) => {
+    const { name, value } = event.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   useEffect(() => {
@@ -77,7 +94,7 @@ export const useWorkManagement = () => {
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.error('Editing ticket error', error);
+      console.error("Editing ticket error", error);
       if (error?.response?.data?.errors) {
         const fieldErrors: Record<string, string> = {};
         error.response.data.errors.forEach(
@@ -105,5 +122,7 @@ export const useWorkManagement = () => {
     errors,
     isLoading,
     isAddingTicket,
+    handleChangeCompany,
+    flightCompanies,
   };
 };

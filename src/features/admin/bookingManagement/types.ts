@@ -1,5 +1,6 @@
-import type { BookingFieldError } from '@/types/errorTypes';
-import type { SoldTicket } from '@/types/types';
+import type { BookingFieldError } from "@/types/errorTypes";
+import type { FlightCompany, SoldTicket } from "@/types/types";
+import type { SelectChangeEvent } from "@mui/material";
 
 export type WorkFormModalProps = {
   isModalOpen: boolean;
@@ -9,6 +10,10 @@ export type WorkFormModalProps = {
   handleSave: () => void;
   errors: BookingFieldError;
   isAddingTicket: boolean;
+  flightCompanies: FlightCompany[];
+  handleChangeCompany: (
+    event: SelectChangeEvent<string | number | string[]>,
+  ) => void;
 };
 
 export type BookingRowProps = {

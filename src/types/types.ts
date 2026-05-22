@@ -19,8 +19,8 @@ export type Property = {
   floor_number?: number | null;
   build_year?: number | null;
   property_images: (File | string | PropertyImage)[];
-  status: 'active' | 'draft';
-  availability?: 'available' | 'sold' | 'rented';
+  status: "active" | "draft";
+  availability?: "available" | "sold" | "rented";
 };
 
 export type TicketImage = {
@@ -53,7 +53,7 @@ export type TouristPackage = {
   accomodation?: string;
   meal_included?: string;
   package_images: (PackageImage | File | string)[];
-  status: 'active' | 'draft';
+  status: "active" | "draft";
 };
 
 export type ContactTypes = {
@@ -94,9 +94,15 @@ export type SoldTicket = {
   client_name: string;
   ticket_date: Date;
   ticket_code: string;
+  flight_company_id: "";
   ticket_price: string;
-  status?: 'pending' | 'completed';
+  status?: "pending" | "completed";
   createdAt?: Date;
+};
+
+export type FlightCompany = {
+  id?: number;
+  flight_company: string;
 };
 
 export type Insurance = {
