@@ -25,7 +25,9 @@ export const ViewProperty = () => {
   const { close, isOpen, open } = useDisclosure();
   const navigate = useNavigate();
 
-  const shareUrl = window.location.href;
+  // const shareUrl = window.location.href;
+  const slug = window.location.pathname.split("/").pop();
+  const shareUrl = `${import.meta.env.VITE_LOCAL}/share/property/${slug}`;
 
   if (isLoading)
     return (
