@@ -36,7 +36,6 @@ export const ViewProperty = () => {
       </div>
     );
 
-  // const imageUrl = property?.property_images[0] as string;
   const firstImage = property?.property_images?.[0];
   const image =
     typeof firstImage === "object" && "property_image" in firstImage
