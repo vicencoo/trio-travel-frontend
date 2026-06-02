@@ -1,8 +1,8 @@
-import { DEFAULT_TICKET } from '@/defaults/planeTicket';
-import { ticketServices } from '@/services/ticketServices';
-import type { PlaneTicketFieldError } from '@/types/errorTypes';
-import type { PlaneTicket, TicketImage } from '@/types/types';
-import { useEffect, useState, type ChangeEvent } from 'react';
+import { DEFAULT_TICKET } from "@/defaults/planeTicket";
+import { ticketServices } from "@/services/ticketServices";
+import type { PlaneTicketFieldError } from "@/types/errorTypes";
+import type { PlaneTicket, TicketImage } from "@/types/types";
+import { useEffect, useState, type ChangeEvent } from "react";
 
 const ADMIN_PLANE_TICKETS = 6;
 
@@ -25,6 +25,7 @@ export const usePlaneTicketsPage = () => {
   const handleOpenModal = () => {
     setOpenModal((prev) => !prev);
     setPlaneTicket(DEFAULT_TICKET);
+    setErrors({});
   };
 
   const getAllTickets = async () => {
@@ -56,7 +57,7 @@ export const usePlaneTicketsPage = () => {
   const handleDeleteTicket = async (ticketId: number) => {
     try {
       const confirm = window.confirm(
-        'Are you sure that you want to delete this Plane Ticket?',
+        "Are you sure that you want to delete this Plane Ticket?",
       );
       if (confirm) {
         const res = await ticketServices.delete(ticketId);
@@ -66,7 +67,7 @@ export const usePlaneTicketsPage = () => {
         }
       }
     } catch (err) {
-      console.error('Error deleting ticket', err);
+      console.error("Error deleting ticket", err);
     }
   };
 
@@ -87,18 +88,18 @@ export const usePlaneTicketsPage = () => {
     setIsAddingTicket(true);
     try {
       const formData = new FormData();
-      if (planeTicket.from) formData.append('from', planeTicket.from);
-      if (planeTicket.to) formData.append('to', planeTicket.to);
+      if (planeTicket.from) formData.append("from", planeTicket.from);
+      if (planeTicket.to) formData.append("to", planeTicket.to);
       if (planeTicket.departure_airport)
-        formData.append('departure_airport', planeTicket.departure_airport);
+        formData.append("departure_airport", planeTicket.departure_airport);
       if (planeTicket.arrival_airport)
-        formData.append('arrival_airport', planeTicket.arrival_airport);
+        formData.append("arrival_airport", planeTicket.arrival_airport);
       if (planeTicket.price)
-        formData.append('price', planeTicket.price.toString());
+        formData.append("price", planeTicket.price.toString());
       if (planeTicket.ticket_images)
         planeTicket.ticket_images.forEach((img) => {
           if (img instanceof File) {
-            formData.append('ticket_images', img);
+            formData.append("ticket_images", img);
           }
         });
 
@@ -113,7 +114,7 @@ export const usePlaneTicketsPage = () => {
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.error('Editing ticket error', error);
+      console.error("Editing ticket error", error);
       if (error?.response?.data?.errors) {
         const fieldErrors: Record<string, string> = {};
         error.response.data.errors.forEach(

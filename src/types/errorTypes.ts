@@ -43,6 +43,7 @@ export type SignupFieldError = {
 export type LoginFieldError = {
   email?: string;
   password?: string;
+  wrongCredentials?: string;
 };
 
 export type BookingFieldError = {
