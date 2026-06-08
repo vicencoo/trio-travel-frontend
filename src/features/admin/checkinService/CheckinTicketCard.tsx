@@ -44,7 +44,7 @@ export const CheckinTicketCard = ({
               text={ticket.ticket_code}
               size="text-xs"
               font="font-semibold"
-              className="text-slate-500 truncate"
+              className="text-slate-500 truncate uppercase"
             />
           </div>
         </div>

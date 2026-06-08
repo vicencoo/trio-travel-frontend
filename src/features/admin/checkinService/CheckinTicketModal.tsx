@@ -82,7 +82,7 @@ export const CheckinTicketModal = ({
                 text={activeTicket?.ticket_code}
                 size="text-sm"
                 font="font-semibold font-serif"
-                className="text-white truncate"
+                className="text-white truncate uppercase"
               />
             </div>
           </div>
@@ -97,15 +97,7 @@ export const CheckinTicketModal = ({
               value={activeTicket?.flight_company?.flight_company}
             />
             <TicketInfo label="Data e Fluturimit" value={date ?? ""} />
-            {/* <TicketInfo
-              label='Kodi i Fluturimit'
-              value={activeTicket?.ticket_code}
-              className='cursor-pointer'
-              onClick={() =>
-                activeTicket?.ticket_code &&
-                navigator.clipboard.writeText(activeTicket?.ticket_code)
-              }
-            /> */}
+
             <TicketInfo
               label="Kodi i Fluturimit"
               value={activeTicket?.ticket_code}

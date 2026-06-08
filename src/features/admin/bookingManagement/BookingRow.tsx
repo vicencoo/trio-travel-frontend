@@ -18,7 +18,7 @@ export const BookingRow = ({
           text={booking.ticket_code}
           size="md:text-sm text-xs"
           font="md:font-medium font-semibold"
-          className="text-slate-700 dark:text-slate-400 pr-2 truncate"
+          className="text-slate-700 dark:text-slate-400 pr-2 truncate uppercase"
         />
       </div>
       <Text
