@@ -18,6 +18,7 @@ import {
 import { ViewImages } from "@/components/viewImages/ViewImages";
 import { useDisclosure } from "@/hooks/useDisclosure";
 import { ShareModal } from "@/components/shareModal/ShareModal";
+import { SEO } from "@/components/seo";
 
 export const ViewPackage = () => {
   const navigate = useNavigate();
@@ -33,6 +34,28 @@ export const ViewPackage = () => {
 
   const currentUrl = window.location.href;
   const slug = window.location.pathname.split("/").pop();
+  const canonicalUrl = `https://www.triotravel.al/paketa-turistike/${slug}`;
+
+  const seoTitle = `${packageData?.title || "Paketë Turistike"} | Trio Travel Albania`;
+
+  const seoDescription =
+    packageData && packageData?.description
+      ? packageData.description.slice(0, 155)
+      : "Zbuloni paketa turistike me Trio Travel Albania. Rezervoni udhëtime, hotele dhe oferta pushimesh sipas dëshirës tuaj.";
+
+  const firstImage = packageData?.package_images?.[0];
+
+  const seoImage: string =
+    typeof firstImage === "string"
+      ? firstImage
+      : firstImage instanceof File
+        ? URL.createObjectURL(firstImage)
+        : typeof firstImage === "object" &&
+            firstImage !== null &&
+            "image_url" in firstImage &&
+            typeof firstImage.image_url === "string"
+          ? firstImage.image_url
+          : "https://www.triotravel.al/images/package-image.webp";
 
   const shareUrl = `${import.meta.env.VITE_LOCAL}/share/package/${slug}`;
 
@@ -79,161 +102,188 @@ Faleminderit!
   };
 
   return (
-    <div className="flex flex-col gap-10 container pt-3 pb-20">
-      <div className="flex flex-col gap-3">
-        <div className="flex items-center w-full justify-between">
-          <span
-            className="flex items-center cursor-pointer w-max text-gray-500 hover:underline hover:scale-110 hover:text-black transition-all duration-300 will-change-transform"
-            onClick={() => navigate("/paketa-turistike")}
-          >
-            <ArrowBack fontSize="small" />
-            <Text text={"Kthehu Tek Paketat Turistike"} font="font-medium" />
-          </span>
-          <div
-            className="flex items-center gap-1 hover:underline cursor-pointer hover:scale-105 transition-all duration-150 will-change-transform"
-            onClick={open}
-          >
-            <Share2 size={18} />
-            <Text
-              text={"Shpërndaj"}
-              font="font-medium"
-              className="hidden md:flex"
-            />
+    <>
+      <SEO
+        title={seoTitle}
+        description={seoDescription}
+        canonical={canonicalUrl}
+        image={seoImage}
+        keywords={[
+          packageData?.title || "",
+          packageData?.destination || "",
+          "paketa turistike",
+          "paketa turistike Shqiperi",
+          "oferta pushimesh",
+          "rezervo pakete turistike",
+          "Trio Travel Albania",
+        ]}
+      />
+
+      <div className="flex flex-col gap-10 container pt-3 pb-20">
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center w-full justify-between">
+            <span
+              className="flex items-center cursor-pointer w-max text-gray-500 hover:underline hover:scale-110 hover:text-black transition-all duration-300 will-change-transform"
+              onClick={() => navigate("/paketa-turistike")}
+            >
+              <ArrowBack fontSize="small" />
+              <Text text={"Kthehu Tek Paketat Turistike"} font="font-medium" />
+            </span>
+            <div
+              className="flex items-center gap-1 hover:underline cursor-pointer hover:scale-105 transition-all duration-150 will-change-transform"
+              onClick={open}
+            >
+              <Share2 size={18} />
+              <Text
+                text={"Shpërndaj"}
+                font="font-medium"
+                className="hidden md:flex"
+              />
+            </div>
+          </div>
+
+          <div className="flex w-full justify-center">
+            {packageData && <ViewImages images={packageData.package_images} />}
           </div>
         </div>
-
-        <div className="flex w-full justify-center">
-          {packageData && <ViewImages images={packageData.package_images} />}
-        </div>
-      </div>
-      <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
-        <div className="flex flex-col gap-6 md:col-span-2">
-          <Card>
-            <Text
-              text={packageData?.title}
-              size="text-2xl md:text-4xl"
-              font="font-serif font-bold"
-              className="capitalize"
-            />
-            <span className="flex items-center gap-1">
-              <LocationOnOutlined fontSize="small" className="text-blue-600" />
-              <Text
-                text={packageData?.destination}
-                size="text-lg"
-                font="font-medium font-serif"
-                className="tracking-wide capitalize"
-              />
-            </span>
-          </Card>
-          <Card>
-            <Text
-              text={"Përshkrimi"}
-              size="text-2xl"
-              font="font-serif font-semibold"
-            />
-
-            <Text
-              text={packageData?.description}
-              font="font-serif"
-              className="text-slate-700 leading-relaxed whitespace-pre-line"
-            />
-          </Card>
-        </div>
-
-        <div className="md:col-span-1 flex flex-col gap-5">
-          <Card bgColor="bg-gradient-to-b from-slate-900 to-slate-800">
-            <div className="flex flex-col text-center gap-4 pb-6 border-b border-slate-500">
-              <div className="flex justify-between items-center">
-                <Text
-                  text={"DUKE FILLUAR NGA"}
-                  size="text-sm"
-                  font="font-medium"
-                  className="text-gray-300"
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
+          <div className="flex flex-col gap-6 md:col-span-2">
+            <Card>
+              <h1 className="text-2xl md:text-4xl font-serif font-bold capitalize">
+                {packageData?.title}
+              </h1>
+              <span className="flex items-center gap-1">
+                <LocationOnOutlined
+                  fontSize="small"
+                  className="text-blue-600"
                 />
-                <Share2 onClick={open} className="cursor-pointer text-white" />
+                <Text
+                  text={packageData?.destination}
+                  size="text-lg"
+                  font="font-medium font-serif"
+                  className="tracking-wide capitalize"
+                />
+              </span>
+            </Card>
+            <Card>
+              <Text
+                text={"Përshkrimi"}
+                size="text-2xl"
+                font="font-serif font-semibold"
+              />
+
+              <Text
+                text={packageData?.description}
+                font="font-serif"
+                className="text-slate-700 leading-relaxed whitespace-pre-line"
+              />
+            </Card>
+          </div>
+
+          <div className="md:col-span-1 flex flex-col gap-5">
+            <Card bgColor="bg-gradient-to-b from-slate-900 to-slate-800">
+              <div className="flex flex-col text-center gap-4 pb-6 border-b border-slate-500">
+                <div className="flex justify-between items-center">
+                  <Text
+                    text={"DUKE FILLUAR NGA"}
+                    size="text-sm"
+                    font="font-medium"
+                    className="text-gray-300"
+                  />
+                  <Share2
+                    onClick={open}
+                    className="cursor-pointer text-white"
+                  />
+                </div>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-bold font-serif text-gray-100">
+                    €{formattedPrice(Number(packageData?.price))}
+                  </span>
+                  <span className="text-lg font-medium text-gray-300">
+                    /personi
+                  </span>
+                </div>
               </div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold font-serif text-gray-100">
-                  €{formattedPrice(Number(packageData?.price))}
-                </span>
-                <span className="text-lg font-medium text-gray-300">
-                  /personi
-                </span>
+              <div className="flex flex-col gap-3">
+                {/* Kohezgjatja */}
+                <InfoItem
+                  icon={
+                    <CalendarMonthOutlined
+                      className="text-blue-500"
+                      fontSize="small"
+                    />
+                  }
+                  label="Kohëzgjatja"
+                  value={`${packageData?.duration && packageData?.duration + 1} ditë / ${packageData?.duration} netë`}
+                />
+
+                {/* Akomodimi */}
+                <InfoItem
+                  icon={
+                    <AirlineSeatIndividualSuiteOutlined
+                      className="text-blue-500"
+                      fontSize="small"
+                    />
+                  }
+                  label="Akomodimi"
+                  value={formatAccomodationPlan(
+                    packageData?.accomodation || "",
+                  )}
+                />
+
+                {/* Included */}
+                <InfoItem
+                  icon={
+                    <RestaurantMenuOutlined
+                      className="text-blue-500"
+                      fontSize="small"
+                    />
+                  }
+                  label="Vaktet e Përfshira"
+                  value={formatMealPlan(packageData?.meal_included || "")}
+                />
               </div>
-            </div>
-            <div className="flex flex-col gap-3">
-              {/* Kohezgjatja */}
-              <InfoItem
-                icon={
-                  <CalendarMonthOutlined
-                    className="text-blue-500"
-                    fontSize="small"
-                  />
+              <Button
+                name="rezervo tani"
+                bgHover="#2563eb"
+                borderHover="#1d4ed8"
+                onClick={() =>
+                  window.open(
+                    `https://wa.me/355696900916?text=${reserveMessage}`,
+                  )
                 }
-                label="Kohëzgjatja"
-                value={`${packageData?.duration && packageData?.duration + 1} ditë / ${packageData?.duration} netë`}
               />
+            </Card>
 
-              {/* Akomodimi */}
-              <InfoItem
-                icon={
-                  <AirlineSeatIndividualSuiteOutlined
-                    className="text-blue-500"
-                    fontSize="small"
-                  />
+            {/* Kontact */}
+            <Card bgColor="bg-blue-100" borderColor="border-blue-200">
+              <Text text={"Keni nevojë për ndihmë?"} font="font-medium" />
+              <Text
+                text={
+                  "Ne jemi këtu gjithmonë për tju ndihmuar. Mos nguroni të na kontaktoni."
                 }
-                label="Akomodimi"
-                value={formatAccomodationPlan(packageData?.accomodation || "")}
+                size="text-sm"
+                font="font-medium"
+                className="text-gray-600 "
               />
-
-              {/* Included */}
-              <InfoItem
-                icon={
-                  <RestaurantMenuOutlined
-                    className="text-blue-500"
-                    fontSize="small"
-                  />
+              <Button
+                name="na kontaktoni"
+                border="transparent"
+                bgColor="#2563eb"
+                bgHover="#1d4ed8"
+                color="white"
+                borderHover="#1d4ed8 "
+                onClick={() =>
+                  window.open(
+                    `https://wa.me/355696900916?text=${contactMessage}`,
+                  )
                 }
-                label="Vaktet e Përfshira"
-                value={formatMealPlan(packageData?.meal_included || "")}
               />
-            </div>
-            <Button
-              name="rezervo tani"
-              bgHover="#2563eb"
-              borderHover="#1d4ed8"
-              onClick={() =>
-                window.open(`https://wa.me/355696900916?text=${reserveMessage}`)
-              }
-            />
-          </Card>
-
-          {/* Kontact */}
-          <Card bgColor="bg-blue-100" borderColor="border-blue-200">
-            <Text text={"Keni nevojë për ndihmë?"} font="font-medium" />
-            <Text
-              text={
-                "Ne jemi këtu gjithmonë për tju ndihmuar. Mos nguroni të na kontaktoni."
-              }
-              size="text-sm"
-              font="font-medium"
-              className="text-gray-600 "
-            />
-            <Button
-              name="na kontaktoni"
-              border="transparent"
-              bgColor="#2563eb"
-              bgHover="#1d4ed8"
-              color="white"
-              borderHover="#1d4ed8 "
-              onClick={() =>
-                window.open(`https://wa.me/355696900916?text=${contactMessage}`)
-              }
-            />
-          </Card>
+            </Card>
+          </div>
         </div>
+        {slug && <ShareModal isOpen={isOpen} close={close} path={shareUrl} />}
       </div>
-      {slug && <ShareModal isOpen={isOpen} close={close} path={shareUrl} />}
-    </div>
+    </>
   );
 };

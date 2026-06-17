@@ -1,11 +1,12 @@
-import { useProperty } from './useProperty';
-import { PropertyHero } from './PropertyHero';
-import { PropertyFilters } from './PropertyFilters';
-import { useScrollOnChange } from '@/hooks/useScrollOnChange';
-import { PropertyCardSkeleton } from '@/components/skeletons';
-import { PropertyCard } from '@/components/propertyCard';
-import { Pagination } from '@/components/pagination';
-import { NoPropertyFound } from '@/components/noPropertyFound';
+import { useProperty } from "./useProperty";
+import { PropertyHero } from "./PropertyHero";
+import { PropertyFilters } from "./PropertyFilters";
+import { useScrollOnChange } from "@/hooks/useScrollOnChange";
+import { PropertyCardSkeleton } from "@/components/skeletons";
+import { PropertyCard } from "@/components/propertyCard";
+import { Pagination } from "@/components/pagination";
+import { NoPropertyFound } from "@/components/noPropertyFound";
+import { SEO } from "@/components/seo";
 
 export const Properties = () => {
   const {
@@ -21,46 +22,66 @@ export const Properties = () => {
   const { scrollRef } = useScrollOnChange(pageNumber);
 
   return (
-    <div className='flex flex-col gap-10 pb-10'>
-      <PropertyHero />
+    <>
+      <SEO
+        title="Prona në Shitje në Shqipëri | Apartamente, Vila & Investime"
+        description="Gjeni prona në shitje në Shqipëri, apartamente, vila dhe prona për investim në lokacionet më të kërkuara."
+        canonical="https://www.triotravel.al/pronat"
+        keywords={[
+          "prona",
+          "prona ne Shqiperi",
+          "prona ne shitje",
+          "apartamente ne shitje",
+          "vila ne shitje",
+          "apartamente ne Sarande",
+          "apartamente ne Tirane",
+          "prona bregdetare",
+          "real estate Albania",
+          "Trio Travel Albania",
+        ]}
+      />
 
-      <div className='container' ref={scrollRef}>
-        <PropertyFilters
-          handleSearchChange={handleSearchChange}
-          handleSearchClick={handleSearchClick}
-          hadleListingFilterChange={hadleListingFilterChange}
-          listingType={listingType}
-          count={data?.pagination.totalProducts}
-        />
-      </div>
+      <div className="flex flex-col gap-10 pb-10">
+        <PropertyHero />
 
-      {isLoading ? (
-        <div className='container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:gap-4 gap-5'>
-          {Array.from({ length: 6 }).map((_, index) => (
-            <PropertyCardSkeleton key={index} />
-          ))}
-        </div>
-      ) : data?.properties && data.properties.length > 0 ? (
-        <div className='flex flex-col gap-10 items-center'>
-          <div className='container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:gap-4 gap-5'>
-            {data &&
-              data.properties.map((property, idx) => (
-                <PropertyCard
-                  key={property.id}
-                  index={idx}
-                  property={property}
-                />
-              ))}
-          </div>
-          <Pagination
-            onChange={handlePageChange}
-            page={pageNumber}
-            pages={data.pagination.totalPages}
+        <div className="container" ref={scrollRef}>
+          <PropertyFilters
+            handleSearchChange={handleSearchChange}
+            handleSearchClick={handleSearchClick}
+            hadleListingFilterChange={hadleListingFilterChange}
+            listingType={listingType}
+            count={data?.pagination.totalProducts}
           />
         </div>
-      ) : (
-        <NoPropertyFound />
-      )}
-    </div>
+
+        {isLoading ? (
+          <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:gap-4 gap-5">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <PropertyCardSkeleton key={index} />
+            ))}
+          </div>
+        ) : data?.properties && data.properties.length > 0 ? (
+          <div className="flex flex-col gap-10 items-center">
+            <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:gap-4 gap-5">
+              {data &&
+                data.properties.map((property, idx) => (
+                  <PropertyCard
+                    key={property.id}
+                    index={idx}
+                    property={property}
+                  />
+                ))}
+            </div>
+            <Pagination
+              onChange={handlePageChange}
+              page={pageNumber}
+              pages={data.pagination.totalPages}
+            />
+          </div>
+        ) : (
+          <NoPropertyFound />
+        )}
+      </div>
+    </>
   );
 };
