@@ -1,14 +1,14 @@
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import type { TouristPackage } from '@/types/types';
-import { packageServices } from '@/services/packageServices';
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import type { TouristPackage } from "@/types/types";
+import { packageServices } from "@/services/packageServices";
 
 export const useViewPackage = () => {
   const { slug } = useParams();
   const [packageData, setPackageData] = useState<TouristPackage | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-  const id = slug?.split('-').pop();
+  const id = slug?.split("-").pop();
 
   const images = packageData?.package_images || [];
 

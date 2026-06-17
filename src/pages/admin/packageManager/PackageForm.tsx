@@ -20,6 +20,7 @@ const vaktet = [
   { label: "Vetem Mengjesi", value: "breakfastOnly" },
   { label: "Mengjes ,Darke", value: "breakfastDinner" },
   { label: "All Inclusive", value: "allInclusive" },
+  { label: "Ultra All Inclusive", value: "ultraAllInclusive" },
 ];
 
 export const PackageForm = ({

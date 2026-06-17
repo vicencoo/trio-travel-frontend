@@ -33,6 +33,7 @@ export const ViewPackage = () => {
 
   const currentUrl = window.location.href;
   const slug = window.location.pathname.split("/").pop();
+
   const shareUrl = `${import.meta.env.VITE_LOCAL}/share/package/${slug}`;
 
   const reserveMessage = encodeURIComponent(`
@@ -59,6 +60,7 @@ Faleminderit!
 
   const formatMealPlan = (meal: string) => {
     const mealPlans: Record<string, string> = {
+      ultraAllInclusive: "Ultra All Inclusive",
       allInclusive: "All Inclusive",
       breakfastDinner: "Mengjesi dhe Darka",
       breakfastOnly: "Breakfast Only",
@@ -231,7 +233,7 @@ Faleminderit!
           </Card>
         </div>
       </div>
-      <ShareModal isOpen={isOpen} close={close} path={shareUrl} />
+      {slug && <ShareModal isOpen={isOpen} close={close} path={shareUrl} />}
     </div>
   );
 };
