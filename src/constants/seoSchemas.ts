@@ -6,11 +6,19 @@ export const propertiesSchema = [
     url: "https://www.triotravel.al/pronat",
     description:
       "Gjeni prona në shitje në Shqipëri, apartamente, vila dhe prona për investim në lokacionet më të kërkuara.",
+    inLanguage: "sq-AL",
     isPartOf: {
       "@type": "WebSite",
       "@id": "https://www.triotravel.al#website",
       name: "Trio Travel & Immo",
       url: "https://www.triotravel.al",
+    },
+    about: {
+      "@type": "Thing",
+      name: "Prona në shitje, apartamente, vila dhe investime imobiliare në Shqipëri",
+    },
+    mainEntity: {
+      "@id": "https://www.triotravel.al#realestate",
     },
   },
   {
@@ -18,8 +26,53 @@ export const propertiesSchema = [
     "@id": "https://www.triotravel.al#realestate",
     name: "Trio Travel & Immo",
     url: "https://www.triotravel.al/pronat",
+    logo: "https://www.triotravel.al/images/trio-travel-icon.webp",
+    image: "https://www.triotravel.al/images/trio-travel-properties-og.webp",
     telephone: "+355696900916",
-    areaServed: "Albania",
+    areaServed: {
+      "@type": "Country",
+      name: "Albania",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "AL",
+    },
+    knowsAbout: [
+      "Prona në shitje",
+      "Apartamente në shitje",
+      "Vila në shitje",
+      "Prona bregdetare",
+      "Investime imobiliare",
+      "Real Estate Albania",
+    ],
+    makesOffer: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Prona në Shitje",
+          description:
+            "Shërbim për gjetjen dhe prezantimin e pronave në shitje në Shqipëri.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Apartamente dhe Vila",
+          description:
+            "Apartamente, vila dhe prona të zgjedhura në lokacione të kërkuara.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Prona për Investim",
+          description: "Prona të përshtatshme për investim në Shqipëri.",
+        },
+      },
+    ],
   },
 ];
 

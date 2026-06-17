@@ -28,7 +28,7 @@ export const Properties = () => {
         title="Prona në Shitje në Shqipëri | Apartamente, Vila & Investime"
         description="Gjeni prona në shitje në Shqipëri, apartamente, vila dhe prona për investim në lokacionet më të kërkuara."
         canonical="https://www.triotravel.al/pronat"
-        image="https://www.triotravel.al/images/property-cover.webp"
+        image="https://www.triotravel.al/images/trio-travel-properties-og.webp"
         keywords={[
           "prona",
           "prona ne Shqiperi",
