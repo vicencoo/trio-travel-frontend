@@ -114,7 +114,15 @@ Faleminderit!
       "@type": "TravelAgency",
       name: "Trio Travel & Immo",
       url: "https://www.triotravel.al",
+      logo: "https://www.triotravel.al/images/trio-travel-icon.webp",
       telephone: "+355696900916",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Kryqezimi Rinia, Pallati i Kollozit",
+        addressLocality: "Vlorë",
+        postalCode: "9400",
+        addressCountry: "AL",
+      },
     },
     offers: {
       "@type": "Offer",
@@ -143,7 +151,9 @@ Faleminderit!
           "paketa turistike Shqiperi",
           "oferta pushimesh",
           "rezervo pakete turistike",
-          "Trio Travel Albania",
+          "agjenci turistike Vlore",
+          "agjensi turistike Vlore",
+          "Trio Travel Immo",
         ]}
         schema={packageSchema}
       />

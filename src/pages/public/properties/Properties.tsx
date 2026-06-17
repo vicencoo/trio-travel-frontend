@@ -26,20 +26,22 @@ export const Properties = () => {
     <>
       <SEO
         title="Prona në Shitje në Shqipëri | Apartamente, Vila & Investime"
-        description="Gjeni prona në shitje në Shqipëri, apartamente, vila dhe prona për investim në lokacionet më të kërkuara."
+        description="Gjeni prona në shitje në Shqipëri me Trio Travel & Immo. Apartamente, vila, prona bregdetare dhe mundësi investimi në Vlorë, Sarandë, Tiranë dhe zona të tjera."
         canonical="https://www.triotravel.al/pronat"
         image="https://www.triotravel.al/images/trio-travel-properties-og.webp"
         keywords={[
-          "prona",
-          "prona ne Shqiperi",
           "prona ne shitje",
+          "prona ne Shqiperi",
           "apartamente ne shitje",
           "vila ne shitje",
+          "apartamente ne Vlore",
           "apartamente ne Sarande",
           "apartamente ne Tirane",
           "prona bregdetare",
           "real estate Albania",
-          "Trio Travel Albania",
+          "investime imobiliare",
+          "Trio Travel Immo",
+          "agjenci imobiliare Vlore",
         ]}
         schema={propertiesSchema}
       />

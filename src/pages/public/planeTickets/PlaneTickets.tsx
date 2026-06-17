@@ -29,19 +29,21 @@ Do të doja disa sugjerime për udhëtimin tim. Mund të më ndihmoni, ju lutem?
   return (
     <>
       <SEO
-        title="Bileta Avioni | Oferta Fluturimesh & Çmime nga Trio Travel"
-        description="Gjeni bileta avioni dhe oferta fluturimesh të ndryshme. Kontaktoni Trio Travel Albania për asistencë udhëtimi."
+        title="Bileta Avioni | Oferta Fluturimesh & Rezervime Online"
+        description="Gjeni bileta avioni dhe oferta fluturimesh për destinacione të ndryshme me Trio Travel & Immo. Rezervoni fluturimin tuaj me asistencë profesionale."
         canonical="https://www.triotravel.al/bileta-avioni"
         image="https://www.triotravel.al/images/plane-ticket-cover.webp"
         keywords={[
           "bileta avioni",
-          "bileta avioni Tirane",
+          "bileta avioni online",
+          "rezervo bileta avioni",
           "oferta fluturimesh",
           "fluturime te lira",
-          "rezervo bileta avioni",
-          "bileta avioni online",
+          "agjenci turistike Vlore",
           "agjenci turistike Shqiperi",
-          "Trio Travel Albania",
+          "fluturime europiane",
+          "fluturime nderkombetare",
+          "Trio Travel Immo",
         ]}
         schema={planeTicketsSchema}
       />

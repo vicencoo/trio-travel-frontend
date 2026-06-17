@@ -29,20 +29,22 @@ export const Destinations = () => {
   return (
     <>
       <SEO
-        title="Destinacione Udhëtimi | Pushime & Paketa Turistike"
-        description="Zbuloni destinacionet më të pëlqyera për pushime me Trio Travel Albania. Eksploroni plazhe, qytete ikonike dhe udhëtime të personalizuara sipas buxhetit tuaj."
+        title="Destinacione Turistike | Pushime, Udhëtime & Paketa Turistike"
+        description="Zbuloni destinacione turistike për pushime me Trio Travel & Immo. Eksploroni udhëtime në Europë, Turqi, Dubai dhe destinacione të personalizuara sipas buxhetit tuaj."
         canonical="https://www.triotravel.al/destinacionet"
         image="https://www.triotravel.al/images/trio-travel-package-og.webp"
         keywords={[
-          "destinacione udhetimi",
           "destinacione turistike",
+          "destinacione udhetimi",
           "pushime",
-          "paketa turistike",
-          "udhetime te personalizuara",
           "pushime ne Europe",
           "pushime ne Turqi",
           "pushime ne Dubai",
-          "Trio Travel Albania",
+          "paketa turistike",
+          "udhetime te personalizuara",
+          "agjenci turistike Vlore",
+          "agjenci turistike Shqiperi",
+          "Trio Travel Immo",
         ]}
         schema={destinationsSchema}
       />

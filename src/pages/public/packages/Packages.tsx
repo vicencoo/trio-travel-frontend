@@ -33,7 +33,7 @@ A mund të më ndihmoni me sugjerime dhe organizimin?`,
     <>
       <SEO
         title="Paketa Turistike | Oferta Udhëtimi & Paketa të Personalizuara"
-        description="Zbuloni paketa turistike me Trio Travel Albania ose krijoni paketën tuaj të personalizuar sipas destinacionit, buxhetit dhe datave të udhëtimit."
+        description="Zbuloni paketa turistike me Trio Travel & Immo në Vlorë ose krijoni paketën tuaj të personalizuar sipas destinacionit, buxhetit dhe datave të udhëtimit."
         canonical="https://www.triotravel.al/paketa-turistike"
         image="https://www.triotravel.al/images/trio-travel-package-og.webp"
         keywords={[
@@ -44,8 +44,10 @@ A mund të më ndihmoni me sugjerime dhe organizimin?`,
           "pushime ne Europe",
           "pushime ne Turqi",
           "pushime ne Dubai",
+          "agjenci turistike Vlore",
+          "agjensi turistike Vlore",
           "agjenci turistike Shqiperi",
-          "agjenci turistike Tirane",
+          "agjensi turistike Shqiperi",
           "udhetime te organizuara",
         ]}
         schema={packagesSchema}

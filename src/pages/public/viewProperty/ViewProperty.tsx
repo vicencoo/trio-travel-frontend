@@ -66,12 +66,14 @@ export const ViewProperty = () => {
     description: seoDescription,
     image: seoImage,
     datePosted: property?.created_at,
+
     address: {
       "@type": "PostalAddress",
       addressLocality: property?.city,
       streetAddress: `${property?.street || ""} ${property?.area || ""}`.trim(),
       addressCountry: "AL",
     },
+
     offers: {
       "@type": "Offer",
       url: canonicalUrl,
@@ -79,6 +81,7 @@ export const ViewProperty = () => {
       priceCurrency: "EUR",
       availability: "https://schema.org/InStock",
     },
+
     floorSize: property?.space
       ? {
           "@type": "QuantitativeValue",
@@ -86,17 +89,26 @@ export const ViewProperty = () => {
           unitCode: "MTK",
         }
       : undefined,
+
     numberOfRooms: property?.bedrooms,
     numberOfBathroomsTotal: property?.toilets,
     yearBuilt: property?.build_year,
+
     provider: {
       "@type": "RealEstateAgent",
       name: "Trio Travel & Immo",
       url: "https://www.triotravel.al",
+      logo: "https://www.triotravel.al/images/trio-travel-icon.webp",
       telephone: "+355696900916",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Kryqezimi Rinia, Pallati i Kollozit",
+        addressLocality: "Vlorë",
+        postalCode: "9400",
+        addressCountry: "AL",
+      },
     },
   };
-
   return (
     <>
       <SEO
@@ -111,10 +123,17 @@ export const ViewProperty = () => {
           String(property?.property_type ?? ""),
           "prona ne shitje",
           "apartamente ne shitje",
+          "apartamente ne shitje vlore",
+          "apartamente ne shitje ne vlore",
+          "apartamente me qera",
+          "apartamente me qera vlore",
+          "apartamente me qera ne vlore",
           "vila ne shitje",
           "prona ne Shqiperi",
+          "agjenci imobiliare Vlore",
+          "agjensi imobiliare Vlore",
           "real estate Albania",
-          "Trio Travel Albania",
+          "Trio Travel Immo",
         ]}
         schema={propertySchema}
       />

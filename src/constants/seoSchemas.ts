@@ -35,6 +35,9 @@ export const propertiesSchema = [
     },
     address: {
       "@type": "PostalAddress",
+      streetAddress: "Kryqezimi Rinia, Pallati i Kollozit",
+      addressLocality: "Vlorë",
+      postalCode: "9400",
       addressCountry: "AL",
     },
     knowsAbout: [
@@ -132,27 +135,63 @@ export const planeTicketsSchema = [
   {
     "@type": "CollectionPage",
     "@id": "https://www.triotravel.al/bileta-avioni#collection",
-    name: "Bileta Avioni",
+    name: "Bileta Avioni & Oferta Fluturimesh",
     url: "https://www.triotravel.al/bileta-avioni",
     description:
-      "Gjeni bileta avioni dhe oferta fluturimesh të ndryshme me Trio Travel & Immo.",
+      "Gjeni bileta avioni dhe oferta fluturimesh për destinacione të ndryshme me Trio Travel & Immo.",
+    inLanguage: "sq-AL",
     isPartOf: {
       "@type": "WebSite",
       "@id": "https://www.triotravel.al#website",
       name: "Trio Travel & Immo",
       url: "https://www.triotravel.al",
     },
+    about: {
+      "@type": "Thing",
+      name: "Bileta avioni, fluturime dhe rezervime udhëtimi",
+    },
+    mainEntity: {
+      "@id": "https://www.triotravel.al#travelagency",
+    },
   },
+
   {
     "@type": "TravelAgency",
     "@id": "https://www.triotravel.al#travelagency",
     name: "Trio Travel & Immo",
     url: "https://www.triotravel.al",
+    logo: "https://www.triotravel.al/images/trio-travel-icon.webp",
+    image: "https://www.triotravel.al/images/plane-ticket-cover.webp",
     telephone: "+355696900916",
-    areaServed: "Albania",
+
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Kryqezimi Rinia, Pallati i Kollozit",
+      addressLocality: "Vlorë",
+      postalCode: "9400",
+      addressCountry: "AL",
+    },
+
+    areaServed: {
+      "@type": "Country",
+      name: "Albania",
+    },
+
+    priceRange: "€€",
+
+    knowsAbout: [
+      "Bileta Avioni",
+      "Oferta Fluturimesh",
+      "Rezervime Fluturimesh",
+      "Udhëtime Ndërkombëtare",
+      "Udhëtime Europiane",
+      "Planifikim Udhëtimi",
+    ],
+
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Bileta Avioni dhe Oferta Fluturimesh",
+
       itemListElement: [
         {
           "@type": "Offer",
@@ -160,9 +199,10 @@ export const planeTicketsSchema = [
             "@type": "Service",
             name: "Bileta Avioni",
             description:
-              "Rezervim biletash avioni për destinacione të ndryshme.",
+              "Rezervim biletash avioni për destinacione të ndryshme në Europë dhe botë.",
           },
         },
+
         {
           "@type": "Offer",
           itemOffered: {
@@ -172,12 +212,14 @@ export const planeTicketsSchema = [
               "Oferta fluturimesh sipas destinacionit dhe datave të udhëtimit.",
           },
         },
+
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
             name: "Asistencë Udhëtimi",
-            description: "Ndihmë për zgjedhjen dhe organizimin e fluturimit.",
+            description:
+              "Ndihmë për zgjedhjen, rezervimin dhe organizimin e fluturimit.",
           },
         },
       ],
@@ -189,15 +231,23 @@ export const destinationsSchema = [
   {
     "@type": "CollectionPage",
     "@id": "https://www.triotravel.al/destinacionet#collection",
-    name: "Destinacione Udhëtimi",
+    name: "Destinacione Turistike",
     url: "https://www.triotravel.al/destinacionet",
     description:
-      "Zbuloni destinacionet më të pëlqyera për pushime me Trio Travel & Immo.",
+      "Zbuloni destinacione turistike për pushime, udhëtime në Europë, Turqi, Dubai dhe paketa të personalizuara me Trio Travel & Immo.",
+    inLanguage: "sq-AL",
     isPartOf: {
       "@type": "WebSite",
       "@id": "https://www.triotravel.al#website",
       name: "Trio Travel & Immo",
       url: "https://www.triotravel.al",
+    },
+    about: {
+      "@type": "Thing",
+      name: "Destinacione turistike, pushime dhe udhëtime të personalizuara",
+    },
+    mainEntity: {
+      "@id": "https://www.triotravel.al#travelagency",
     },
   },
   {
@@ -205,8 +255,20 @@ export const destinationsSchema = [
     "@id": "https://www.triotravel.al#travelagency",
     name: "Trio Travel & Immo",
     url: "https://www.triotravel.al",
+    logo: "https://www.triotravel.al/images/trio-travel-icon.webp",
+    image: "https://www.triotravel.al/images/trio-travel-package-og.webp",
     telephone: "+355696900916",
-    areaServed: "Albania",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Kryqezimi Rinia, Pallati i Kollozit",
+      addressLocality: "Vlorë",
+      postalCode: "9400",
+      addressCountry: "AL",
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Albania",
+    },
     knowsAbout: [
       "Destinacione turistike",
       "Paketa turistike",
@@ -214,6 +276,7 @@ export const destinationsSchema = [
       "Pushime në Europë",
       "Pushime në Turqi",
       "Pushime në Dubai",
+      "Planifikim udhëtimi",
     ],
   },
 ];

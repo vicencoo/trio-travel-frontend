@@ -10,20 +10,23 @@ export const Contact = () => {
   return (
     <>
       <SEO
-        title="Na Kontaktoni | Trio Travel Albania"
-        description="Kontaktoni Trio Travel Albania për paketa turistike, prona, bileta avioni dhe asistencë të personalizuar për udhëtimet tuaja."
+        title="Kontakt | Trio Travel & Immo në Vlorë"
+        description="Kontaktoni Trio Travel & Immo në Vlorë për paketa turistike, prona në shitje, bileta avioni dhe asistencë të personalizuar për udhëtimet tuaja."
         canonical="https://www.triotravel.al/kontakti"
-        image="https://www.triotravel.al/images/trio-travel-icon.webp"
+        image="https://www.triotravel.al/images/trio-travel-og.webp"
         keywords={[
           "kontakt trio travel",
-          "agjenci turistike tirane",
-          "kontakt agjenci turistike",
-          "trio travel albania",
-          "paketa turistike",
-          "prona",
+          "trio travel vlore",
+          "trio travel immo",
+          "agjenci turistike vlore",
+          "agjenci imobiliare vlore",
+          "paketa turistike vlore",
+          "prona ne shitje vlore",
           "bileta avioni",
+          "Kryqezimi Rinia Vlore",
         ]}
       />
+
       <div className="flex flex-col gap-10 pb-7 md:pb-20">
         <div className="relative w-full overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 py-12 md:py-20">
           <div className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8">
