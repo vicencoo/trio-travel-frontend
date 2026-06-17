@@ -1,7 +1,2 @@
-// export const DEFAULT_URL = import.meta.env.VITE_LOCAL;
-export const DEFAULT_URL = import.meta.env.VITE_LOCALLY_DEVELOPMENT;
-
-// ('https://trio-travel-frontend-vercel-henna.vercel.app');
-// window.location.hostname === 'localhost'
-//   ? import.meta.env.VITE_LOCAL
-//   : import.meta.env.VITE_NETWORK;
+export const DEFAULT_URL = import.meta.env.VITE_LOCAL;
+// export const DEFAULT_URL = import.meta.env.VITE_LOCALLY_DEVELOPMENT;
