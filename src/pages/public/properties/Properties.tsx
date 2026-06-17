@@ -7,6 +7,7 @@ import { PropertyCard } from "@/components/propertyCard";
 import { Pagination } from "@/components/pagination";
 import { NoPropertyFound } from "@/components/noPropertyFound";
 import { SEO } from "@/components/seo";
+import { propertiesSchema } from "@/constants/seoSchemas";
 
 export const Properties = () => {
   const {
@@ -27,6 +28,7 @@ export const Properties = () => {
         title="Prona në Shitje në Shqipëri | Apartamente, Vila & Investime"
         description="Gjeni prona në shitje në Shqipëri, apartamente, vila dhe prona për investim në lokacionet më të kërkuara."
         canonical="https://www.triotravel.al/pronat"
+        image="https://www.triotravel.al/images/property-cover.webp"
         keywords={[
           "prona",
           "prona ne Shqiperi",
@@ -39,6 +41,7 @@ export const Properties = () => {
           "real estate Albania",
           "Trio Travel Albania",
         ]}
+        schema={propertiesSchema}
       />
 
       <div className="flex flex-col gap-10 pb-10">

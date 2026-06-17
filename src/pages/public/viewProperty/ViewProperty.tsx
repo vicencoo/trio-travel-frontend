@@ -57,6 +57,46 @@ export const ViewProperty = () => {
           ? firstImage.image_url
           : "https://www.triotravel.al/images/property-cover.webp";
 
+  const propertySchema = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    "@id": `${canonicalUrl}#property`,
+    name: property?.title,
+    url: canonicalUrl,
+    description: seoDescription,
+    image: seoImage,
+    datePosted: property?.created_at,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: property?.city,
+      streetAddress: `${property?.street || ""} ${property?.area || ""}`.trim(),
+      addressCountry: "AL",
+    },
+    offers: {
+      "@type": "Offer",
+      url: canonicalUrl,
+      price: property?.price,
+      priceCurrency: "EUR",
+      availability: "https://schema.org/InStock",
+    },
+    floorSize: property?.space
+      ? {
+          "@type": "QuantitativeValue",
+          value: property.space,
+          unitCode: "MTK",
+        }
+      : undefined,
+    numberOfRooms: property?.bedrooms,
+    numberOfBathroomsTotal: property?.toilets,
+    yearBuilt: property?.build_year,
+    provider: {
+      "@type": "RealEstateAgent",
+      name: "Trio Travel & Immo",
+      url: "https://www.triotravel.al",
+      telephone: "+355696900916",
+    },
+  };
+
   return (
     <>
       <SEO
@@ -76,7 +116,9 @@ export const ViewProperty = () => {
           "real estate Albania",
           "Trio Travel Albania",
         ]}
+        schema={propertySchema}
       />
+
       <div className="container flex flex-col pt-3 gap-10 pb-20">
         <div className="flex flex-col gap-3">
           <div className="flex w-full items-center justify-between">

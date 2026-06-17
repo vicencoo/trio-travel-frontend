@@ -55,7 +55,7 @@ export const ViewPackage = () => {
             "image_url" in firstImage &&
             typeof firstImage.image_url === "string"
           ? firstImage.image_url
-          : "https://www.triotravel.al/images/package-image.webp";
+          : "https://www.triotravel.al/images/trio-travel-package-og.webp";
 
   const shareUrl = `${import.meta.env.VITE_LOCAL}/share/package/${slug}`;
 
@@ -101,6 +101,34 @@ Faleminderit!
     return accomodationPlans[accomodation] || accomodation;
   };
 
+  const packageSchema = {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    "@id": `${canonicalUrl}#touristtrip`,
+    name: packageData?.title,
+    url: canonicalUrl,
+    description: seoDescription,
+    image: seoImage,
+    touristType: ["Couple", "Family", "Group"],
+    provider: {
+      "@type": "TravelAgency",
+      name: "Trio Travel & Immo",
+      url: "https://www.triotravel.al",
+      telephone: "+355696900916",
+    },
+    offers: {
+      "@type": "Offer",
+      url: canonicalUrl,
+      price: packageData?.price,
+      priceCurrency: "EUR",
+      availability: "https://schema.org/InStock",
+    },
+    itinerary: {
+      "@type": "ItemList",
+      name: packageData?.destination,
+    },
+  };
+
   return (
     <>
       <SEO
@@ -109,14 +137,15 @@ Faleminderit!
         canonical={canonicalUrl}
         image={seoImage}
         keywords={[
-          packageData?.title || "",
-          packageData?.destination || "",
+          String(packageData?.title ?? ""),
+          String(packageData?.destination ?? ""),
           "paketa turistike",
           "paketa turistike Shqiperi",
           "oferta pushimesh",
           "rezervo pakete turistike",
           "Trio Travel Albania",
         ]}
+        schema={packageSchema}
       />
 
       <div className="flex flex-col gap-10 container pt-3 pb-20">

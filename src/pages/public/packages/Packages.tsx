@@ -9,6 +9,7 @@ import { PackageCardSkeleton } from "@/components/skeletons";
 import { NoDataFound } from "@/components/noDataFound";
 import { Search } from "@/icons";
 import { SEO } from "@/components/seo";
+import { packagesSchema } from "@/constants/seoSchemas";
 
 export const Packages = () => {
   const {
@@ -34,6 +35,7 @@ A mund të më ndihmoni me sugjerime dhe organizimin?`,
         title="Paketa Turistike | Oferta Udhëtimi & Paketa të Personalizuara"
         description="Zbuloni paketa turistike me Trio Travel Albania ose krijoni paketën tuaj të personalizuar sipas destinacionit, buxhetit dhe datave të udhëtimit."
         canonical="https://www.triotravel.al/paketa-turistike"
+        image="https://www.triotravel.al/images/trio-travel-package-og.webp"
         keywords={[
           "paketa turistike",
           "paketa turistike Shqiperi",
@@ -46,6 +48,7 @@ A mund të më ndihmoni me sugjerime dhe organizimin?`,
           "agjenci turistike Tirane",
           "udhetime te organizuara",
         ]}
+        schema={packagesSchema}
       />
 
       <div className="flex flex-col md:gap-16 gap-8 w-full">

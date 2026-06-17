@@ -5,4 +5,5 @@ export type SEOProps = {
   image?: string;
   keywords?: string[];
   noindex?: boolean;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
 };

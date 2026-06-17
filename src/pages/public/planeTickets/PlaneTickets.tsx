@@ -9,6 +9,7 @@ import { ViewAllButton } from "@/components/viewAllButton";
 import { Plane, Search } from "@/icons";
 import { Image } from "@/components/image";
 import { SEO } from "@/components/seo";
+import { planeTicketsSchema } from "@/constants/seoSchemas";
 
 export const PlaneTickets = () => {
   const {
@@ -42,7 +43,9 @@ Do të doja disa sugjerime për udhëtimin tim. Mund të më ndihmoni, ju lutem?
           "agjenci turistike Shqiperi",
           "Trio Travel Albania",
         ]}
+        schema={planeTicketsSchema}
       />
+
       <div className="flex flex-col gap-10 pb-10">
         <div className="flex flex-col w-full md:h-[300px] h-[250px] relative md:mb-4 mb-20">
           <Image

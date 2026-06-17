@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import type { SEOProps } from "./types";
 
 const DEFAULT_KEYWORDS = [
-  "Trio Travel Albania",
+  "Trio Travel & Immo",
   "paketa turistike",
   "paketa turistike Shqiperi",
   "paketa turistike Turqi",
@@ -15,9 +15,51 @@ const DEFAULT_KEYWORDS = [
   "apartamente ne shitje",
   "apartamente ne Sarande",
   "vila ne shitje",
-  "hotele",
+  "real estate Albania",
   "pushime ne Shqiperi",
 ];
+
+const DEFAULT_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  name: "Trio Travel & Immo",
+  url: "https://www.triotravel.al",
+  logo: "https://www.triotravel.al/images/trio-travel-icon.webp",
+  telephone: "+355696900916",
+  image: "https://www.triotravel.al/images/trio-travel-og.webp",
+  areaServed: "Albania",
+  knowsLanguage: ["Albanian", "English", "Italian"],
+  knowsAbout: [
+    "Paketa Turistike",
+    "Travel Planning",
+    "Group Tours",
+    "Flight Tickets",
+    "Real Estate",
+    "Property Investment",
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Sherbimet e Trio Travel & Immo",
+    itemListElement: [
+      {
+        "@type": "OfferCatalog",
+        name: "Paketa Turistike",
+      },
+      {
+        "@type": "OfferCatalog",
+        name: "Bileta Avioni",
+      },
+      {
+        "@type": "OfferCatalog",
+        name: "Prona ne Shitje",
+      },
+      {
+        "@type": "OfferCatalog",
+        name: "Prona per Investim",
+      },
+    ],
+  },
+};
 
 export const SEO = ({
   title,
@@ -26,9 +68,20 @@ export const SEO = ({
   image = "https://www.triotravel.al/images/trio-travel-og.webp",
   keywords = DEFAULT_KEYWORDS,
   noindex = false,
+  schema,
 }: SEOProps) => {
+  const structuredData = schema
+    ? Array.isArray(schema)
+      ? {
+          "@context": "https://schema.org",
+          "@graph": schema,
+        }
+      : schema
+    : DEFAULT_SCHEMA;
+
   return (
     <Helmet>
+      {/* Basic SEO */}
       <title>{title}</title>
 
       <meta name="description" content={description} />
@@ -45,7 +98,8 @@ export const SEO = ({
 
       <link rel="canonical" href={canonical} />
 
-      <meta property="og:site_name" content="Trio Travel Albania" />
+      {/* Open Graph */}
+      <meta property="og:site_name" content="Trio Travel & Immo" />
       <meta property="og:locale" content="sq_AL" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={canonical} />
@@ -57,27 +111,16 @@ export const SEO = ({
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
 
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
       <meta name="twitter:image:alt" content={title} />
 
+      {/* Structured Data */}
       <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "TravelAgency",
-          name: "Trio Travel Albania",
-          url: "https://www.triotravel.al",
-          logo: "https://www.triotravel.al/images/trio-travel-icon.webp",
-          image,
-          description,
-          areaServed: "Albania",
-          address: {
-            "@type": "PostalAddress",
-            addressCountry: "AL",
-          },
-        })}
+        {JSON.stringify(structuredData)}
       </script>
     </Helmet>
   );
