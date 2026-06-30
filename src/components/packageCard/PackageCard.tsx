@@ -43,7 +43,7 @@ export const PackageCard = ({ data, index }: PackageCardProps) => {
           text={data.title}
           size="text-lg"
           font="font-bold font-serig"
-          className="capitalize"
+          className="uppercase"
         />
         <div className="flex flex-col gap-3">
           <div className="flex w-full items-center justify-between">
@@ -51,7 +51,7 @@ export const PackageCard = ({ data, index }: PackageCardProps) => {
               text={data.destination}
               size="text-sm"
               font="font-medium"
-              className="text-gray-500 capitalize"
+              className="text-gray-500 uppercase"
             />
 
             <Text

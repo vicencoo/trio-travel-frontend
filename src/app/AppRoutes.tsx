@@ -25,6 +25,7 @@ import InsuranceExpirationPage from "@/pages/admin/InsuranceExpirationPage";
 import { ProtectedRoute } from "@/guards/ProtectedRoute";
 import { UserRole } from "@/types/user";
 import FlightCompaniesPage from "@/pages/admin/FlightCompaniesPage";
+import { TurkeyPackages } from "@/pages/public/turkeyPackages";
 
 export const AppRoutes = () => {
   const navigate = useNavigate();
@@ -50,6 +51,8 @@ export const AppRoutes = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/pronat/:slug" element={<ViewProperty />} />
         <Route path="/paketa-turistike/:slug" element={<ViewPackage />} />
+
+        <Route path="/paketa-turistike-turqi" element={<TurkeyPackages />} />
       </Route>
       {/* </Route> */}
 

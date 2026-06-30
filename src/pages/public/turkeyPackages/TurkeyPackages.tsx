@@ -1,58 +1,57 @@
-import { usePackages } from "./usePackages";
-import { useScrollOnChange } from "@/hooks/useScrollOnChange";
-import { Text } from "@/components/text";
-import { PackageCard } from "@/components/packageCard";
-import { Pagination } from "@/components/pagination";
-import { PackageCardSkeleton } from "@/components/skeletons";
-import { NoDataFound } from "@/components/noDataFound";
 import { SEO } from "@/components/seo";
-import { packagesSchema } from "@/constants/seoSchemas";
-import { PackagesHero } from "./PackagesHero";
+import { Pagination } from "@/components/pagination";
+import { Text } from "@/components/text";
+import { NoDataFound } from "@/components/noDataFound";
+import { useTurkeyPackages } from "./useTurkeyPackages";
+import { useScrollOnChange } from "@/hooks/useScrollOnChange";
+import { PackageCardSkeleton } from "@/components/skeletons";
+import { PackageCard } from "@/components/packageCard";
+import { turkeyPackagesSchema } from "@/constants/seoSchemas";
+import { TurkeyPackagesHero } from "./TurkeyHero";
 
-export const Packages = () => {
+export const TurkeyPackages = () => {
   const {
     data,
     handlePageChange,
-    pageNumber,
     handleSearchChange,
     handleSearchClick,
     isLoading,
-  } = usePackages();
+    pageNumber,
+  } = useTurkeyPackages();
 
   const message = encodeURIComponent(
     `Përshëndetje!
-Do të doja të krijoja një paketë udhëtimi të personalizuar sipas dëshirave të mia.
-A mund të më ndihmoni me sugjerime dhe organizimin?`,
+  Jam i/e interesuar për paketa turistike në Turqi.
+  A mund të më ndihmoni me oferta për Stamboll, Antalya, Bodrum ose destinacione të tjera?`,
   );
 
   const { scrollRef } = useScrollOnChange(pageNumber);
-
   return (
     <>
       <SEO
-        title="Paketa Turistike | Oferta Udhëtimi & Paketa të Personalizuara"
-        description="Zbuloni paketa turistike me Trio Travel & Immo në Vlorë ose krijoni paketën tuaj të personalizuar sipas destinacionit, buxhetit dhe datave të udhëtimit."
-        canonical="https://www.triotravel.al/paketa-turistike"
+        title="Paketa Turistike Turqi | Stamboll, Antalya, Bodrum & Oferta Pushimesh"
+        description="Zbuloni paketa turistike për Turqi me Trio Travel & Immo. Oferta për Stamboll, Antalya, Bodrum dhe destinacione të tjera me hotele, fluturime dhe asistencë."
+        canonical="https://www.triotravel.al/paketa-turistike-turqi"
         image="https://www.triotravel.al/images/trio-travel-package-og.webp"
         keywords={[
-          "paketa turistike",
-          "paketa turistike Shqiperi",
-          "paketa turistike te personalizuara",
-          "oferta udhetimi",
-          "pushime ne Europe",
+          "paketa turistike Turqi",
+          "paketa turistike ne Turqi",
           "pushime ne Turqi",
-          "pushime ne Dubai",
+          "oferta Turqi",
+          "paketa Stamboll",
+          "pushime Antalya",
+          "paketa Antalya",
+          "paketa Bodrum",
+          "paketa turistike nga Vlora",
           "agjenci turistike Vlore",
-          "agjensi turistike Vlore",
           "agjenci turistike Shqiperi",
-          "agjensi turistike Shqiperi",
           "udhetime te organizuara",
         ]}
-        schema={packagesSchema}
+        schema={turkeyPackagesSchema}
       />
 
       <div className="flex flex-col md:gap-16 gap-8 w-full">
-        <PackagesHero
+        <TurkeyPackagesHero
           handleSearchChange={handleSearchChange}
           handleSearchClick={handleSearchClick}
           scrollRef={scrollRef}
@@ -78,7 +77,7 @@ A mund të më ndihmoni me sugjerime dhe organizimin?`,
             />
           </div>
         ) : (
-          <NoDataFound text="No Packages found" />
+          <NoDataFound text="Nuk u gjetën paketa për Turqi" />
         )}
         <div className="container">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-500 text-white shadow-xl">
@@ -87,12 +86,12 @@ A mund të më ndihmoni me sugjerime dhe organizimin?`,
 
             <div className="relative flex flex-col items-center gap-5 px-6 py-10 md:px-10 md:py-14 text-center">
               <Text
-                text="Nuk po gjeni atë që po kërkoni?"
+                text="Nuk po gjeni paketën e duhur për Turqi?"
                 size="text-2xl md:text-3xl"
                 font="font-semibold"
               />
               <Text
-                text="Le të krijojmë paketën perfekte të udhëtimit, të përshtatur sipas ëndrrave tuaja"
+                text="Na shkruani dhe ne ju sugjerojmë ofertën më të përshtatshme për Stamboll, Antalya, Bodrum ose qytete të tjera të Turqisë."
                 font="font-medium"
                 size="md:text-lg text-base"
                 className="max-w-2xl text-white/90"
@@ -103,7 +102,7 @@ A mund të më ndihmoni me sugjerime dhe organizimin?`,
                   window.open(`https://wa.me/355696900916?text=${message}`);
                 }}
               >
-                Kërko Paketë të Personalizuar
+                Kërko Ofertë për Turqi
               </button>
             </div>
           </div>

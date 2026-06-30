@@ -14,6 +14,7 @@ import {
   LocationOnOutlined,
   RestaurantMenuOutlined,
   Share2,
+  WhatsAppIcon,
 } from "@/icons";
 import { ViewImages } from "@/components/viewImages/ViewImages";
 import { useDisclosure } from "@/hooks/useDisclosure";
@@ -188,7 +189,7 @@ Faleminderit!
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
           <div className="flex flex-col gap-6 md:col-span-2">
             <Card>
-              <h1 className="text-2xl md:text-4xl font-serif font-bold capitalize">
+              <h1 className="text-2xl md:text-4xl font-serif font-bold uppercase">
                 {packageData?.title}
               </h1>
               <span className="flex items-center gap-1">
@@ -200,7 +201,7 @@ Faleminderit!
                   text={packageData?.destination}
                   size="text-lg"
                   font="font-medium font-serif"
-                  className="tracking-wide capitalize"
+                  className="tracking-wide uppercase"
                 />
               </span>
             </Card>
@@ -307,11 +308,12 @@ Faleminderit!
               />
               <Button
                 name="na kontaktoni"
+                endIcon={<WhatsAppIcon />}
                 border="transparent"
-                bgColor="#2563eb"
-                bgHover="#1d4ed8"
+                borderHover="transparent"
                 color="white"
-                borderHover="#1d4ed8 "
+                bgColor="#16a34a"
+                bgHover="#15803d"
                 onClick={() =>
                   window.open(
                     `https://wa.me/355696900916?text=${contactMessage}`,

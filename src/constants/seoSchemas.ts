@@ -131,6 +131,63 @@ export const packagesSchema = [
   },
 ];
 
+export const turkeyPackagesSchema = [
+  {
+    "@type": "CollectionPage",
+    "@id": "https://www.triotravel.al/paketa-turistike-turqi#collection",
+    name: "Paketa Turistike Turqi",
+    url: "https://www.triotravel.al/paketa-turistike-turqi",
+    description:
+      "Zbuloni paketa turistike për Turqi me oferta për Stamboll, Antalya, Bodrum dhe destinacione të tjera.",
+    inLanguage: "sq-AL",
+    isPartOf: {
+      "@type": "WebSite",
+      "@id": "https://www.triotravel.al#website",
+      name: "Trio Travel & Immo",
+      url: "https://www.triotravel.al",
+    },
+    about: {
+      "@type": "Place",
+      name: "Turqi",
+    },
+  },
+  {
+    "@type": "TravelAgency",
+    "@id": "https://www.triotravel.al#travelagency",
+    name: "Trio Travel & Immo",
+    url: "https://www.triotravel.al",
+    telephone: "+355696900916",
+    areaServed: "Albania",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Paketa Turistike për Turqi",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "TouristTrip",
+            name: "Paketa turistike Stamboll",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "TouristTrip",
+            name: "Paketa turistike Antalya",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "TouristTrip",
+            name: "Paketa turistike Bodrum",
+          },
+        },
+      ],
+    },
+  },
+];
+
 export const planeTicketsSchema = [
   {
     "@type": "CollectionPage",

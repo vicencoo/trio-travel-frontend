@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useHome } from "./useHome";
 import { Advertise } from "./Advertise";
 import { SectionHeader } from "./SectionHeader";
@@ -11,6 +11,7 @@ import { FAQ } from "./FAQ";
 import { ViewAllButton } from "@/components/viewAllButton";
 import { PropertyCardSkeleton } from "@/components/skeletons";
 import { SEO } from "@/components/seo";
+import { ArrowRightAlt, BadgeCheck, MapPin, Plane } from "@/icons";
 
 export const Home = () => {
   const {
@@ -110,6 +111,63 @@ export const Home = () => {
             </div>
           </div>
         )}
+
+        <section className="grid grid-cols-1 overflow-hidden rounded-2xl bg-[#0f2f2f] text-white shadow-xl md:grid-cols-[1.05fr_0.95fr]">
+          <div className="flex flex-col justify-center gap-6 px-6 py-9 md:px-10 md:py-12">
+            <span className="w-max rounded-full bg-amber-300 px-4 py-1 text-sm font-semibold text-[#18302f]">
+              Destinacion i kërkuar
+            </span>
+
+            <div className="flex flex-col gap-3">
+              <h2 className="text-3xl font-semibold md:text-4xl">
+                Paketa turistike Turqi
+              </h2>
+              <p className="max-w-2xl text-base leading-7 text-white/85 md:text-lg">
+                Shikoni ofertat për Stamboll, Antalya, Bodrum dhe qytete të
+                tjera të Turqisë me hotele, fluturime dhe itinerare të
+                përshtatura për familje, çifte ose grupe.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 text-sm text-white/90 sm:grid-cols-3">
+              <span className="flex items-center gap-2">
+                <Plane size={18} className="text-amber-300" />
+                Fluturime & hotele
+              </span>
+              <span className="flex items-center gap-2">
+                <MapPin size={18} className="text-amber-300" />
+                Antalya & Stamboll
+              </span>
+              <span className="flex items-center gap-2">
+                <BadgeCheck size={18} className="text-amber-300" />
+                Paketa me asistencë
+              </span>
+            </div>
+
+            <Link
+              to="/paketa-turistike-turqi"
+              className="inline-flex w-max items-center gap-2 rounded-md bg-white px-6 py-3 text-sm font-semibold text-[#0f2f2f] transition-all duration-200 hover:bg-amber-200"
+              aria-label="Shiko paketa turistike Turqi"
+            >
+              Shiko paketa turistike Turqi
+              <ArrowRightAlt fontSize="small" />
+            </Link>
+          </div>
+
+          <Link
+            to="/paketa-turistike-turqi"
+            className="relative block min-h-[260px] md:min-h-full"
+            aria-label="Paketa turistike Turqi"
+          >
+            <img
+              src="/images/packages.webp"
+              alt="Paketa turistike në Turqi"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0f2f2f]/65 via-transparent to-transparent md:bg-gradient-to-l" />
+          </Link>
+        </section>
 
         {planeTickets &&
           planeTickets?.totalTickets &&

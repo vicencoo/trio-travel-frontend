@@ -1,0 +1,53 @@
+import { packageServices } from "@/services/packageServices";
+import type { PackageResponse } from "@/types/responseTypes";
+import { useEffect, useState, type ChangeEvent } from "react";
+
+const ITEMS_PER_PAGE = 12;
+
+export const useTurkeyPackages = () => {
+  const [data, setData] = useState<PackageResponse | null>(null);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const handlePageChange = (_event: ChangeEvent<unknown>, page: number) => {
+    setPageNumber(page);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSearchClick = () => {
+    setSearchQuery(inputValue);
+    setPageNumber(1);
+  };
+
+  useEffect(() => {
+    const getAllPackages = async () => {
+      try {
+        const res = await packageServices.getTurkeyPackages({
+          packageLimit: ITEMS_PER_PAGE,
+          page: pageNumber,
+          searchQuery: searchQuery,
+        });
+        if (res.data) setData(res.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getAllPackages();
+  }, [pageNumber, searchQuery]);
+
+  return {
+    data,
+    handlePageChange,
+    pageNumber,
+    handleSearchChange,
+    handleSearchClick,
+    isLoading,
+  };
+};
