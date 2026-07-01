@@ -61,6 +61,82 @@ const DEFAULT_SCHEMA = {
   },
 };
 
+const BREADCRUMB_LABELS: Record<string, string> = {
+  "paketa-turistike": "Paketa Turistike",
+  "paketa-turistike-turqi": "Paketa Turistike Turqi",
+  destinacionet: "Destinacionet",
+  "bileta-avioni": "Bileta Avioni",
+  pronat: "Pronat",
+  contact: "Kontakt",
+};
+
+const getPageName = (title: string) => title.split("|")[0].trim();
+
+const getPathFromUrl = (url: string) => {
+  try {
+    return new URL(url).pathname;
+  } catch {
+    return "/";
+  }
+};
+
+const buildAutomaticBreadcrumbs = (canonical: string, title: string) => {
+  const path = getPathFromUrl(canonical);
+  const segments = path.split("/").filter(Boolean);
+
+  if (!segments.length) {
+    return [
+      {
+        name: "Trio Travel & Immo",
+        item: "https://www.triotravel.al",
+      },
+    ];
+  }
+
+  const breadcrumbs = [
+    {
+      name: "Trio Travel & Immo",
+      item: "https://www.triotravel.al",
+    },
+  ];
+
+  segments.forEach((segment, index) => {
+    const item = `https://www.triotravel.al/${segments
+      .slice(0, index + 1)
+      .join("/")}`;
+    const isLast = index === segments.length - 1;
+
+    breadcrumbs.push({
+      name: isLast
+        ? getPageName(title)
+        : BREADCRUMB_LABELS[segment] ?? segment.replace(/-/g, " "),
+      item,
+    });
+  });
+
+  return breadcrumbs;
+};
+
+const buildBreadcrumbSchema = (
+  breadcrumbs: {
+    name: string;
+    item: string;
+  }[]
+) => ({
+  "@type": "BreadcrumbList",
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: breadcrumb.name,
+    item: breadcrumb.item,
+  })),
+});
+
+const withoutContext = (schema: Record<string, unknown>) => {
+  const { ["@context"]: _context, ...schemaWithoutContext } = schema;
+  return schemaWithoutContext;
+};
+
 export const SEO = ({
   title,
   description,
@@ -69,15 +145,22 @@ export const SEO = ({
   keywords = DEFAULT_KEYWORDS,
   noindex = false,
   schema,
+  breadcrumbs,
 }: SEOProps) => {
-  const structuredData = schema
+  const breadcrumbSchema = buildBreadcrumbSchema(
+    breadcrumbs ?? buildAutomaticBreadcrumbs(canonical, title)
+  );
+
+  const schemaItems = schema
     ? Array.isArray(schema)
-      ? {
-          "@context": "https://schema.org",
-          "@graph": schema,
-        }
-      : schema
-    : DEFAULT_SCHEMA;
+      ? schema.map(withoutContext)
+      : [withoutContext(schema)]
+    : [DEFAULT_SCHEMA];
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [...schemaItems, breadcrumbSchema],
+  };
 
   return (
     <Helmet>

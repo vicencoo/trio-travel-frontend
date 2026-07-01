@@ -1,3 +1,63 @@
+import { FAQ_INFO } from "./faq";
+
+export const faqPageSchema = {
+  "@type": "FAQPage",
+  "@id": "https://www.triotravel.al#faq",
+  mainEntity: FAQ_INFO.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
+export const homeSchema = [
+  {
+    "@type": "TravelAgency",
+    "@id": "https://www.triotravel.al#travelagency",
+    name: "Trio Travel & Immo",
+    url: "https://www.triotravel.al",
+    logo: "https://www.triotravel.al/images/trio-travel-icon.webp",
+    telephone: "+355696900916",
+    image: "https://www.triotravel.al/images/trio-travel-og.webp",
+    areaServed: "Albania",
+    knowsLanguage: ["Albanian", "English", "Italian"],
+    knowsAbout: [
+      "Paketa Turistike",
+      "Travel Planning",
+      "Group Tours",
+      "Flight Tickets",
+      "Real Estate",
+      "Property Investment",
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Sherbimet e Trio Travel & Immo",
+      itemListElement: [
+        {
+          "@type": "OfferCatalog",
+          name: "Paketa Turistike",
+        },
+        {
+          "@type": "OfferCatalog",
+          name: "Bileta Avioni",
+        },
+        {
+          "@type": "OfferCatalog",
+          name: "Prona ne Shitje",
+        },
+        {
+          "@type": "OfferCatalog",
+          name: "Prona per Investim",
+        },
+      ],
+    },
+  },
+  faqPageSchema,
+];
+
 export const propertiesSchema = [
   {
     "@type": "CollectionPage",

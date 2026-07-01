@@ -12,6 +12,7 @@ import { ViewAllButton } from "@/components/viewAllButton";
 import { PropertyCardSkeleton } from "@/components/skeletons";
 import { SEO } from "@/components/seo";
 import { ArrowRightAlt, BadgeCheck, MapPin, Plane } from "@/icons";
+import { homeSchema } from "@/constants/seoSchemas";
 
 export const Home = () => {
   const {
@@ -49,6 +50,7 @@ export const Home = () => {
           "real estate Albania",
           "udhetime te personalizuara",
         ]}
+        schema={homeSchema}
       />
 
       <div className="container flex flex-col md:gap-20 gap-14 md:mb-16 my-10">

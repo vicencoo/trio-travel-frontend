@@ -6,4 +6,8 @@ export type SEOProps = {
   keywords?: string[];
   noindex?: boolean;
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  breadcrumbs?: {
+    name: string;
+    item: string;
+  }[];
 };
