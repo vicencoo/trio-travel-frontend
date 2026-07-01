@@ -1,18 +1,3 @@
-import { FAQ_INFO } from "./faq";
-
-export const faqPageSchema = {
-  "@type": "FAQPage",
-  "@id": "https://www.triotravel.al#faq",
-  mainEntity: FAQ_INFO.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
-};
-
 export const homeSchema = [
   {
     "@type": "TravelAgency",
@@ -55,7 +40,6 @@ export const homeSchema = [
       ],
     },
   },
-  faqPageSchema,
 ];
 
 export const propertiesSchema = [

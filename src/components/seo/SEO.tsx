@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import type { SEOProps } from "./types";
+import { FAQ_INFO } from "@/constants/faq";
 
 const DEFAULT_KEYWORDS = [
   "Trio Travel & Immo",
@@ -132,6 +133,19 @@ const buildBreadcrumbSchema = (
   })),
 });
 
+const faqPageSchema = {
+  "@type": "FAQPage",
+  "@id": "https://www.triotravel.al#faq",
+  mainEntity: FAQ_INFO.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 const withoutContext = (schema: Record<string, unknown>) => {
   const { ["@context"]: _context, ...schemaWithoutContext } = schema;
   return schemaWithoutContext;
@@ -159,7 +173,7 @@ export const SEO = ({
 
   const structuredData = {
     "@context": "https://schema.org",
-    "@graph": [...schemaItems, breadcrumbSchema],
+    "@graph": [...schemaItems, breadcrumbSchema, faqPageSchema],
   };
 
   return (
