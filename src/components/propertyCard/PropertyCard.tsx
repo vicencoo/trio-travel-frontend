@@ -1,7 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Image } from "../image";
 import { Text } from "../text";
-import { Button } from "../button";
 import type { PropertyCardProps } from "./types";
 import { formattedPrice } from "@/utils/formattedPrice";
 import {
@@ -13,8 +12,6 @@ import {
 import { createSlug } from "@/utils/createSlug";
 
 export const PropertyCard = ({ property, index }: PropertyCardProps) => {
-  const navigate = useNavigate();
-
   const firstImage = property?.property_images?.[0];
   const image =
     typeof firstImage === "object" && "property_image" in firstImage
@@ -22,14 +19,11 @@ export const PropertyCard = ({ property, index }: PropertyCardProps) => {
       : "";
 
   const slug = createSlug(property.title, property.id);
+  const propertyPath = `/pronat/${slug}`;
+  const cardClassName = `group flex w-full ${property.availability !== "available" ? "cursor-not-allowed" : "cursor-pointer"}  flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl will-change-transform`;
 
-  const handleNavigate = () => navigate(`/pronat/${slug}`);
-
-  return (
-    <div
-      className={`group flex w-full ${property.availability !== "available" ? "cursor-not-allowed" : "cursor-pointer"}  flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl will-change-transform`}
-      onClick={() => property.availability === "available" && handleNavigate()}
-    >
+  const content = (
+    <>
       {property.availability !== "available" && (
         <>
           <div className="absolute inset-0 bg-black/40 z-[9998]" />
@@ -146,23 +140,21 @@ export const PropertyCard = ({ property, index }: PropertyCardProps) => {
             />
           </div>
 
-          <Button
-            name="Shiko Pronën"
-            color="#1d4ed8"
-            border="#1d4ed8"
-            bgColor="white"
-            bgHover="#1d4ed8"
-            hoverColor="white"
-            padding="8px 24px"
-            onClick={(e?: React.MouseEvent) => {
-              if (property.availability === "available") {
-                e?.stopPropagation();
-                handleNavigate();
-              }
-            }}
-          />
+          <span className="inline-flex items-center justify-center text-nowrap rounded-md border border-[#1d4ed8] bg-white px-6 py-2 text-sm font-medium capitalize text-[#1d4ed8] transition-colors duration-200 group-hover:bg-[#1d4ed8] group-hover:text-white">
+            Shiko Pronën
+          </span>
         </div>
       </div>
-    </div>
+    </>
+  );
+
+  if (property.availability !== "available") {
+    return <div className={cardClassName}>{content}</div>;
+  }
+
+  return (
+    <Link to={propertyPath} className={cardClassName}>
+      {content}
+    </Link>
   );
 };

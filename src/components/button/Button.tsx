@@ -1,4 +1,5 @@
 import { Button as MuiButton } from '@mui/material';
+import { Link } from 'react-router-dom';
 import type { ButtonProps } from './types';
 
 const DEFAULT_COLORS = {
@@ -12,6 +13,7 @@ const DEFAULT_COLORS = {
 export const Button = ({
   name,
   onClick,
+  to,
   color = DEFAULT_COLORS.color,
   hoverColor = DEFAULT_COLORS.hoverColor,
   bgColor = DEFAULT_COLORS.bgColor,
@@ -30,7 +32,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <MuiButton
-      type={type}
+      {...(to ? { component: Link, to } : { type })}
       disabled={disabled || loading}
       variant={variant}
       fullWidth={fullWidth}

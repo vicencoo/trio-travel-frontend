@@ -1,9 +1,9 @@
-import { useNavigate } from 'react-router-dom';
-import type { SideBarProps } from './types';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronDown, ChevronUp, Person, TypeOutline } from '@/icons';
 import { Text } from '@/components/text';
 import { SIDEBAR_ITEMS } from '@/constants/navigation';
+import type { SideBarProps } from './types';
 
 export const SideBar = ({
   isCollapsed,
@@ -12,8 +12,6 @@ export const SideBar = ({
   onClose,
   openSubItem,
 }: SideBarProps) => {
-  const navigate = useNavigate();
-
   useEffect(() => {
     const isMobile = window.innerWidth < 992;
     if (!isCollapsed && isMobile) {
@@ -26,8 +24,7 @@ export const SideBar = ({
     };
   }, [isCollapsed]);
 
-  const handleNavigate = (path: string) => {
-    navigate(path);
+  const handleLinkClick = () => {
     if (window.innerWidth < 992) {
       onClose();
     }
@@ -77,36 +74,52 @@ export const SideBar = ({
             </div>
           )}
         </div>
-        {/*  */}
+
         <div className='flex-1 overflow-y-auto hide-scrollbar pt-5 pb-14 px-4 gap-3 flex flex-col'>
           {SIDEBAR_ITEMS.map((item) => (
-            <div
-              className='flex flex-col gap-2'
-              key={item.label}
-              onClick={() => item.path && handleNavigate(item.path)}
-            >
-              <div
-                className={`flex items-center gap-2 px-3 ${!isCollapsed ? 'py-4' : 'py-3'}  border border-transparent rounded-lg cursor-pointer text-slate-700 dark:text-slate-300 hover:bg-slate-200  dark:hover:bg-slate-700 ease-in-out  select-none truncate ${location.pathname === item.path ? 'bg-gradient-to-r from-indigo-500 to-violet-600 text-white' : 'text-slate-700 dark:text-slate-400 bg-transparent '} transition-all duration-200`}
-                onClick={() => item.subItems && handleOpenSubItems(item.label)}
-              >
-                <div className='min-w-[22px] flex justify-center'>
-                  <item.icon size={22} />
-                </div>
-                {!isCollapsed && (
-                  <div className={`flex w-full items-center justify-between`}>
-                    <Text text={item.label} font='font-semibold' />
-                    {item.subItems && (
-                      <>
-                        {openSubItem !== item.label ? (
-                          <ChevronDown size={18} />
-                        ) : (
-                          <ChevronUp size={18} />
-                        )}
-                      </>
-                    )}
+            <div className='flex flex-col gap-2' key={item.label}>
+              {item.path ? (
+                <Link
+                  to={item.path}
+                  className={`flex items-center gap-2 px-3 ${!isCollapsed ? 'py-4' : 'py-3'}  border border-transparent rounded-lg cursor-pointer text-slate-700 dark:text-slate-300 hover:bg-slate-200  dark:hover:bg-slate-700 ease-in-out  select-none truncate ${location.pathname === item.path ? 'bg-gradient-to-r from-indigo-500 to-violet-600 text-white' : 'text-slate-700 dark:text-slate-400 bg-transparent '} transition-all duration-200`}
+                  onClick={handleLinkClick}
+                >
+                  <div className='min-w-[22px] flex justify-center'>
+                    <item.icon size={22} />
                   </div>
-                )}
-              </div>
+                  {!isCollapsed && (
+                    <div className='flex w-full items-center justify-between'>
+                      <Text text={item.label} font='font-semibold' />
+                    </div>
+                  )}
+                </Link>
+              ) : (
+                <div
+                  className={`flex items-center gap-2 px-3 ${!isCollapsed ? 'py-4' : 'py-3'}  border border-transparent rounded-lg cursor-pointer text-slate-700 dark:text-slate-300 hover:bg-slate-200  dark:hover:bg-slate-700 ease-in-out  select-none truncate ${location.pathname === item.path ? 'bg-gradient-to-r from-indigo-500 to-violet-600 text-white' : 'text-slate-700 dark:text-slate-400 bg-transparent '} transition-all duration-200`}
+                  onClick={() =>
+                    item.subItems && handleOpenSubItems(item.label)
+                  }
+                >
+                  <div className='min-w-[22px] flex justify-center'>
+                    <item.icon size={22} />
+                  </div>
+                  {!isCollapsed && (
+                    <div className='flex w-full items-center justify-between'>
+                      <Text text={item.label} font='font-semibold' />
+                      {item.subItems && (
+                        <>
+                          {openSubItem !== item.label ? (
+                            <ChevronDown size={18} />
+                          ) : (
+                            <ChevronUp size={18} />
+                          )}
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+
               {!isCollapsed && (
                 <div
                   className={`flex flex-col gap-1 pl-5 overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
@@ -114,9 +127,10 @@ export const SideBar = ({
                   `}
                 >
                   {item?.subItems?.map((subItem) => (
-                    <div
+                    <Link
+                      to={subItem.path}
                       className={`flex items-center gap-2 cursor-pointer  px-2 py-3  hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg ${location.pathname === subItem.path ? 'bg-gradient-to-r from-indigo-500 to-violet-600 text-white' : 'bg-transparent text-slate-900 dark:text-slate-400'} transition-all duration-200 select-none`}
-                      onClick={() => handleNavigate(subItem.path)}
+                      onClick={handleLinkClick}
                       key={subItem.path}
                     >
                       <subItem.icon size={16} />
@@ -125,13 +139,14 @@ export const SideBar = ({
                         size='text-[15px]'
                         font='font-medium'
                       />
-                    </div>
+                    </Link>
                   ))}
                 </div>
               )}
             </div>
           ))}
         </div>
+
         <div className='border-t border-slate-300/60 dark:border-slate-700/70 flex items-center gap-2 p-4 bg-white dark:bg-slate-900'>
           <span className='flex w-10 min-w-10 h-10 items-center justify-center  border border-blue-500 rounded-full text-slate-900 dark:text-slate-300'>
             <Person />

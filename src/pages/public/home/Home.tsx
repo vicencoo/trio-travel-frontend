@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useHome } from "./useHome";
 import { Advertise } from "./Advertise";
 import { SectionHeader } from "./SectionHeader";
@@ -22,7 +22,6 @@ export const Home = () => {
     destinations,
     propertiesLoading,
   } = useHome();
-  const navigate = useNavigate();
   return (
     <>
       <SEO
@@ -83,7 +82,7 @@ export const Home = () => {
               <div className="flex w-full justify-center">
                 <ViewAllButton
                   text="shiko te gjitha pronat"
-                  onClick={() => navigate("/pronat")}
+                  path="/pronat"
                 />
               </div>
             </div>

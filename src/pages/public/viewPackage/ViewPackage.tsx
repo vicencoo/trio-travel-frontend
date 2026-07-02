@@ -1,5 +1,5 @@
 import { useViewPackage } from "./useViewPackage";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { InfoItem } from "./InfoItem";
 import { Spinner } from "@/components/spinner";
 import { Text } from "@/components/text";
@@ -22,7 +22,6 @@ import { ShareModal } from "@/components/shareModal/ShareModal";
 import { SEO } from "@/components/seo";
 
 export const ViewPackage = () => {
-  const navigate = useNavigate();
   const { packageData, isLoading } = useViewPackage();
   const { close, isOpen, open } = useDisclosure();
 
@@ -162,13 +161,13 @@ Faleminderit!
       <div className="flex flex-col gap-10 container pt-3 pb-20">
         <div className="flex flex-col gap-3">
           <div className="flex items-center w-full justify-between">
-            <span
+            <Link
+              to="/paketa-turistike"
               className="flex items-center cursor-pointer w-max text-gray-500 hover:underline hover:scale-110 hover:text-black transition-all duration-300 will-change-transform"
-              onClick={() => navigate("/paketa-turistike")}
             >
               <ArrowBack fontSize="small" />
               <Text text={"Kthehu Tek Paketat Turistike"} font="font-medium" />
-            </span>
+            </Link>
             <div
               className="flex items-center gap-1 hover:underline cursor-pointer hover:scale-105 transition-all duration-150 will-change-transform"
               onClick={open}

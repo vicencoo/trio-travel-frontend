@@ -10,6 +10,7 @@ export type AdminPageHeaderProps = {
   buttonBg?: string;
   buttonBgHover?: string;
   buttonBorderHover?: string;
-  onClick: () => void;
+  onClick?: () => void;
+  buttonTo?: string;
   display?: boolean;
 };

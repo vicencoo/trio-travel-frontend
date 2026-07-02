@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { usePropertiesPage } from './usePropertiesPage';
 import { PropertyTableRow } from './PropertyTableRow';
 import { DataTable } from '@/components/dataTable';
@@ -13,7 +12,6 @@ import { Input } from '@/components/input';
 import { PROPERTY_COLUMNS } from './columns';
 
 export const PropertiesPage = () => {
-  const navigate = useNavigate();
   const {
     properties,
     handleDelete,
@@ -39,7 +37,7 @@ export const PropertiesPage = () => {
         buttonBg='#3b82f6'
         buttonBgHover='#1d4ed8'
         buttonBorderHover='#1e3a8a'
-        onClick={() => navigate('/admin/add-property')}
+        buttonTo='/admin/add-property'
       />
 
       <div className='flex flex-col gap-4 w-full'>

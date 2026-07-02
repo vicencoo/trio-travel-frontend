@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useViewProperty } from "./useViewProperty";
 import { PropertyStats } from "./PropertyStats";
 import { ContactAgency } from "./ContactAgency";
@@ -23,7 +23,6 @@ import { SEO } from "@/components/seo";
 export const ViewProperty = () => {
   const { property, isLoading } = useViewProperty();
   const { close, isOpen, open } = useDisclosure();
-  const navigate = useNavigate();
 
   const slug = window.location.pathname.split("/").pop();
   const shareUrl = `${import.meta.env.VITE_LOCAL}/share/property/${slug}`;
@@ -141,13 +140,13 @@ export const ViewProperty = () => {
       <div className="container flex flex-col pt-3 gap-10 pb-20">
         <div className="flex flex-col gap-3">
           <div className="flex w-full items-center justify-between">
-            <span
+            <Link
+              to="/pronat"
               className="flex items-center cursor-pointer w-max text-gray-500 hover:underline hover:scale-110 hover:text-black transition-all duration-300 will-change-transform"
-              onClick={() => navigate("/pronat")}
             >
               <ArrowBack fontSize="small" />
               <Text text={"Kthehu Tek Pronat"} font="font-medium" />
-            </span>
+            </Link>
 
             <div
               className="flex items-center gap-1 hover:underline cursor-pointer hover:scale-105 transition-all duration-150 will-change-transform"

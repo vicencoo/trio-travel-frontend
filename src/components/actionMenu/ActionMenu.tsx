@@ -8,10 +8,12 @@ import {
 import { Text } from '../text';
 import type { ActionMenuProps } from './types';
 import { useDisclosure } from '@/hooks/useDisclosure';
+import { Link } from 'react-router-dom';
 
 export const ActionMenu = ({
   enableEdit = true,
   onEdit,
+  editPath,
   enableDelete = true,
   onDelete,
   enableRenew,
@@ -35,7 +37,23 @@ export const ActionMenu = ({
       </span>
       {isOpen && (
         <div className='absolute flex flex-col py-3 px-4 gap-3 bg-white rounded-lg shadow-lg border border-gray-100 z-[9999] top-full right-0 mt-1'>
-          {enableEdit && (
+          {enableEdit && editPath && (
+            <Link
+              to={editPath}
+              className='flex items-center gap-1 px-3 py-1 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-lg transition-colors duration-300'
+              onClick={() => {
+                onEdit?.();
+                close();
+              }}
+            >
+              <ModeEditOutlineOutlinedIcon
+                className='text-blue-500'
+                fontSize='small'
+              />
+              <Text text={'Edito'} font='font-medium' />
+            </Link>
+          )}
+          {enableEdit && !editPath && (
             <button
               className='flex items-center gap-1 px-3 py-1 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-lg transition-colors duration-300'
               onClick={() => {

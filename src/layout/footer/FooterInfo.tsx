@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Image } from '@/components/image';
 import { Icon } from '@/components/icon';
 import { Text } from '@/components/text';
@@ -63,15 +63,15 @@ const CONTACT = [
 ];
 
 export const FooterInfo = () => {
-  const navigate = useNavigate();
   return (
     <div className='flex flex-col gap-4'>
-      <Image
-        img='/images/TrioTravel.webp'
-        alt='Trio Travel Agency Logo'
-        className='w-[200px] cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform'
-        onClick={() => navigate('/')}
-      />
+      <Link to='/' aria-label='Trio Travel homepage'>
+        <Image
+          img='/images/TrioTravel.webp'
+          alt='Trio Travel Agency Logo'
+          className='w-[200px] cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform'
+        />
+      </Link>
       <div className='flex flex-col gap-2'>
         {FOOTER_INFO.map((item) => (
           <span key={item.id} className='flex items-center gap-1'>

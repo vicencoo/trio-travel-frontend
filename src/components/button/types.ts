@@ -3,6 +3,7 @@ import type { MouseEventHandler, ReactNode } from 'react';
 export type ButtonProps = {
   name: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  to?: string;
   color?: string;
   hoverColor?: string;
   bgColor?: string;

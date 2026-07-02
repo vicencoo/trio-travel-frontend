@@ -2,7 +2,6 @@ import { ActionMenu } from '@/components/actionMenu';
 import { Image } from '@/components/image';
 import { Text } from '@/components/text';
 import { formattedPrice } from '@/utils/formattedPrice';
-import { useNavigate } from 'react-router-dom';
 import type { PropertyItemProps } from './types';
 
 const availabilityConfig = {
@@ -32,8 +31,6 @@ export const PropertyTableRow = ({
   renewProperty,
   publishOrDraft,
 }: PropertyItemProps) => {
-  const navigate = useNavigate();
-
   const firstImage = property.property_images?.[0];
   const image =
     typeof firstImage === 'object' && 'property_image' in firstImage
@@ -98,7 +95,7 @@ export const PropertyTableRow = ({
         enableEdit
         enableDelete
         onDelete={() => property.id && handleDelete(property.id)}
-        onEdit={() => navigate(`/admin/editProperty/${property.id}`)}
+        editPath={`/admin/editProperty/${property.id}`}
         enableRenew
         onRenew={() => property.id && renewProperty(property.id)}
         enableStatus

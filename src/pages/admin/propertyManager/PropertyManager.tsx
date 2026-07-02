@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { usePropertyManager } from './usePropertyManager';
 import { Card } from '@/components/card';
 import { Text } from '@/components/text';
@@ -19,7 +18,6 @@ import {
 import { PROPERTY_TYPE } from '@/constants/property';
 
 export const PropertyManager = () => {
-  const navigate = useNavigate();
   const {
     handlePropertyChange,
     propertyData,
@@ -356,7 +354,7 @@ export const PropertyManager = () => {
       <div className='flex w-full md:w-3/5 justify-between gap-3'>
         <Button
           name='anulo'
-          onClick={() => navigate('/admin/manage-properties')}
+          to='/admin/manage-properties'
           fullWidth
           bgHover='#ef4444'
           borderHover='#b91c1c'

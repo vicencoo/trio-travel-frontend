@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import type { DestinationsProps } from "./types";
 import { Image } from "@/components/image";
 import { Text } from "@/components/text";
@@ -14,7 +14,6 @@ export const Destinations = ({ destinations }: DestinationsProps) => {
   const [slideDirection, setSlideDirection] = useState<"left" | "right" | null>(
     null
   );
-  const navigate = useNavigate();
   const total = destinations?.length || 0;
 
   useEffect(() => {
@@ -92,10 +91,10 @@ export const Destinations = ({ destinations }: DestinationsProps) => {
               : "";
 
           return (
-            <div
+            <Link
+              to="/destinacionet"
               className="group flex flex-col items-center gap-2 cursor-pointer"
               key={destination.id}
-              onClick={() => navigate("/destinacionet")}
             >
               <div className="sm:w-[124px] sm:h-[124px] w-[104px] h-[104px] rounded-full p-[4px] bg-white shadow-md border border-blue-500 group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300 will-change-transform">
                 <Image
@@ -122,7 +121,7 @@ export const Destinations = ({ destinations }: DestinationsProps) => {
                   />
                 )}
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

@@ -15,6 +15,7 @@ export const AdminPageHeader = ({
   buttonBorderHover = '#3730a3',
   display = true,
   onClick,
+  buttonTo,
 }: AdminPageHeaderProps) => {
   return (
     <div className='flex md:flex-row flex-col md:gap-0 gap-7 w-full justify-between items-center bg-white dark:bg-slate-700 p-7 rounded-lg shadow-lg'>
@@ -60,6 +61,7 @@ export const AdminPageHeader = ({
             border='transparent'
             borderHover={buttonBorderHover}
             onClick={onClick}
+            to={buttonTo}
             fullWidth
           />
         </div>
