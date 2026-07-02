@@ -49,7 +49,7 @@ Do të doja disa sugjerime për udhëtimin tim. Mund të më ndihmoni, ju lutem?
       />
 
       <div className="flex flex-col gap-10 pb-10">
-        <div className="flex flex-col w-full md:h-[300px] h-[250px] relative md:mb-4 mb-20">
+        <div className="public-reveal flex flex-col w-full md:h-[300px] h-[250px] relative md:mb-4 mb-20">
           <Image
             img="/images/plane-ticket-cover.webp"
             alt="Plane Tickets Hero Image"
@@ -122,7 +122,7 @@ Do të doja disa sugjerime për udhëtimin tim. Mund të më ndihmoni, ju lutem?
           </div>
         )}
 
-        <div className="container">
+        <div className="public-reveal container">
           <div className="flex flex-col bg-white rounded-lg border border-blue-400/50 shadow-lg shadow-blue-100 p-5 md:p-10 gap-3 md:gap-6 text-center">
             <Text
               text={"Keni nevojë për ndihmë në planifikimin e udhëtimit tuaj?"}

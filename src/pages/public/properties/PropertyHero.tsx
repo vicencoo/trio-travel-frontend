@@ -3,7 +3,7 @@ import { Text } from "@/components/text";
 
 export const PropertyHero = () => {
   return (
-    <div className="flex w-full md:h-[300px] h-[200px] relative overflow-hidden">
+    <div className="public-reveal flex w-full md:h-[300px] h-[200px] relative overflow-hidden">
       <Image
         img="/images/property-cover.webp"
         alt="Property Page Hero Image"

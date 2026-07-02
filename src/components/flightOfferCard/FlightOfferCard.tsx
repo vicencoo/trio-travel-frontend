@@ -25,7 +25,7 @@ Jam i interesuar për bileta nga ${from} për në ${to}.
 A mund të më dërgoni më shumë informacion ju lutem?`,
   );
   return (
-    <div className='flex w-full h-[250px] border border-gray-300 relative rounded-3xl overflow-hidden hover:shadow-md transition-all duration-300 will-change-transform group select-none'>
+    <div className='public-reveal flex w-full h-[250px] border border-gray-300 relative rounded-3xl overflow-hidden hover:shadow-md transition-all duration-300 will-change-transform group select-none'>
       <Image
         src={image}
         alt={`Ticket from ${ticket.from} to ${ticket.to}`}

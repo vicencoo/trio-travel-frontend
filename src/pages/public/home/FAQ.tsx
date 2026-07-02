@@ -11,7 +11,7 @@ export const FAQ = () => {
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
     );
   return (
-    <div className='flex border-2 flex-col rounded-lg select-none'>
+    <div className='public-reveal flex border-2 flex-col rounded-lg select-none'>
       {FAQ_INFO.map((faq, index) => {
         const questionNumber =
           index + 1 < 10 ? `0${index + 1}` : `${index + 1}`;

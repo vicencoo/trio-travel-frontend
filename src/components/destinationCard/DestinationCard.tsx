@@ -26,7 +26,7 @@ Faleminderit.`,
   );
   return (
     <div
-      className='flex flex-col bg-white overflow-hidden rounded-2xl shadow-sm 
+      className='public-reveal flex flex-col bg-white overflow-hidden rounded-2xl shadow-sm 
     md:h-[320px] h-[355px] relative hover:shadow-lg hover:scale-105 transition-all duration-300 will-change-transform'
     >
       <Image

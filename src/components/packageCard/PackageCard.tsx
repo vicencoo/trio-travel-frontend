@@ -25,7 +25,7 @@ export const PackageCard = ({ data, index }: PackageCardProps) => {
 
   return (
     <Link to={`/paketa-turistike/${slug}`}>
-      <div className="flex flex-col border h-[540px] rounded-3xl overflow-hidden bg-white relative shadow-sm cursor-pointer hover:-translate-y-1 hover:shadow-md transition-all duration-300 will-change-transform group select-none">
+      <div className="public-reveal flex flex-col border h-[540px] rounded-3xl overflow-hidden bg-white relative shadow-sm cursor-pointer hover:-translate-y-1 hover:shadow-md transition-all duration-300 will-change-transform group select-none">
         <Image
           src={image}
           alt={data.title}

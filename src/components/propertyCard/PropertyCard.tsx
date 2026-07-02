@@ -20,7 +20,7 @@ export const PropertyCard = ({ property, index }: PropertyCardProps) => {
 
   const slug = createSlug(property.title, property.id);
   const propertyPath = `/pronat/${slug}`;
-  const cardClassName = `group flex w-full ${property.availability !== "available" ? "cursor-not-allowed" : "cursor-pointer"}  flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl will-change-transform`;
+  const cardClassName = `public-reveal group flex w-full ${property.availability !== "available" ? "cursor-not-allowed" : "cursor-pointer"}  flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl will-change-transform`;
 
   const content = (
     <>

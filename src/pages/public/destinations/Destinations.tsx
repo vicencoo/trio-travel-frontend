@@ -63,7 +63,7 @@ export const Destinations = () => {
 
         <div className="flex flex-col gap-10">
           <div
-            className="flex flex-col items-center justify-center gap-10 container"
+            className="public-reveal flex flex-col items-center justify-center gap-10 container"
             ref={scrollRef}
           >
             <h2 className="text-4xl font-medium text-gray-700">
@@ -94,7 +94,7 @@ export const Destinations = () => {
               <div></div>
             )}
           </div>
-          <div className="bg-purple-100 py-6 md:py-24">
+          <div className="public-reveal bg-purple-100 py-6 md:py-24">
             <div className="grid grid-cols-1 md:grid-cols-2 container items-center">
               <div className="flex flex-col gap-3 md:items-start items-center md:text-start text-center">
                 <Text

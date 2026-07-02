@@ -79,7 +79,7 @@ export const TurkeyPackages = () => {
         ) : (
           <NoDataFound text="Nuk u gjetën paketa për Turqi" />
         )}
-        <div className="container">
+        <div className="public-reveal container">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-500 text-white shadow-xl">
             <div className="absolute -top-10 right-0 h-32 w-32 rounded-full bg-white/10 blur-3xl" />
             <div className="absolute bottom-0 left-0 h-24 w-24 rounded-full bg-cyan-300/20 blur-2xl" />

@@ -12,7 +12,7 @@ export const Card = ({
 }: CardProps) => {
   return (
     <div
-      className={`${bgColor} flex flex-col ${gap} ${width} ${padding} border ${borderColor} hover:shadow-sm transition-all duration-200 will-change-transform rounded-lg overflow-hidden ${className}`}
+      className={`site-card ${bgColor} flex flex-col ${gap} ${width} ${padding} border ${borderColor} hover:shadow-sm transition-all duration-200 will-change-transform rounded-lg overflow-hidden ${className}`}
       onClick={onClick}
     >
       {children}

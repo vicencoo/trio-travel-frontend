@@ -11,7 +11,7 @@ export const TurkeyPackagesHero = ({
   handleSearchClick,
 }: TurkeyPackagesHeroTypes) => {
   return (
-    <div className="relative flex h-[400px] overflow-hidden bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-400 text-white w-full ">
+    <div className="public-reveal relative flex h-[400px] overflow-hidden bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-400 text-white w-full ">
       <Image
         src={"/images/packages.webp"}
         className="absolute w-full h-full object-cover"

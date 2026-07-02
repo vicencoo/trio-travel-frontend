@@ -28,7 +28,7 @@ export const Contact = () => {
       />
 
       <div className="flex flex-col gap-10 pb-7 md:pb-20">
-        <div className="relative w-full overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 py-12 md:py-20">
+        <div className="public-reveal relative w-full overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 py-12 md:py-20">
           <div className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8">
             <div className="flex flex-col items-center text-center gap-6 md:gap-8 max-w-4xl mx-auto">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
@@ -67,7 +67,7 @@ export const Contact = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 container">
+        <div className="public-reveal grid grid-cols-1 md:grid-cols-2 gap-5 container">
           <InfoCard />
           <ContactForm
             contact={contact}

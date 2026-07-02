@@ -6,6 +6,10 @@ body {
   background-color: #f8fafc;
 }
 
+html.public-scroll {
+  scroll-behavior: smooth;
+}
+
 .leaflet-container {
   height: 250px;
   width: 100%;
@@ -42,6 +46,44 @@ body.dash-open #root {
 
 .animate-slide-in {
   animation: slide-in-left 0.3s ease-out forwards;
+}
+
+@keyframes public-reveal {
+  from {
+    opacity: 0.001;
+    translate: 0 14px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .public-page-content :where(.public-reveal, .site-card, section) {
+      animation: public-reveal 0.45s ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 22%;
+      will-change: opacity, translate;
+    }
+
+    .public-page-content
+      :where(.public-reveal:nth-child(2), .site-card:nth-child(2)) {
+      animation-range: entry 2% cover 24%;
+    }
+
+    .public-page-content
+      :where(.public-reveal:nth-child(3), .site-card:nth-child(3)) {
+      animation-range: entry 4% cover 26%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.public-scroll {
+    scroll-behavior: auto;
+  }
 }
 
 .hide-scrollbar::-webkit-scrollbar {

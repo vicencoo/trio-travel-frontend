@@ -19,7 +19,7 @@ Faleminderit!
 export const DestinationHero = () => {
   return (
     <div
-      className="relative flex flex-col items-center justify-center overflow-hidden  py-24"
+      className="public-reveal relative flex flex-col items-center justify-center overflow-hidden  py-24"
       style={{ background: "#0f172a" }}
     >
       {/* large emerald glow — top right */}

@@ -24,7 +24,7 @@ Faleminderit! 😊
 
 export const Advertise = () => {
   return (
-    <div className='relative w-full h-[80vh] rounded-3xl overflow-hidden select-none'>
+    <div className='public-reveal relative w-full h-[80vh] rounded-3xl overflow-hidden select-none'>
       <Image
         img='/images/advertise.webp'
         alt='Advertise image'
