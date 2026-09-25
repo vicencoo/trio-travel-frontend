@@ -1,5 +1,5 @@
 import { useViewPackage } from "./useViewPackage";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { InfoItem } from "./InfoItem";
 import { Spinner } from "@/components/spinner";
 import { Text } from "@/components/text";
@@ -20,6 +20,8 @@ import { ViewImages } from "@/components/viewImages/ViewImages";
 import { useDisclosure } from "@/hooks/useDisclosure";
 import { ShareModal } from "@/components/shareModal/ShareModal";
 import { SEO } from "@/components/seo";
+import { NotFound } from "@/pages/public/notFound";
+import { getPackageSeo } from "@/seo/detail";
 
 export const ViewPackage = () => {
   const { packageData, isLoading } = useViewPackage();
@@ -32,30 +34,15 @@ export const ViewPackage = () => {
       </div>
     );
 
+  if (!packageData) return <NotFound />;
+
   const currentUrl = window.location.href;
   const slug = window.location.pathname.split("/").pop();
-  const canonicalUrl = `https://www.triotravel.al/paketa-turistike/${slug}`;
+  const seo = getPackageSeo(packageData);
 
-  const seoTitle = `${packageData?.title || "Paketë Turistike"} | Trio Travel Albania`;
-
-  const seoDescription =
-    packageData && packageData?.description
-      ? packageData.description.slice(0, 155)
-      : "Zbuloni paketa turistike me Trio Travel Albania. Rezervoni udhëtime, hotele dhe oferta pushimesh sipas dëshirës tuaj.";
-
-  const firstImage = packageData?.package_images?.[0];
-
-  const seoImage: string =
-    typeof firstImage === "string"
-      ? firstImage
-      : firstImage instanceof File
-        ? URL.createObjectURL(firstImage)
-        : typeof firstImage === "object" &&
-            firstImage !== null &&
-            "image_url" in firstImage &&
-            typeof firstImage.image_url === "string"
-          ? firstImage.image_url
-          : "https://www.triotravel.al/images/trio-travel-package-og.webp";
+  // Old or mistyped slugs point to the one real URL for this package
+  if (seo && slug !== seo.slug)
+    return <Navigate to={`/paketa-turistike/${seo.slug}`} replace />;
 
   const shareUrl = `${import.meta.env.VITE_LOCAL}/share/package/${slug}`;
 
@@ -101,62 +88,9 @@ Faleminderit!
     return accomodationPlans[accomodation] || accomodation;
   };
 
-  const packageSchema = {
-    "@context": "https://schema.org",
-    "@type": "TouristTrip",
-    "@id": `${canonicalUrl}#touristtrip`,
-    name: packageData?.title,
-    url: canonicalUrl,
-    description: seoDescription,
-    image: seoImage,
-    touristType: ["Couple", "Family", "Group"],
-    provider: {
-      "@type": "TravelAgency",
-      name: "Trio Travel & Immo",
-      url: "https://www.triotravel.al",
-      logo: "https://www.triotravel.al/images/trio-travel-icon.webp",
-      telephone: "+355696900916",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Kryqezimi Rinia, Pallati i Kollozit",
-        addressLocality: "Vlorë",
-        postalCode: "9400",
-        addressCountry: "AL",
-      },
-    },
-    offers: {
-      "@type": "Offer",
-      url: canonicalUrl,
-      price: packageData?.price,
-      priceCurrency: "EUR",
-      availability: "https://schema.org/InStock",
-    },
-    itinerary: {
-      "@type": "ItemList",
-      name: packageData?.destination,
-    },
-  };
-
   return (
     <>
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        canonical={canonicalUrl}
-        image={seoImage}
-        keywords={[
-          String(packageData?.title ?? ""),
-          String(packageData?.destination ?? ""),
-          "paketa turistike",
-          "paketa turistike Shqiperi",
-          "oferta pushimesh",
-          "rezervo pakete turistike",
-          "agjenci turistike Vlore",
-          "agjensi turistike Vlore",
-          "Trio Travel Immo",
-        ]}
-        schema={packageSchema}
-      />
+      {seo && <SEO {...seo} />}
 
       <div className="flex flex-col gap-10 container pt-3 pb-20">
         <div className="flex flex-col gap-3">
@@ -182,7 +116,10 @@ Faleminderit!
           </div>
 
           <div className="flex w-full justify-center">
-            {packageData && <ViewImages images={packageData.package_images} />}
+            {packageData && <ViewImages
+                images={packageData.package_images}
+                title={packageData.title}
+              />}
           </div>
         </div>
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8">

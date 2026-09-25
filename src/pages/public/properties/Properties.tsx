@@ -7,7 +7,7 @@ import { PropertyCard } from "@/components/propertyCard";
 import { Pagination } from "@/components/pagination";
 import { NoPropertyFound } from "@/components/noPropertyFound";
 import { SEO } from "@/components/seo";
-import { propertiesSchema } from "@/constants/seoSchemas";
+import { PAGE_SEO } from "@/seo/pages";
 
 export const Properties = () => {
   const {
@@ -24,27 +24,7 @@ export const Properties = () => {
 
   return (
     <>
-      <SEO
-        title="Prona në Shitje në Shqipëri | Apartamente, Vila & Investime"
-        description="Gjeni prona në shitje në Shqipëri me Trio Travel & Immo. Apartamente, vila, prona bregdetare dhe mundësi investimi në Vlorë, Sarandë, Tiranë dhe zona të tjera."
-        canonical="https://www.triotravel.al/pronat"
-        image="https://www.triotravel.al/images/trio-travel-properties-og.webp"
-        keywords={[
-          "prona ne shitje",
-          "prona ne Shqiperi",
-          "apartamente ne shitje",
-          "vila ne shitje",
-          "apartamente ne Vlore",
-          "apartamente ne Sarande",
-          "apartamente ne Tirane",
-          "prona bregdetare",
-          "real estate Albania",
-          "investime imobiliare",
-          "Trio Travel Immo",
-          "agjenci imobiliare Vlore",
-        ]}
-        schema={propertiesSchema}
-      />
+      <SEO {...PAGE_SEO.properties} />
 
       <div className="flex flex-col gap-10 pb-10">
         <PropertyHero />

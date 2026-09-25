@@ -3,29 +3,14 @@ import { ContactForm } from "./ContactForm";
 import { InfoCard } from "./InfoCard";
 import { useContact } from "./useContact";
 import { SEO } from "@/components/seo";
+import { PAGE_SEO } from "@/seo/pages";
 
 export const Contact = () => {
   const { contact, handleChangeContact, handleSubmit, isLoading } =
     useContact();
   return (
     <>
-      <SEO
-        title="Kontakt | Trio Travel & Immo në Vlorë"
-        description="Kontaktoni Trio Travel & Immo në Vlorë për paketa turistike, prona në shitje, bileta avioni dhe asistencë të personalizuar për udhëtimet tuaja."
-        canonical="https://www.triotravel.al/kontakti"
-        image="https://www.triotravel.al/images/trio-travel-og.webp"
-        keywords={[
-          "kontakt trio travel",
-          "trio travel vlore",
-          "trio travel immo",
-          "agjenci turistike vlore",
-          "agjenci imobiliare vlore",
-          "paketa turistike vlore",
-          "prona ne shitje vlore",
-          "bileta avioni",
-          "Kryqezimi Rinia Vlore",
-        ]}
-      />
+      <SEO {...PAGE_SEO.contact} />
 
       <div className="flex flex-col gap-10 pb-7 md:pb-20">
         <div className="public-reveal relative w-full overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 py-12 md:py-20">

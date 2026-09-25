@@ -5,6 +5,7 @@ export const SectionHeader = ({ title, text }: SectionHeaderProps) => {
   return (
     <div className='public-reveal flex flex-col w-full items-center justify-center gap-1'>
       <Text
+        Tag='h2'
         text={title}
         size='text-3xl'
         font='font-medium'

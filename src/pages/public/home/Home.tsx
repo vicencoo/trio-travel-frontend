@@ -11,8 +11,8 @@ import { FAQ } from "./FAQ";
 import { ViewAllButton } from "@/components/viewAllButton";
 import { PropertyCardSkeleton } from "@/components/skeletons";
 import { SEO } from "@/components/seo";
+import { PAGE_SEO } from "@/seo/pages";
 import { ArrowRightAlt, BadgeCheck, MapPin, Plane } from "@/icons";
-import { homeSchema } from "@/constants/seoSchemas";
 
 export const Home = () => {
   const {
@@ -24,33 +24,7 @@ export const Home = () => {
   } = useHome();
   return (
     <>
-      <SEO
-        title="Trio Travel & Immo | Paketa Turistike, Prona & Bileta Avioni në Shqipëri"
-        description="Trio Travel & Immo në Vlorë ofron paketa turistike, bileta avioni, prona në shitje, apartamente, vila dhe udhëtime të personalizuara në Shqipëri dhe destinacionet më të kërkuara në botë."
-        canonical="https://www.triotravel.al"
-        image="https://www.triotravel.al/images/trio-travel-og.webp"
-        keywords={[
-          "Trio Travel",
-          "Trio Travel Albania",
-          "Trio Travel Vlore",
-          "paketa turistike",
-          "paketa turistike Shqiperi",
-          "paketa turistike Turqi",
-          "paketa turistike Dubai",
-          "bileta avioni",
-          "oferta fluturimesh",
-          "agjenci turistike Vlore",
-          "agjenci turistike Shqiperi",
-          "prona ne shitje",
-          "apartamente ne shitje",
-          "vila ne shitje",
-          "prona ne Vlore",
-          "apartamente ne Vlore",
-          "real estate Albania",
-          "udhetime te personalizuara",
-        ]}
-        schema={homeSchema}
-      />
+      <SEO {...PAGE_SEO.home} />
 
       <div className="container flex flex-col md:gap-20 gap-14 md:mb-16 my-10">
         <Advertise />

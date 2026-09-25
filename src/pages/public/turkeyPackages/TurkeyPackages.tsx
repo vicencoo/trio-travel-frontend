@@ -1,4 +1,5 @@
 import { SEO } from "@/components/seo";
+import { PAGE_SEO } from "@/seo/pages";
 import { Pagination } from "@/components/pagination";
 import { Text } from "@/components/text";
 import { NoDataFound } from "@/components/noDataFound";
@@ -6,7 +7,6 @@ import { useTurkeyPackages } from "./useTurkeyPackages";
 import { useScrollOnChange } from "@/hooks/useScrollOnChange";
 import { PackageCardSkeleton } from "@/components/skeletons";
 import { PackageCard } from "@/components/packageCard";
-import { turkeyPackagesSchema } from "@/constants/seoSchemas";
 import { TurkeyPackagesHero } from "./TurkeyHero";
 
 export const TurkeyPackages = () => {
@@ -28,27 +28,7 @@ export const TurkeyPackages = () => {
   const { scrollRef } = useScrollOnChange(pageNumber);
   return (
     <>
-      <SEO
-        title="Paketa Turistike Turqi | Stamboll, Antalya, Bodrum & Oferta Pushimesh"
-        description="Zbuloni paketa turistike për Turqi me Trio Travel & Immo. Oferta për Stamboll, Antalya, Bodrum dhe destinacione të tjera me hotele, fluturime dhe asistencë."
-        canonical="https://www.triotravel.al/paketa-turistike-turqi"
-        image="https://www.triotravel.al/images/trio-travel-package-og.webp"
-        keywords={[
-          "paketa turistike Turqi",
-          "paketa turistike ne Turqi",
-          "pushime ne Turqi",
-          "oferta Turqi",
-          "paketa Stamboll",
-          "pushime Antalya",
-          "paketa Antalya",
-          "paketa Bodrum",
-          "paketa turistike nga Vlora",
-          "agjenci turistike Vlore",
-          "agjenci turistike Shqiperi",
-          "udhetime te organizuara",
-        ]}
-        schema={turkeyPackagesSchema}
-      />
+      <SEO {...PAGE_SEO.turkeyPackages} />
 
       <div className="flex flex-col md:gap-16 gap-8 w-full">
         <TurkeyPackagesHero

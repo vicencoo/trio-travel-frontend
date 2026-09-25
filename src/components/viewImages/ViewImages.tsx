@@ -7,12 +7,14 @@ interface ViewImagesProps {
   images: (string | File | PropertyImage | PackageImage)[];
   initialIndex?: number;
   onImageClick?: (index: number) => void;
+  title?: string;
 }
 
 export const ViewImages = ({
   images,
   initialIndex = 0,
   onImageClick,
+  title,
 }: ViewImagesProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(initialIndex);
 
@@ -23,6 +25,9 @@ export const ViewImages = ({
   const next = () => {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
+
+  const altFor = (index: number) =>
+    title ? `${title} – foto ${index + 1}` : `Imazhi ${index + 1}`;
 
   const getImageSrc = (
     src: string | File | PackageImage | PropertyImage,
@@ -48,7 +53,7 @@ export const ViewImages = ({
           >
             <Image
               src={getImageSrc(src)}
-              alt={`Imazhi ${currentImageIndex}`}
+              alt={altFor(index)}
               loading={index === 0 ? 'eager' : 'lazy'}
               priority={index === 0 ? 'high' : 'auto'}
               className='w-full h-full object-cover rounded-lg'
@@ -87,7 +92,7 @@ export const ViewImages = ({
         {images.map((src, index) => (
           <Image
             key={index}
-            alt={`Imazhi ${index}`}
+            alt={altFor(index)}
             src={getImageSrc(src)}
             loading='lazy'
             priority='auto'

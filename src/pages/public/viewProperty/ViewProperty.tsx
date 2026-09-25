@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useViewProperty } from "./useViewProperty";
 import { PropertyStats } from "./PropertyStats";
 import { ContactAgency } from "./ContactAgency";
@@ -19,6 +19,8 @@ import { ViewImages } from "@/components/viewImages/ViewImages";
 import { useDisclosure } from "@/hooks/useDisclosure";
 import { ShareModal } from "@/components/shareModal/ShareModal";
 import { SEO } from "@/components/seo";
+import { NotFound } from "@/pages/public/notFound";
+import { getPropertySeo } from "@/seo/detail";
 
 export const ViewProperty = () => {
   const { property, isLoading } = useViewProperty();
@@ -34,108 +36,17 @@ export const ViewProperty = () => {
       </div>
     );
 
-  const canonicalUrl = `https://www.triotravel.al/pronat/${slug}`;
+  if (!property) return <NotFound />;
 
-  const seoTitle = `${property?.title || "Pronë në Shqipëri"} | Trio Travel Albania`;
+  const seo = getPropertySeo(property);
 
-  const seoDescription = property?.description
-    ? property.description.slice(0, 155)
-    : "Shfletoni prona në Shqipëri me Trio Travel Albania. Gjeni apartamente, vila dhe prona për investim.";
+  // Old or mistyped slugs point to the one real URL for this property
+  if (seo && slug !== seo.slug)
+    return <Navigate to={`/pronat/${seo.slug}`} replace />;
 
-  const firstImage = property?.property_images?.[0];
-
-  const seoImage: string =
-    typeof firstImage === "string"
-      ? firstImage
-      : firstImage instanceof File
-        ? "https://www.triotravel.al/images/property-cover.webp"
-        : typeof firstImage === "object" &&
-            firstImage !== null &&
-            "image_url" in firstImage &&
-            typeof firstImage.image_url === "string"
-          ? firstImage.image_url
-          : "https://www.triotravel.al/images/property-cover.webp";
-
-  const propertySchema = {
-    "@context": "https://schema.org",
-    "@type": "RealEstateListing",
-    "@id": `${canonicalUrl}#property`,
-    name: property?.title,
-    url: canonicalUrl,
-    description: seoDescription,
-    image: seoImage,
-    datePosted: property?.created_at,
-
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: property?.city,
-      streetAddress: `${property?.street || ""} ${property?.area || ""}`.trim(),
-      addressCountry: "AL",
-    },
-
-    offers: {
-      "@type": "Offer",
-      url: canonicalUrl,
-      price: property?.price,
-      priceCurrency: "EUR",
-      availability: "https://schema.org/InStock",
-    },
-
-    floorSize: property?.space
-      ? {
-          "@type": "QuantitativeValue",
-          value: property.space,
-          unitCode: "MTK",
-        }
-      : undefined,
-
-    numberOfRooms: property?.bedrooms,
-    numberOfBathroomsTotal: property?.toilets,
-    yearBuilt: property?.build_year,
-
-    provider: {
-      "@type": "RealEstateAgent",
-      name: "Trio Travel & Immo",
-      url: "https://www.triotravel.al",
-      logo: "https://www.triotravel.al/images/trio-travel-icon.webp",
-      telephone: "+355696900916",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Kryqezimi Rinia, Pallati i Kollozit",
-        addressLocality: "Vlorë",
-        postalCode: "9400",
-        addressCountry: "AL",
-      },
-    },
-  };
   return (
     <>
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        canonical={canonicalUrl}
-        image={seoImage}
-        keywords={[
-          String(property?.title ?? ""),
-          String(property?.city ?? ""),
-          String(property?.area ?? ""),
-          String(property?.property_type ?? ""),
-          "prona ne shitje",
-          "apartamente ne shitje",
-          "apartamente ne shitje vlore",
-          "apartamente ne shitje ne vlore",
-          "apartamente me qera",
-          "apartamente me qera vlore",
-          "apartamente me qera ne vlore",
-          "vila ne shitje",
-          "prona ne Shqiperi",
-          "agjenci imobiliare Vlore",
-          "agjensi imobiliare Vlore",
-          "real estate Albania",
-          "Trio Travel Immo",
-        ]}
-        schema={propertySchema}
-      />
+      {seo && <SEO {...seo} />}
 
       <div className="container flex flex-col pt-3 gap-10 pb-20">
         <div className="flex flex-col gap-3">
@@ -161,7 +72,10 @@ export const ViewProperty = () => {
             </div>
           </div>
 
-          {property && <ViewImages images={property.property_images} />}
+          {property && <ViewImages
+              images={property.property_images}
+              title={property.title}
+            />}
         </div>
 
         <div className="grid md:grid-cols-3 grid-cols-1 gap-5">

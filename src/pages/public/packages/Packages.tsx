@@ -6,7 +6,7 @@ import { Pagination } from "@/components/pagination";
 import { PackageCardSkeleton } from "@/components/skeletons";
 import { NoDataFound } from "@/components/noDataFound";
 import { SEO } from "@/components/seo";
-import { packagesSchema } from "@/constants/seoSchemas";
+import { PAGE_SEO } from "@/seo/pages";
 import { PackagesHero } from "./PackagesHero";
 
 export const Packages = () => {
@@ -29,27 +29,7 @@ A mund të më ndihmoni me sugjerime dhe organizimin?`,
 
   return (
     <>
-      <SEO
-        title="Paketa Turistike | Oferta Udhëtimi & Paketa të Personalizuara"
-        description="Zbuloni paketa turistike me Trio Travel & Immo në Vlorë ose krijoni paketën tuaj të personalizuar sipas destinacionit, buxhetit dhe datave të udhëtimit."
-        canonical="https://www.triotravel.al/paketa-turistike"
-        image="https://www.triotravel.al/images/trio-travel-package-og.webp"
-        keywords={[
-          "paketa turistike",
-          "paketa turistike Shqiperi",
-          "paketa turistike te personalizuara",
-          "oferta udhetimi",
-          "pushime ne Europe",
-          "pushime ne Turqi",
-          "pushime ne Dubai",
-          "agjenci turistike Vlore",
-          "agjensi turistike Vlore",
-          "agjenci turistike Shqiperi",
-          "agjensi turistike Shqiperi",
-          "udhetime te organizuara",
-        ]}
-        schema={packagesSchema}
-      />
+      <SEO {...PAGE_SEO.packages} />
 
       <div className="flex flex-col md:gap-16 gap-8 w-full">
         <PackagesHero

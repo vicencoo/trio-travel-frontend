@@ -6,7 +6,7 @@ import { DestinationCard } from "@/components/destinationCard";
 import { Pagination } from "@/components/pagination";
 import { Image } from "@/components/image";
 import { SEO } from "@/components/seo";
-import { destinationsSchema } from "@/constants/seoSchemas";
+import { PAGE_SEO } from "@/seo/pages";
 
 const message = encodeURIComponent(`
 Përshëndetje
@@ -28,26 +28,7 @@ export const Destinations = () => {
 
   return (
     <>
-      <SEO
-        title="Destinacione Turistike | Pushime, Udhëtime & Paketa Turistike"
-        description="Zbuloni destinacione turistike për pushime me Trio Travel & Immo. Eksploroni udhëtime në Europë, Turqi, Dubai dhe destinacione të personalizuara sipas buxhetit tuaj."
-        canonical="https://www.triotravel.al/destinacionet"
-        image="https://www.triotravel.al/images/trio-travel-package-og.webp"
-        keywords={[
-          "destinacione turistike",
-          "destinacione udhetimi",
-          "pushime",
-          "pushime ne Europe",
-          "pushime ne Turqi",
-          "pushime ne Dubai",
-          "paketa turistike",
-          "udhetime te personalizuara",
-          "agjenci turistike Vlore",
-          "agjenci turistike Shqiperi",
-          "Trio Travel Immo",
-        ]}
-        schema={destinationsSchema}
-      />
+      <SEO {...PAGE_SEO.destinations} />
 
       <div className="flex flex-col gap-14">
         <DestinationHero />

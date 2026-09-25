@@ -11,7 +11,8 @@ export const createSlug = (
       .replace(/ç/g, 'c')
       .replace(/[^a-z0-9\s-]/g, '') // heq karakteret speciale
       .replace(/\s+/g, '-') // spaces → -
-      .replace(/-+/g, '-') + // multiple - → one
+      .replace(/-+/g, '-') // multiple - → one
+      .replace(/^-|-$/g, '') + // no leading/trailing -
       `-${id}`
   );
 };

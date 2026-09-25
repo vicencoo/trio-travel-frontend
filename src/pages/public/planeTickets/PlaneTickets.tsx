@@ -9,7 +9,7 @@ import { ViewAllButton } from "@/components/viewAllButton";
 import { Plane, Search } from "@/icons";
 import { Image } from "@/components/image";
 import { SEO } from "@/components/seo";
-import { planeTicketsSchema } from "@/constants/seoSchemas";
+import { PAGE_SEO } from "@/seo/pages";
 
 export const PlaneTickets = () => {
   const {
@@ -28,25 +28,7 @@ Do të doja disa sugjerime për udhëtimin tim. Mund të më ndihmoni, ju lutem?
 
   return (
     <>
-      <SEO
-        title="Bileta Avioni | Oferta Fluturimesh & Rezervime Online"
-        description="Gjeni bileta avioni dhe oferta fluturimesh për destinacione të ndryshme me Trio Travel & Immo. Rezervoni fluturimin tuaj me asistencë profesionale."
-        canonical="https://www.triotravel.al/bileta-avioni"
-        image="https://www.triotravel.al/images/plane-ticket-cover.webp"
-        keywords={[
-          "bileta avioni",
-          "bileta avioni online",
-          "rezervo bileta avioni",
-          "oferta fluturimesh",
-          "fluturime te lira",
-          "agjenci turistike Vlore",
-          "agjenci turistike Shqiperi",
-          "fluturime europiane",
-          "fluturime nderkombetare",
-          "Trio Travel Immo",
-        ]}
-        schema={planeTicketsSchema}
-      />
+      <SEO {...PAGE_SEO.planeTickets} />
 
       <div className="flex flex-col gap-10 pb-10">
         <div className="public-reveal flex flex-col w-full md:h-[300px] h-[250px] relative md:mb-4 mb-20">

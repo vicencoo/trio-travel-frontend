@@ -43,6 +43,7 @@ export const Advertise = () => {
           />
         </span>
         <Text
+          Tag='h1'
           text={'Zbulo botën me udhëtime të dizajnuara vetëm për ty'}
           size='md:text-4xl text-xl'
           font='font-medium'
