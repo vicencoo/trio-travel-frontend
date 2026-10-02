@@ -121,7 +121,7 @@ export const HomeBannerSlider = ({
 
   return (
     <section
-      className={`public-reveal group relative w-full h-[70svh] min-h-[480px] max-h-[620px] md:h-[65vh] md:min-h-[460px] md:max-h-[600px] overflow-hidden rounded-2xl md:rounded-3xl shadow-xl select-none touch-pan-y ${
+      className={`public-reveal group relative w-full [contain:inline-size] h-[70svh] min-h-[480px] max-h-[620px] md:h-[65vh] md:min-h-[460px] md:max-h-[600px] overflow-hidden rounded-2xl md:rounded-3xl shadow-xl select-none touch-pan-y ${
         isLooping ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""
       }`}
       aria-roledescription="carousel"
