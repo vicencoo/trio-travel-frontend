@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useHome } from "./useHome";
 import { SectionHeader } from "./SectionHeader";
 import { PropertyCard } from "@/components/propertyCard";
@@ -11,7 +10,6 @@ import { ViewAllButton } from "@/components/viewAllButton";
 import { PropertyCardSkeleton } from "@/components/skeletons";
 import { SEO } from "@/components/seo";
 import { PAGE_SEO } from "@/seo/pages";
-import { ArrowRightAlt, BadgeCheck, MapPin, Plane } from "@/icons";
 import { homePageBanners } from "@/constants/homePageBanners";
 import { HomeBannerSlider } from "@/components/homeBanners";
 
