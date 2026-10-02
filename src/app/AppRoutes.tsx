@@ -13,6 +13,7 @@ import { UserLayout } from "@/layout/UserLayout";
 import { ProtectedRoute } from "@/guards/ProtectedRoute";
 import { UserRole } from "@/types/user";
 import { TurkeyPackages } from "@/pages/public/turkeyPackages";
+import { ChristmasPackages } from "@/pages/public/christmasPackages";
 import { NotFound } from "@/pages/public/notFound";
 import { Spinner } from "@/components/spinner";
 import { AuthPage } from "@/pages/auth/authPage/AuthPage";
@@ -62,6 +63,10 @@ export const AppRoutes = () => {
           <Route path="/paketa-turistike/:slug" element={<ViewPackage />} />
 
           <Route path="/paketa-turistike-turqi" element={<TurkeyPackages />} />
+          <Route
+            path="/paketa-turistike-krishtlindje"
+            element={<ChristmasPackages />}
+          />
 
           <Route path="*" element={<NotFound />} />
         </Route>

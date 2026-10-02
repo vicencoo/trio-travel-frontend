@@ -25,6 +25,7 @@ const PAGE_SETTINGS: Record<
   home: { changefreq: "daily", priority: "1.0" },
   packages: { changefreq: "daily", priority: "0.9" },
   turkeyPackages: { changefreq: "daily", priority: "0.9" },
+  christmasPackages: { changefreq: "daily", priority: "0.9" },
   properties: { changefreq: "daily", priority: "0.9" },
   destinations: { changefreq: "weekly", priority: "0.8" },
   planeTickets: { changefreq: "weekly", priority: "0.8" },
@@ -63,10 +64,7 @@ const fetchAll = async (
   return items;
 };
 
-const toEntries = (
-  items: ApiItem[],
-  basePath: string,
-): SitemapEntry[] => {
+const toEntries = (items: ApiItem[], basePath: string): SitemapEntry[] => {
   const byId = new Map(items.map((item) => [item.id, item]));
 
   return [...byId.values()]
@@ -92,11 +90,13 @@ const renderUrl = ({ loc, lastmod, changefreq, priority }: SitemapEntry) =>
     .join("\n");
 
 export async function GET() {
-  const [packages, turkeyPackages, properties] = await Promise.allSettled([
-    fetchAll("/packages", "packages", "packageLimit"),
-    fetchAll("/turkey-packages", "packages", "packageLimit"),
-    fetchAll("/properties", "properties", "limit"),
-  ]);
+  const [packages, turkeyPackages, christmasPackages, properties] =
+    await Promise.allSettled([
+      fetchAll("/packages", "packages", "packageLimit"),
+      fetchAll("/turkey-packages", "packages", "packageLimit"),
+      fetchAll("/christmas-packages", "packages", "packageLimit"),
+      fetchAll("/properties", "properties", "limit"),
+    ]);
 
   const valueOf = (result: PromiseSettledResult<ApiItem[]>) => {
     if (result.status === "fulfilled") return result.value;
@@ -107,15 +107,22 @@ export async function GET() {
   const entries = [
     ...STATIC_PAGES,
     ...toEntries(
-      [...valueOf(packages), ...valueOf(turkeyPackages)],
+      [
+        ...valueOf(packages),
+        ...valueOf(turkeyPackages),
+        ...valueOf(christmasPackages),
+      ],
       "/paketa-turistike",
     ),
     ...toEntries(valueOf(properties), "/pronat"),
   ];
 
-  const anyFailed = [packages, turkeyPackages, properties].some(
-    (result) => result.status === "rejected",
-  );
+  const anyFailed = [
+    packages,
+    turkeyPackages,
+    christmasPackages,
+    properties,
+  ].some((result) => result.status === "rejected");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

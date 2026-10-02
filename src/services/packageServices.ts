@@ -15,6 +15,13 @@ export const packageServices = {
     status?: string;
   }) => axios("/turkey-packages", { params }),
 
+  getChristmasPackages: (params: {
+    packageLimit?: number;
+    page?: number;
+    searchQuery?: string;
+    status?: string;
+  }) => axios("/christmas-packages", { params }),
+
   getOne: (packageId: number) => axios("/package", { params: { packageId } }),
 
   renew: (packageId: number) =>

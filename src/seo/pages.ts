@@ -1,4 +1,9 @@
-import { DEFAULT_IMAGE, ORGANIZATION_ID, SITE_URL, WEBSITE_ID } from "./site.js";
+import {
+  DEFAULT_IMAGE,
+  ORGANIZATION_ID,
+  SITE_URL,
+  WEBSITE_ID,
+} from "./site.js";
 import type { Schema } from "./structuredData.js";
 
 export type PageSeo = {
@@ -121,13 +126,46 @@ export const PAGE_SEO = {
       "all inclusive Antalya",
       "paketa turistike nga Vlora",
       "agjenci turistike Vlore",
+      "agjensi turistike Vlore",
+      "agjenci turistike",
+      "agjensi turistike",
       "agjenci turistike Shqiperi",
+      "agjensi turistike Shqiperi",
     ],
     schema: collectionPage(
       "/paketa-turistike-turqi",
       "Paketa Turistike Turqi",
       "Paketa turistike për Turqi me resorte All Inclusive në Antalya, Kemer dhe Belek.",
       "Pushime në Turqi",
+    ),
+  }),
+
+  christmasPackages: page({
+    path: "/paketa-turistike-krishtlindje",
+    title: "Paketa Turistike për Krishtlindje & Vit të Ri | Trio Travel & Immo",
+    description:
+      "Paketa turistike për Krishtlindje dhe Vit të Ri me Trio Travel & Immo: tregje festive, qytete magjike të Evropës, fluturime, hotele dhe asistencë nga Vlora.",
+    image: `${SITE_URL}/images/christmas-banner.webp`,
+    keywords: [
+      "paketa turistike Krishtlindje",
+      "paketa turistike per Krishtlindje",
+      "paketa Viti i Ri",
+      "pushime per Krishtlindje",
+      "pushime per festat e fundvitit",
+      "tregjet e Krishtlindjeve",
+      "oferta Krishtlindje",
+      "udhetime dimerore",
+      "paketa turistike nga Vlora",
+      "agjenci turistike Vlore",
+      "agjensi turistike Vlore",
+      "agjenci turistike Shqiperi",
+      "agjensi turistike Shqiperi",
+    ],
+    schema: collectionPage(
+      "/paketa-turistike-krishtlindje",
+      "Paketa Turistike për Krishtlindje",
+      "Paketa turistike për Krishtlindje dhe Vit të Ri me fluturime, hotele dhe itinerare festive.",
+      "Pushime për Krishtlindje dhe Vit të Ri",
     ),
   }),
 

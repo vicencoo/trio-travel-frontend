@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useHome } from "./useHome";
-import { Advertise } from "./Advertise";
 import { SectionHeader } from "./SectionHeader";
 import { PropertyCard } from "@/components/propertyCard";
 import { PackageCard } from "@/components/packageCard";
@@ -13,6 +12,8 @@ import { PropertyCardSkeleton } from "@/components/skeletons";
 import { SEO } from "@/components/seo";
 import { PAGE_SEO } from "@/seo/pages";
 import { ArrowRightAlt, BadgeCheck, MapPin, Plane } from "@/icons";
+import { homePageBanners } from "@/constants/homePageBanners";
+import { HomeBannerSlider } from "@/components/homeBanners";
 
 export const Home = () => {
   const {
@@ -27,7 +28,8 @@ export const Home = () => {
       <SEO {...PAGE_SEO.home} />
 
       <div className="container flex flex-col md:gap-20 gap-14 md:mb-16 my-10">
-        <Advertise />
+        {/* <Advertise /> */}
+        <HomeBannerSlider banners={homePageBanners} />
 
         {propertiesLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -54,14 +56,13 @@ export const Home = () => {
               </div>
 
               <div className="flex w-full justify-center">
-                <ViewAllButton
-                  text="shiko te gjitha pronat"
-                  path="/pronat"
-                />
+                <ViewAllButton text="shiko te gjitha pronat" path="/pronat" />
               </div>
             </div>
           )
         )}
+
+        {/* <ChristmasBanner /> */}
 
         {packages?.packages && packages.packages.length > 0 && (
           <div className="flex flex-col gap-10">
@@ -87,7 +88,7 @@ export const Home = () => {
           </div>
         )}
 
-        <section className="grid grid-cols-1 overflow-hidden rounded-2xl bg-[#0f2f2f] text-white shadow-xl md:grid-cols-[1.05fr_0.95fr]">
+        {/* <section className="grid grid-cols-1 overflow-hidden rounded-2xl bg-[#0f2f2f] text-white shadow-xl md:grid-cols-[1.05fr_0.95fr]">
           <div className="flex flex-col justify-center gap-6 px-6 py-9 md:px-10 md:py-12">
             <span className="w-max rounded-full bg-amber-300 px-4 py-1 text-sm font-semibold text-[#18302f]">
               Destinacion i kërkuar
@@ -142,7 +143,7 @@ export const Home = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0f2f2f]/65 via-transparent to-transparent md:bg-gradient-to-l" />
           </Link>
-        </section>
+        </section> */}
 
         {planeTickets &&
           planeTickets?.totalTickets &&
