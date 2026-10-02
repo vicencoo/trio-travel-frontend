@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "@/icons";
 import { HomeBanner } from "./HomeBanner";
+import { inertProps } from "@/utils/inertProps";
 import type { HomeBannerSliderTypes } from "./types";
 
 const SWIPE_THRESHOLD = 50;
@@ -154,7 +155,7 @@ export const HomeBannerSlider = ({
               aria-roledescription="slide"
               aria-label={`${realIndex + 1} / ${total}`}
               aria-hidden={isClone || !isActive}
-              inert={isClone || !isActive}
+              {...inertProps(isClone || !isActive)}
             >
               <HomeBanner {...banner} isFirst={!isClone && realIndex === 0} />
             </div>
