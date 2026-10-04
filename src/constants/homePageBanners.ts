@@ -3,6 +3,21 @@ import type { HomeBannerSliderTypes } from "@/components/homeBanners/types";
 
 export const homePageBanners: HomeBannerSliderTypes["banners"] = [
   {
+    id: 3,
+    title: "Paketa turistike për festat e Nëntorit",
+    badge: "28 & 29 Nëntori",
+    image: "/images/november-packages-desktop.webp",
+    mobileImage: "/images/november-packages-mobile.webp",
+    text: `Shfrytëzoni pushimet e 28 dhe 29 Nëntorit për një udhëtim të shkurtër në qytetet më të bukura të Evropës, me fluturime, hotele dhe itinerare të organizuara.`,
+    info: [
+      { id: 1, icon: Plane, text: "Fluturime & hotele" },
+      { id: 2, icon: MapPin, text: "Fundjava në Evropë" },
+      { id: 3, icon: BadgeCheck, text: "Paketa me asistencë" },
+    ],
+    buttonText: "Shiko paketat e Nëntorit",
+    buttonUrl: "/paketa-turistike-festat-e-nentorit",
+  },
+  {
     id: 1,
     title: "Paketa turistike për Krishtlindje",
     badge: "Oferta për festat",

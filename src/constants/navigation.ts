@@ -14,9 +14,19 @@ import {
 
 export const HEADER_ITEMS = [
   { id: 1, name: "faqja kryesore", path: "/" },
-  { id: 2, name: "pronat", path: "/pronat" },
-  { id: 3, name: "bileta avioni", path: "/bileta-avioni" },
-  { id: 4, name: "paketa turistike", path: "/paketa-turistike" },
+  {
+    id: 2,
+    name: "pronat",
+    path: "/pronat",
+    megaMenu: "properties" as const,
+  },
+  {
+    id: 3,
+    name: "paketa turistike",
+    path: "/paketa-turistike",
+    megaMenu: "packages" as const,
+  },
+  { id: 4, name: "bileta avioni", path: "/bileta-avioni" },
   { id: 5, name: "destinacione", path: "/destinacionet" },
   { id: 6, name: "kontakt", path: "/contact" },
 ];

@@ -26,6 +26,7 @@ const PAGE_SETTINGS: Record<
   packages: { changefreq: "daily", priority: "0.9" },
   turkeyPackages: { changefreq: "daily", priority: "0.9" },
   christmasPackages: { changefreq: "daily", priority: "0.9" },
+  novemberPackages: { changefreq: "daily", priority: "0.9" },
   properties: { changefreq: "daily", priority: "0.9" },
   destinations: { changefreq: "weekly", priority: "0.8" },
   planeTickets: { changefreq: "weekly", priority: "0.8" },
@@ -90,13 +91,19 @@ const renderUrl = ({ loc, lastmod, changefreq, priority }: SitemapEntry) =>
     .join("\n");
 
 export async function GET() {
-  const [packages, turkeyPackages, christmasPackages, properties] =
-    await Promise.allSettled([
-      fetchAll("/packages", "packages", "packageLimit"),
-      fetchAll("/turkey-packages", "packages", "packageLimit"),
-      fetchAll("/christmas-packages", "packages", "packageLimit"),
-      fetchAll("/properties", "properties", "limit"),
-    ]);
+  const [
+    packages,
+    turkeyPackages,
+    christmasPackages,
+    novemberPackages,
+    properties,
+  ] = await Promise.allSettled([
+    fetchAll("/packages", "packages", "packageLimit"),
+    fetchAll("/turkey-packages", "packages", "packageLimit"),
+    fetchAll("/christmas-packages", "packages", "packageLimit"),
+    fetchAll("/november-packages", "packages", "packageLimit"),
+    fetchAll("/properties", "properties", "limit"),
+  ]);
 
   const valueOf = (result: PromiseSettledResult<ApiItem[]>) => {
     if (result.status === "fulfilled") return result.value;
@@ -111,6 +118,7 @@ export async function GET() {
         ...valueOf(packages),
         ...valueOf(turkeyPackages),
         ...valueOf(christmasPackages),
+        ...valueOf(novemberPackages),
       ],
       "/paketa-turistike",
     ),
@@ -121,6 +129,7 @@ export async function GET() {
     packages,
     turkeyPackages,
     christmasPackages,
+    novemberPackages,
     properties,
   ].some((result) => result.status === "rejected");
 

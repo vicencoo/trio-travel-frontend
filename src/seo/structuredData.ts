@@ -18,6 +18,7 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   "paketa-turistike": "Paketa Turistike",
   "paketa-turistike-turqi": "Paketa Turistike Turqi",
   "paketa-turistike-krishtlindje": "Paketa Turistike për Krishtlindje",
+  "paketa-turistike-festat-e-nentorit": "Paketa Turistike për Festat e Nëntorit",
   destinacionet: "Destinacionet",
   "bileta-avioni": "Bileta Avioni",
   pronat: "Pronat",

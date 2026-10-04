@@ -10,6 +10,14 @@ export type DashboardHeaderProps = {
   currentPage: string;
 };
 
+export type MegaMenuProps = {
+  isOpen: boolean;
+  whatsappUrl: string;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+  onNavigate: () => void;
+};
+
 export type AvatarProps = {
   letter: string;
   size?: string;

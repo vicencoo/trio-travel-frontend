@@ -22,6 +22,13 @@ export const packageServices = {
     status?: string;
   }) => axios("/christmas-packages", { params }),
 
+  getNovemberPackages: (params: {
+    packageLimit?: number;
+    page?: number;
+    searchQuery?: string;
+    status?: string;
+  }) => axios("/november-packages", { params }),
+
   getOne: (packageId: number) => axios("/package", { params: { packageId } }),
 
   renew: (packageId: number) =>

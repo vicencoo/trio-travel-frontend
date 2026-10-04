@@ -48,6 +48,8 @@ export { default as SmsOutlined } from '@mui/icons-material/SmsOutlined';
 export {
   X,
   Plus,
+  ArrowRight,
+  KeyRound,
   Repeat,
   LayersPlus,
   Search,

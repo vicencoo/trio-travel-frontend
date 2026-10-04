@@ -11,9 +11,10 @@ export const useDisclosure = (initialState = false) => {
   const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
 
   const handleClickOutside = useCallback((e: MouseEvent | TouchEvent) => {
-    // Cast target to Node for 'contains' check
-    const target = e.target as Node;
-    if (ref.current && !ref.current.contains(target)) {
+    // composedPath() is captured at dispatch time, so it still includes the
+    // wrapper when the clicked node was removed by the re-render this same
+    // click triggered (e.g. the Menu icon swapped for the X icon).
+    if (ref.current && !e.composedPath().includes(ref.current)) {
       setIsOpen(false);
     }
   }, []);

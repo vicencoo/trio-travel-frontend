@@ -14,6 +14,7 @@ import { ProtectedRoute } from "@/guards/ProtectedRoute";
 import { UserRole } from "@/types/user";
 import { TurkeyPackages } from "@/pages/public/turkeyPackages";
 import { ChristmasPackages } from "@/pages/public/christmasPackages";
+import { NovemberPackages } from "@/pages/public/novemberPackages";
 import { NotFound } from "@/pages/public/notFound";
 import { Spinner } from "@/components/spinner";
 import { AuthPage } from "@/pages/auth/authPage/AuthPage";
@@ -66,6 +67,10 @@ export const AppRoutes = () => {
           <Route
             path="/paketa-turistike-krishtlindje"
             element={<ChristmasPackages />}
+          />
+          <Route
+            path="/paketa-turistike-festat-e-nentorit"
+            element={<NovemberPackages />}
           />
 
           <Route path="*" element={<NotFound />} />

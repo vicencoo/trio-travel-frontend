@@ -169,6 +169,34 @@ export const PAGE_SEO = {
     ),
   }),
 
+  novemberPackages: page({
+    path: "/paketa-turistike-festat-e-nentorit",
+    title: "Paketa Turistike për Festat e Nëntorit | Trio Travel & Immo",
+    description:
+      "Paketa turistike për festat e 28 dhe 29 Nëntorit me Trio Travel & Immo: qytete të Evropës, fundjava të shkurtra, fluturime, hotele dhe asistencë nga Vlora.",
+    image: `${SITE_URL}/images/november-packages-desktop.webp`,
+    keywords: [
+      "paketa turistike festat e Nentorit",
+      "paketa turistike 28 Nentori",
+      "pushime per 28 Nentor",
+      "pushime per festat e Nentorit",
+      "oferta 28 dhe 29 Nentori",
+      "udhetime ne Nentor",
+      "fundjave ne Evrope",
+      "paketa turistike nga Vlora",
+      "agjenci turistike Vlore",
+      "agjensi turistike Vlore",
+      "agjenci turistike Shqiperi",
+      "agjensi turistike Shqiperi",
+    ],
+    schema: collectionPage(
+      "/paketa-turistike-festat-e-nentorit",
+      "Paketa Turistike për Festat e Nëntorit",
+      "Paketa turistike për festat e 28 dhe 29 Nëntorit me fluturime, hotele dhe itinerare të organizuara.",
+      "Pushime për festat e Nëntorit",
+    ),
+  }),
+
   properties: page({
     path: "/pronat",
     title: "Prona në Shitje & me Qera në Vlorë | Trio Travel & Immo",
