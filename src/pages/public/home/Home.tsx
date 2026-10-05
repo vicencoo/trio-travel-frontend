@@ -6,6 +6,7 @@ import { FlightOfferCard } from "@/components/flightOfferCard";
 import { StatisticsSection } from "./StatisticsSection";
 import { Destinations } from "./Destinations";
 import { FAQ } from "./FAQ";
+import { FAQ_INFO } from "@/constants/faq";
 import { ViewAllButton } from "@/components/viewAllButton";
 import { PropertyCardSkeleton } from "@/components/skeletons";
 import { SEO } from "@/components/seo";
@@ -183,7 +184,13 @@ export const Home = () => {
 
         <div className="flex flex-col gap-10">
           <SectionHeader title="Pyetjet më të shpeshta" />
-          <FAQ />
+          <FAQ items={FAQ_INFO.slice(0, 6)} />
+          <div className="flex w-full justify-center">
+            <ViewAllButton
+              text="Shiko Të Gjitha Pyetjet"
+              path="/pyetje-te-shpeshta"
+            />
+          </div>
         </div>
       </div>
     </>

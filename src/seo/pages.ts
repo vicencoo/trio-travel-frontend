@@ -79,7 +79,6 @@ export const PAGE_SEO = {
       isPartOf: { "@id": WEBSITE_ID },
       about: { "@id": ORGANIZATION_ID },
     },
-    includeFaq: true,
   }),
 
   packages: page({
@@ -299,6 +298,37 @@ export const PAGE_SEO = {
       isPartOf: { "@id": WEBSITE_ID },
       about: { "@id": ORGANIZATION_ID },
     },
+  }),
+
+  faq: page({
+    path: "/pyetje-te-shpeshta",
+    title: "Pyetjet më të Shpeshta (FAQ) | Trio Travel & Immo",
+    description:
+      "Përgjigje për pyetjet më të shpeshta rreth biletave të avionit, paketave turistike, vizave, sigurimeve, pagesave të faturave dhe Western Union në Trio Travel & Immo, Vlorë.",
+    image: DEFAULT_IMAGE,
+    keywords: [
+      "pyetje te shpeshta",
+      "FAQ trio travel",
+      "si te rezervoj bileta avioni",
+      "anulimi i biletes se avionit",
+      "asistence per viza",
+      "sigurim udhetimi",
+      "sigurim automjeti Vlore",
+      "pagesa e faturave Vlore",
+      "Western Union Vlore",
+      "agjenci turistike Vlore",
+    ],
+    schema: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/pyetje-te-shpeshta#webpage`,
+      url: `${SITE_URL}/pyetje-te-shpeshta`,
+      name: "Pyetjet më të Shpeshta",
+      inLanguage: "sq-AL",
+      isPartOf: { "@id": WEBSITE_ID },
+      about: { "@id": ORGANIZATION_ID },
+      mainEntity: { "@id": `${SITE_URL}/pyetje-te-shpeshta#faq` },
+    },
+    includeFaq: true,
   }),
 } satisfies Record<string, PageSeo>;
 

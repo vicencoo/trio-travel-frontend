@@ -47,12 +47,14 @@
 export const FAQ_INFO = [
   {
     id: 1,
+    slug: "sherbimet-e-agjencise",
     question: "Çfarë shërbimesh ofron agjencia juaj?",
     answer:
       "Ne ofrojmë një gamë të gjerë shërbimesh, duke përfshirë rezervimin e biletave ajrore (vendore dhe ndërkombëtare), paketa turistike, asistencë për viza, sigurim udhëtimi, sigurime për mjete motorike, pagesa të faturave të ujit dhe energjisë elektrike, pagesa të gjobave të automjeteve, si dhe shërbime të transfertave të parave përmes Western Union.",
   },
   {
     id: 2,
+    slug: "bileta-avioni-me-cmimin-me-te-mire",
     question:
       "A mund të më ndihmoni të rezervoj bileta avioni me çmimin më të mirë të mundshëm?",
     answer:
@@ -60,12 +62,14 @@ export const FAQ_INFO = [
   },
   {
     id: 3,
+    slug: "paketa-pushimesh-dhe-ture",
     question: "A ofroni paketa pushimesh dhe ture turistike?",
     answer:
       "Po, ne ofrojmë një shumëllojshmëri paketash turistike dhe pushimesh, si udhëtime familjare, muaj mjalti, ture në grup dhe plane të personalizuara udhëtimi sipas preferencave tuaja.",
   },
   {
     id: 4,
+    slug: "ndryshimi-ose-anulimi-i-rezervimit",
     question:
       "A mund ta ndryshoj ose anuloj rezervimin tim të fluturimit ose udhëtimit?",
     answer:
@@ -73,24 +77,28 @@ export const FAQ_INFO = [
   },
   {
     id: 5,
+    slug: "asistence-per-viza",
     question: "A ofroni asistencë për viza dhe dokumentacion udhëtimi?",
     answer:
       "Po, ne ofrojmë udhëzim dhe asistencë për aplikimet për viza, dokumentet e nevojshme të udhëtimit dhe procedurat përkatëse, në varësi të destinacionit.",
   },
   {
     id: 6,
+    slug: "sigurim-udhetimi-dhe-sherbime-shtese",
     question: "A ofroni sigurim udhëtimi dhe shërbime shtesë?",
     answer:
       "Po, ne ofrojmë sigurim udhëtimi si dhe shërbime shtesë, si zgjedhja e vendit në avion, bagazh shtesë, vakte speciale dhe kërkesa për asistencë të veçantë, në përputhje me politikat e kompanive ajrore dhe ofruesve të shërbimeve.",
   },
   {
     id: 7,
+    slug: "si-te-rezervoj",
     question: "Si mund të rezervoj shërbimet tuaja të udhëtimit?",
     answer:
       "Ju mund t’i rezervoni shërbimet tona nëpërmjet zyrës sonë ose me telefon. Mënyrat e pagesës ndryshojnë sipas shërbimit dhe mund të përfshijnë transfertë bankare ose pagesë në dorë.",
   },
   {
     id: 8,
+    slug: "pagesa-e-faturave-te-ujit-dhe-dritave",
     question:
       "A mund të paguaj faturat e ujit dhe energjisë elektrike në agjencinë tuaj?",
     answer:
@@ -98,24 +106,28 @@ export const FAQ_INFO = [
   },
   {
     id: 9,
+    slug: "pagesa-e-gjobave-te-automjeteve",
     question: "A mund të paguaj gjoba të automjeteve në agjencinë tuaj?",
     answer:
       "Po, ne ju ndihmojmë me pagesën e gjobave të automjeteve dhe procedurat përkatëse, duke e bërë procesin sa më të thjeshtë dhe efikas.",
   },
   {
     id: 10,
+    slug: "sigurim-automjeti",
     question: "A ofroni siguracion për automjete?",
     answer:
       "Po, ne ofrojmë shërbime për sigurimin e mjeteve motorike dhe ju ndihmojmë të zgjidhni mbulimin më të përshtatshëm sipas nevojave tuaja.",
   },
   {
     id: 11,
+    slug: "western-union",
     question: "A mund të dërgoj ose të marr para përmes Western Union?",
     answer:
       "Po, ne ofrojmë shërbime Western Union për dërgimin dhe marrjen e parave. Për këtë shërbim kërkohet dokument identifikimi i vlefshëm sipas rregullave dhe procedurave të Western Union.",
   },
   {
     id: 12,
+    slug: "pse-trio-travel",
     question: "Pse të zgjedh agjencinë tuaj?",
     answer:
       "Ne ofrojmë shërbim profesional, asistencë të personalizuar dhe një gamë të gjerë shërbimesh në një vend të vetëm. Qëllimi ynë është t’ju kursejmë kohë dhe t’ju ofrojmë zgjidhje të shpejta, të sigurta dhe të besueshme për nevojat tuaja të udhëtimit dhe shërbimeve të përditshme.",

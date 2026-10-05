@@ -94,6 +94,8 @@ export const usePropertyManager = () => {
           }
         });
 
+      formData.append("currency", propertyData.currency || "EUR");
+
       if (propertyData.availability) {
         formData.append("availability", propertyData.availability);
       }

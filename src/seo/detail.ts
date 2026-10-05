@@ -26,6 +26,7 @@ type SeoProperty = {
   street?: string;
   area?: string;
   price?: number | null;
+  currency?: string;
   space?: number | null;
   bedrooms?: number | null;
   toilets?: number | null;
@@ -273,7 +274,7 @@ export const getPropertySeo = (data: SeoProperty): DetailSeo | null => {
           "@type": "Offer",
           url: canonical,
           price: data.price,
-          priceCurrency: "EUR",
+          priceCurrency: data.currency === "ALL" ? "ALL" : "EUR",
           businessFunction: isRent
             ? "http://purl.org/goodrelations/v1#LeaseOut"
             : "http://purl.org/goodrelations/v1#Sell",

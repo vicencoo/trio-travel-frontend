@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, House, MapPin, MessageCircleMore } from "@/icons";
 import { PROPERTY_LISTING_LINKS } from "@/constants/propertyListing";
 import { createSlug } from "@/utils/createSlug";
-import { formattedPrice } from "@/utils/formattedPrice";
+import { formatPropertyPrice } from "@/utils/currency";
 import { inertProps } from "@/utils/inertProps";
 import type { Property } from "@/types/types";
 import { useRecentProperties } from "./useRecentProperties";
@@ -60,7 +60,7 @@ const RecentPropertyCard = ({
       </span>
       {property.price != null && (
         <span className="mt-auto pt-1 text-base font-semibold text-blue-700">
-          {formattedPrice(Number(property.price))}€
+          {formatPropertyPrice(property.price, property.currency)}
           {property.listing_type === "rent" && (
             <span className="text-xs font-medium text-gray-500"> / muaj</span>
           )}

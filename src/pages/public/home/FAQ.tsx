@@ -1,10 +1,39 @@
 import { Text } from '@/components/text';
 import { FAQ_INFO } from '@/constants/faq';
 import { AddIcon, Close } from '@/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-export const FAQ = () => {
+const HEADER_OFFSET = 80;
+
+type FAQProps = {
+  items?: typeof FAQ_INFO;
+};
+
+export const FAQ = ({ items = FAQ_INFO }: FAQProps) => {
+  const { hash } = useLocation();
   const [openQuestions, setOpenQuestions] = useState<number[]>([]);
+
+  // A link like /pyetje-te-shpeshta#western-union opens and scrolls to that
+  // question. Runs after ScrollToTop has reset the page.
+  useEffect(() => {
+    const target = items.find((faq) => `#${faq.slug}` === hash);
+    if (!target) return;
+
+    const timeout = setTimeout(() => {
+      setOpenQuestions((prev) =>
+        prev.includes(target.id) ? prev : [...prev, target.id],
+      );
+
+      const el = document.getElementById(target.slug);
+      if (!el) return;
+      const top =
+        el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 150);
+
+    return () => clearTimeout(timeout);
+  }, [hash, items]);
 
   const toggleQuestions = (id: number) =>
     setOpenQuestions((prev) =>
@@ -12,11 +41,12 @@ export const FAQ = () => {
     );
   return (
     <div className='public-reveal flex border-2 flex-col rounded-lg select-none'>
-      {FAQ_INFO.map((faq, index) => {
+      {items.map((faq, index) => {
         const questionNumber =
           index + 1 < 10 ? `0${index + 1}` : `${index + 1}`;
         return (
           <div
+            id={faq.slug}
             onClick={() => toggleQuestions(faq.id)}
             className={`border-b-2 last:border-b-0 py-5 md:px-10 px-2 transition-all duration-300 ease-in-out ${
               openQuestions.includes(faq.id)
@@ -33,6 +63,7 @@ export const FAQ = () => {
                   font='font-bold'
                 />
                 <Text
+                  Tag='h3'
                   text={faq.question}
                   size='sm:text-lg text-sm'
                   font='font-bold'
@@ -40,8 +71,8 @@ export const FAQ = () => {
               </span>
 
               <span
-                className={`w-9 h-9 min-w-9 min-h-9 flex-shrink-0 rounded-lg 
-                flex items-center justify-center cursor-pointer 
+                className={`w-9 h-9 min-w-9 min-h-9 flex-shrink-0 rounded-lg
+                flex items-center justify-center cursor-pointer
                 transition-all duration-300 ease-in-out transform
                 ${
                   openQuestions.includes(faq.id)

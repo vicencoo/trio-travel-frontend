@@ -23,6 +23,7 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   "bileta-avioni": "Bileta Avioni",
   pronat: "Pronat",
   contact: "Kontakt",
+  "pyetje-te-shpeshta": "Pyetjet më të Shpeshta",
 };
 
 const getPageName = (title: string) => title.split("|")[0].trim();
@@ -63,12 +64,18 @@ const buildBreadcrumbSchema = (breadcrumbs: Breadcrumb[]) => ({
   })),
 });
 
+const FAQ_URL = `${SITE_URL}/pyetje-te-shpeshta`;
+
 const faqPageSchema = {
   "@type": "FAQPage",
-  "@id": `${SITE_URL}/#faq`,
+  "@id": `${FAQ_URL}#faq`,
+  url: FAQ_URL,
+  inLanguage: "sq-AL",
   about: { "@id": ORGANIZATION_ID },
   mainEntity: FAQ_INFO.map((faq) => ({
     "@type": "Question",
+    "@id": `${FAQ_URL}#${faq.slug}`,
+    url: `${FAQ_URL}#${faq.slug}`,
     name: faq.question,
     acceptedAnswer: {
       "@type": "Answer",
@@ -84,7 +91,7 @@ const withoutContext = (schema: Schema) => {
 };
 
 // One JSON-LD @graph per page: the business, the website, the page's own
-// schema, its breadcrumbs and (on the home page) the FAQ.
+// schema, its breadcrumbs and (on the FAQ page) the FAQ.
 export const buildStructuredData = ({
   title,
   canonical,

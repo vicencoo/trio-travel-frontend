@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Image } from "../image";
 import { Text } from "../text";
 import type { PropertyCardProps } from "./types";
-import { formattedPrice } from "@/utils/formattedPrice";
+import { formatPropertyPrice } from "@/utils/currency";
 import {
   BathtubOutlinedIcon,
   HotelOutlinedIcon,
@@ -133,7 +133,7 @@ export const PropertyCard = ({ property, index }: PropertyCardProps) => {
               className="text-gray-500"
             />
             <Text
-              text={`${formattedPrice(Number(property.price))}€`}
+              text={formatPropertyPrice(property.price, property.currency)}
               size="text-2xl"
               font="font-semibold font-serif"
               className="text-blue-700"

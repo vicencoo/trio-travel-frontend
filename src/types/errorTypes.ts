@@ -16,6 +16,7 @@ export type PropertyFieldError = {
   street?: string;
   area?: string;
   price?: string;
+  currency?: string;
   space?: string;
 };
 

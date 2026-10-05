@@ -4,7 +4,7 @@ import { PropertyStats } from "./PropertyStats";
 import { ContactAgency } from "./ContactAgency";
 import { Text } from "@/components/text";
 import { Card } from "@/components/card";
-import { formattedPrice } from "@/utils/formattedPrice";
+import { formatPropertyPrice } from "@/utils/currency";
 import { Spinner } from "@/components/spinner";
 import {
   ArrowBack,
@@ -88,7 +88,7 @@ export const ViewProperty = () => {
                   </h1>
                   <div className="flex items-center gap-2">
                     <Text
-                      text={`${formattedPrice(Number(property?.price))}€`}
+                      text={formatPropertyPrice(property?.price, property?.currency)}
                       size="text-2xl"
                       font="font-bold font-serif"
                       className="capitalize text-blue-500"

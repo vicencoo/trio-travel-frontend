@@ -21,6 +21,7 @@ export type Property = {
   property_images: (File | string | PropertyImage)[];
   status: "active" | "draft";
   availability?: "available" | "sold" | "rented";
+  currency?: "EUR" | "ALL";
   created_at?: Date;
 };
 

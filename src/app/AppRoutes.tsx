@@ -15,6 +15,7 @@ import { UserRole } from "@/types/user";
 import { TurkeyPackages } from "@/pages/public/turkeyPackages";
 import { ChristmasPackages } from "@/pages/public/christmasPackages";
 import { NovemberPackages } from "@/pages/public/novemberPackages";
+import { Faq } from "@/pages/public/faq";
 import { NotFound } from "@/pages/public/notFound";
 import { Spinner } from "@/components/spinner";
 import { AuthPage } from "@/pages/auth/authPage/AuthPage";
@@ -60,6 +61,7 @@ export const AppRoutes = () => {
           <Route path="/bileta-avioni" element={<PlaneTickets />} />
           <Route path="/pronat" element={<Properties />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/pyetje-te-shpeshta" element={<Faq />} />
           <Route path="/pronat/:slug" element={<ViewProperty />} />
           <Route path="/paketa-turistike/:slug" element={<ViewPackage />} />
 

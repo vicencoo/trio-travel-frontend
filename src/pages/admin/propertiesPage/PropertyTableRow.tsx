@@ -1,7 +1,7 @@
 import { ActionMenu } from '@/components/actionMenu';
 import { Image } from '@/components/image';
 import { Text } from '@/components/text';
-import { formattedPrice } from '@/utils/formattedPrice';
+import { formatPropertyPrice } from '@/utils/currency';
 import type { PropertyItemProps } from './types';
 
 const availabilityConfig = {
@@ -61,7 +61,7 @@ export const PropertyTableRow = ({
         className='capitalize col-span-1 hidden md:flex text-gray-900 dark:text-slate-300'
       />
       <Text
-        text={`${formattedPrice(Number(property.price))}€`}
+        text={formatPropertyPrice(property.price, property.currency)}
         size='md:text-base text-sm'
         font='font-semibold font-serif'
         className='capitalize md:col-span-1 col-span-2 text-stone-700 dark:text-slate-400'

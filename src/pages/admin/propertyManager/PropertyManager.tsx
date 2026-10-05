@@ -16,6 +16,7 @@ import {
   LocationOnOutlined,
 } from '@/icons';
 import { PROPERTY_TYPE } from '@/constants/property';
+import { CURRENCY_OPTIONS } from '@/utils/currency';
 
 export const PropertyManager = () => {
   const {
@@ -252,8 +253,30 @@ export const PropertyManager = () => {
               onChange={(e) =>
                 handleChangePropertyData('price', e.target.value)
               }
-              icon={<EuroOutlined fontSize='inherit' />}
+              icon={
+                propertyData.currency === 'ALL' ? (
+                  <span className='text-xs font-bold'>ALL</span>
+                ) : (
+                  <EuroOutlined fontSize='inherit' />
+                )
+              }
               errorMessage={error?.price}
+            />
+          </div>
+          <div className='flex flex-col gap-1'>
+            <Text
+              text='Monedha *'
+              font='font-semibold'
+              size='text-sm'
+              className='text-slate-900 dark:text-slate-300'
+            />
+            <Selector
+              options={CURRENCY_OPTIONS}
+              value={propertyData.currency || 'EUR'}
+              onChange={(e) =>
+                handleChangePropertyData('currency', e.target.value as string)
+              }
+              errorMessage={error?.currency}
             />
           </div>
           <div className='flex flex-col gap-1'>

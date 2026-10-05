@@ -31,6 +31,7 @@ const PAGE_SETTINGS: Record<
   destinations: { changefreq: "weekly", priority: "0.8" },
   planeTickets: { changefreq: "weekly", priority: "0.8" },
   contact: { changefreq: "monthly", priority: "0.7" },
+  faq: { changefreq: "monthly", priority: "0.7" },
 };
 
 const STATIC_PAGES: SitemapEntry[] = Object.entries(PAGE_SETTINGS).map(

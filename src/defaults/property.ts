@@ -17,4 +17,5 @@ export const DEFAULT_PROPERTY: Property = {
   property_images: [],
   status: 'draft',
   availability: 'available',
+  currency: 'EUR',
 };
