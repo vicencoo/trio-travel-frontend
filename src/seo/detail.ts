@@ -41,6 +41,7 @@ export type DetailSeo = {
   slug: string;
   canonical: string;
   title: string;
+  shareTitle: string;
   description: string;
   image: string;
   keywords: string[];
@@ -103,6 +104,10 @@ const imageUrls = (images: unknown[] | undefined) =>
 
 const withBrand = (name: string) => `${name} | Trio Travel & Immo`;
 
+// Social previews show the name in capitals so it stands out in a chat;
+// Google keeps the normal title, as it rewrites all-caps ones
+const shareTitle = (name: string) => withBrand(name.toLocaleUpperCase("sq"));
+
 export const getPackageSeo = (data: SeoPackage): DetailSeo | null => {
   const slug = createSlug(data.title, data.id);
   if (!slug || !data.title) return null;
@@ -128,6 +133,7 @@ export const getPackageSeo = (data: SeoPackage): DetailSeo | null => {
     slug,
     canonical,
     title: withBrand(titleName),
+    shareTitle: shareTitle(titleName),
     description,
     image,
     // Drafts are still reachable by link but shouldn't be in Google
@@ -229,6 +235,7 @@ export const getPropertySeo = (data: SeoProperty): DetailSeo | null => {
     slug,
     canonical,
     title: withBrand(titleName),
+    shareTitle: shareTitle(titleName),
     description,
     image,
     // Drafts are still reachable by link but shouldn't be in Google

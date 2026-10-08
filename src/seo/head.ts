@@ -7,6 +7,8 @@ import {
 
 export type SeoMeta = {
   title: string;
+  // Title for social previews (Open Graph / Twitter), when it differs
+  shareTitle?: string;
   description: string;
   canonical?: string;
   image?: string;
@@ -25,6 +27,7 @@ export type HeadTag =
 // server writes them into the HTML, so both always match.
 export const buildHeadTags = ({
   title,
+  shareTitle = title,
   description,
   canonical,
   image = DEFAULT_IMAGE,
@@ -55,16 +58,16 @@ export const buildHeadTags = ({
     meta({ property: "og:site_name", content: BRAND }),
     meta({ property: "og:locale", content: "sq_AL" }),
     meta({ property: "og:type", content: "website" }),
-    meta({ property: "og:title", content: title }),
+    meta({ property: "og:title", content: shareTitle }),
     meta({ property: "og:description", content: description }),
     meta({ property: "og:image", content: image }),
     meta({ property: "og:image:secure_url", content: image }),
-    meta({ property: "og:image:alt", content: title }),
+    meta({ property: "og:image:alt", content: shareTitle }),
     meta({ name: "twitter:card", content: "summary_large_image" }),
-    meta({ name: "twitter:title", content: title }),
+    meta({ name: "twitter:title", content: shareTitle }),
     meta({ name: "twitter:description", content: description }),
     meta({ name: "twitter:image", content: image }),
-    meta({ name: "twitter:image:alt", content: title }),
+    meta({ name: "twitter:image:alt", content: shareTitle }),
   ];
 };
 
