@@ -26,15 +26,16 @@ export const HEADER_ITEMS = [
     path: "/paketa-turistike",
     megaMenu: "packages" as const,
   },
-  { id: 4, name: "bileta avioni", path: "/bileta-avioni" },
   {
-    id: 7,
+    id: 4,
     name: "shërbime",
     path: "/sherbime",
     megaMenu: "services" as const,
   },
-  { id: 5, name: "destinacione", path: "/destinacionet" },
-  { id: 6, name: "kontakt", path: "/contact" },
+  { id: 5, name: "bileta avioni", path: "/bileta-avioni" },
+
+  { id: 6, name: "destinacione", path: "/destinacionet" },
+  { id: 7, name: "kontakt", path: "/contact" },
 ];
 
 export const SIDEBAR_ITEMS = [
@@ -78,11 +79,6 @@ export const SIDEBAR_ITEMS = [
       },
     ],
   },
-  // {
-  //   icon: Workflow,
-  //   label: "Menaxhimi i Biletave",
-  //   path: "/admin/work-management",
-  // },
   {
     icon: ShieldCheck,
     label: "Siguracionet",
