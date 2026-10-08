@@ -44,7 +44,9 @@ export const ViewPackage = () => {
   if (seo && slug !== seo.slug)
     return <Navigate to={`/paketa-turistike/${seo.slug}`} replace />;
 
-  const shareUrl = `${import.meta.env.VITE_LOCAL}/share/package/${slug}`;
+  // The page's own URL: the server puts its title, description and image in
+  // the HTML, so social apps show the preview without a backend share link
+  const shareUrl = seo?.canonical ?? currentUrl;
 
   const reserveMessage = encodeURIComponent(`
 Përshëndetje! 

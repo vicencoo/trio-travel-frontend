@@ -27,7 +27,6 @@ export const ViewProperty = () => {
   const { close, isOpen, open } = useDisclosure();
 
   const slug = window.location.pathname.split("/").pop();
-  const shareUrl = `${import.meta.env.VITE_LOCAL}/share/property/${slug}`;
 
   if (isLoading)
     return (
@@ -43,6 +42,10 @@ export const ViewProperty = () => {
   // Old or mistyped slugs point to the one real URL for this property
   if (seo && slug !== seo.slug)
     return <Navigate to={`/pronat/${seo.slug}`} replace />;
+
+  // The page's own URL: the server puts its title, description and image in
+  // the HTML, so social apps show the preview without a backend share link
+  const shareUrl = seo?.canonical ?? window.location.href;
 
   return (
     <>
