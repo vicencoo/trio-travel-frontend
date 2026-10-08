@@ -11,6 +11,8 @@ import {
   PropertiesMegaMenu,
   PropertiesMobileLinks,
 } from "./PropertiesMegaMenu";
+import { ServicesMegaMenu, ServicesMobileLinks } from "./ServicesMegaMenu";
+import { SERVICE_PAGES } from "@/constants/services";
 
 const WHATSAPP_URL = "https://wa.me/355696900916";
 const MEGA_MENU_CLOSE_DELAY = 150;
@@ -21,6 +23,7 @@ type MegaMenuKey = NonNullable<HeaderItem["megaMenu"]>;
 const MEGA_MENU_IDS: Record<MegaMenuKey, string> = {
   packages: "packages-mega-menu",
   properties: "properties-mega-menu",
+  services: "services-mega-menu",
 };
 
 export const Header = () => {
@@ -28,6 +31,9 @@ export const Header = () => {
   const { ref: wrapperRef, isOpen, toggle, close } = useDisclosure();
   const [isScrolled, setIsScrolled] = useState(false);
   const [openMenu, setOpenMenu] = useState<MegaMenuKey | null>(null);
+  // The services list is long, so on mobile it starts collapsed every time
+  // the menu is opened
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   // Opening one menu replaces the other straight away
@@ -52,6 +58,13 @@ export const Header = () => {
 
   const openPackages = useCallback(() => openMega("packages"), [openMega]);
   const openProperties = useCallback(() => openMega("properties"), [openMega]);
+  const openServices = useCallback(() => openMega("services"), [openMega]);
+
+  const megaMenuOpeners: Record<MegaMenuKey, () => void> = {
+    packages: openPackages,
+    properties: openProperties,
+    services: openServices,
+  };
 
   useEffect(() => {
     if (!openMenu) return;
@@ -79,11 +92,14 @@ export const Header = () => {
   const isActive = (path: string) =>
     pathname === path || (path !== "/" && pathname.startsWith(`${path}/`));
 
-  // The packages item is also active on the seasonal package pages
+  // The packages item is also active on the seasonal package pages, and the
+  // services item on every service page
   const isItemActive = (item: HeaderItem) =>
     isActive(item.path) ||
     (item.megaMenu === "packages" &&
-      homePageBanners.some((banner) => pathname === banner.buttonUrl));
+      homePageBanners.some((banner) => pathname === banner.buttonUrl)) ||
+    (item.megaMenu === "services" &&
+      SERVICE_PAGES.some((service) => pathname === service.path));
 
   return (
     <header
@@ -112,8 +128,9 @@ export const Header = () => {
             const active = isItemActive(item);
             const isMenuOpen = !!item.megaMenu && openMenu === item.megaMenu;
             const highlighted = active || isMenuOpen;
-            const openThisMenu =
-              item.megaMenu === "packages" ? openPackages : openProperties;
+            const openThisMenu = item.megaMenu
+              ? megaMenuOpeners[item.megaMenu]
+              : undefined;
             return (
               <Link
                 key={item.id}
@@ -163,7 +180,10 @@ export const Header = () => {
           {/* Mobile menu button */}
           <button
             type="button"
-            onClick={toggle}
+            onClick={() => {
+              if (!isOpen) setMobileServicesOpen(false);
+              toggle();
+            }}
             aria-label={isOpen ? "Mbyll menunë" : "Hap menunë"}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
@@ -190,6 +210,14 @@ export const Header = () => {
         onNavigate={closeMega}
       />
 
+      <ServicesMegaMenu
+        isOpen={openMenu === "services"}
+        whatsappUrl={WHATSAPP_URL}
+        onMouseEnter={openServices}
+        onMouseLeave={scheduleCloseMega}
+        onNavigate={closeMega}
+      />
+
       {/* Mobile menu */}
       <div
         id="mobile-menu"
@@ -205,25 +233,61 @@ export const Header = () => {
           className="container flex flex-col gap-1 py-4"
         >
           {HEADER_ITEMS.map((item) => {
-            const active = isActive(item.path);
+            const active = isItemActive(item);
             return (
               <div key={item.id} className="flex flex-col gap-1">
-                <Link
-                  to={item.path}
-                  aria-current={active ? "page" : undefined}
-                  className={`flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium capitalize transition-colors duration-200 ${
-                    active
-                      ? "bg-red-50 text-red-700"
-                      : "text-gray-700 hover:bg-gray-50 hover:text-gray-950"
-                  }`}
-                >
-                  {item.name}
-                  {active && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-red-600" />
+                <div className="flex items-center gap-1">
+                  <Link
+                    to={item.path}
+                    aria-current={active ? "page" : undefined}
+                    className={`flex flex-1 items-center justify-between rounded-xl px-4 py-3 text-base font-medium capitalize transition-colors duration-200 ${
+                      active
+                        ? "bg-red-50 text-red-700"
+                        : "text-gray-700 hover:bg-gray-50 hover:text-gray-950"
+                    }`}
+                  >
+                    {item.name}
+                    {active && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-red-600" />
+                    )}
+                  </Link>
+                  {item.megaMenu === "services" && (
+                    <button
+                      type="button"
+                      onClick={() => setMobileServicesOpen((open) => !open)}
+                      aria-label={
+                        mobileServicesOpen
+                          ? "Mbyll listën e shërbimeve"
+                          : "Hap listën e shërbimeve"
+                      }
+                      aria-expanded={mobileServicesOpen}
+                      aria-controls="mobile-services-links"
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-gray-600 transition-colors duration-200 hover:bg-gray-50 hover:text-gray-950"
+                    >
+                      <ChevronDown
+                        size={18}
+                        className={`transition-transform duration-300 ${
+                          mobileServicesOpen ? "rotate-180 text-red-600" : ""
+                        }`}
+                      />
+                    </button>
                   )}
-                </Link>
+                </div>
                 {item.megaMenu === "properties" && <PropertiesMobileLinks />}
                 {item.megaMenu === "packages" && <PackagesMobileLinks />}
+                {item.megaMenu === "services" && (
+                  <div
+                    id="mobile-services-links"
+                    className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                      mobileServicesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    }`}
+                    {...inertProps(!mobileServicesOpen)}
+                  >
+                    <div className="overflow-hidden">
+                      <ServicesMobileLinks />
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}

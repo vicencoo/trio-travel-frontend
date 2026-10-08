@@ -50,7 +50,7 @@ export const FAQ_INFO = [
     slug: "sherbimet-e-agjencise",
     question: "Çfarë shërbimesh ofron agjencia juaj?",
     answer:
-      "Ne ofrojmë një gamë të gjerë shërbimesh, duke përfshirë rezervimin e biletave ajrore (vendore dhe ndërkombëtare), paketa turistike, asistencë për viza, sigurim udhëtimi, sigurime për mjete motorike, pagesa të faturave të ujit dhe energjisë elektrike, pagesa të gjobave të automjeteve, si dhe shërbime të transfertave të parave përmes Western Union.",
+      "Ne ofrojmë një gamë të gjerë shërbimesh, duke përfshirë rezervimin e biletave ajrore (vendore dhe ndërkombëtare), paketa turistike, asistencë për viza, siguracione Albsig (automjete, motorra, mjete lundruese, prona, jetë dhe udhëtime), pagesa të faturave të dritave, ujit dhe DigitAlb, pagesa gjobash, transferta parash me MoneyGram, ndihmë për shërbimet e-Albania, si dhe prona në shitje dhe me qera.",
   },
   {
     id: 2,
@@ -100,30 +100,37 @@ export const FAQ_INFO = [
     id: 8,
     slug: "pagesa-e-faturave-te-ujit-dhe-dritave",
     question:
-      "A mund të paguaj faturat e ujit dhe energjisë elektrike në agjencinë tuaj?",
+      "A mund të paguaj faturat e dritave, ujit dhe DigitAlb në agjencinë tuaj?",
     answer:
-      "Po, në agjencinë tonë mund të kryeni pagesa për faturat e ujit dhe energjisë elektrike në mënyrë të shpejtë, të sigurt dhe të besueshme.",
+      "Po, në agjencinë tonë mund të paguani faturat e dritave (OSHEE), të ujit dhe abonimin e televizorit DigitAlb, në mënyrë të shpejtë dhe të sigurt, dhe merrni menjëherë mandatin e pagesës.",
   },
   {
     id: 9,
     slug: "pagesa-e-gjobave-te-automjeteve",
-    question: "A mund të paguaj gjoba të automjeteve në agjencinë tuaj?",
+    question: "A mund të paguaj gjoba në agjencinë tuaj?",
     answer:
-      "Po, ne ju ndihmojmë me pagesën e gjobave të automjeteve dhe procedurat përkatëse, duke e bërë procesin sa më të thjeshtë dhe efikas.",
+      "Po, te ne paguani të gjitha llojet e gjobave: të policisë rrugore, të automjeteve, të parkimit dhe gjoba të tjera administrative. Ju ndihmojmë të gjeni shumën e saktë dhe ju japim mandatin e pagesës.",
   },
   {
     id: 10,
     slug: "sigurim-automjeti",
     question: "A ofroni siguracion për automjete?",
     answer:
-      "Po, ne ofrojmë shërbime për sigurimin e mjeteve motorike dhe ju ndihmojmë të zgjidhni mbulimin më të përshtatshëm sipas nevojave tuaja.",
+      "Po, ne bëjmë siguracione Albsig për automjete (TPL, Kasko dhe Kartoni Jeshil), motorra dhe mjete lundruese, si dhe siguracione prone, jete dhe udhëtimi. Ju ndihmojmë të zgjidhni mbulimin më të përshtatshëm sipas nevojave tuaja.",
   },
   {
     id: 11,
-    slug: "western-union",
-    question: "A mund të dërgoj ose të marr para përmes Western Union?",
+    slug: "moneygram",
+    question: "A mund të dërgoj ose të marr para përmes MoneyGram?",
     answer:
-      "Po, ne ofrojmë shërbime Western Union për dërgimin dhe marrjen e parave. Për këtë shërbim kërkohet dokument identifikimi i vlefshëm sipas rregullave dhe procedurave të Western Union.",
+      "Po, ne jemi pikë MoneyGram në Vlorë për dërgimin dhe marrjen e parave. Për këtë shërbim kërkohet dokument identifikimi i vlefshëm sipas rregullave dhe procedurave të MoneyGram.",
+  },
+  {
+    id: 13,
+    slug: "sherbime-e-albania",
+    question: "A më ndihmoni me shërbimet e e-Albania?",
+    answer:
+      "Po, ju ndihmojmë të aplikoni në portalin e-Albania, të merrni certifikata dhe vërtetime me vulë elektronike dhe t'i printoni ato.",
   },
   {
     id: 12,

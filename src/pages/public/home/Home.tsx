@@ -4,6 +4,7 @@ import { PropertyCard } from "@/components/propertyCard";
 import { PackageCard } from "@/components/packageCard";
 import { FlightOfferCard } from "@/components/flightOfferCard";
 import { StatisticsSection } from "./StatisticsSection";
+import { ServicesSection } from "./ServicesSection";
 import { Destinations } from "./Destinations";
 import { FAQ } from "./FAQ";
 import { FAQ_INFO } from "@/constants/faq";
@@ -171,6 +172,8 @@ export const Home = () => {
               </div>
             </div>
           )}
+
+        <ServicesSection />
 
         <StatisticsSection />
 

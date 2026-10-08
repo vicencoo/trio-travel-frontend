@@ -3,6 +3,8 @@
 // "@/" aliases, and write relative imports with a ".js" extension so they
 // also run as plain Node ES modules.
 
+import { SERVICE_PAGES } from "../constants/services.js";
+
 export const SITE_URL = "https://www.triotravel.al";
 export const BRAND = "Trio Travel & Immo";
 export const DEFAULT_IMAGE = `${SITE_URL}/images/trio-travel-og.webp`;
@@ -19,15 +21,25 @@ const ADDRESS = {
   addressCountry: "AL",
 };
 
-const service = (name: string, description: string) => ({
+const service = (name: string, description: string, path?: string) => ({
   "@type": "Offer",
-  itemOffered: { "@type": "Service", name, description },
+  itemOffered: {
+    "@type": "Service",
+    name,
+    description,
+    ...(path && { url: `${SITE_URL}${path}` }),
+  },
 });
 
 // The single description of the business. Every other schema points to it
 // through { "@id": ORGANIZATION_ID } instead of repeating it.
 export const organizationSchema = {
-  "@type": ["TravelAgency", "RealEstateAgent"],
+  "@type": [
+    "TravelAgency",
+    "RealEstateAgent",
+    "InsuranceAgency",
+    "FinancialService",
+  ],
   "@id": ORGANIZATION_ID,
   name: BRAND,
   url: SITE_URL,
@@ -72,6 +84,17 @@ export const organizationSchema = {
     "Apartamente",
     "Vila",
     "Investime Imobiliare",
+    "Siguracione Albsig",
+    "Siguracion Automjeti",
+    "Siguracion Motorri",
+    "Siguracion Mjete Lundruese",
+    "Siguracion Prone",
+    "Siguracion Jete",
+    "Siguracion Udhëtimi",
+    "Pagesa Faturash",
+    "Pagesa Gjobash",
+    "MoneyGram",
+    "Shërbime e-Albania",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
@@ -92,6 +115,9 @@ export const organizationSchema = {
       service(
         "Prona me Qera",
         "Apartamente, dyqane dhe ambiente biznesi me qera në Vlorë.",
+      ),
+      ...SERVICE_PAGES.map((page) =>
+        service(page.name, page.summary, page.path),
       ),
     ],
   },

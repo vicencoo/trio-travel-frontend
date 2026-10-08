@@ -1,10 +1,16 @@
 import {
+  BRAND,
   DEFAULT_IMAGE,
   ORGANIZATION_ID,
   SITE_URL,
   WEBSITE_ID,
 } from "./site.js";
-import type { Schema } from "./structuredData.js";
+import type { Breadcrumb, Schema } from "./structuredData.js";
+import {
+  SERVICE_PAGES,
+  getServicePage,
+  type ServicePage,
+} from "../constants/services.js";
 
 export type PageSeo = {
   path: string;
@@ -14,6 +20,7 @@ export type PageSeo = {
   image: string;
   keywords: string[];
   schema?: Schema | Schema[];
+  breadcrumbs?: Breadcrumb[];
   includeFaq?: boolean;
 };
 
@@ -49,7 +56,7 @@ export const PAGE_SEO = {
     path: "/",
     title: "Trio Travel & Immo | Agjenci Turistike & Prona në Vlorë",
     description:
-      "Trio Travel & Immo në Vlorë ofron paketa turistike, bileta avioni, prona në shitje dhe me qera, apartamente, vila dhe udhëtime të personalizuara.",
+      "Trio Travel & Immo në Vlorë: paketa turistike, bileta avioni, prona në shitje dhe me qera, siguracione Albsig, pagesa faturash e gjobash dhe MoneyGram.",
     image: DEFAULT_IMAGE,
     keywords: [
       "Trio Travel",
@@ -69,6 +76,12 @@ export const PAGE_SEO = {
       "prona ne Vlore",
       "real estate Albania",
       "udhetime te personalizuara",
+      "siguracione Vlore",
+      "siguracion makine Vlore",
+      "pagesa faturash Vlore",
+      "pagesa gjobash Vlore",
+      "MoneyGram Vlore",
+      "e-Albania Vlore",
     ],
     schema: {
       "@type": "WebPage",
@@ -304,7 +317,7 @@ export const PAGE_SEO = {
     path: "/pyetje-te-shpeshta",
     title: "Pyetjet më të Shpeshta (FAQ) | Trio Travel & Immo",
     description:
-      "Përgjigje për pyetjet më të shpeshta rreth biletave të avionit, paketave turistike, vizave, sigurimeve, pagesave të faturave dhe Western Union në Trio Travel & Immo, Vlorë.",
+      "Përgjigje për pyetjet më të shpeshta rreth biletave të avionit, paketave turistike, vizave, sigurimeve, pagesave të faturave dhe MoneyGram në Trio Travel & Immo, Vlorë.",
     image: DEFAULT_IMAGE,
     keywords: [
       "pyetje te shpeshta",
@@ -315,7 +328,7 @@ export const PAGE_SEO = {
       "sigurim udhetimi",
       "sigurim automjeti Vlore",
       "pagesa e faturave Vlore",
-      "Western Union Vlore",
+      "MoneyGram Vlore",
       "agjenci turistike Vlore",
     ],
     schema: {
@@ -330,7 +343,126 @@ export const PAGE_SEO = {
     },
     includeFaq: true,
   }),
+
+  services: page({
+    path: "/sherbime",
+    title: "Shërbimet Tona në Vlorë | Trio Travel & Immo",
+    description:
+      "Të gjitha shërbimet në një vend në Vlorë: paketa turistike, bileta avioni, prona, siguracione Albsig, pagesa faturash e gjobash, MoneyGram dhe e-Albania.",
+    image: `${SITE_URL}/images/services/sherbime-og.webp`,
+    keywords: [
+      "sherbime Vlore",
+      "agjenci sherbimesh Vlore",
+      "siguracione Vlore",
+      "pagesa faturash Vlore",
+      "pagesa gjobash Vlore",
+      "MoneyGram Vlore",
+      "e-Albania Vlore",
+      "agjenci turistike Vlore",
+      "Trio Travel Vlore",
+    ],
+    schema: collectionPage(
+      "/sherbime",
+      "Shërbimet e Trio Travel & Immo",
+      "Udhëtime, prona, siguracione, pagesa faturash e gjobash, MoneyGram dhe shërbime e-Albania në Vlorë.",
+      "Shërbime në Vlorë",
+    ),
+  }),
 } satisfies Record<string, PageSeo>;
+
+const SERVICES_CRUMB: Breadcrumb = {
+  name: "Shërbime",
+  item: `${SITE_URL}/sherbime`,
+};
+
+// Service pages live at the root (/siguracion-automjeti) so the URL holds
+// the keyword; their breadcrumbs still show where they sit in the site.
+const serviceBreadcrumbs = (service: ServicePage): Breadcrumb[] => {
+  const parent = SERVICE_PAGES.find((other) =>
+    other.children?.keys.includes(service.key),
+  );
+
+  return [
+    { name: BRAND, item: `${SITE_URL}/` },
+    SERVICES_CRUMB,
+    ...(parent
+      ? [{ name: parent.name, item: canonicalFor(parent.path) }]
+      : []),
+    { name: service.name, item: canonicalFor(service.path) },
+  ];
+};
+
+const serviceSchema = (service: ServicePage): Schema[] => {
+  const url = canonicalFor(service.path);
+
+  return [
+    {
+      "@type": "WebPage",
+      "@id": `${url}#webpage`,
+      url,
+      name: service.heading,
+      description: service.description,
+      inLanguage: "sq-AL",
+      isPartOf: { "@id": WEBSITE_ID },
+      about: { "@id": `${url}#service` },
+      primaryImageOfPage: `${SITE_URL}${service.image}`,
+    },
+    {
+      "@type": "Service",
+      "@id": `${url}#service`,
+      name: service.heading,
+      serviceType: service.name,
+      description: service.intro,
+      url,
+      image: `${SITE_URL}${service.image}`,
+      provider: { "@id": ORGANIZATION_ID },
+      areaServed: { "@type": "City", name: "Vlorë" },
+      ...(service.children && {
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: service.name,
+          itemListElement: service.children.keys
+            .map(getServicePage)
+            .filter((child) => child !== undefined)
+            .map((child) => ({
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: child.name,
+                url: canonicalFor(child.path),
+              },
+            })),
+        },
+      }),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${url}#faq`,
+      url,
+      inLanguage: "sq-AL",
+      mainEntity: service.faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: { "@type": "Answer", text: faq.answer },
+      })),
+    },
+  ];
+};
+
+export const SERVICE_SEO: Record<string, PageSeo> = Object.fromEntries(
+  SERVICE_PAGES.map((service) => [
+    service.key,
+    page({
+      path: service.path,
+      title: service.title,
+      description: service.description,
+      image: `${SITE_URL}${service.ogImage}`,
+      keywords: service.keywords,
+      schema: serviceSchema(service),
+      breadcrumbs: serviceBreadcrumbs(service),
+    }),
+  ]),
+);
 
 export const NOT_FOUND_SEO = {
   title: "Faqja nuk u gjet | Trio Travel & Immo",

@@ -2,7 +2,7 @@
 // backend, so new packages/properties appear without a redeploy.
 
 import { createSlug } from "../src/utils/createSlug.js";
-import { PAGE_SEO } from "../src/seo/pages.js";
+import { PAGE_SEO, SERVICE_SEO } from "../src/seo/pages.js";
 import { SITE_URL } from "../src/seo/site.js";
 
 const API_URL = (
@@ -32,14 +32,20 @@ const PAGE_SETTINGS: Record<
   planeTickets: { changefreq: "weekly", priority: "0.8" },
   contact: { changefreq: "monthly", priority: "0.7" },
   faq: { changefreq: "monthly", priority: "0.7" },
+  services: { changefreq: "monthly", priority: "0.9" },
 };
 
-const STATIC_PAGES: SitemapEntry[] = Object.entries(PAGE_SETTINGS).map(
-  ([key, settings]) => ({
+const STATIC_PAGES: SitemapEntry[] = [
+  ...Object.entries(PAGE_SETTINGS).map(([key, settings]) => ({
     loc: PAGE_SEO[key as keyof typeof PAGE_SEO].path,
     ...settings,
-  }),
-);
+  })),
+  ...Object.values(SERVICE_SEO).map((page) => ({
+    loc: page.path,
+    changefreq: "monthly" as const,
+    priority: "0.8",
+  })),
+];
 
 // Walks every page of a paginated list endpoint
 const fetchAll = async (

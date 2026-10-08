@@ -8,7 +8,7 @@ export const Map = () => {
         style={{ border: 0 }}
         allowFullScreen
         loading='lazy'
-        title='Google Maps location'
+        title='Vendndodhja e Trio Travel & Immo në Google Maps'
       />
     </div>
   );

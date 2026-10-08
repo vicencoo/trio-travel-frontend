@@ -17,6 +17,8 @@ import { ChristmasPackages } from "@/pages/public/christmasPackages";
 import { NovemberPackages } from "@/pages/public/novemberPackages";
 import { Faq } from "@/pages/public/faq";
 import { NotFound } from "@/pages/public/notFound";
+import { ServicePage, Services } from "@/pages/public/services";
+import { SERVICE_PAGES } from "@/constants/services";
 import { Spinner } from "@/components/spinner";
 import { AuthPage } from "@/pages/auth/authPage/AuthPage";
 import { AdminLayout } from "@/layout/AdminLayout";
@@ -74,6 +76,15 @@ export const AppRoutes = () => {
             path="/paketa-turistike-festat-e-nentorit"
             element={<NovemberPackages />}
           />
+
+          <Route path="/sherbime" element={<Services />} />
+          {SERVICE_PAGES.map((service) => (
+            <Route
+              key={service.key}
+              path={service.path}
+              element={<ServicePage key={service.key} service={service} />}
+            />
+          ))}
 
           <Route path="*" element={<NotFound />} />
         </Route>

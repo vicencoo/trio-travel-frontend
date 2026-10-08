@@ -1,12 +1,21 @@
+import { Link } from 'react-router-dom';
 import { Text } from '@/components/text';
 import { FooterInfo } from './FooterInfo';
 import { Map } from '@/components/map';
+import { CORE_SERVICES, getServicePage } from '@/constants/services';
 
-const SERVICES = [
-  { id: 1, text: 'Plane Tickets' },
-  { id: 2, text: 'Package Booking' },
-  { id: 3, text: 'Hotel Booking' },
-  { id: 4, text: 'Rental Services' },
+const FOOTER_SERVICES = [
+  ...CORE_SERVICES,
+  ...[
+    'insurance',
+    'carInsurance',
+    'billPayments',
+    'finePayments',
+    'moneygram',
+    'eAlbania',
+  ]
+    .map(getServicePage)
+    .filter((service) => service !== undefined),
 ];
 
 export const Footer = () => {
@@ -17,24 +26,34 @@ export const Footer = () => {
         <FooterInfo />
 
         <div className='flex flex-col gap-4 md:mx-auto mx-0 md:items-start items-center'>
-          <Text text={'Services'} size='text-xl' font='font-serif' />
-          <div className='flex flex-col gap-2 md:items-start items-center'>
-            {SERVICES.map((service) => (
-              <Text
-                text={service.text}
-                key={service.id}
-                className='hover:underline w-fit text-gray-600 cursor-pointer hover:text-gray-700 transition-colors duration-300'
-                font='font-medium'
-              />
+          <Text text={'Shërbimet'} size='text-xl' font='font-serif' />
+          <nav
+            aria-label='Shërbimet'
+            className='grid grid-cols-2 md:grid-cols-1 gap-x-6 gap-y-2 md:items-start items-center'
+          >
+            {FOOTER_SERVICES.map((service) => (
+              <Link
+                to={service.path}
+                key={service.path}
+                className='hover:underline w-fit text-gray-600 hover:text-gray-700 transition-colors duration-300 font-medium'
+              >
+                {service.name}
+              </Link>
             ))}
-          </div>
+            <Link
+              to='/sherbime'
+              className='hover:underline w-fit text-red-600 hover:text-red-700 transition-colors duration-300 font-semibold'
+            >
+              Të gjitha shërbimet
+            </Link>
+          </nav>
         </div>
 
         <Map />
       </div>
       <span className='flex w-full justify-center pt-3'>
         <Text size='text-sm' font='font-medium'>
-          &copy; Trio Travel Agency. All rights reserved.
+          &copy; Trio Travel & Immo. Të gjitha të drejtat e rezervuara.
         </Text>
       </span>
     </div>

@@ -5,7 +5,7 @@
 
 import template from "./_template.js";
 import { replaceHead, type SeoMeta } from "../src/seo/head.js";
-import { NOT_FOUND_SEO, PAGE_SEO } from "../src/seo/pages.js";
+import { NOT_FOUND_SEO, PAGE_SEO, SERVICE_SEO } from "../src/seo/pages.js";
 import { getPackageSeo, getPropertySeo } from "../src/seo/detail.js";
 import { BRAND } from "../src/seo/site.js";
 
@@ -14,7 +14,10 @@ const API_URL = (
 ).replace(/\/$/, "");
 
 const STATIC_PAGES = new Map<string, SeoMeta>(
-  Object.values(PAGE_SEO).map((page) => [page.path, page]),
+  [...Object.values(PAGE_SEO), ...Object.values(SERVICE_SEO)].map((page) => [
+    page.path,
+    page,
+  ]),
 );
 
 // Used when the page can't be resolved (e.g. backend down): no canonical, so

@@ -91,6 +91,15 @@ export {
   MessageCircleMore,
   Bird,
   Menu,
+  Car,
+  Motorbike,
+  Sailboat,
+  HeartPulse,
+  Receipt,
+  Siren,
+  Banknote,
+  Landmark,
+  Phone,
 } from 'lucide-react';
 
 // export { default as X } from 'lucide-react/dist/esm/icons/x';

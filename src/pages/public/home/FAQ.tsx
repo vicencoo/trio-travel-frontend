@@ -14,7 +14,7 @@ export const FAQ = ({ items = FAQ_INFO }: FAQProps) => {
   const { hash } = useLocation();
   const [openQuestions, setOpenQuestions] = useState<number[]>([]);
 
-  // A link like /pyetje-te-shpeshta#western-union opens and scrolls to that
+  // A link like /pyetje-te-shpeshta#moneygram opens and scrolls to that
   // question. Runs after ScrollToTop has reset the page.
   useEffect(() => {
     const target = items.find((faq) => `#${faq.slug}` === hash);

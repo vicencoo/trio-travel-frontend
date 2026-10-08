@@ -27,6 +27,12 @@ export const HEADER_ITEMS = [
     megaMenu: "packages" as const,
   },
   { id: 4, name: "bileta avioni", path: "/bileta-avioni" },
+  {
+    id: 7,
+    name: "shërbime",
+    path: "/sherbime",
+    megaMenu: "services" as const,
+  },
   { id: 5, name: "destinacione", path: "/destinacionet" },
   { id: 6, name: "kontakt", path: "/contact" },
 ];

@@ -24,6 +24,7 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   pronat: "Pronat",
   contact: "Kontakt",
   "pyetje-te-shpeshta": "Pyetjet më të Shpeshta",
+  sherbime: "Shërbime",
 };
 
 const getPageName = (title: string) => title.split("|")[0].trim();

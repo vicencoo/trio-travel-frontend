@@ -16,12 +16,12 @@ const FOOTER_INFO = [
   {
     id: 1,
     icon: <LocationOnOutlined fontSize='small' />,
-    text: 'Kryqezimi Rinia ,Vlore, Albania',
+    text: 'Kryqëzimi Rinia, Vlorë, Shqipëri',
   },
   {
     id: 2,
     icon: <AccessTimeOutlined fontSize='small' />,
-    text: 'Hours: 8:00-13:00 15:00-20:00 Monday-Saturday',
+    text: 'Orari: 08:00-13:00, 15:00-20:00, e hënë - e shtunë',
   },
   {
     id: 3,
@@ -65,10 +65,10 @@ const CONTACT = [
 export const FooterInfo = () => {
   return (
     <div className='flex flex-col gap-4'>
-      <Link to='/' aria-label='Trio Travel homepage'>
+      <Link to='/' aria-label='Trio Travel & Immo, kryefaqja'>
         <Image
           img='/images/TrioTravel.webp'
-          alt='Trio Travel Agency Logo'
+          alt='Logo e Trio Travel & Immo'
           className='w-[200px] cursor-pointer hover:scale-105 transition-all duration-300 will-change-transform'
         />
       </Link>
@@ -86,7 +86,7 @@ export const FooterInfo = () => {
         ))}
       </div>
       <div className='flex flex-col gap-2 w-full md:items-start items-center'>
-        <Text text={'Follow us'} font='font-bold' />
+        <Text text={'Na ndiqni'} font='font-bold' />
         <div className='flex gap-2'>
           {CONTACT.map((contact) => (
             <div
