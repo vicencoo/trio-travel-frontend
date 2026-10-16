@@ -50,7 +50,7 @@ export const FAQ_INFO = [
     slug: "sherbimet-e-agjencise",
     question: "Çfarë shërbimesh ofron agjencia juaj?",
     answer:
-      "Ne ofrojmë një gamë të gjerë shërbimesh, duke përfshirë rezervimin e biletave ajrore (vendore dhe ndërkombëtare), paketa turistike, asistencë për viza, siguracione Albsig (automjete, motorra, mjete lundruese, prona, jetë dhe udhëtime), pagesa të faturave të dritave, ujit dhe DigitAlb, pagesa gjobash, transferta parash me MoneyGram, ndihmë për shërbimet e-Albania, si dhe prona në shitje dhe me qera.",
+      "Ne ofrojmë një gamë të gjerë shërbimesh, duke përfshirë rezervimin e biletave ajrore (vendore dhe ndërkombëtare), paketa turistike, asistencë për viza, siguracione Albsig (automjete, motorra, mjete lundruese, prona, jetë dhe udhëtime), pagesa të faturave të dritave, ujit dhe DigitAlb, pagesa gjobash, transferta parash me MoneyGram, si dhe prona në shitje dhe me qera.",
   },
   {
     id: 2,
@@ -124,13 +124,6 @@ export const FAQ_INFO = [
     question: "A mund të dërgoj ose të marr para përmes MoneyGram?",
     answer:
       "Po, ne jemi pikë MoneyGram në Vlorë për dërgimin dhe marrjen e parave. Për këtë shërbim kërkohet dokument identifikimi i vlefshëm sipas rregullave dhe procedurave të MoneyGram.",
-  },
-  {
-    id: 13,
-    slug: "sherbime-e-albania",
-    question: "A më ndihmoni me shërbimet e e-Albania?",
-    answer:
-      "Po, ju ndihmojmë të aplikoni në portalin e-Albania, të merrni certifikata dhe vërtetime me vulë elektronike dhe t'i printoni ato.",
   },
   {
     id: 12,

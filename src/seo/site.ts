@@ -94,7 +94,6 @@ export const organizationSchema = {
     "Pagesa Faturash",
     "Pagesa Gjobash",
     "MoneyGram",
-    "Shërbime e-Albania",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",

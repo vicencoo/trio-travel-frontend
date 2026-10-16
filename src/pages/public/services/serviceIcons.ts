@@ -3,7 +3,6 @@ import {
   Car,
   HeartPulse,
   House,
-  Landmark,
   Motorbike,
   Plane,
   Receipt,
@@ -24,5 +23,4 @@ export const SERVICE_ICONS: Record<ServiceIconKey, typeof Car> = {
   bills: Receipt,
   fines: Siren,
   moneygram: Banknote,
-  eAlbania: Landmark,
 };

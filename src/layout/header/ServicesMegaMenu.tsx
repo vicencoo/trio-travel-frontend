@@ -47,8 +47,8 @@ export const ServicesMegaMenu = ({
             </span>
             <h3 className="text-xl font-semibold">Shërbime</h3>
             <p className="text-sm leading-6 text-white/70">
-              Siguracione Albsig, pagesa faturash e gjobash, MoneyGram dhe
-              e-Albania, të gjitha në një vend në Vlorë.
+              Siguracione Albsig, pagesa faturash e gjobash dhe MoneyGram, të
+              gjitha në një vend në Vlorë.
             </p>
           </div>
 

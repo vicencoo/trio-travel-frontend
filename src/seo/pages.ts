@@ -81,7 +81,6 @@ export const PAGE_SEO = {
       "pagesa faturash Vlore",
       "pagesa gjobash Vlore",
       "MoneyGram Vlore",
-      "e-Albania Vlore",
     ],
     schema: {
       "@type": "WebPage",
@@ -348,7 +347,7 @@ export const PAGE_SEO = {
     path: "/sherbime",
     title: "Shërbimet Tona në Vlorë | Trio Travel & Immo",
     description:
-      "Të gjitha shërbimet në një vend në Vlorë: paketa turistike, bileta avioni, prona, siguracione Albsig, pagesa faturash e gjobash, MoneyGram dhe e-Albania.",
+      "Të gjitha shërbimet në një vend në Vlorë: paketa turistike, bileta avioni, prona, siguracione Albsig, pagesa faturash e gjobash dhe MoneyGram.",
     image: `${SITE_URL}/images/services/sherbime-og.webp`,
     keywords: [
       "sherbime Vlore",
@@ -357,14 +356,13 @@ export const PAGE_SEO = {
       "pagesa faturash Vlore",
       "pagesa gjobash Vlore",
       "MoneyGram Vlore",
-      "e-Albania Vlore",
       "agjenci turistike Vlore",
       "Trio Travel Vlore",
     ],
     schema: collectionPage(
       "/sherbime",
       "Shërbimet e Trio Travel & Immo",
-      "Udhëtime, prona, siguracione, pagesa faturash e gjobash, MoneyGram dhe shërbime e-Albania në Vlorë.",
+      "Udhëtime, prona, siguracione, pagesa faturash e gjobash dhe MoneyGram në Vlorë.",
       "Shërbime në Vlorë",
     ),
   }),

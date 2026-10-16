@@ -12,7 +12,6 @@ const FOOTER_SERVICES = [
     'billPayments',
     'finePayments',
     'moneygram',
-    'eAlbania',
   ]
     .map(getServicePage)
     .filter((service) => service !== undefined),

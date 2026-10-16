@@ -26,7 +26,7 @@ export const Services = () => {
       <div className="flex w-full flex-col gap-14 pb-10 md:gap-20 md:pb-20">
         <ServiceHero
           heading="Të gjitha shërbimet në një vend, në Vlorë"
-          intro="Nga pushimet dhe biletat e avionit te pronat, siguracionet Albsig, pagesat e faturave dhe gjobave, MoneyGram dhe e-Albania. Te Trio Travel & Immo i kryeni të gjitha shpejt, në Kryqëzimin Rinia."
+          intro="Nga pushimet dhe biletat e avionit te pronat, siguracionet Albsig, pagesat e faturave dhe gjobave dhe MoneyGram. Te Trio Travel & Immo i kryeni të gjitha shpejt, në Kryqëzimin Rinia."
           image="/images/services/sherbime.webp"
           imageAlt="Shërbimet e Trio Travel & Immo në Vlorë"
           whatsappMessage={WHATSAPP_MESSAGE}

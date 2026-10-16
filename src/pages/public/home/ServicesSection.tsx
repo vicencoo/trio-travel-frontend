@@ -10,7 +10,6 @@ const HOME_SERVICES = [
   "billPayments",
   "finePayments",
   "moneygram",
-  "eAlbania",
 ]
   .map(getServicePage)
   .filter((service) => service !== undefined);
@@ -19,7 +18,7 @@ export const ServicesSection = () => (
   <div className="flex flex-col gap-10">
     <SectionHeader
       title="Shërbime të tjera në agjencinë tonë"
-      text="Siguracione, pagesa faturash e gjobash, MoneyGram dhe e-Albania në një vend"
+      text="Siguracione, pagesa faturash e gjobash dhe MoneyGram në një vend"
     />
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {HOME_SERVICES.map((service) => (

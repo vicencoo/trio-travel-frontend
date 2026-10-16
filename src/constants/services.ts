@@ -1,8 +1,8 @@
 // Content of the service landing pages (insurance, bill payments, fines,
-// MoneyGram, e-Albania). Shared by the React pages and src/seo, so keep it
+// MoneyGram). Shared by the React pages and src/seo, so keep it
 // free of React, browser APIs and "@/" aliases.
 
-export type ServiceGroup = "insurance" | "payments" | "assistance";
+export type ServiceGroup = "insurance" | "payments";
 
 export type ServiceIconKey =
   | "insurance"
@@ -14,8 +14,7 @@ export type ServiceIconKey =
   | "travel"
   | "bills"
   | "fines"
-  | "moneygram"
-  | "eAlbania";
+  | "moneygram";
 
 export type ServiceFaq = {
   id: number;
@@ -61,10 +60,6 @@ export const SERVICE_GROUPS: Record<
   payments: {
     name: "Pagesa & Transferta",
     text: "Pagesa faturash dhe gjobash, si dhe dërgim e marrje parash me MoneyGram.",
-  },
-  assistance: {
-    name: "Asistencë & Dokumente",
-    text: "Ndihmë me aplikimet dhe dokumentet në portalin e-Albania.",
   },
 };
 
@@ -912,85 +907,6 @@ export const SERVICE_PAGES: ServicePage[] = [
     ]),
     whatsappMessage:
       "Përshëndetje! Kam një pyetje për shërbimin MoneyGram (dërgim / marrje parash).",
-  },
-  {
-    key: "eAlbania",
-    path: "/sherbime-e-albania",
-    group: "assistance",
-    icon: "eAlbania",
-    name: "Shërbime e-Albania",
-    summary: "Aplikime, certifikata dhe dokumente online.",
-    title: "Shërbime e-Albania në Vlorë – Aplikime & Certifikata | Trio Travel",
-    description:
-      "Ndihmë me shërbimet e-Albania në Vlorë: certifikata, vërtetime, aplikime online dhe dokumente me vulë elektronike, te Trio Travel & Immo.",
-    keywords: [
-      "e-Albania",
-      "e-Albania Vlore",
-      "sherbime e-Albania",
-      "aplikim ne e-Albania",
-      "ndihme per e-Albania",
-      "certifikate familjare",
-      "certifikate personale",
-      "certifikate lindje e-Albania",
-      "vertetim e-Albania",
-      "aplikim online dokumente",
-      ...LOCAL_KEYWORDS,
-    ],
-    heading: "Shërbime e-Albania në Vlorë",
-    intro:
-      "Shumë dokumente sot merren vetëm online, në portalin e-Albania, por jo të gjithë kanë kohë ose njohuri për ta bërë vetë. Te Trio Travel & Immo ju ndihmojmë të aplikoni, të shkarkoni dhe të printoni certifikatat dhe dokumentet që ju duhen.",
-    ...images("sherbime-e-albania"),
-    imageAlt: "Ndihmë për aplikime dhe certifikata në e-Albania",
-    highlights: [
-      {
-        title: "Certifikata",
-        text: "Certifikatë familjare, personale, lindjeje dhe të tjera nga Gjendja Civile.",
-      },
-      {
-        title: "Vërtetime",
-        text: "Vërtetime dhe dokumente me vulë elektronike, të vlefshme për institucionet.",
-      },
-      {
-        title: "Aplikime online",
-        text: "Plotësim dhe dorëzim i aplikimeve për shërbimet publike.",
-      },
-      {
-        title: "Printim i dokumenteve",
-        text: "Ju i merrni dokumentet gati, të printuara.",
-      },
-    ],
-    documents: [
-      "Kartë identiteti",
-      "Kredencialet e llogarisë e-Albania, ose ju ndihmojmë të krijoni një llogari",
-      "Dokumente shtesë, sipas shërbimit që kërkoni",
-    ],
-    steps: [
-      "Na tregoni çfarë dokumenti ose shërbimi ju duhet.",
-      "Bëjmë aplikimin bashkë në portalin e-Albania.",
-      "Ju dorëzojmë dokumentin e printuar ose ju njoftojmë kur të jetë gati.",
-    ],
-    faqs: faqs("e-albania", [
-      {
-        slug: "cfare-sherbimesh",
-        question: "Për çfarë shërbimesh e-Albania mund të më ndihmoni?",
-        answer:
-          "Për certifikata të Gjendjes Civile, vërtetime të ndryshme, aplikime online për shërbime publike dhe printimin e dokumenteve me vulë elektronike.",
-      },
-      {
-        slug: "llogari",
-        question: "Nuk kam llogari në e-Albania. Çfarë duhet të bëj?",
-        answer:
-          "Ejani me kartën e identitetit dhe ju ndihmojmë të krijoni llogarinë dhe ta përdorni për herë të parë.",
-      },
-      {
-        slug: "vlefshmeria",
-        question: "A janë të vlefshme dokumentet nga e-Albania?",
-        answer:
-          "Po. Dokumentet me vulë elektronike nga e-Albania pranohen nga institucionet publike në Shqipëri.",
-      },
-    ]),
-    whatsappMessage:
-      "Përshëndetje! Më duhet ndihmë për një shërbim në e-Albania.",
   },
 ];
 
