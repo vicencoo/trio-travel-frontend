@@ -8,6 +8,8 @@ import { replaceHead, type SeoMeta } from "../src/seo/head.js";
 import { NOT_FOUND_SEO, PAGE_SEO, SERVICE_SEO } from "../src/seo/pages.js";
 import { getPackageSeo, getPropertySeo } from "../src/seo/detail.js";
 import { BRAND } from "../src/seo/site.js";
+import { getZoiUnitSeo } from "../src/seo/zoiVilla.js";
+import { ZOI_VILLA_PATH, getZoiUnit } from "../src/constants/zoiVilla.js";
 
 const API_URL = (
   process.env.VITE_LOCAL || "https://trio-travel-backend-mysql.vercel.app"
@@ -75,6 +77,13 @@ const resolvePage = async (path: string): Promise<PageResult> => {
   const [, section, slug, ...rest] = path.split("/");
 
   if (slug && !rest.length) {
+    if (`/${section}` === ZOI_VILLA_PATH) {
+      const unit = getZoiUnit(slug);
+      return unit
+        ? { status: 200, seo: getZoiUnitSeo(unit) }
+        : { status: 404, seo: NOT_FOUND_SEO };
+    }
+
     if (section === "pronat")
       return resolveDetail(
         "/pronat",

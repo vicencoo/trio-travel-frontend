@@ -11,6 +11,7 @@ import {
   getServicePage,
   type ServicePage,
 } from "../constants/services.js";
+import { ZOI_VILLA_SEO } from "./zoiVilla.js";
 
 export type PageSeo = {
   path: string;
@@ -236,6 +237,8 @@ export const PAGE_SEO = {
       "Prona në shitje dhe me qera në Vlorë",
     ),
   }),
+
+  zoiVilla: ZOI_VILLA_SEO,
 
   destinations: page({
     path: "/destinacionet",

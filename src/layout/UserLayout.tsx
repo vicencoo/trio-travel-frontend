@@ -16,7 +16,7 @@ export const UserLayout = () => {
     <div className='public-layout flex flex-col min-h-screen'>
       <Header />
       <div className='flex flex-1'>
-        <main className='public-page-content flex-1'>
+        <main className='public-page-content min-w-0 flex-1'>
           <Outlet />
         </main>
       </div>

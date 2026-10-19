@@ -16,6 +16,8 @@ import { TurkeyPackages } from "@/pages/public/turkeyPackages";
 import { ChristmasPackages } from "@/pages/public/christmasPackages";
 import { NovemberPackages } from "@/pages/public/novemberPackages";
 import { Faq } from "@/pages/public/faq";
+import { ViewZoiUnit, ZoiVilla } from "@/pages/public/zoiVilla";
+import { ZOI_VILLA_PATH } from "@/constants/zoiVilla";
 import { NotFound } from "@/pages/public/notFound";
 import { ServicePage, Services } from "@/pages/public/services";
 import { SERVICE_PAGES } from "@/constants/services";
@@ -65,6 +67,11 @@ export const AppRoutes = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/pyetje-te-shpeshta" element={<Faq />} />
           <Route path="/pronat/:slug" element={<ViewProperty />} />
+          <Route path={ZOI_VILLA_PATH} element={<ZoiVilla />} />
+          <Route
+            path={`${ZOI_VILLA_PATH}/:slug`}
+            element={<ViewZoiUnit />}
+          />
           <Route path="/paketa-turistike/:slug" element={<ViewPackage />} />
 
           <Route path="/paketa-turistike-turqi" element={<TurkeyPackages />} />

@@ -8,6 +8,7 @@ import { Pagination } from "@/components/pagination";
 import { NoPropertyFound } from "@/components/noPropertyFound";
 import { SEO } from "@/components/seo";
 import { PAGE_SEO } from "@/seo/pages";
+import { ZoiVillaPromo } from "@/components/zoiVillaPromo";
 
 export const Properties = () => {
   const {
@@ -66,6 +67,10 @@ export const Properties = () => {
         ) : (
           <NoPropertyFound />
         )}
+
+        <div className="container">
+          <ZoiVillaPromo />
+        </div>
       </div>
     </>
   );

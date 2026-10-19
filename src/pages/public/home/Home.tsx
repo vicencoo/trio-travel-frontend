@@ -14,6 +14,7 @@ import { SEO } from "@/components/seo";
 import { PAGE_SEO } from "@/seo/pages";
 import { homePageBanners } from "@/constants/homePageBanners";
 import { HomeBannerSlider } from "@/components/homeBanners";
+import { ZoiVillaPromo } from "@/components/zoiVillaPromo";
 
 export const Home = () => {
   const {
@@ -61,6 +62,8 @@ export const Home = () => {
             </div>
           )
         )}
+
+        <ZoiVillaPromo />
 
         {/* <ChristmasBanner /> */}
 

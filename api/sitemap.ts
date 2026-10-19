@@ -4,6 +4,7 @@
 import { createSlug } from "../src/utils/createSlug.js";
 import { PAGE_SEO, SERVICE_SEO } from "../src/seo/pages.js";
 import { SITE_URL } from "../src/seo/site.js";
+import { ZOI_UNITS, zoiUnitPath } from "../src/constants/zoiVilla.js";
 
 const API_URL = (
   process.env.VITE_LOCAL || "https://trio-travel-backend-mysql.vercel.app"
@@ -28,6 +29,7 @@ const PAGE_SETTINGS: Record<
   christmasPackages: { changefreq: "daily", priority: "0.9" },
   novemberPackages: { changefreq: "daily", priority: "0.9" },
   properties: { changefreq: "daily", priority: "0.9" },
+  zoiVilla: { changefreq: "weekly", priority: "0.9" },
   destinations: { changefreq: "weekly", priority: "0.8" },
   planeTickets: { changefreq: "weekly", priority: "0.8" },
   contact: { changefreq: "monthly", priority: "0.7" },
@@ -130,6 +132,11 @@ export async function GET() {
       "/paketa-turistike",
     ),
     ...toEntries(valueOf(properties), "/pronat"),
+    ...ZOI_UNITS.map((unit) => ({
+      loc: zoiUnitPath(unit),
+      changefreq: "weekly" as const,
+      priority: unit.status === "available" ? "0.8" : "0.5",
+    })),
   ];
 
   const anyFailed = [

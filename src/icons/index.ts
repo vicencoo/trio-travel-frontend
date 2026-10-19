@@ -100,6 +100,8 @@ export {
   Banknote,
   Landmark,
   Phone,
+  Building2,
+  Compass,
 } from 'lucide-react';
 
 // export { default as X } from 'lucide-react/dist/esm/icons/x';

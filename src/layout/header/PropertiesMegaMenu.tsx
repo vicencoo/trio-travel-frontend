@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, House, MapPin, MessageCircleMore } from "@/icons";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Building2,
+  House,
+  MapPin,
+  MessageCircleMore,
+} from "@/icons";
+import { ZOI_VILLA, ZOI_VILLA_PATH } from "@/constants/zoiVilla";
 import { PROPERTY_LISTING_LINKS } from "@/constants/propertyListing";
 import { createSlug } from "@/utils/createSlug";
 import { formatPropertyPrice } from "@/utils/currency";
@@ -144,6 +152,29 @@ export const PropertiesMegaMenu = ({
                 />
               </Link>
             ))}
+
+            <Link
+              to={ZOI_VILLA_PATH}
+              onClick={onNavigate}
+              className="group flex items-center gap-3 rounded-2xl bg-gold/15 p-3 ring-1 ring-gold/40 transition-colors duration-200 hover:bg-gold hover:text-navy"
+            >
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/25 text-gold transition-colors duration-200 group-hover:bg-white/60 group-hover:text-navy">
+                <Building2 size={18} />
+              </span>
+              <span className="flex flex-1 flex-col">
+                <span className="flex items-center gap-1.5 text-sm font-semibold">
+                  {ZOI_VILLA.name}
+                  <BadgeCheck size={14} className="text-gold group-hover:text-navy" />
+                </span>
+                <span className="text-xs text-white/60 transition-colors duration-200 group-hover:text-navy/70">
+                  Apartamente 2+1 & 3+1 në {ZOI_VILLA.city}
+                </span>
+              </span>
+              <ArrowRight
+                size={16}
+                className="shrink-0 transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </Link>
           </div>
 
           <a
@@ -234,5 +265,21 @@ export const PropertiesMobileLinks = () => (
         </span>
       </Link>
     ))}
+    <Link
+      to={ZOI_VILLA_PATH}
+      className="flex items-center gap-3 rounded-xl px-2 py-2 transition-colors duration-200 hover:bg-gray-50"
+    >
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-navy text-gold">
+        <Building2 size={18} />
+      </span>
+      <span className="flex flex-col">
+        <span className="text-sm font-medium text-gray-800">
+          {ZOI_VILLA.name}
+        </span>
+        <span className="text-xs text-gray-500">
+          Apartamente 2+1 & 3+1 në {ZOI_VILLA.city}
+        </span>
+      </span>
+    </Link>
   </div>
 );

@@ -88,7 +88,7 @@ export const ViewImages = ({
       </div>
 
       {/* Thumbnails */}
-      <div className='flex md:grid md:grid-cols-7 gap-3 overflow-x-auto md:overflow-visible hide-scrollbar snap-x snap-mandatory'>
+      <div className='flex w-full md:grid md:grid-cols-7 gap-3 overflow-x-auto md:overflow-visible hide-scrollbar snap-x snap-mandatory'>
         {images.map((src, index) => (
           <Image
             key={index}
